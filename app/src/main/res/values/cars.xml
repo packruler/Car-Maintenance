@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="car_makes">
+        <item name="Acura">Acura</item>
+        <item name="Alfa_Romeo">Alfa Romeo</item>
+        <item name="Ariel">Ariel</item>
+        <item name="ARO">ARO</item>
+        <item name="Aston_Martin">Aston Martin</item>
+        <item name="Audi">Audi</item>
+        <item name="Bentley">Bentley</item>
+        <item name="BMW">BMW</item>
+        <item name="Buick">Buick</item>
+        <item name="Cadillac">Cadillac</item>
+        <item name="Chevrolet">Chevrolet</item>
+        <item name="Dodge">Dodge</item>
+        <item name="Ferrari">Ferrari</item>
+        <item name="Fiat">Fiat</item>
+        <item name="Ford">Ford</item>
+        <item name="GMC">GMC</item>
+        <item name="Honda">Honda</item>
+        <item name="Hyundai">Hyundai</item>
+        <item name="Infiniti">Infiniti</item>
+        <item name="Jaguar">Jaguar</item>
+        <item name="Jeep">Jeep</item>
+        <item name="Kia">Kia</item>
+        <item name="Land_Rover">Land Rover</item>
+        <item name="Lexus">Lexus</item>
+        <item name="Lincoln">Lincoln</item>
+        <item name="Lotus">Lotus</item>
+        <item name="Maserati">Maserati</item>
+        <item name="Mazda">Mazda</item>
+        <item name="McLaren">McLaren</item>
+        <item name="Mercedes-Benz">Mercedes-Benz</item>
+        <item name="Mini_Cooper">Mini Cooper</item>
+        <item name="Mitsubishi">Mitsubishi</item>
+        <item name="Nissan">Nissan</item>
+        <item name="Porsche">Porsche</item>
+        <item name="Rolls-Royce">Rolls-Royce</item>
+        <item name="Scion">Scion</item>
+        <item name="Smart">Smart</item>
+        <item name="Subaru">Subaru</item>
+        <item name="Tesla">Tesla</item>
+        <item name="Toyota">Toyota</item>
+        <item name="Volkswagen">Volkswagen</item>
+    </string-array>
+
+    <string-array name="Acura_Models">
+        <item name="CL">CL</item>
+        <item name="ILX">ILX</item>
+        <item name="Integra">Integra</item>
+        <item name="Legend">Legend</item>
+        <item name="MDX">MDX</item>
+        <item name="NSX">NSX</item>
+        <item name="RDX">RDX</item>
+        <item name="RL">RL</item>
+        <item name="RLX">RLX</item>
+        <item name="RSX">RSX</item>
+        <item name="SLX">SLX</item>
+        <item name="TL">TL</item>
+        <item name="TSX">TSX</item>
+        <item name="ZDX">ZDX</item>
+    </string-array>
+
+    <string-array name="Alfa_Romeo_Models">
+        <item name="145">145</item>
+        <item name="146">146</item>
+        <item name="147">147</item>
+        <item name="155">155</item>
+        <item name="156">156</item>
+        <item name="159">159</item>
+        <item name="166">166</item>
+        <item name="1900">1900</item>
+        <item name="2000">2000</item>
+        <item name="24 HP">24 HP</item>
+        <item name="2600">2600</item>
+        <item name="33">33</item>
+        <item name="4C">4C</item>
+        <item name="6">6</item>
+        <item name="6C">6C</item>
+        <item name="75">75</item>
+        <item name="8C">8C</item>
+        <item name="Alfasud">Alfasud</item>
+        <item name="Alfetta">Alfetta</item>
+        <item name="Arna">Arna</item>
+        <item name="Crosswagon Q4">Crosswagon Q4</item>
+        <item name="Brera">Brera</item>
+        <item name="Giulia">Giulia</item>
+        <item name="Giulietta">Giulietta</item>
+        <item name="GT">GT</item>
+        <item name="GTV">GTV</item>
+        <item name="Montreal">Montreal</item>
+        <item name="MiTo">MiTo</item>
+        <item name="RL">RL</item>
+        <item name="RM">RM</item>
+        <item name="Spider">Spider</item>
+        <item name="Torpedo">Torpedo</item>
+    </string-array>
+
+    <string-array name="Ariel_Models">
+        <item name="Atom 1">Atom 1</item>
+        <item name="Atom 2">Atom 2</item>
+        <item name="Atom 3">Atom 3</item>
+        <item name="Atom 500 V8">Atom 500 V8</item>
+    </string-array>
+
+    <string-array name="ARO_Models">
+        <item name="10 Series">10 Series</item>
+        <item name="24 Series">24 Series</item>
+        <item name="IMS Series">IMS Series</item>
+        <item name="M Series">M Series</item>
+    </string-array>
+
+    <string-array name="Aston_Martin_Models">
+        <item name="Cygnet">Cygnet</item>
+        <item name="DB AR1">DB AR1</item>
+        <item name="DB2">DB2</item>
+        <item name="DB Mark III">DB Mark III</item>
+        <item name="DB4">DB4</item>
+        <item name="DB5">DB5</item>
+        <item name="DB6">DB6</item>
+        <item name="DB7">DB7</item>
+        <item name="DB9">DB9</item>
+        <item name="DBS">DBS</item>
+        <item name="Lagonda">Lagonda</item>
+        <item name="One-77">One-77</item>
+        <item name="Rapide">Rapide</item>
+        <item name="V8">V8</item>
+        <item name="V12">V12</item>
+        <item name="Vanquish">Vanquish</item>
+        <item name="Virage">Virage</item>
+    </string-array>
+
+    <string-array name="Audi_Models">
+        <item name="100">100</item>
+        <item name="100/200">100/200</item>
+        <item name="80">80</item>
+        <item name="80/90">80/90</item>
+        <item name="A1">A1</item>
+        <item name="A2">A2</item>
+        <item name="A3">A3</item>
+        <item name="A4">A4</item>
+        <item name="A5">A5</item>
+        <item name="A6">A6</item>
+        <item name="A7">A7</item>
+        <item name="A8">A8</item>
+        <item name="Allroad">Allroad</item>
+        <item name="Cabriolet">Cabriolet</item>
+        <item name="Coupe">Coupe</item>
+        <item name="Q3">Q3</item>
+        <item name="Q5">Q5</item>
+        <item name="Q7">Q7</item>
+        <item name="Quattro">Quattro</item>
+        <item name="R8">R8</item>
+        <item name="RS Q3">RS Q3</item>
+        <item name="RS3">RS3</item>
+        <item name="RS4">RS4</item>
+        <item name="RS5">RS5</item>
+        <item name="RS6">RS6</item>
+        <item name="RS7">RS7</item>
+        <item name="S3">S3</item>
+        <item name="S4">S4</item>
+        <item name="S5">S5</item>
+        <item name="S6">S6</item>
+        <item name="S7">S7</item>
+        <item name="S8">S8</item>
+        <item name="SQ4">SQ4</item>
+        <item name="TT">TT</item>
+        <item name="Typ R">Typ R</item>
+        <item name="V8">V8</item>
+    </string-array>
+
+    <string-array name="Bentley_Models">
+        <item name="Arnage">Arnage</item>
+        <item name="Azure">Azure</item>
+        <item name="Brooklands">Brooklands</item>
+        <item name="Continental">Continental</item>
+        <item name="Flying Spur">Flying Spur</item>
+        <item name="Mark VI">Mark VI</item>
+        <item name="Mulsanne">Mulsanne</item>
+        <item name="S1">S1</item>
+        <item name="State Limousine">State Limousine</item>
+        <item name="T1">T1</item>
+        <item name="T2">T2</item>
+    </string-array>
+
+    <string-array name="Mini_Cooper_Models">
+        <item name="Clubman">Clubman</item>
+        <item name="Clubvan">Clubvan</item>
+        <item name="Convertible">Convertible</item>
+        <item name="Countryman">Countryman</item>
+        <item name="Hatch">Hatch</item>
+        <item name="Paceman">Paceman</item>
+        <item name="Roadster">Roadster</item>
+        <item name="Classic">Classic</item>
+    </string-array>
+
+</resources>
