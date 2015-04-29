@@ -30,22 +30,19 @@ public class Vehicle {
     private LinkedList<ServiceTask> serviceTasks;
     private long mileage;
     private Date purchased;
-    private JSONObject jsonObject;
 
     public Vehicle() {
         serviceTasks = new LinkedList<>();
-        jsonObject = new JSONObject();
     }
 
-    public Vehicle(JSONObject in) throws JSONException {
-        jsonObject = in;
+    public Vehicle(JSONObject jsonObject) throws JSONException {
         name = jsonObject.getString(NAME);
         mileage = jsonObject.getLong(MILEAGE);
         purchased = new Date(jsonObject.getLong(PURCHASED));
         make = jsonObject.getString(MAKE);
         model = jsonObject.getString(MODEL);
-//        submodel = jsonObject.getString(SUBMODEL);
-//        year = jsonObject.getInt(YEAR);
+        submodel = jsonObject.getString(SUBMODEL);
+        year = jsonObject.getInt(YEAR);
 
         serviceTasks = new LinkedList<>();
         if (jsonObject.getJSONArray(SERVICE_TASKS).length() > 0) {
@@ -60,81 +57,82 @@ public class Vehicle {
         }
     }
 
-    public JSONObject getJsonObject(){
+    public JSONObject getJsonObject() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put(NAME, name);
+        jsonObject.put(MAKE, make);
+        jsonObject.put(MODEL, model);
+        jsonObject.put(SUBMODEL, submodel);
+        jsonObject.put(YEAR, year);
+        jsonObject.put(SERVICE_TASKS, serviceTasks);
+        jsonObject.put(MILEAGE, mileage);
+        jsonObject.put(PURCHASED, purchased);
+
         return jsonObject;
     }
 
-    public void setName(String in) throws JSONException {
+    public void setName(String in){
         name = in;
-        jsonObject.put(NAME, name);
     }
 
     public String getName() {
         return name;
     }
 
-    public void setMake(String in) throws JSONException{
+    public void setMake(String in){
         make = in;
-        jsonObject.put(MAKE, make);
     }
 
-    public String getMake(){
+    public String getMake() {
         return make;
     }
 
-    public void setModel(String in)throws JSONException{
+    public void setModel(String in){
         model = in;
-        jsonObject.put(MODEL, model);
     }
 
-    public String getModel(){
+    public String getModel() {
         return model;
     }
 
-    public void setSubmodel(String in) throws JSONException{
+    public void setSubmodel(String in){
         this.submodel = in;
-        jsonObject.put(SUBMODEL, submodel);
     }
 
     public String getSubmodel() {
         return submodel;
     }
 
-    public void setYear(int in)throws JSONException{
+    public void setYear(int in)  {
         year = in;
-        jsonObject.put(YEAR, year);
     }
 
-    public int getYear(){
+    public int getYear() {
         return year;
     }
 
-    public void setMileage(long in) throws JSONException{
+    public void setMileage(long in)  {
         mileage = in;
-        jsonObject.put(MILEAGE, mileage);
     }
 
     public long getMileage() {
         return mileage;
     }
 
-    public void setPurchased(Date in) throws JSONException{
+    public void setPurchased(Date in)  {
         purchased = in;
-        jsonObject.put(PURCHASED, purchased);
     }
 
     public Date getPurchased() {
         return purchased;
     }
 
-    public void addServiceTask(ServiceTask in) throws JSONException {
+    public void addServiceTask(ServiceTask in)  {
         serviceTasks.add(in);
-        JSONArray array = jsonObject.getJSONArray(SERVICE_TASKS);
-        array.put(in.getJSONObject());
-        jsonObject.put(SERVICE_TASKS, array);
     }
 
-    public List<ServiceTask> getServiceTasks(){
+    public List<ServiceTask> getServiceTasks() {
         return serviceTasks;
     }
 

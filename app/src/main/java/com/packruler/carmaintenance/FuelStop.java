@@ -12,49 +12,55 @@ public class FuelStop extends ServiceTask {
     public static final String FILLED = "FILLED";
     public static final String MISSED_FILLUP = "MISSED_FILLUP";
 
-    private long volume;
+    private double volume;
     private boolean filled;
     private boolean missedFillup;
 
-    public FuelStop() throws JSONException {
-        super();
+    public FuelStop() {
         super.setTask("Fuel");
-
     }
 
-    public FuelStop(JSONObject in) throws JSONException {
-        super(in);
+    public FuelStop(JSONObject jsonObject) throws JSONException {
+        super(jsonObject);
         if (!super.getTask().equals(FUEL_STOP))
             throw new RuntimeException("NOT FUEL STOP");
 
-        volume = super.jsonObject.getLong(VOLUME);
-        filled = super.jsonObject.getBoolean(FILLED);
+        volume = jsonObject.getDouble(VOLUME);
+        filled = jsonObject.getBoolean(FILLED);
     }
 
-    public void setVolume(long in) throws JSONException {
+    public void setVolume(long in) {
         volume = in;
-        super.jsonObject.put(VOLUME, volume);
     }
 
-    public long getVolume() {
+    public double getVolume() {
         return volume;
     }
 
     public void setFilled(boolean in) throws JSONException {
         filled = in;
-        super.jsonObject.put(FILLED, filled);
     }
 
     public boolean getFilled() {
         return filled;
     }
 
-    public void setMissedFillup(boolean in) throws JSONException {
+    public void setMissedFillup(boolean in) {
         missedFillup = in;
-        super.jsonObject.put(MISSED_FILLUP, missedFillup);
     }
 
     public boolean getMissedFillup() {
         return missedFillup;
+    }
+
+    @Override
+    public JSONObject getJSONObject() throws JSONException {
+        JSONObject jsonObject = super.getJSONObject();
+
+        jsonObject.put(VOLUME, volume);
+        jsonObject.put(FILLED, filled);
+        jsonObject.put(MISSED_FILLUP, missedFillup);
+
+        return super.getJSONObject();
     }
 }

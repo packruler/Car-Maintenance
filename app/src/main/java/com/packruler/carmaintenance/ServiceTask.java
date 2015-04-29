@@ -26,100 +26,93 @@ public class ServiceTask {
     private String placeName = "";
     private Place place;
     private Date date = new Date();
-    private long cost;
-    private long mileage;
-    protected JSONObject jsonObject = new JSONObject();
+    private double cost;
+    private double mileage;
 
-    public ServiceTask() throws JSONException {
-        jsonObject.put(TASK, task);
-        jsonObject.put(DETAILS, details);
-        jsonObject.put(PLACE, Long.MIN_VALUE);
-        jsonObject.put(DATE, date.getTime());
-        jsonObject.put(COST, cost);
-        jsonObject.put(MILEAGE, mileage);
+    public ServiceTask() {
     }
 
-    public ServiceTask(JSONObject in) throws JSONException {
-        jsonObject = in;
+    public ServiceTask(JSONObject jsonObject) throws JSONException {
         task = jsonObject.getString(TASK);
         details = jsonObject.getString(DETAILS);
         placeName = jsonObject.getString(PLACE_NAME);
-//        place = GeoDataApi.
+//        place = googleApiClient.getPlaceById(googleApiClient, jsonObject.getString(PLACE));
         date = new Date(jsonObject.getLong(DATE));
+        cost = jsonObject.getDouble(COST);
+        mileage = jsonObject.getDouble(MILEAGE);
 
     }
 
-    public void setTask(String name) throws JSONException {
-        task = name;
-        jsonObject.put(TASK, task);
+    public void setTask(String task) {
+        this.task = task;
     }
 
     public String getTask() {
         return task;
     }
 
-    public void setDetails(String in) throws JSONException {
-        details = in;
-        jsonObject.put(DETAILS, details);
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public String getDetails() {
         return details;
     }
 
-    public void setPlaceName(String in) throws JSONException {
-        placeName = in;
-        jsonObject.put(PLACE_NAME, placeName);
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
     }
 
     public String getPlaceName() {
         return placeName;
     }
 
-    public void setPlace(Place in) throws JSONException {
-        place = in;
-        setPlaceName(place.getName().toString());
-        jsonObject.put(PLACE, place.getId());
+    public void setPlace(Place place) {
+        this.place = place;
+        setPlaceName(this.place.getName().toString());
     }
 
     public Place getPlace() {
         return place;
     }
 
-    public void setDate(Date in) throws JSONException {
-        date = in;
-        jsonObject.put(DATE, date.getTime());
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Date getDate() {
         return date;
     }
 
-    public void setCost(long in) throws JSONException {
-        cost = in;
-        jsonObject.put(COST, cost);
+    public void setCost(long cost) {
+        this.cost = cost;
     }
 
-    public long getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setMileage(long in) throws JSONException {
-        mileage = in;
-        jsonObject.put(MILEAGE, mileage);
+    public void setMileage(long mileage) throws JSONException {
+        this.mileage = mileage;
     }
 
-    public long getMileage() {
+    public double getMileage() {
         return mileage;
     }
 
     public JSONObject getJSONObject() throws JSONException {
-        jsonObject.put("task", task);
-        jsonObject.put("details", details);
-        jsonObject.put("place", place);
-        jsonObject.put("date", date.getTime());
-        jsonObject.put("cost", cost);
-        jsonObject.put("mileage", mileage);
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put(TASK, task);
+        jsonObject.put(DETAILS, details);
+        jsonObject.put(PLACE_NAME, placeName);
+        jsonObject.put(DATE, date.getTime());
+        jsonObject.put(COST, cost);
+        jsonObject.put(MILEAGE, mileage);
+
+        if (place != null)
+            jsonObject.put(PLACE, place.getId());
+
         return jsonObject;
     }
 }
