@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">Vehicle Name:</string>
+    <string name="make">Manufacturer:</string>
+    <string name="model">Model:</string>
+    <string name="submodel">Sub-Model:</string>
+    <string name="year">Year:</string>
+    <string name="mileage">Mileage:</string>
+    <string name="purchase_cost">Purchase Cost:</string>
+    <string name="purchase_date">Purchase Date:</string>
+
+    <string name="save">Save Changes</string>
+    <string name="discard">Discard Changes</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string-array name="verify">
+        <item>@string/yes</item>
+        <item>@string/no</item>
+    </string-array>
+</resources>

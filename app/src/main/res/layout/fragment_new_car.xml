@@ -1,0 +1,313 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.MainActivity"
+            android:padding="@dimen/abc_action_bar_content_inset_material">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:dividerPadding="@dimen/abc_action_bar_icon_vertical_padding_material"
+        android:divider="@android:drawable/divider_horizontal_bright">
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
+            card_view:cardElevation="1dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/name"
+                    android:id="@+id/name_textView"
+                    android:gravity="center_vertical"
+                    android:layout_alignTop="@+id/edit_name"
+                    android:layout_alignBottom="@+id/edit_name"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_name"
+                    android:layout_toRightOf="@+id/name_textView"
+                    android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
+                    android:layout_alignParentRight="true"
+                    android:inputType="textShortMessage"
+                    android:gravity="right"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
+            card_view:cardElevation="1dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/year"
+                    android:id="@+id/year_textView"
+                    android:gravity="center_vertical"
+                    android:layout_alignTop="@+id/edit_year"
+                    android:layout_alignBottom="@+id/edit_year"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_year"
+                    android:gravity="right"
+                    android:calendarViewShown="false"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
+                    android:layout_toRightOf="@id/year_textView"
+                    android:inputType="number"
+                    android:numeric="integer"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
+            card_view:cardElevation="1dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/make"
+                    android:id="@+id/make_textView"
+                    android:gravity="center_vertical"
+                    android:layout_alignTop="@+id/edit_make"
+                    android:layout_alignBottom="@+id/edit_make"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_make"
+                    android:layout_toRightOf="@+id/make_textView"
+                    android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
+                    android:layout_alignParentRight="true"
+                    android:inputType="textShortMessage"
+                    android:gravity="right"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
+            card_view:cardElevation="1dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/model"
+                    android:id="@+id/model_textView"
+                    android:gravity="center_vertical"
+                    android:layout_alignTop="@+id/edit_model"
+                    android:layout_alignBottom="@+id/edit_model"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_model"
+                    android:layout_toRightOf="@+id/model_textView"
+                    android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
+                    android:layout_alignParentRight="true"
+                    android:inputType="textShortMessage"
+                    android:gravity="right"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
+            card_view:cardElevation="1dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/submodel"
+                    android:id="@+id/submodel_textView"
+                    android:gravity="center_vertical"
+                    android:layout_alignTop="@+id/edit_submodel"
+                    android:layout_alignBottom="@+id/edit_submodel"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_submodel"
+                    android:layout_toRightOf="@+id/submodel_textView"
+                    android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
+                    android:layout_alignParentRight="true"
+                    android:inputType="textShortMessage"
+                    android:gravity="right"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
+            card_view:cardElevation="1dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/mileage"
+                    android:id="@+id/mileage_textView"
+                    android:gravity="center_vertical"
+                    android:layout_alignTop="@+id/edit_mileage"
+                    android:layout_alignBottom="@+id/edit_mileage"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_mileage"
+                    android:layout_toRightOf="@+id/mileage_textView"
+                    android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
+                    android:layout_alignParentRight="true"
+                    android:inputType="number"
+                    android:gravity="right"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
+            android:layout_marginBottom="@dimen/abc_action_bar_default_padding_material"
+            card_view:cardElevation="1dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/purchase_cost"
+                    android:id="@+id/purchase_cost_textView"
+                    android:gravity="center_vertical"
+                    android:layout_alignTop="@+id/edit_purchase_cost"
+                    android:layout_alignBottom="@+id/edit_purchase_cost"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_purchase_cost"
+                    android:layout_toRightOf="@+id/purchase_cost_textView"
+                    android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
+                    android:layout_alignParentRight="true"
+                    android:inputType="numberDecimal"
+                    android:gravity="right"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
+            card_view:cardElevation="1dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/purchase_date"
+                    android:id="@+id/purchase_date_textView"
+                    android:gravity="center_vertical"                    />
+
+                <DatePicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_purchase_date"
+                    android:gravity="right"
+                    android:spinnersShown="true"
+                    android:calendarViewShown="false"
+                    android:layout_below="@+id/purchase_date_textView"
+                    android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
+                    android:layout_alignParentRight="true"
+                    android:datePickerMode="spinner"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:id="@+id/save_changes"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/discard"
+                android:layout_alignParentRight="true"
+                android:id="@+id/discard_changes"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>
