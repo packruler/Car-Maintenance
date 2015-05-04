@@ -1,7 +1,6 @@
 package com.packruler.carmaintenance.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,12 +17,11 @@ import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
 
 public class EditCarFragment extends android.support.v4.app.Fragment {
     private final String TAG = getClass().getName();
 
-    private Vehicle vehicle;
+    private Vehicle vehicle = new Vehicle();
     private ListView listView;
     private MainActivity mainActivity;
     private SharedPreferences sharedPreferences;
@@ -31,12 +29,11 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
     public EditCarFragment() {
         // Required empty public constructor
-        sharedPreferences = getActivity().getSharedPreferences(getActivity().getApplication().getPackageName(), Context.MODE_MULTI_PROCESS);
-        vehicle = new Vehicle();
+//        sharedPreferences = getActivity().getSharedPreferences(getActivity().getApplication().getPackageName(), Context.MODE_MULTI_PROCESS);
     }
 
-    public EditCarFragment(Vehicle vehicle){
-        this();
+    public EditCarFragment(Vehicle vehicle) {
+//        this();
         this.vehicle = vehicle;
     }
 
@@ -52,7 +49,6 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_new_car, container, false);
         setVariables(rootView);
-        loadVehicleDetails();
         return rootView;
     }
 
@@ -77,6 +73,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     private EditText mileageText;
     private EditText purchaseCost;
     private DatePicker purchaseDate;
+    private boolean variablesSet = false;
 
     private void setVariables(View view) {
         nameText = (EditText) view.findViewById(R.id.edit_name);
@@ -94,6 +91,9 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
         view.findViewById(R.id.save_changes).setOnClickListener(saveDiscardListener);
         view.findViewById(R.id.discard_changes).setOnClickListener(saveDiscardListener);
+
+//        loadVehicleDetails();
+//        variablesSet = true;
     }
 
     private void storeVehicle() {
@@ -103,9 +103,9 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         if (!updated.equals(toastError))
             Toast.makeText(activity, updated, Toast.LENGTH_LONG).show();
         else {
-            if (activity.containsCar(vehicle.getName()))
+            if (activity.containsCar(nameText.getText().toString()))
                 Toast.makeText(activity, "Name already in use. Please choose new name.", Toast.LENGTH_LONG).show();
-            else{
+            else {
                 vehicle.setName(nameText.getText().toString());
                 vehicle.setYear(Integer.valueOf(yearText.getText().toString()));
                 vehicle.setMake(makeText.getText().toString());
@@ -113,7 +113,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                 vehicle.setSubmodel(submodelText.getText().toString());
                 vehicle.setMileage(Long.valueOf(mileageText.getText().toString()));
                 vehicle.setPurchaseCost(Double.valueOf(purchaseCost.getText().toString()));
-                vehicle.setPurchaseDate(new Date(purchaseDate.getYear(),purchaseDate.getMonth(),purchaseDate.getDayOfMonth()));
+                vehicle.setPurchaseDate(new Date(purchaseDate.getYear(), purchaseDate.getMonth(), purchaseDate.getDayOfMonth()));
                 activity.updateCar(vehicle);
             }
         }
@@ -123,43 +123,46 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         if (nameText.length() == 0)
             toastError += "\n" + getString(R.string.name).substring(0, getString(R.string.name).length() - 1);
 
-        if (yearText.length() == 0)
-            toastError += "\n" + getString(R.string.year).substring(0, getString(R.string.year).length() - 1);
-
-        if (makeText.length() == 0)
-            toastError += "\n" + getString(R.string.make).substring(0, getString(R.string.make).length() - 1);
-
-        if (modelText.length() == 0)
-            toastError += "\n" + getString(R.string.model).substring(0, getString(R.string.model).length() - 1);
-
-        if (mileageText.length() == 0)
-            toastError += "\n" + getString(R.string.mileage).substring(0, getString(R.string.mileage).length() - 1);
-
-        if (purchaseCost.length() == 0)
-            toastError += "\n" + getString(R.string.purchase_cost).substring(0, getString(R.string.purchase_cost).length() - 1);
+//        if (yearText.length() == 0)
+//            toastError += "\n" + getString(R.string.year).substring(0, getString(R.string.year).length() - 1);
+//
+//        if (makeText.length() == 0)
+//            toastError += "\n" + getString(R.string.make).substring(0, getString(R.string.make).length() - 1);
+//
+//        if (modelText.length() == 0)
+//            toastError += "\n" + getString(R.string.model).substring(0, getString(R.string.model).length() - 1);
+//
+//        if (mileageText.length() == 0)
+//            toastError += "\n" + getString(R.string.mileage).substring(0, getString(R.string.mileage).length() - 1);
+//
+//        if (purchaseCost.length() == 0)
+//            toastError += "\n" + getString(R.string.purchase_cost).substring(0, getString(R.string.purchase_cost).length() - 1);
 
         return toastError;
     }
 
 
     private void loadVehicleDetails() {
-        Map<String, String> defaultStrings = vehicle.getDetailValues();
+//        Map<String, String> defaultStrings = vehicle.getDetailValues();
 
-        nameText.setText(defaultStrings.get(Vehicle.NAME));
-        yearText.setText(defaultStrings.get(Vehicle.YEAR));
-        makeText.setText(defaultStrings.get(Vehicle.MAKE));
-        modelText.setText(defaultStrings.get(Vehicle.MODEL));
-        submodelText.setText(defaultStrings.get(Vehicle.SUBMODEL));
-        mileageText.setText(defaultStrings.get(Vehicle.MILEAGE));
-        purchaseCost.setText(defaultStrings.get(Vehicle.PURCHASE_COST));
-        Log.i(TAG, defaultStrings.get(Vehicle.PURCHASE_DATE));
-        Date date = new Date(Long.valueOf(defaultStrings.get(Vehicle.PURCHASE_DATE)));
-        purchaseDate.init(date.getYear()+1900, date.getMonth(), date.getDay(), null);
+        nameText.setText(vehicle.getName());
+        yearText.setText(vehicle.getYear());
+        makeText.setText(vehicle.getMake());
+        modelText.setText(vehicle.getModel());
+        submodelText.setText(vehicle.getSubmodel());
+        mileageText.setText("" + vehicle.getMileage());
+        purchaseCost.setText("" + vehicle.getPurchaseCost());
+
+        Log.i(TAG, "Name: " + vehicle.getName());
+
+        Date date = vehicle.getPurchaseDate();
+        purchaseDate.init(date.getYear() + 1900, date.getMonth(), date.getDay(), null);
     }
 
-    public void setVehicle(Vehicle vehicle){
+    public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
-        loadVehicleDetails();
+        if (variablesSet)
+            loadVehicleDetails();
     }
 
     private View.OnClickListener saveDiscardListener = new View.OnClickListener() {

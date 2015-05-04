@@ -16,17 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.packruler.carmaintenance.R;
+import com.packruler.carmaintenance.sql.CarSql;
 import com.packruler.carmaintenance.vehicle.Vehicle;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -47,7 +43,7 @@ public class MainActivity extends AppCompatActivity
     private Map<String, Vehicle> vehicleMap = new TreeMap<>();
 
     private SharedPreferences sharedPreferences;
-
+    private CarSql allCarsSQL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,19 +53,20 @@ public class MainActivity extends AppCompatActivity
 
         sharedPreferences = getSharedPreferences(getApplication().getPackageName(), MODE_MULTI_PROCESS);
 //        sharedPreferences.edit().clear().apply();
-        Set<String> carNames = sharedPreferences.getStringSet(CAR_NAME_SET, new TreeSet<String>());
-        Log.i(TAG, "Names " + carNames.toString());
-        for (String carName : carNames) {
-            try {
-                String car = sharedPreferences.getString(carName, "");
-                Log.i(TAG, "Imported JSON: " + car);
-                Vehicle vehicle = new Vehicle(new JSONObject(car));
-                vehicleMap.put(carName, vehicle);
-            } catch (JSONException e) {
-                e.printStackTrace();
-                Log.i(TAG, "ERROR STRING: " + sharedPreferences.getString(carName, ""));
-            }
-        }
+//        Set<String> carNames = sharedPreferences.getStringSet(CAR_NAME_SET, new TreeSet<String>());
+//        Log.i(TAG, "Names " + carNames.toString());
+//        for (String carName : carNames) {
+//            try {
+//                String car = sharedPreferences.getString(carName, "");
+//                Log.i(TAG, "Imported JSON: " + car);
+//                Vehicle vehicle = new Vehicle(new JSONObject(car));
+//                vehicleMap.put(carName, vehicle);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//                Log.i(TAG, "ERROR STRING: " + sharedPreferences.getString(carName, ""));
+//            }
+//        }
+
         Log.i(TAG, "Car map size: " + vehicleMap.size());
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -82,6 +79,8 @@ public class MainActivity extends AppCompatActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         mNavigationDrawerFragment.updateDrawer();
+
+        allCarsSQL = new CarSql(this);
     }
 
     @Override
@@ -98,6 +97,11 @@ public class MainActivity extends AppCompatActivity
         fragmentManager.beginTransaction()
                 .replace(R.id.container, editCarFragment)
                 .commit();
+        Vehicle vehicle = vehicleMap.get(name);
+        Log.i(TAG, "Vehicle null " + (vehicle == null));
+        if (vehicle == null)
+            vehicle = new Vehicle();
+        editCarFragment.setVehicle(vehicle);
 
 //        fragmentManager.beginTransaction()
 //                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
@@ -209,18 +213,20 @@ public class MainActivity extends AppCompatActivity
     }
 
     public boolean containsCar(String name) {
+        Log.i(TAG, "Contains: " + name);
         return vehicleMap.containsKey(name);
     }
 
     public boolean updateCar(Vehicle vehicle) {
         vehicleMap.put(vehicle.getName(), vehicle);
-        try {
-            Log.i(TAG, "JSON String: " + vehicle.getJsonObject().toString());
-            sharedPreferences.edit().putStringSet(CAR_NAME_SET, vehicleMap.keySet()).apply();
-            sharedPreferences.edit().putString(vehicle.getName(), vehicle.getJsonObject().toString()).apply();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        allCarsSQL.putCar(vehicle);
+//        try {
+//            Log.i(TAG, "JSON String: " + vehicle.getJsonObject().toString());
+//            sharedPreferences.edit().putStringSet(CAR_NAME_SET, vehicleMap.keySet()).apply();
+//            sharedPreferences.edit().putString(vehicle.getName(), vehicle.getJsonObject().toString()).apply();
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
         mNavigationDrawerFragment.updateDrawer();
         return true;
     }

@@ -3,6 +3,9 @@ package com.packruler.carmaintenance.ui;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -11,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,10 +24,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.packruler.carmaintenance.R;
+import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.util.List;
 
@@ -64,6 +72,9 @@ public class NavigationDrawerFragment extends Fragment {
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+    private TextView selectedCarName;
+    private ImageView selectedCarIcon;
+    private RelativeLayout selectedCarView;
 
     public NavigationDrawerFragment() {
     }
@@ -83,7 +94,9 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
         // Select either the default item (0) or the last selected item.
-        selectItem(mCurrentSelectedPosition);
+//        selectItem(mCurrentSelectedPosition);
+
+
     }
 
     @Override
@@ -91,6 +104,15 @@ public class NavigationDrawerFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         // Indicate that this fragment would like to influence the set of actions in the action bar.
         setHasOptionsMenu(true);
+
+        mDrawerListView.addHeaderView(View.inflate(getActivity(), R.layout.selected_car_display, null));
+        selectedCarIcon = (ImageView) getActivity().findViewById(R.id.selected_car_icon);
+        selectedCarName = (TextView) getActivity().findViewById(R.id.selected_car_name);
+        selectedCarView = (RelativeLayout) getActivity().findViewById(R.id.selected_car_view);
+        selectedCarName.setText("TEST");
+        Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.ic_launcher);
+        selectedCarIcon.setImageBitmap(icon);
+        selectedCarView.setBackgroundColor(Palette.from(icon).generate().getLightVibrantColor(Color.WHITE));
     }
 
     @Override
@@ -301,5 +323,9 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 
         Log.i(TAG, "Names: " + vehicleNames.toString());
+    }
+
+    private void updateSelectedCar(Vehicle vehicle){
+        selectedCarName.setText(vehicle.getName());
     }
 }
