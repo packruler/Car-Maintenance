@@ -1,7 +1,6 @@
 package com.packruler.carmaintenance.vehicle.maintenence;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by Packruler on 4/27/2015.
@@ -13,29 +12,30 @@ public class FuelStop extends ServiceTask {
     public static final String MISSED_FILLUP = "MISSED_FILLUP";
     public static final String OCTANE = "OCTANE";
 
-    private double volume;
+    private float volume;
     private boolean filled;
     private boolean missedFillup;
     private int octane;
+    private float costPerVolume;
 
     public FuelStop() {
-        super.setTask("Fuel");
+        super.setTask(FUEL_STOP);
     }
 
-    public FuelStop(JSONObject jsonObject) throws JSONException {
-        super(jsonObject);
-        if (!super.getTask().equals(FUEL_STOP))
-            throw new RuntimeException("NOT FUEL STOP");
+//    public FuelStop(JSONObject jsonObject) throws JSONException {
+//        super(jsonObject);
+//        if (!super.getTask().equals(FUEL_STOP))
+//            throw new RuntimeException("NOT FUEL STOP");
+//
+//        volume = jsonObject.getDouble(VOLUME);
+//        filled = jsonObject.getBoolean(FILLED);
+//    }
 
-        volume = jsonObject.getDouble(VOLUME);
-        filled = jsonObject.getBoolean(FILLED);
-    }
-
-    public void setVolume(long in) {
+    public void setVolume(float in) {
         volume = in;
     }
 
-    public double getVolume() {
+    public float getVolume() {
         return volume;
     }
 
@@ -55,22 +55,19 @@ public class FuelStop extends ServiceTask {
         return missedFillup;
     }
 
-    @Override
-    public JSONObject getJSONObject() throws JSONException {
-        JSONObject jsonObject = super.getJSONObject();
-
-        jsonObject.put(VOLUME, volume);
-        jsonObject.put(FILLED, filled);
-        jsonObject.put(MISSED_FILLUP, missedFillup);
-
-        return super.getJSONObject();
-    }
-
     public int getOctane() {
         return octane;
     }
 
     public void setOctane(int octane) {
         this.octane = octane;
+    }
+
+    public float getCostPerVolume() {
+        return costPerVolume;
+    }
+
+    public void setCostPerVolume(float costPerVolume) {
+        this.costPerVolume = costPerVolume;
     }
 }

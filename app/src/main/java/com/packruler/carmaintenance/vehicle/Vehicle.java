@@ -59,7 +59,7 @@ public class Vehicle {
 //            JSONArray jsonArray = jsonObject.getJSONArray(SERVICE_TASKS);
 //            for (int x = 0; x < jsonObject.length(); x++) {
 //                JSONObject current = jsonArray.getJSONObject(x);
-//                if (current.getString(ServiceTask.TASK).equals(FuelStop.FUEL_STOP))
+//                if (current.getString(ServiceTask.TYPE).equals(FuelStop.FUEL_STOP))
 //                    serviceTasks.add(new FuelStop(current));
 //                else
 //                    serviceTasks.add(new ServiceTask(current));

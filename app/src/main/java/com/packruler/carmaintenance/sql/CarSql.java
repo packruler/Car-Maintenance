@@ -2,12 +2,19 @@ package com.packruler.carmaintenance.sql;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.packruler.carmaintenance.vehicle.Vehicle;
+import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
+import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
+
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Packruler on 5/4/15.
@@ -64,14 +71,12 @@ public class CarSql {
                         COLUMN_NAME_OCTANE + " INT" + ")";
     }
 
-    private SQLiteDatabase database;
     private SQLHelper sqlHelper;
     private Context context;
 
     public CarSql(Context context) {
         this.context = context;
         sqlHelper = new SQLHelper(context);
-        database = sqlHelper.getWritableDatabase();
     }
 
     private class SQLHelper extends SQLiteOpenHelper {
@@ -115,9 +120,39 @@ public class CarSql {
         contentValues.put(CarTable.COLUMN_NAME_PURCHASE_DATE, vehicle.getPurchaseDate().getTime());
         Log.i(TAG, "Put: " + contentValues.toString());
 
+        SQLiteDatabase database = sqlHelper.getWritableDatabase();
         database.beginTransaction();
         database.insert(CarTable.TABLE_NAME, null, contentValues);
         database.endTransaction();
+    }
+
+    public List<ServiceTask> getServiceTask(String name) {
+        SQLiteDatabase database = sqlHelper.getReadableDatabase();
+        Cursor cursor = database.query(ServiceTable.TABLE_NAME, null, null, null, null, null, null);
+        LinkedList<ServiceTask> list = new LinkedList<>();
+        while (!cursor.isAfterLast()) {
+            if (cursor.getString(0).equals(name)) {
+                ServiceTask task;
+                switch (cursor.getString(1)) {
+                    case FuelStop.FUEL_STOP:
+                        task = new FuelStop();
+                        ((FuelStop) task).setCostPerVolume(cursor.getFloat(7));
+                        ((FuelStop) task).setVolume(cursor.getFloat(8));
+                        ((FuelStop) task).setOctane(cursor.getInt(9));
+                        break;
+                    default:
+                        task = new ServiceTask();
+                        break;
+                }
+                task.setCost(cursor.getFloat(2));
+                task.setMileage(cursor.getFloat(3));
+                task.setDate(new Date(cursor.getLong(4)));
+                task.setPlace(cursor.getString(5));
+                task.setPlaceName(cursor.getString(6));
+                list.add(task);
+            }
+        }
+        return list;
     }
 
 
