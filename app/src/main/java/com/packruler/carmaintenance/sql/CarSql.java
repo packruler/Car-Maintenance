@@ -5,9 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.BaseColumns;
 import android.util.Log;
 
+import com.packruler.carmaintenance.ui.MainActivity;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
@@ -22,65 +22,16 @@ import java.util.List;
 public class CarSql {
     private final String TAG = getClass().getName();
 
-    public static final class CarTable implements BaseColumns {
-        public static final String TABLE_NAME = "cars";
-        public static final String COLUMN_NAME_CAR_NAME = "car_name";
-        public static final String COLUMN_NAME_MAKE = "make";
-        public static final String COLUMN_NAME_MODEL = "model";
-        public static final String COLUMN_NAME_SUBMODEL = "submodel";
-        public static final String COLUMN_NAME_YEAR = "year";
-        public static final String COLUMN_NAME_VIN = "vin";
-        public static final String COLUMN_NAME_WEIGHT = "weight";
-        public static final String COLUMN_NAME_COLOR = "color";
-        public static final String COLUMN_NAME_PURCHASE_DATE = "purchase_date";
-        public static final String COLUMN_NAME_BOUGHT_FROM = "bought_from";
-        public static final String COLUMN_NAME_PURCHASE_COST = "purchase_cost";
-
-        private static final String SQL_CREATE =
-                "CREATE TABLE " + TABLE_NAME + " (" +
-                        COLUMN_NAME_CAR_NAME + " STRING PRIMARY KEY," +
-                        COLUMN_NAME_MAKE + " STRING," + COLUMN_NAME_MODEL + " STRING," +
-                        COLUMN_NAME_SUBMODEL + " STRING," + COLUMN_NAME_YEAR + " INTEGER," +
-                        COLUMN_NAME_VIN + " STRING," +
-                        COLUMN_NAME_WEIGHT + " LONG," + COLUMN_NAME_COLOR + " STRING," +
-                        COLUMN_NAME_PURCHASE_DATE + " LONG," + COLUMN_NAME_BOUGHT_FROM + " STRING," +
-                        COLUMN_NAME_PURCHASE_COST + " FLOAT" + ")";
-    }
-
-    public static final class ServiceTable implements BaseColumns {
-        public static final String TABLE_NAME = "service";
-        public static final String COLUMN_NAME_CAR_NAME = "car_name";
-        public static final String COLUMN_NAME_TYPE = "type";
-        public static final String COLUMN_NAME_COST = "cost";
-        public static final String COLUMN_NAME_MILEAGE = "mileage";
-        public static final String COLUMN_NAME_DATE = "date";
-        public static final String COLUMN_NAME_LOCATION_ID = "location_id";
-        public static final String COLUMN_NAME_LOCATION_NAME = "location_name";
-
-        //For Gas
-        public static final String COLUMN_NAME_COST_PER_VOLUME = "cost_per_volume";
-        public static final String COLUMN_NAME_VOLUME = "volume";
-        public static final String COLUMN_NAME_OCTANE = "octane";
-
-        public static final String SQL_CREATE =
-                "CREATE TABLE " + TABLE_NAME + " (" + COLUMN_NAME_CAR_NAME + " STRING," +
-                        COLUMN_NAME_TYPE + " STRING," + COLUMN_NAME_COST + " FLOAT," +
-                        COLUMN_NAME_MILEAGE + " LONG," + COLUMN_NAME_DATE + " STRING," +
-                        COLUMN_NAME_LOCATION_ID + " STRING," + COLUMN_NAME_LOCATION_NAME +
-                        COLUMN_NAME_COST_PER_VOLUME + " FLOAT," + COLUMN_NAME_VOLUME + " FLOAT," +
-                        COLUMN_NAME_OCTANE + " INT" + ")";
-    }
-
     private SQLHelper sqlHelper;
-    private Context context;
+    private MainActivity activity;
 
-    public CarSql(Context context) {
-        this.context = context;
-        sqlHelper = new SQLHelper(context);
+    public CarSql(MainActivity activity) {
+        this.activity = activity;
+        sqlHelper = new SQLHelper(activity);
     }
 
     private class SQLHelper extends SQLiteOpenHelper {
-        public static final int DATABASE_VERSION = 3;
+        public static final int DATABASE_VERSION = 1;
         public static final String DATABASE_NAME = "Cars.db";
 
         public SQLHelper(Context context) {
@@ -126,7 +77,7 @@ public class CarSql {
         database.endTransaction();
     }
 
-    public List<ServiceTask> getServiceTask(String name) {
+    public List<ServiceTask> getServiceTasks(String name) {
         SQLiteDatabase database = sqlHelper.getReadableDatabase();
         Cursor cursor = database.query(ServiceTable.TABLE_NAME, null, null, null, null, null, null);
         LinkedList<ServiceTask> list = new LinkedList<>();
@@ -155,5 +106,14 @@ public class CarSql {
         return list;
     }
 
-
+    public void loadCars() {
+        SQLiteDatabase database = sqlHelper.getReadableDatabase();
+        Cursor cursor = database.query(CarTable.TABLE_NAME, null, null, null, null, null, null);
+        while (!cursor.isAfterLast()) {
+            Vehicle vehicle = new Vehicle(cursor);
+            vehicle.setServiceTasks(getServiceTasks(vehicle.getName()));
+            activity.loadCar(vehicle);
+            cursor.moveToNext();
+        }
+    }
 }

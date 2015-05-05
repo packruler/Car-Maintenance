@@ -1,5 +1,8 @@
 package com.packruler.carmaintenance.vehicle;
 
+import android.database.Cursor;
+
+import com.packruler.carmaintenance.sql.CarTable;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
 import java.util.Calendar;
@@ -30,23 +33,38 @@ public class Vehicle {
     private String submodel="";
     private int year;
     private String vin="";
-    private LinkedList<ServiceTask> serviceTasks = new LinkedList<>();
+    private List<ServiceTask> serviceTasks = new LinkedList<>();
     private long weight;
-    private double mileage;
-    private Date purchase_date = new Date();
-    private double purchaseCost;
+    private float mileage;
+    private Date purchaseDate = new Date();
+    private float purchaseCost;
     private String color="";
     private String boughtFrom="";
 
     public Vehicle() {
         serviceTasks = new LinkedList<>();
-        purchase_date = Calendar.getInstance().getTime();
+        purchaseDate = Calendar.getInstance().getTime();
+    }
+
+    public Vehicle(Cursor cursor){
+        name = cursor.getString(cursor.getColumnIndex(CarTable.COLUMN_NAME_CAR_NAME));
+        make = cursor.getString(cursor.getColumnIndex(CarTable.COLUMN_NAME_MAKE));
+        model = cursor.getString(cursor.getColumnIndex(CarTable.COLUMN_NAME_MODEL));
+        submodel = cursor.getString(cursor.getColumnIndex(CarTable.COLUMN_NAME_SUBMODEL));
+        year = cursor.getInt(cursor.getColumnIndex(CarTable.COLUMN_NAME_YEAR));
+        vin = cursor.getString(cursor.getColumnIndex(CarTable.COLUMN_NAME_VIN));
+        weight = cursor.getLong(cursor.getColumnIndex(CarTable.COLUMN_NAME_WEIGHT));
+        mileage = cursor.getFloat(cursor.getColumnIndex(CarTable.COLUMN_NAME_MILEAGE));
+        purchaseDate = new Date(cursor.getLong(cursor.getColumnIndex(CarTable.COLUMN_NAME_PURCHASE_DATE)));
+        purchaseCost = cursor.getFloat(cursor.getColumnIndex(CarTable.COLUMN_NAME_PURCHASE_COST));
+        color = cursor.getString(cursor.getColumnIndex(CarTable.COLUMN_NAME_COLOR));
+        boughtFrom = cursor.getString(cursor.getColumnIndex(CarTable.COLUMN_NAME_BOUGHT_FROM));
     }
 
 //    public Vehicle(JSONObject jsonObject) throws JSONException {
 //        name = jsonObject.getString(NAME);
 //        mileage = jsonObject.getLong(MILEAGE);
-//        purchase_date = new Date(jsonObject.getLong(PURCHASE_DATE));
+//        purchaseDate = new Date(jsonObject.getLong(PURCHASE_DATE));
 //        make = jsonObject.getString(MAKE);
 //        model = jsonObject.getString(MODEL);
 //        submodel = jsonObject.getString(SUBMODEL);
@@ -79,7 +97,7 @@ public class Vehicle {
 //        jsonObject.put(YEAR, year);
 //        jsonObject.put(SERVICE_TASKS, serviceTasks);
 //        jsonObject.put(MILEAGE, mileage);
-//        jsonObject.put(PURCHASE_DATE, purchase_date.getTime());
+//        jsonObject.put(PURCHASE_DATE, purchaseDate.getTime());
 //        jsonObject.put(PURCHASE_COST, purchaseCost);
 //
 //        return jsonObject;
@@ -125,31 +143,31 @@ public class Vehicle {
         return year;
     }
 
-    public void setMileage(long in) {
+    public void setMileage(float in) {
         mileage = in;
     }
 
-    public double getMileage() {
+    public float getMileage() {
         return mileage;
     }
 
     public void setPurchaseDate(Date in) {
-        purchase_date = in;
+        purchaseDate = in;
     }
 
     public Date getPurchaseDate() {
-        return purchase_date;
+        return purchaseDate;
     }
 
     public void addServiceTask(ServiceTask in) {
         serviceTasks.add(in);
     }
 
-    public double getPurchaseCost() {
+    public float getPurchaseCost() {
         return purchaseCost;
     }
 
-    public void setPurchaseCost(double purchaseCost) {
+    public void setPurchaseCost(float purchaseCost) {
         this.purchaseCost = purchaseCost;
     }
 
@@ -159,6 +177,10 @@ public class Vehicle {
 
     public void setVin(String vin) {
         this.vin = vin;
+    }
+
+    public void setServiceTasks(List<ServiceTask> serviceTasks){
+        this.serviceTasks = serviceTasks;
     }
 
     public List<ServiceTask> getServiceTasks() {

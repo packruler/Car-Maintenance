@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity
         mNavigationDrawerFragment.updateDrawer();
 
         allCarsSQL = new CarSql(this);
+        allCarsSQL.loadCars();
     }
 
     @Override
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity
         if (vehicleMap.containsKey(name))
             editCarFragment = new EditCarFragment(vehicleMap.get(name));
         else
-        editCarFragment = new EditCarFragment();
+            editCarFragment = new EditCarFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -229,5 +230,10 @@ public class MainActivity extends AppCompatActivity
 //        }
         mNavigationDrawerFragment.updateDrawer();
         return true;
+    }
+
+    public void loadCar(Vehicle vehicle) {
+        Log.i(TAG, "Loading car: " + vehicle.getName());
+        vehicleMap.put(vehicle.getName(), vehicle);
     }
 }

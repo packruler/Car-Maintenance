@@ -107,12 +107,25 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                 Toast.makeText(activity, "Name already in use. Please choose new name.", Toast.LENGTH_LONG).show();
             else {
                 vehicle.setName(nameText.getText().toString());
-                vehicle.setYear(Integer.valueOf(yearText.getText().toString()));
-                vehicle.setMake(makeText.getText().toString());
-                vehicle.setModel(modelText.getText().toString());
-                vehicle.setSubmodel(submodelText.getText().toString());
-                vehicle.setMileage(Long.valueOf(mileageText.getText().toString()));
-                vehicle.setPurchaseCost(Double.valueOf(purchaseCost.getText().toString()));
+
+                if (yearText.getText().length() > 0)
+                    vehicle.setYear(Integer.valueOf(yearText.getText().toString()));
+
+                if (makeText.getText().length() > 0)
+                    vehicle.setMake(makeText.getText().toString());
+
+                if (modelText.getText().length() > 0)
+                    vehicle.setModel(modelText.getText().toString());
+
+                if (submodelText.getText().length() > 0)
+                    vehicle.setSubmodel(submodelText.getText().toString());
+
+                if (mileageText.getText().length() > 0)
+                    vehicle.setMileage(Long.valueOf(mileageText.getText().toString()));
+
+                if (purchaseCost.getText().length() > 0)
+                    vehicle.setPurchaseCost(Float.valueOf(purchaseCost.getText().toString()));
+
                 vehicle.setPurchaseDate(new Date(purchaseDate.getYear(), purchaseDate.getMonth(), purchaseDate.getDayOfMonth()));
                 activity.updateCar(vehicle);
             }
@@ -171,7 +184,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
             Log.i(TAG, "onClick");
             switch (v.getId()) {
                 case R.id.save_changes:
-                    Log.i(TAG, "Length: " + nameText.getText().length());
+                    Log.i(TAG, "Name Length: " + nameText.getText().length());
                     storeVehicle();
                     break;
                 case R.id.discard_changes:
