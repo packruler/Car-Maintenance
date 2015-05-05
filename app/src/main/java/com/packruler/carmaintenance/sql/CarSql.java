@@ -1,5 +1,6 @@
 package com.packruler.carmaintenance.sql;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -7,12 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.packruler.carmaintenance.ui.MainActivity;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,10 +22,10 @@ public class CarSql {
     private final String TAG = getClass().getName();
 
     private SQLHelper sqlHelper;
-    private MainActivity activity;
+    private VehicleContainer activity;
 
-    public CarSql(MainActivity activity) {
-        this.activity = activity;
+    public CarSql(Activity activity) {
+        this.activity = (VehicleContainer) activity;
         sqlHelper = new SQLHelper(activity);
     }
 
@@ -40,80 +39,89 @@ public class CarSql {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL(CarTable.SQL_CREATE);
-            db.execSQL(ServiceTable.SQL_CREATE);
+            db.execSQL(Vehicle.SQL_CREATE);
+            db.execSQL(ServiceTask.SQL_CREATE);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            switch (oldVersion) {
-                case 1:
-                    db.execSQL(ServiceTable.SQL_CREATE);
-                case 2:
-                    db.execSQL("ALTER TABLE " + ServiceTable.TABLE_NAME + " ADD COLUMN " + ServiceTable.COLUMN_NAME_OCTANE + " INT");
-            }
+
         }
 
     }
 
     public void putCar(Vehicle vehicle) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(CarTable.COLUMN_NAME_CAR_NAME, vehicle.getName());
-        contentValues.put(CarTable.COLUMN_NAME_MAKE, vehicle.getMake());
-        contentValues.put(CarTable.COLUMN_NAME_MODEL, vehicle.getModel());
-        contentValues.put(CarTable.COLUMN_NAME_SUBMODEL, vehicle.getSubmodel());
-        contentValues.put(CarTable.COLUMN_NAME_YEAR, vehicle.getYear());
-        contentValues.put(CarTable.COLUMN_NAME_VIN, vehicle.getVin());
-        contentValues.put(CarTable.COLUMN_NAME_WEIGHT, vehicle.getModel());
-        contentValues.put(CarTable.COLUMN_NAME_COLOR, vehicle.getColor());
-        contentValues.put(CarTable.COLUMN_NAME_BOUGHT_FROM, vehicle.getBoughtFrom());
-        contentValues.put(CarTable.COLUMN_NAME_PURCHASE_COST, vehicle.getPurchaseCost());
-        contentValues.put(CarTable.COLUMN_NAME_PURCHASE_DATE, vehicle.getPurchaseDate().getTime());
+        ContentValues contentValues = vehicle.getContentValues();
         Log.i(TAG, "Put: " + contentValues.toString());
 
         SQLiteDatabase database = sqlHelper.getWritableDatabase();
-        database.beginTransaction();
-        database.insert(CarTable.TABLE_NAME, null, contentValues);
-        database.endTransaction();
+        database.insertOrThrow(Vehicle.TABLE_NAME, null, contentValues);
+    }
+
+    public void updateCar(Vehicle vehicle) {
+        ContentValues contentValues = vehicle.getContentValues();
+        Log.i(TAG, "Put: " + contentValues.toString());
+
+        SQLiteDatabase database = sqlHelper.getWritableDatabase();
+        database.update(Vehicle.TABLE_NAME, contentValues, null, null);
     }
 
     public List<ServiceTask> getServiceTasks(String name) {
         SQLiteDatabase database = sqlHelper.getReadableDatabase();
-        Cursor cursor = database.query(ServiceTable.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = database.query(ServiceTask.TABLE_NAME, null, ServiceTask.CAR_NAME + "= " + "\"" + name + "\"", null, null, null, null);
+        cursor.moveToFirst();
         LinkedList<ServiceTask> list = new LinkedList<>();
+        Log.i(TAG, "Count: " + cursor.getCount());
         while (!cursor.isAfterLast()) {
-            if (cursor.getString(0).equals(name)) {
-                ServiceTask task;
-                switch (cursor.getString(1)) {
-                    case FuelStop.FUEL_STOP:
-                        task = new FuelStop();
-                        ((FuelStop) task).setCostPerVolume(cursor.getFloat(7));
-                        ((FuelStop) task).setVolume(cursor.getFloat(8));
-                        ((FuelStop) task).setOctane(cursor.getInt(9));
-                        break;
-                    default:
-                        task = new ServiceTask();
-                        break;
-                }
-                task.setCost(cursor.getFloat(2));
-                task.setMileage(cursor.getFloat(3));
-                task.setDate(new Date(cursor.getLong(4)));
-                task.setPlace(cursor.getString(5));
-                task.setPlaceName(cursor.getString(6));
-                list.add(task);
+            ServiceTask task;
+            switch (cursor.getString(cursor.getColumnIndex(ServiceTask.TYPE))) {
+                case FuelStop.FUEL_STOP:
+                    task = new FuelStop(cursor);
+                    break;
+                default:
+                    task = new ServiceTask(cursor);
+                    break;
             }
+            list.add(task);
+            cursor.moveToNext();
         }
         return list;
     }
 
+    public void putServiceTask(ServiceTask serviceTask) {
+        ContentValues contentValues = serviceTask.getContentValues();
+        Log.i(TAG, "Service Task: " + contentValues.toString());
+        SQLiteDatabase database = sqlHelper.getWritableDatabase();
+        database.insertOrThrow(ServiceTask.TABLE_NAME, null, contentValues);
+    }
+
     public void loadCars() {
         SQLiteDatabase database = sqlHelper.getReadableDatabase();
-        Cursor cursor = database.query(CarTable.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = database.query(Vehicle.TABLE_NAME, null, null, null, null, null, null);
+        cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Vehicle vehicle = new Vehicle(cursor);
             vehicle.setServiceTasks(getServiceTasks(vehicle.getName()));
+//            Cursor serviceCursor = database.rawQuery("SELECT * FROM " + ServiceTask.TABLE_NAME + " WHERE " + ServiceTask.CAR_NAME + " = " + vehicle.getName(), null);
+//            while (!serviceCursor.isAfterLast()) {
+//                ServiceTask task;
+//                switch (cursor.getString(cursor.getColumnIndex(ServiceTask.TYPE))) {
+//                    case FuelStop.FUEL_STOP:
+//                        task = new FuelStop(serviceCursor);
+//                        break;
+//                    default:
+//                        task = new ServiceTask(serviceCursor);
+//                        break;
+//                }
+//                vehicle.addServiceTask(task);
+//            }
+            Log.i(TAG, "Loaded " + vehicle.getName());
             activity.loadCar(vehicle);
             cursor.moveToNext();
         }
+    }
+
+    public interface VehicleContainer {
+        void loadCar(Vehicle vehicle);
     }
 }
