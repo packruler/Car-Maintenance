@@ -14,6 +14,7 @@ import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class SQLTester extends ActionBarActivity implements CarSql.VehicleContainer {
@@ -110,5 +111,13 @@ public class SQLTester extends ActionBarActivity implements CarSql.VehicleContai
 
     public void loadSQL() {
         carSql.loadCars();
+        Set<String> names = vehicleMap.keySet();
+        Log.i(TAG, "Car names: " + names.toString());
+        Vehicle vehicle = vehicleMap.get(names.iterator().next());
+        String oldName = vehicle.getName();
+        vehicle.setName("THIS CHANGED");
+        Log.i(TAG, "Name Changed");
+        carSql.updateVehicleName(oldName, vehicle);
+        Log.i(TAG, "SQL updated");
     }
 }

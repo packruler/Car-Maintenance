@@ -81,6 +81,9 @@ public class Vehicle {
     public void setName(String name) {
         this.name = name;
         contentValues.put(CAR_NAME, this.name);
+        for (ServiceTask task : serviceTasks){
+            task.setCarName(this.name);
+        }
     }
 
     public String getName() {

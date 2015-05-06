@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.packruler.carmaintenance.R;
+import com.packruler.carmaintenance.sql.CarSql;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.util.Calendar;
@@ -21,10 +22,11 @@ import java.util.Date;
 public class EditCarFragment extends android.support.v4.app.Fragment {
     private final String TAG = getClass().getName();
 
-    private Vehicle vehicle = new Vehicle();
+    private Vehicle vehicle=new Vehicle();
     private ListView listView;
     private MainActivity mainActivity;
     private SharedPreferences sharedPreferences;
+    private CarSql carSql;
 
 
     public EditCarFragment() {
@@ -194,4 +196,8 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
             }
         }
     };
+
+    public void setCarSql(CarSql carSql) {
+        this.carSql = carSql;
+    }
 }

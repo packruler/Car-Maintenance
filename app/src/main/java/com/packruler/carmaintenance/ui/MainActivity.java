@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
     private Map<String, Vehicle> vehicleMap = new TreeMap<>();
 
     private SharedPreferences sharedPreferences;
-    private CarSql allCarsSQL;
+    private CarSql carsSQL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity
 
         mNavigationDrawerFragment.updateDrawer();
 
-        allCarsSQL = new CarSql(this);
-        allCarsSQL.loadCars();
+        carsSQL = new CarSql(this);
+        carsSQL.loadCars();
     }
 
     @Override
@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity
         else
             editCarFragment = new EditCarFragment();
 
+        editCarFragment.setCarSql(carsSQL);
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         fragmentManager.beginTransaction()
@@ -220,7 +221,7 @@ public class MainActivity extends AppCompatActivity
 
     public boolean updateCar(Vehicle vehicle) {
         vehicleMap.put(vehicle.getName(), vehicle);
-        allCarsSQL.putCar(vehicle);
+        carsSQL.putCar(vehicle);
 //        try {
 //            Log.i(TAG, "JSON String: " + vehicle.getJsonObject().toString());
 //            sharedPreferences.edit().putStringSet(CAR_NAME_SET, vehicleMap.keySet()).apply();

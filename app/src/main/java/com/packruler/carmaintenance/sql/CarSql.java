@@ -121,6 +121,20 @@ public class CarSql {
         }
     }
 
+    public void updateVehicleData(Vehicle vehicle) {
+        SQLiteDatabase database = sqlHelper.getWritableDatabase();
+        database.update(Vehicle.TABLE_NAME, vehicle.getContentValues(), Vehicle.CAR_NAME + "= " + vehicle.getName(), null);
+    }
+
+    public void updateVehicleName(String oldName, Vehicle vehicle) {
+        SQLiteDatabase database = sqlHelper.getWritableDatabase();
+        database.update(Vehicle.TABLE_NAME, vehicle.getContentValues(), Vehicle.CAR_NAME + "= " + "\"" + oldName + "\"", null);
+        database.delete(ServiceTask.TABLE_NAME, ServiceTask.CAR_NAME + "= " + "\"" + oldName + "\"", null);
+        for (ServiceTask task : vehicle.getServiceTasks()) {
+            database.insert(ServiceTask.TABLE_NAME, null, task.getContentValues());
+        }
+    }
+
     public interface VehicleContainer {
         void loadCar(Vehicle vehicle);
     }
