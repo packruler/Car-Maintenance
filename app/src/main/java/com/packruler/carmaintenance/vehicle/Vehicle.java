@@ -26,21 +26,33 @@ public class Vehicle {
     public static final String YEAR = "year";
     public static final String VIN = "vin";
     public static final String WEIGHT = "weight";
+    public static final String WEIGHT_UNITS = "weight_units";
     public static final String MILEAGE = "mileage";
+    public static final String MILEAGE_UNITS = "mileage_units";
     public static final String COLOR = "color";
     public static final String PURCHASE_DATE = "purchase_date";
     public static final String BOUGHT_FROM = "bought_from";
     public static final String PURCHASE_COST = "purchase_cost";
+    public static final String COST_UNITS = "cost_units";
+    public static final String DISPLACEMENT = "displacement";
+    public static final String DISPLACEMENT_UNITS = "displacement_units";
+    public static final String HORSEPOWER = "horsepower";
+    public static final String HORSEPOWER_UNITS = "horsepower_units";
+    public static final String TORQUE = "torque";
+    public static final String TORQUE_UNITS = "torque_units";
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" +
                     CAR_NAME + " STRING PRIMARY KEY," +
                     MAKE + " STRING," + MODEL + " STRING," +
                     SUBMODEL + " STRING," + YEAR + " INTEGER," +
-                    VIN + " STRING," + WEIGHT + " LONG," +
-                    MILEAGE + " FLOAT," + COLOR + " STRING," +
+                    VIN + " STRING," + WEIGHT + " LONG," + WEIGHT_UNITS + " STRING," +
+                    DISPLACEMENT + " FLOAT," + DISPLACEMENT_UNITS + " STRING," +
+                    HORSEPOWER + " FLOAT," + HORSEPOWER_UNITS + " STRING," +
+                    TORQUE + " FLOAT," + TORQUE_UNITS + " STRING," +
+                    MILEAGE + " FLOAT," + MILEAGE_UNITS + " STRING," + COLOR + " STRING," +
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " STRING," +
-                    PURCHASE_COST + " FLOAT" + ")";
+                    PURCHASE_COST + " FLOAT," + COST_UNITS + " STRING" + ")";
 
     private String name = "";
     private String make = "";
@@ -81,7 +93,7 @@ public class Vehicle {
     public void setName(String name) {
         this.name = name;
         contentValues.put(CAR_NAME, this.name);
-        for (ServiceTask task : serviceTasks){
+        for (ServiceTask task : serviceTasks) {
             task.setCarName(this.name);
         }
     }

@@ -2,6 +2,7 @@ package com.packruler.carmaintenance.vehicle.maintenence;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.google.android.gms.location.places.Place;
 
@@ -18,7 +19,9 @@ public class ServiceTask {
     public static final String TYPE = "type";
     public static final String DETAILS = "details";
     public static final String COST = "cost";
+    public static final String COST_UNITS = "cost_units";
     public static final String MILEAGE = "mileage";
+    public static final String MILEAGE_UNITS = "mileage_units";
     public static final String DATE = "date";
     public static final String LOCATION_ID = "location_id";
     public static final String LOCATION_NAME = "location_name";
@@ -26,17 +29,20 @@ public class ServiceTask {
     //For Gas
     public static final String COST_PER_VOLUME = "cost_per_volume";
     public static final String VOLUME = "volume";
+    public static final String VOLUME_UNITS = "volume_units";
     public static final String OCTANE = "octane";
+    public static final String OCTANE_UNITS = "octane_units";
     public static final String MISSED_FILL_UP = "MISSED_FILL_UP";
     public static final String COMPLETE_FILL_UP = "COMPLETE_FILL_UP";
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + CAR_NAME + " STRING," +
                     TASK_NUM + " INTEGER," + TYPE + " STRING," + COST + " FLOAT," +
-                    MILEAGE + " LONG," + DATE + " STRING," + DETAILS + " STRING," +
-                    LOCATION_ID + " STRING," + LOCATION_NAME + " STRING," +
-                    COST_PER_VOLUME + " FLOAT," + VOLUME + " FLOAT," +
-                    OCTANE + " INT," + MISSED_FILL_UP + " INTEGER," +
+                    MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," + DATE + " STRING," +
+                    DETAILS + " STRING," + LOCATION_ID + " STRING," + LOCATION_NAME + " STRING," +
+                    COST_PER_VOLUME + " FLOAT," + COST_UNITS + " STRING," +
+                    VOLUME + " FLOAT," + VOLUME_UNITS + " STRING," +
+                    OCTANE + " INT," + OCTANE_UNITS + " STRING," + MISSED_FILL_UP + " INTEGER," +
                     COMPLETE_FILL_UP + " INTEGER" + ")";
 
 //    GeoDataApi geoDataApi = new G
@@ -51,6 +57,7 @@ public class ServiceTask {
     private Date date = new Date();
     private float cost;
     private float mileage;
+    private SQLiteDatabase database;
 
     public ServiceTask(int taskNum) {
         this.taskNum = taskNum;
