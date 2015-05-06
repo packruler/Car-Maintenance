@@ -5,8 +5,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.google.android.gms.location.places.Place;
+import com.packruler.carmaintenance.sql.CarSql;
+import com.packruler.carmaintenance.vehicle.Vehicle;
 
+import java.sql.SQLDataException;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by Packruler on 4/27/2015.
@@ -35,6 +41,8 @@ public class ServiceTask {
     public static final String MISSED_FILL_UP = "MISSED_FILL_UP";
     public static final String COMPLETE_FILL_UP = "COMPLETE_FILL_UP";
 
+    public static final String[] RESERVED_WORDS = new String[]{TABLE_NAME, GENERAL_TYPE, CAR_NAME};
+
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + CAR_NAME + " STRING," +
                     TASK_NUM + " INTEGER," + TYPE + " STRING," + COST + " FLOAT," +
@@ -58,14 +66,21 @@ public class ServiceTask {
     private float cost;
     private float mileage;
     private SQLiteDatabase database;
+    private Set<String> RESERVED_STRINGS = new TreeSet<>(Arrays.asList(RESERVED_WORDS));
 
     public ServiceTask(int taskNum) {
+        RESERVED_STRINGS.addAll(Arrays.asList(CarSql.RESERVED_WORDS));
+        RESERVED_STRINGS.addAll(Arrays.asList(Vehicle.RESERVED_WORDS));
+
         this.taskNum = taskNum;
         contentValues.put(TASK_NUM, taskNum);
         setType(GENERAL_TYPE);
     }
 
     public ServiceTask(Cursor cursor) {
+        RESERVED_STRINGS.addAll(Arrays.asList(CarSql.RESERVED_WORDS));
+        RESERVED_STRINGS.addAll(Arrays.asList(Vehicle.RESERVED_WORDS));
+
         setCarName(cursor.getString(cursor.getColumnIndex(CAR_NAME)));
         setTaskNum(cursor.getInt(cursor.getColumnIndex(TASK_NUM)));
         setType(cursor.getString(cursor.getColumnIndex(TYPE)));
@@ -82,9 +97,27 @@ public class ServiceTask {
         return carName;
     }
 
-    public void setCarName(String carName) {
+    public boolean setCarName(String carName) {
         this.carName = carName;
         contentValues.put(CAR_NAME, carName);
+        return true;
+    }
+
+    public boolean canUseCarName(String carName) throws SQLDataException {
+        if (carName.length() < 3)
+            throw new SQLDataException("Car name must be more than 3 characters long");
+
+        Cursor nameCursor = database.query(TABLE_NAME, new String[]{CAR_NAME}, null, null, null, null, null);
+        nameCursor.moveToFirst();
+        while (!nameCursor.isAfterLast()) {
+            if (nameCursor.getString(nameCursor.getColumnIndex(CAR_NAME)).equalsIgnoreCase(carName))
+                throw new SQLDataException(carName + " already in use");
+        }
+
+        if (RESERVED_STRINGS.contains(carName))
+            throw new SQLDataException(carName + " cannot be used");
+
+        return true;
     }
 
     public int getTaskNum() {

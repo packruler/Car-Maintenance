@@ -41,6 +41,9 @@ public class Vehicle {
     public static final String TORQUE = "torque";
     public static final String TORQUE_UNITS = "torque_units";
 
+
+    public static final String[] RESERVED_WORDS = new String[]{TABLE_NAME,CAR_NAME};
+
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" +
                     CAR_NAME + " STRING PRIMARY KEY," +
