@@ -42,12 +42,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b150856a-4955-4538-bbe1-94377f603e98" name="Default" comment="SQL setup work almost complete&#10;Added PartReplacement class&#10;Added class for standardizing managing data using SQL to store everything">
-      <change type="NEW" beforePath="" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/PartReplacement.java" />
-      <change type="NEW" beforePath="" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSql.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSql.java" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/workspace.xml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/workspace.xml" />
     </list>
     <ignored path="Material Car Maintenance.iws" />
@@ -300,49 +295,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SQLDataHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="docComment;class#SQLDataHandler#0" expanded="true" />
-                <element signature="method#SQLDataHandler#0;class#SQLDataHandler#0" expanded="true" />
-                <element signature="e#623#624#0" expanded="true" />
-                <element signature="e#665#666#0" expanded="true" />
-                <element signature="method#getString#0;class#SQLDataHandler#0" expanded="true" />
-                <element signature="method#putString#1;class#SQLDataHandler#0" expanded="true" />
-                <element signature="method#putString#2;class#SQLDataHandler#0" expanded="true" />
-                <element signature="method#getFloat#0;class#SQLDataHandler#0" expanded="true" />
-                <element signature="method#putFloat#0;class#SQLDataHandler#0" expanded="true" />
-                <element signature="method#getInt#0;class#SQLDataHandler#0" expanded="true" />
-                <element signature="method#putInt#0;class#SQLDataHandler#0" expanded="true" />
-                <element signature="method#getDouble#0;class#SQLDataHandler#0" expanded="true" />
-                <element signature="method#putDouble#0;class#SQLDataHandler#0" expanded="true" />
-                <element signature="method#getLong#0;class#SQLDataHandler#0" expanded="true" />
-                <element signature="method#putLong#0;class#SQLDataHandler#0" expanded="true" />
-                <element signature="method#getBoolean#0;class#SQLDataHandler#0" expanded="true" />
-                <element signature="method#putBoolean#0;class#SQLDataHandler#0" expanded="true" />
-                <element signature="method#setContentValues#0;class#SQLDataHandler#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CarSql.java" pinned="false" current-in-tab="true">
         <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSql.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.552901">
-              <caret line="204" column="39" selection-start-line="204" selection-start-column="39" selection-end-line="204" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.5085324">
+              <caret line="72" column="49" selection-start-line="72" selection-start-column="49" selection-end-line="72" selection-end-column="49" />
               <folding>
                 <element signature="method#CarSql#0;class#CarSql#0" expanded="true" />
-                <element signature="e#3515#3558#0" expanded="false" />
+                <element signature="e#3567#3610#0" expanded="false" />
                 <element signature="method#getCars#0;class#CarSql#0" expanded="true" />
-                <element signature="e#8215#8216#0" expanded="true" />
-                <element signature="e#8269#8270#0" expanded="true" />
+                <element signature="e#8267#8268#0" expanded="true" />
+                <element signature="e#8321#8322#0" expanded="true" />
                 <element signature="method#checkString#0;class#CarSql#0" expanded="true" />
                 <element signature="method#checkString#1;class#CarSql#0" expanded="true" />
+                <element signature="method#checkString#2;class#CarSql#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -369,6 +335,9 @@
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
     <option name="FORCE_PUSH_ALLOWED" value="true" />
+    <push-targets>
+      <push-target-info repo="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" source="master" target-remote="origin" target-branch="master" />
+    </push-targets>
   </component>
   <component name="GradleLocalSettings">
     <option name="tasksExpandState">
@@ -1302,10 +1271,10 @@
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/miscellaneous/StringSet.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/PartReplacement.java" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSql.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSql.java" />
       </list>
     </option>
   </component>
@@ -1499,7 +1468,7 @@
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
@@ -1782,7 +1751,13 @@
       <option name="project" value="LOCAL" />
       <updated>1430962050959</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="SQL setup work almost complete&#10;Added PartReplacement class&#10;Added class for standardizing managing data using SQL to store everything">
+      <created>1431031062010</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1431031062010</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1848,7 +1823,8 @@
     <MESSAGE value="Update SQL columns to include units" />
     <MESSAGE value="Initial data checks" />
     <MESSAGE value="Service Task all done with SQL" />
-    <option name="LAST_COMMIT_MESSAGE" value="Service Task all done with SQL" />
+    <MESSAGE value="SQL setup work almost complete&#10;Added PartReplacement class&#10;Added class for standardizing managing data using SQL to store everything" />
+    <option name="LAST_COMMIT_MESSAGE" value="SQL setup work almost complete&#10;Added PartReplacement class&#10;Added class for standardizing managing data using SQL to store everything" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2407,16 +2383,17 @@
     </entry>
     <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSql.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.552901">
-          <caret line="204" column="39" selection-start-line="204" selection-start-column="39" selection-end-line="204" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.5085324">
+          <caret line="72" column="49" selection-start-line="72" selection-start-column="49" selection-end-line="72" selection-end-column="49" />
           <folding>
             <element signature="method#CarSql#0;class#CarSql#0" expanded="true" />
-            <element signature="e#3515#3558#0" expanded="false" />
+            <element signature="e#3567#3610#0" expanded="false" />
             <element signature="method#getCars#0;class#CarSql#0" expanded="true" />
-            <element signature="e#8215#8216#0" expanded="true" />
-            <element signature="e#8269#8270#0" expanded="true" />
+            <element signature="e#8267#8268#0" expanded="true" />
+            <element signature="e#8321#8322#0" expanded="true" />
             <element signature="method#checkString#0;class#CarSql#0" expanded="true" />
             <element signature="method#checkString#1;class#CarSql#0" expanded="true" />
+            <element signature="method#checkString#2;class#CarSql#0" expanded="true" />
           </folding>
         </state>
       </provider>

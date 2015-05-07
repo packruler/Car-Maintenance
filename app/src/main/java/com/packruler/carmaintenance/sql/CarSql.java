@@ -70,6 +70,7 @@ public class CarSql {
             db.execSQL(Vehicle.SQL_CREATE);
             db.execSQL(ServiceTask.SQL_CREATE);
             db.execSQL(FuelStop.SQL_CREATE);
+            db.execSQL(PartReplacement.SQL_CREATE);
         }
 
         @Override
