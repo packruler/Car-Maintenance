@@ -155,4 +155,12 @@ public class CarSql {
     public interface VehicleContainer {
         void loadCar(Vehicle vehicle);
     }
+
+    public SQLiteDatabase getWritableDatabase(){
+        return sqlHelper.getWritableDatabase();
+    }
+
+    public SQLiteDatabase getReadableDatabase(){
+        return sqlHelper.getReadableDatabase();
+    }
 }

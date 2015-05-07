@@ -2,13 +2,10 @@ package com.packruler.carmaintenance.vehicle.maintenence;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
-import com.google.android.gms.location.places.Place;
 import com.packruler.carmaintenance.sql.CarSql;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
-import java.sql.SQLDataException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Set;
@@ -38,8 +35,10 @@ public class ServiceTask {
     public static final String VOLUME_UNITS = "volume_units";
     public static final String OCTANE = "octane";
     public static final String OCTANE_UNITS = "octane_units";
-    public static final String MISSED_FILL_UP = "MISSED_FILL_UP";
-    public static final String COMPLETE_FILL_UP = "COMPLETE_FILL_UP";
+    public static final String MISSED_FILL_UP = "missed_fill_up";
+    public static final String COMPLETE_FILL_UP = "complete_fill_up";
+    public static final String DISTANCE_PER_VOLUME = "distance_per_volume";
+    public static final String DISTANCE_PER_VOLUME_UNIT = "distance_per_volume_unit";
 
     public static final String[] RESERVED_WORDS = new String[]{TABLE_NAME, GENERAL_TYPE, CAR_NAME};
 
@@ -51,73 +50,56 @@ public class ServiceTask {
                     COST_PER_VOLUME + " FLOAT," + COST_UNITS + " STRING," +
                     VOLUME + " FLOAT," + VOLUME_UNITS + " STRING," +
                     OCTANE + " INT," + OCTANE_UNITS + " STRING," + MISSED_FILL_UP + " INTEGER," +
-                    COMPLETE_FILL_UP + " INTEGER" + ")";
+                    COMPLETE_FILL_UP + " INTEGER," + DISTANCE_PER_VOLUME + " FLOAT," +
+                    DISTANCE_PER_VOLUME_UNIT + " STRING," + ")";
 
 //    GeoDataApi geoDataApi = new G
 
     protected ContentValues contentValues = new ContentValues();
     private int taskNum;
     private String carName;
-    private String type = "";
-    private String details = "";
-    private String locationName = "";
-    private Place location;
-    private Date date = new Date();
-    private float cost;
-    private float mileage;
-    private SQLiteDatabase database;
+    //    private String type = "";
+//    private String details = "";
+//    private String locationName = "";
+//    private String location;
+//    private Date date = new Date();
+//    private float cost;
+//    private float mileage;
+    private CarSql carSql;
     private Set<String> RESERVED_STRINGS = new TreeSet<>(Arrays.asList(RESERVED_WORDS));
 
-    public ServiceTask(int taskNum) {
+    public ServiceTask(CarSql carSql, String carName, int taskNum) {
         RESERVED_STRINGS.addAll(Arrays.asList(CarSql.RESERVED_WORDS));
         RESERVED_STRINGS.addAll(Arrays.asList(Vehicle.RESERVED_WORDS));
 
         this.taskNum = taskNum;
-        contentValues.put(TASK_NUM, taskNum);
-        setType(GENERAL_TYPE);
+        this.carName = carName;
+        this.carSql = carSql;
     }
 
-    public ServiceTask(Cursor cursor) {
-        RESERVED_STRINGS.addAll(Arrays.asList(CarSql.RESERVED_WORDS));
-        RESERVED_STRINGS.addAll(Arrays.asList(Vehicle.RESERVED_WORDS));
-
-        setCarName(cursor.getString(cursor.getColumnIndex(CAR_NAME)));
-        setTaskNum(cursor.getInt(cursor.getColumnIndex(TASK_NUM)));
-        setType(cursor.getString(cursor.getColumnIndex(TYPE)));
-        setDetails(cursor.getString(cursor.getColumnIndex(DETAILS)));
-        setLocationName(cursor.getString(cursor.getColumnIndex(LOCATION_NAME)));
-//        TODO: set location from placeId
-//        setLocation();
-        setDate(new Date(cursor.getLong(cursor.getColumnIndex(DATE))));
-        setCost(cursor.getFloat(cursor.getColumnIndex(COST)));
-        setMileage(cursor.getFloat(cursor.getColumnIndex(MILEAGE)));
-    }
+//    public ServiceTask(Cursor cursor) {
+//        RESERVED_STRINGS.addAll(Arrays.asList(CarSql.RESERVED_WORDS));
+//        RESERVED_STRINGS.addAll(Arrays.asList(Vehicle.RESERVED_WORDS));
+//
+//        setCarName(cursor.getString(cursor.getColumnIndex(CAR_NAME)));
+//        setTaskNum(cursor.getInt(cursor.getColumnIndex(TASK_NUM)));
+//        setType(cursor.getString(cursor.getColumnIndex(TYPE)));
+//        setDetails(cursor.getString(cursor.getColumnIndex(DETAILS)));
+//        setLocationName(cursor.getString(cursor.getColumnIndex(LOCATION_NAME)));
+////        TODO: set location from placeId
+////        setLocation();
+//        setDate(new Date(cursor.getLong(cursor.getColumnIndex(DATE))));
+//        setCost(cursor.getFloat(cursor.getColumnIndex(COST)));
+//        setMileage(cursor.getFloat(cursor.getColumnIndex(MILEAGE)));
+//    }
 
     public String getCarName() {
         return carName;
     }
 
-    public boolean setCarName(String carName) {
+    public void setCarName(String carName) {
+        setString(CAR_NAME, carName);
         this.carName = carName;
-        contentValues.put(CAR_NAME, carName);
-        return true;
-    }
-
-    public boolean canUseCarName(String carName) throws SQLDataException {
-        if (carName.length() < 3)
-            throw new SQLDataException("Car name must be more than 3 characters long");
-
-        Cursor nameCursor = database.query(TABLE_NAME, new String[]{CAR_NAME}, null, null, null, null, null);
-        nameCursor.moveToFirst();
-        while (!nameCursor.isAfterLast()) {
-            if (nameCursor.getString(nameCursor.getColumnIndex(CAR_NAME)).equalsIgnoreCase(carName))
-                throw new SQLDataException(carName + " already in use");
-        }
-
-        if (RESERVED_STRINGS.contains(carName))
-            throw new SQLDataException(carName + " cannot be used");
-
-        return true;
     }
 
     public int getTaskNum() {
@@ -125,80 +107,141 @@ public class ServiceTask {
     }
 
     private void setTaskNum(int taskNum) {
+        setInt(TASK_NUM, taskNum);
         this.taskNum = taskNum;
-        contentValues.put(TASK_NUM, taskNum);
+    }
+
+    public String getString(String column) {
+        Cursor cursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{DETAILS},
+                CAR_NAME + "= \"" + carName + "\"" + " AND " + TASK_NUM + "= \"" + taskNum + "\"",
+                null, null, null, null);
+        return cursor.getString(cursor.getColumnIndex(column));
+    }
+
+    public void setString(String column, String value) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(column, value);
+        carSql.getWritableDatabase().update(TABLE_NAME, contentValues,
+                CAR_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null);
+    }
+
+    public float getFloat(String column) {
+        Cursor cursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{DETAILS},
+                CAR_NAME + "= \"" + carName + "\"" + " AND " + TASK_NUM + "= \"" + taskNum + "\"",
+                null, null, null, null);
+        return cursor.getFloat(cursor.getColumnIndex(column));
+    }
+
+    public void setFloat(String column, float value) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(column, value);
+        carSql.getWritableDatabase().update(TABLE_NAME, contentValues,
+                CAR_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null);
+    }
+
+    public int getInt(String column) {
+        Cursor cursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{DETAILS},
+                CAR_NAME + "= \"" + carName + "\"" + " AND " + TASK_NUM + "= \"" + taskNum + "\"",
+                null, null, null, null);
+        return cursor.getInt(cursor.getColumnIndex(column));
+    }
+
+    public void setInt(String column, int value) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(column, value);
+        carSql.getWritableDatabase().update(TABLE_NAME, contentValues,
+                CAR_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null);
+    }
+
+    public double getDouble(String column) {
+        Cursor cursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{DETAILS},
+                CAR_NAME + "= \"" + carName + "\"" + " AND " + TASK_NUM + "= \"" + taskNum + "\"",
+                null, null, null, null);
+        return cursor.getDouble(cursor.getColumnIndex(column));
+    }
+
+    public void setDouble(String column, double value) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(column, value);
+        carSql.getWritableDatabase().update(TABLE_NAME, contentValues,
+                CAR_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null);
+    }
+
+    public long getLong(String column) {
+        Cursor cursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{DETAILS},
+                CAR_NAME + "= \"" + carName + "\"" + " AND " + TASK_NUM + "= \"" + taskNum + "\"",
+                null, null, null, null);
+        return cursor.getLong(cursor.getColumnIndex(column));
+    }
+
+    public void setLong(String column, long value) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(column, value);
+        carSql.getWritableDatabase().update(TABLE_NAME, contentValues,
+                CAR_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null);
     }
 
     public void setType(String type) {
-        this.type = type;
-        contentValues.put(ServiceTask.TYPE, type);
+        setString(TYPE, type);
     }
 
     public String getType() {
-        return type;
+        return getString(TYPE);
     }
 
     public void setDetails(String details) {
-        this.details = details;
-        contentValues.put(DETAILS, details);
+        setString(DETAILS, details);
     }
 
     public String getDetails() {
-        return details;
+        return getString(DETAILS);
     }
 
     public void setLocationName(String locationName) {
-        this.locationName = locationName;
-        contentValues.put(LOCATION_NAME, locationName);
+        setString(LOCATION_NAME, locationName);
     }
 
     public String getLocationName() {
-        return locationName;
+        return getString(LOCATION_NAME);
     }
 
-    //TODO: setPlace by id
-    public void setLocation(String id) {
-
+    public void setLocationId(String locationId) {
+        setString(LOCATION_ID, locationId);
     }
 
-    public void setPlace(Place location) {
-        this.location = location;
-        setLocationName(this.location.getName().toString());
-        contentValues.put(LOCATION_ID, this.location.getId());
+    public String getLocationId() {
+        return getString(LOCATION_ID);
     }
 
-    public Place getLocation() {
-        return location;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-        contentValues.put(DATE, date.getTime());
+    public void setDate(long date) {
+        setLong(DATE, date);
     }
 
     public Date getDate() {
-        return date;
+        return new Date(getLong(DATE));
     }
 
     public void setCost(float cost) {
-        this.cost = cost;
-        contentValues.put(COST, cost);
+        setFloat(COST, cost);
     }
 
     public float getCost() {
-        return cost;
+        return getFloat(COST);
+    }
+
+    public void setCostUnits(String units) {
+        setString(COST_UNITS, units);
+    }
+
+    public String getCostUnits() {
+        return getString(COST_UNITS);
     }
 
     public void setMileage(float mileage) {
-        this.mileage = mileage;
-        contentValues.put(MILEAGE, mileage);
+        setFloat(MILEAGE, mileage);
     }
 
     public float getMileage() {
-        return mileage;
-    }
-
-    public ContentValues getContentValues() {
-        return contentValues;
+        return getFloat(MILEAGE);
     }
 }

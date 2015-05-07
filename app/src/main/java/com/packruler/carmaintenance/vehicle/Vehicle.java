@@ -4,13 +4,17 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
+import com.packruler.carmaintenance.sql.CarSql;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
+import java.sql.SQLDataException;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Packruler on 4/27/2015.
@@ -41,8 +45,7 @@ public class Vehicle {
     public static final String TORQUE = "torque";
     public static final String TORQUE_UNITS = "torque_units";
 
-
-    public static final String[] RESERVED_WORDS = new String[]{TABLE_NAME,CAR_NAME};
+    public static final String[] RESERVED_WORDS = new String[]{TABLE_NAME, CAR_NAME};
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" +
@@ -72,13 +75,25 @@ public class Vehicle {
     private String boughtFrom = "";
 
     private ContentValues contentValues = new ContentValues();
+    private Set<String> RESERVED_STRINGS;
+    private Cursor cursor;
+    private CarSql carSql;
 
-    public Vehicle() {
+    public Vehicle(CarSql carSql, String name) {
+        RESERVED_STRINGS.addAll(Arrays.asList(CarSql.RESERVED_WORDS));
+        RESERVED_STRINGS.addAll(Arrays.asList(Vehicle.RESERVED_WORDS));
+
+        this.name = name;
+        this.carSql = carSql;
+
         serviceTasks = new LinkedList<>();
         setPurchaseDate(Calendar.getInstance().getTime());
     }
 
     public Vehicle(Cursor cursor) {
+        RESERVED_STRINGS.addAll(Arrays.asList(CarSql.RESERVED_WORDS));
+        RESERVED_STRINGS.addAll(Arrays.asList(Vehicle.RESERVED_WORDS));
+
         name = cursor.getString(cursor.getColumnIndex(CAR_NAME));
         make = cursor.getString(cursor.getColumnIndex(MAKE));
         model = cursor.getString(cursor.getColumnIndex(MODEL));
@@ -93,12 +108,34 @@ public class Vehicle {
         boughtFrom = cursor.getString(cursor.getColumnIndex(BOUGHT_FROM));
     }
 
-    public void setName(String name) {
-        this.name = name;
-        contentValues.put(CAR_NAME, this.name);
-        for (ServiceTask task : serviceTasks) {
-            task.setCarName(this.name);
+    public void setName(String name) throws SQLDataException {
+        if (canUseCarName(name)) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(CAR_NAME, this.name);
+            carSql.getWritableDatabase().update(TABLE_NAME, contentValues,
+                    CAR_NAME + "= \"" + this.name + "\"", null);
+            this.name = name;
+            for (ServiceTask task : serviceTasks) {
+                task.setCarName(this.name);
+            }
         }
+    }
+
+    public boolean canUseCarName(String carName) throws SQLDataException {
+        if (carName.length() < 3)
+            throw new SQLDataException("Car name must be more than 3 characters long");
+
+        Cursor nameCursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{CAR_NAME}, null, null, null, null, null);
+        nameCursor.moveToFirst();
+        while (!nameCursor.isAfterLast()) {
+            if (nameCursor.getString(nameCursor.getColumnIndex(CAR_NAME)).equalsIgnoreCase(carName))
+                throw new SQLDataException(carName + " already in use");
+        }
+
+        if (RESERVED_STRINGS.contains(carName))
+            throw new SQLDataException(carName + " cannot be used");
+
+        return true;
     }
 
     public String getName() {
@@ -111,7 +148,25 @@ public class Vehicle {
     }
 
     public String getMake() {
-        return make;
+        Cursor cursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{MAKE}, CAR_NAME + "= \"" + name + "\"", null, null, null, null);
+        return cursor.getString(cursor.getColumnIndex(MAKE));
+    }
+
+    public boolean canUseMake(String make) throws SQLDataException {
+        if (make.length() < 3)
+            throw new SQLDataException("Car name must be more than 3 characters long");
+
+        Cursor nameCursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{CAR_NAME}, null, null, null, null, null);
+        nameCursor.moveToFirst();
+        while (!nameCursor.isAfterLast()) {
+            if (nameCursor.getString(nameCursor.getColumnIndex(CAR_NAME)).equalsIgnoreCase(make))
+                throw new SQLDataException(make + " already in use");
+        }
+
+        if (RESERVED_STRINGS.contains(make))
+            throw new SQLDataException(make + " cannot be used");
+
+        return true;
     }
 
     public void setModel(String model) {

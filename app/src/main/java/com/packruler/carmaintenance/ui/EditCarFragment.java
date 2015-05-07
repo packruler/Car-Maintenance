@@ -22,7 +22,7 @@ import java.util.Date;
 public class EditCarFragment extends android.support.v4.app.Fragment {
     private final String TAG = getClass().getName();
 
-    private Vehicle vehicle=new Vehicle();
+    private Vehicle vehicle;
     private ListView listView;
     private MainActivity mainActivity;
     private SharedPreferences sharedPreferences;
@@ -199,5 +199,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
     public void setCarSql(CarSql carSql) {
         this.carSql = carSql;
+        if (vehicle ==null)
+            vehicle = new Vehicle(carSql, "");
     }
 }
