@@ -16,6 +16,7 @@ import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.CarSql;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
+import java.sql.SQLDataException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -108,19 +109,35 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
             if (activity.containsCar(nameText.getText().toString()))
                 Toast.makeText(activity, "Name already in use. Please choose new name.", Toast.LENGTH_LONG).show();
             else {
-                vehicle.setName(nameText.getText().toString());
+                try {
+                    vehicle.setName(nameText.getText().toString());
+                } catch (SQLDataException e) {
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
 
                 if (yearText.getText().length() > 0)
                     vehicle.setYear(Integer.valueOf(yearText.getText().toString()));
 
+                try {
                 if (makeText.getText().length() > 0)
                     vehicle.setMake(makeText.getText().toString());
+                } catch (SQLDataException e) {
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
 
+                try{
                 if (modelText.getText().length() > 0)
                     vehicle.setModel(modelText.getText().toString());
+                } catch (SQLDataException e) {
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
 
+                try{
                 if (submodelText.getText().length() > 0)
                     vehicle.setSubmodel(submodelText.getText().toString());
+                } catch (SQLDataException e) {
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
 
                 if (mileageText.getText().length() > 0)
                     vehicle.setMileage(Long.valueOf(mileageText.getText().toString()));
@@ -199,7 +216,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
     public void setCarSql(CarSql carSql) {
         this.carSql = carSql;
-        if (vehicle ==null)
+        if (vehicle == null)
             vehicle = new Vehicle(carSql, "");
     }
 }

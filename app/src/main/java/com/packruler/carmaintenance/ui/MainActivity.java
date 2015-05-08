@@ -81,7 +81,9 @@ public class MainActivity extends AppCompatActivity
         mNavigationDrawerFragment.updateDrawer();
 
         carsSQL = new CarSql(this);
-        carsSQL.loadCars();
+        for (Vehicle vehicle : carsSQL.getCars()) {
+            vehicleMap.put(vehicle.getName(), vehicle);
+        }
     }
 
     @Override
@@ -101,9 +103,8 @@ public class MainActivity extends AppCompatActivity
                 .commit();
         Vehicle vehicle = vehicleMap.get(name);
         Log.i(TAG, "Vehicle null " + (vehicle == null));
-        if (vehicle == null)
-            vehicle = new Vehicle();
-        editCarFragment.setVehicle(vehicle);
+        if (vehicle != null)
+            editCarFragment.setVehicle(vehicle);
 
 //        fragmentManager.beginTransaction()
 //                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
@@ -221,14 +222,6 @@ public class MainActivity extends AppCompatActivity
 
     public boolean updateCar(Vehicle vehicle) {
         vehicleMap.put(vehicle.getName(), vehicle);
-        carsSQL.putCar(vehicle);
-//        try {
-//            Log.i(TAG, "JSON String: " + vehicle.getJsonObject().toString());
-//            sharedPreferences.edit().putStringSet(CAR_NAME_SET, vehicleMap.keySet()).apply();
-//            sharedPreferences.edit().putString(vehicle.getName(), vehicle.getJsonObject().toString()).apply();
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
         mNavigationDrawerFragment.updateDrawer();
         return true;
     }

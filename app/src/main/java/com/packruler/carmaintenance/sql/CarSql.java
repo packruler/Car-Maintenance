@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
@@ -177,6 +176,7 @@ public class CarSql {
 
         while (!cursor.isAfterLast()) {
             list.add(new Vehicle(this, cursor.getString(cursor.getColumnIndex(Vehicle.VEHICLE_NAME))));
+            cursor.moveToNext();
         }
         cursor.close();
         return list;
@@ -203,10 +203,10 @@ public class CarSql {
     public boolean checkString(String string, boolean skipCheck) throws SQLDataException {
         long start = System.currentTimeMillis();
         for (String check : RESERVED_STRINGS) {
-            if (string.contains(check))
+            if (string.contains(" " + check + " "))
                 throw new SQLDataException("Values cannot contain: \"" + check + "\"");
         }
-        Log.i(TAG, "Check string took: " + (System.currentTimeMillis() - start));
+//        Log.i(TAG, "Check string took: " + (System.currentTimeMillis() - start));
         return true;
     }
 }

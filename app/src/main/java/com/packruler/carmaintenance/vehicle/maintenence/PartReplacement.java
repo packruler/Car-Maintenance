@@ -3,6 +3,7 @@ package com.packruler.carmaintenance.vehicle.maintenence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.packruler.carmaintenance.sql.CarSql;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
@@ -37,7 +38,7 @@ public class PartReplacement extends ServiceTask {
             "CREATE TABLE " + TABLE_NAME + " (" + CAR_NAME + " STRING," +
                     TASK_NUM + " INTEGER," + TYPE + " STRING," + COST + " FLOAT," + COST_UNITS + " STRING," +
                     MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," + DATE + " STRING," +
-                    DETAILS + " STRING," + LOCATION_ID + " STRING," + LOCATION_NAME + " STRING," +
+                    DETAILS + " STRING," + LOCATION_ID + " STRING," + LOCATION_NAME + " STRING" +
                     ")";
 
     public PartReplacement(CarSql carSql, String carName, int taskNum) {
@@ -49,15 +50,16 @@ public class PartReplacement extends ServiceTask {
                 CAR_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum);
 
         SQLiteDatabase database = carSql.getWritableDatabase();
+        Cursor cursor = database.query(true, TABLE_NAME, new String[]{CAR_NAME},
+                CAR_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null);
 
-        if (!database.query(true, TABLE_NAME, new String[]{CAR_NAME},
-                CAR_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null)
-                .moveToFirst()) {
+        if (!cursor.moveToFirst()) {
             ContentValues contentValues = new ContentValues();
             contentValues.put(CAR_NAME, carName);
             contentValues.put(TASK_NUM, taskNum);
             database.insert(TABLE_NAME, null, contentValues);
         }
+        cursor.close();
     }
 
     public String getPartName() {
@@ -127,8 +129,10 @@ public class PartReplacement extends ServiceTask {
         int taskNum = 0;
         while (!cursor.isAfterLast()) {
             list.add(new PartReplacement(carSql, carName, ++taskNum));
+            cursor.moveToNext();
         }
         cursor.close();
+        Log.i("PartReplacement", "PartReplacement size: " + list.size());
         return list;
     }
 

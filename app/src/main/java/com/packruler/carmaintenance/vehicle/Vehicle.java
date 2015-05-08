@@ -2,6 +2,8 @@ package com.packruler.carmaintenance.vehicle;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.packruler.carmaintenance.sql.CarSql;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
@@ -79,13 +81,30 @@ public class Vehicle {
     private SQLDataHandler sqlDataHandler;
     private ContentValues contentValues = new ContentValues();
     private Cursor cursor;
+    private int serviceTaskCount = 0;
+    private int fuelStopCount = 0;
+    private int partCount = 0;
 
     public Vehicle(CarSql carSql, String name) {
-
         this.name = name;
         this.carSql = carSql;
         sqlDataHandler = new SQLDataHandler(carSql, TABLE_NAME,
                 VEHICLE_NAME + "= \"" + this.name + "\"");
+
+        SQLiteDatabase database = carSql.getWritableDatabase();
+        Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME},
+                VEHICLE_NAME + "= \"" + name + "\"", null, null, null, null, null);
+
+        if (!cursor.moveToFirst()) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(VEHICLE_NAME, name);
+            database.insert(TABLE_NAME, null, contentValues);
+        }
+
+        cursor.close();
+        serviceTaskCount = ServiceTask.getServiceTasksCountForCar(carSql, name);
+        fuelStopCount = FuelStop.getServiceTasksCountForCar(carSql, name);
+        partCount = PartReplacement.getPartReplacementCountForCar(carSql, name);
     }
 
     public void setName(String name) throws SQLDataException {
@@ -94,20 +113,29 @@ public class Vehicle {
             contentValues.put(VEHICLE_NAME, name);
             sqlDataHandler.setContentValues(contentValues);
 
-            this.name = name;
             sqlDataHandler.setSelection(VEHICLE_NAME + "= \"" + this.name + "\"");
 
-            for (ServiceTask task : ServiceTask.getServiceTasksForCar(carSql, name)) {
-                task.setCarName(this.name);
+            long start = System.currentTimeMillis();
+            for (ServiceTask task : ServiceTask.getServiceTasksForCar(carSql, this.name)) {
+                task.setCarName(name);
             }
 
-            for (FuelStop task : FuelStop.getFuelStopsForCar(carSql, name)) {
-                task.setCarName(this.name);
+            long doneService = System.currentTimeMillis();
+            for (FuelStop task : FuelStop.getFuelStopsForCar(carSql, this.name)) {
+                task.setCarName(name);
             }
 
-            for (PartReplacement task : PartReplacement.getPartReplacementsForCar(carSql, name)) {
-                task.setCarName(this.name);
+            long doneFuel = System.currentTimeMillis();
+            for (PartReplacement task : PartReplacement.getPartReplacementsForCar(carSql, this.name)) {
+                task.setCarName(name);
             }
+            long done = System.currentTimeMillis();
+            this.name = name;
+
+            Log.i(TAG, "Service task: " + (doneService - start));
+            Log.i(TAG, "Fuel task: " + (doneFuel - doneService));
+            Log.i(TAG, "Part task: " + (done - doneFuel));
+            Log.i(TAG, "All task: " + (done - start));
         }
     }
 
@@ -122,7 +150,7 @@ public class Vehicle {
     public void setMake(String make) throws SQLDataException {
         if (canUseMake(make)) {
             ContentValues contentValues = new ContentValues();
-            contentValues.put(VEHICLE_NAME, make);
+            contentValues.put(MAKE, make);
             sqlDataHandler.setContentValues(contentValues);
         }
     }
@@ -180,7 +208,15 @@ public class Vehicle {
     }
 
     public synchronized ServiceTask getNewServiceTask() {
-        return new ServiceTask(carSql, name, ServiceTask.getServiceTasksCountForCar(carSql, name) + 1);
+        return new ServiceTask(carSql, name, ++serviceTaskCount);
+    }
+
+    public synchronized FuelStop getNewFuelStop() {
+        return new FuelStop(carSql, name, ++fuelStopCount);
+    }
+
+    public synchronized PartReplacement getNewPartReplacement() {
+        return new PartReplacement(carSql, name, ++partCount);
     }
 
     public List<ServiceTask> getServiceTasks() {
@@ -189,10 +225,6 @@ public class Vehicle {
 
     public float getPurchaseCost() {
         return sqlDataHandler.getFloat(PURCHASE_COST);
-    }
-
-    public synchronized FuelStop getNewFuelStop() {
-        return new FuelStop(carSql, name, FuelStop.getFuelStopCountForCar(carSql, name) + 1);
     }
 
     public void setPurchaseCost(float purchaseCost) {

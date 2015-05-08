@@ -2,7 +2,6 @@ package com.packruler.carmaintenance.sql;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.util.Log;
 
 import java.sql.SQLDataException;
 
@@ -125,7 +124,7 @@ public class SQLDataHandler {
     }
 
     public void setContentValues(ContentValues contentValues) {
-        Log.i(TAG, "Content Values: " + contentValues.toString());
+//        Log.i(TAG, "Content Values: " + contentValues.toString());
         carSql.getWritableDatabase().update(tableName, contentValues, selection, null);
     }
 }

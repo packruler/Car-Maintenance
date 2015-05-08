@@ -3,6 +3,7 @@ package com.packruler.carmaintenance.vehicle.maintenence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.packruler.carmaintenance.sql.CarSql;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
@@ -41,7 +42,7 @@ public class FuelStop extends ServiceTask {
                     COST + " FLOAT," + MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," +
                     DATE + " STRING," + DETAILS + " STRING," + LOCATION_ID + " STRING," +
                     LOCATION_NAME + " STRING," + COST_PER_VOLUME + " FLOAT," +
-                    COST_UNITS + " STRING," + VOLUME + " FLOAT," + VOLUME_UNITS + " STRING," +
+                    VOLUME + " FLOAT," + VOLUME_UNITS + " STRING," +
                     OCTANE + " INT," + OCTANE_UNITS + " STRING," + MISSED_FILL_UP + " INTEGER," +
                     COMPLETE_FILL_UP + " INTEGER," + DISTANCE_PER_VOLUME + " FLOAT," +
                     DISTANCE_PER_VOLUME_UNIT + " STRING" + ")";
@@ -57,15 +58,16 @@ public class FuelStop extends ServiceTask {
                 CAR_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum);
 
         SQLiteDatabase database = carSql.getWritableDatabase();
+        Cursor cursor = database.query(true, TABLE_NAME, new String[]{CAR_NAME},
+                CAR_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null);
 
-        if (!database.query(true, TABLE_NAME, new String[]{CAR_NAME},
-                CAR_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null)
-                .moveToFirst()) {
+        if (!cursor.moveToFirst()) {
             ContentValues contentValues = new ContentValues();
             contentValues.put(CAR_NAME, carName);
             contentValues.put(TASK_NUM, taskNum);
             database.insert(TABLE_NAME, null, contentValues);
         }
+        cursor.close();
     }
 
     public float getVolume() {
@@ -135,6 +137,7 @@ public class FuelStop extends ServiceTask {
         int taskNum = 0;
         while (!cursor.isAfterLast()) {
             list.add(new FuelStop(carSql, carName, ++taskNum));
+            cursor.moveToNext();
         }
         cursor.close();
         return list;
