@@ -116,19 +116,18 @@ public class Vehicle {
             sqlDataHandler.setSelection(VEHICLE_NAME + "= \"" + this.name + "\"");
 
             long start = System.currentTimeMillis();
-            for (ServiceTask task : ServiceTask.getServiceTasksForCar(carSql, this.name)) {
-                task.setCarName(name);
-            }
+
+            carSql.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
+                    VEHICLE_NAME + "= \"" + this.name + "\"", null);
 
             long doneService = System.currentTimeMillis();
-            for (FuelStop task : FuelStop.getFuelStopsForCar(carSql, this.name)) {
-                task.setCarName(name);
-            }
+            carSql.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
+                    VEHICLE_NAME + "= \"" + this.name + "\"", null);
 
             long doneFuel = System.currentTimeMillis();
-            for (PartReplacement task : PartReplacement.getPartReplacementsForCar(carSql, this.name)) {
-                task.setCarName(name);
-            }
+            carSql.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
+                    VEHICLE_NAME + "= \"" + this.name + "\"", null);
+
             long done = System.currentTimeMillis();
             this.name = name;
 

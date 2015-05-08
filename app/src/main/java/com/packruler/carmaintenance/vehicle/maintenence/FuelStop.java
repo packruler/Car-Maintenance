@@ -3,7 +3,6 @@ package com.packruler.carmaintenance.vehicle.maintenence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.packruler.carmaintenance.sql.CarSql;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
@@ -37,7 +36,7 @@ public class FuelStop extends ServiceTask {
     };
 
     public static final String SQL_CREATE =
-            "CREATE TABLE " + TABLE_NAME + " (" + CAR_NAME + " STRING," +
+            "CREATE TABLE " + TABLE_NAME + " (" + VEHICLE_NAME + " STRING," +
                     TASK_NUM + " INTEGER," + TYPE + " STRING," + COST_UNITS + " STRING," +
                     COST + " FLOAT," + MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," +
                     DATE + " STRING," + DETAILS + " STRING," + LOCATION_ID + " STRING," +
@@ -55,15 +54,15 @@ public class FuelStop extends ServiceTask {
 
 
         sqlDataHandler = new SQLDataHandler(carSql, TABLE_NAME,
-                CAR_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum);
+                VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum);
 
         SQLiteDatabase database = carSql.getWritableDatabase();
-        Cursor cursor = database.query(true, TABLE_NAME, new String[]{CAR_NAME},
-                CAR_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null);
+        Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME},
+                VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null);
 
         if (!cursor.moveToFirst()) {
             ContentValues contentValues = new ContentValues();
-            contentValues.put(CAR_NAME, carName);
+            contentValues.put(VEHICLE_NAME, carName);
             contentValues.put(TASK_NUM, taskNum);
             database.insert(TABLE_NAME, null, contentValues);
         }
@@ -128,8 +127,8 @@ public class FuelStop extends ServiceTask {
 
     public static List<FuelStop> getFuelStopsForCar(CarSql carSql, String carName) {
         LinkedList<FuelStop> list = new LinkedList<>();
-        Cursor cursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{CAR_NAME, TASK_NUM},
-                CAR_NAME + "= \"" + carName + "\"", null, null, null, null);
+        Cursor cursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, TASK_NUM},
+                VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
 
         if (!cursor.moveToFirst())
             return list;
@@ -144,8 +143,8 @@ public class FuelStop extends ServiceTask {
     }
 
     public static int getFuelStopCountForCar(CarSql carSql, String carName) {
-        Cursor cursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{CAR_NAME, TASK_NUM},
-                CAR_NAME + "= \"" + carName + "\"", null, null, null, null);
+        Cursor cursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, TASK_NUM},
+                VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
         int count = cursor.getCount();
         cursor.close();
         return count;
