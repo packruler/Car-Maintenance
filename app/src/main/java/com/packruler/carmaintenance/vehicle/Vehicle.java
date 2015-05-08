@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.packruler.carmaintenance.sql.CarSql;
+import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.packruler.carmaintenance.vehicle.maintenence.PartReplacement;
@@ -64,7 +64,7 @@ public class Vehicle {
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " STRING," +
                     PURCHASE_COST + " FLOAT," + COST_UNITS + " STRING" + ")";
 
-    protected CarSql carSql;
+    protected CarSQL carSQL;
     private String name = "";
     private String make = "";
     private String model = "";
@@ -85,13 +85,13 @@ public class Vehicle {
     private int fuelStopCount = 0;
     private int partCount = 0;
 
-    public Vehicle(CarSql carSql, String name) {
+    public Vehicle(CarSQL carSQL, String name) {
         this.name = name;
-        this.carSql = carSql;
-        sqlDataHandler = new SQLDataHandler(carSql, TABLE_NAME,
+        this.carSQL = carSQL;
+        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
                 VEHICLE_NAME + "= \"" + this.name + "\"");
 
-        SQLiteDatabase database = carSql.getWritableDatabase();
+        SQLiteDatabase database = carSQL.getWritableDatabase();
         Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME},
                 VEHICLE_NAME + "= \"" + name + "\"", null, null, null, null, null);
 
@@ -102,9 +102,9 @@ public class Vehicle {
         }
 
         cursor.close();
-        serviceTaskCount = ServiceTask.getServiceTasksCountForCar(carSql, name);
-        fuelStopCount = FuelStop.getServiceTasksCountForCar(carSql, name);
-        partCount = PartReplacement.getPartReplacementCountForCar(carSql, name);
+        serviceTaskCount = ServiceTask.getServiceTasksCountForCar(carSQL, name);
+        fuelStopCount = FuelStop.getServiceTasksCountForCar(carSQL, name);
+        partCount = PartReplacement.getPartReplacementCountForCar(carSQL, name);
     }
 
     public void setName(String name) throws SQLDataException {
@@ -117,15 +117,15 @@ public class Vehicle {
 
             long start = System.currentTimeMillis();
 
-            carSql.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
+            carSQL.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
                     VEHICLE_NAME + "= \"" + this.name + "\"", null);
 
             long doneService = System.currentTimeMillis();
-            carSql.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
+            carSQL.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
                     VEHICLE_NAME + "= \"" + this.name + "\"", null);
 
             long doneFuel = System.currentTimeMillis();
-            carSql.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
+            carSQL.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
                     VEHICLE_NAME + "= \"" + this.name + "\"", null);
 
             long done = System.currentTimeMillis();
@@ -139,7 +139,7 @@ public class Vehicle {
     }
 
     public boolean canUseCarName(String carName) throws SQLDataException {
-        return carSql.checkString(carName, 3);
+        return carSQL.checkString(carName, 3);
     }
 
     public String getName() {
@@ -159,7 +159,7 @@ public class Vehicle {
     }
 
     public boolean canUseMake(String make) throws SQLDataException {
-        return carSql.checkString(make, 3);
+        return carSQL.checkString(make, 3);
     }
 
     public void setModel(String model) throws SQLDataException {
@@ -207,19 +207,19 @@ public class Vehicle {
     }
 
     public synchronized ServiceTask getNewServiceTask() {
-        return new ServiceTask(carSql, name, ++serviceTaskCount);
+        return new ServiceTask(carSQL, name, ++serviceTaskCount);
     }
 
     public synchronized FuelStop getNewFuelStop() {
-        return new FuelStop(carSql, name, ++fuelStopCount);
+        return new FuelStop(carSQL, name, ++fuelStopCount);
     }
 
     public synchronized PartReplacement getNewPartReplacement() {
-        return new PartReplacement(carSql, name, ++partCount);
+        return new PartReplacement(carSQL, name, ++partCount);
     }
 
     public List<ServiceTask> getServiceTasks() {
-        return ServiceTask.getServiceTasksForCar(carSql, name);
+        return ServiceTask.getServiceTasksForCar(carSQL, name);
     }
 
     public float getPurchaseCost() {

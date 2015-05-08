@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.packruler.carmaintenance.sql.CarSql;
+import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
 
 import java.sql.SQLDataException;
@@ -41,15 +41,15 @@ public class PartReplacement extends ServiceTask {
                     DETAILS + " STRING," + LOCATION_ID + " STRING," + LOCATION_NAME + " STRING" +
                     ")";
 
-    public PartReplacement(CarSql carSql, String carName, int taskNum) {
+    public PartReplacement(CarSQL carSQL, String carName, int taskNum) {
         this.taskNum = taskNum;
         this.carName = carName;
-        this.carSql = carSql;
+        this.carSQL = carSQL;
 
-        sqlDataHandler = new SQLDataHandler(carSql, TABLE_NAME,
+        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
                 VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum);
 
-        SQLiteDatabase database = carSql.getWritableDatabase();
+        SQLiteDatabase database = carSQL.getWritableDatabase();
         Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME},
                 VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null);
 
@@ -118,9 +118,9 @@ public class PartReplacement extends ServiceTask {
         sqlDataHandler.putLong(WARRANTY_LIFE_TIME, warrantyLifeTime);
     }
 
-    public static List<PartReplacement> getPartReplacementsForCar(CarSql carSql, String carName) {
+    public static List<PartReplacement> getPartReplacementsForCar(CarSQL carSQL, String carName) {
         LinkedList<PartReplacement> list = new LinkedList<>();
-        Cursor cursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, TASK_NUM},
+        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, TASK_NUM},
                 VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
 
         if (!cursor.moveToFirst())
@@ -128,7 +128,7 @@ public class PartReplacement extends ServiceTask {
 
         int taskNum = 0;
         while (!cursor.isAfterLast()) {
-            list.add(new PartReplacement(carSql, carName, ++taskNum));
+            list.add(new PartReplacement(carSQL, carName, ++taskNum));
             cursor.moveToNext();
         }
         cursor.close();
@@ -136,8 +136,8 @@ public class PartReplacement extends ServiceTask {
         return list;
     }
 
-    public static int getPartReplacementCountForCar(CarSql carSql, String carName) {
-        Cursor cursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{TASK_NUM},
+    public static int getPartReplacementCountForCar(CarSQL carSQL, String carName) {
+        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{TASK_NUM},
                 VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
         int count = cursor.getCount();
         cursor.close();

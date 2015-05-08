@@ -18,12 +18,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class SQLTester extends ActionBarActivity implements CarSql.VehicleContainer {
+public class SQLTester extends ActionBarActivity implements CarSQL.VehicleContainer {
     private final String TAG = getClass().getName();
 
     private Button fillSQL;
     private Button loadSQL;
-    private CarSql carSql;
+    private CarSQL carSQL;
     private Map<String, Vehicle> vehicleMap = new TreeMap<>();
 
     @Override
@@ -32,7 +32,7 @@ public class SQLTester extends ActionBarActivity implements CarSql.VehicleContai
         setContentView(R.layout.activity_sqltester);
         Log.i(TAG, "onCreate");
 
-        carSql = new CarSql(this);
+        carSQL = new CarSQL(this);
         fillSQL = (Button) findViewById(R.id.fill_sql);
         fillSQL.setOnClickListener(new OnClickListener());
         loadSQL = (Button) findViewById(R.id.load_sql);
@@ -79,7 +79,7 @@ public class SQLTester extends ActionBarActivity implements CarSql.VehicleContai
     private void fillSQL() {
         Log.i(TAG, "Start Fill");
         for (int x = 0; x < 5; x++) {
-            Vehicle vehicle = new Vehicle(carSql, "Car " + x);
+            Vehicle vehicle = new Vehicle(carSQL, "Car " + x);
             try {
                 vehicle.setMake("Mini");
                 vehicle.setModel("Cooper ");
@@ -113,7 +113,7 @@ public class SQLTester extends ActionBarActivity implements CarSql.VehicleContai
     }
 
     public void loadSQL() {
-        for (Vehicle vehicle : carSql.getCars()) {
+        for (Vehicle vehicle : carSQL.getCars()) {
             vehicleMap.put(vehicle.getName(), vehicle);
         }
         Set<String> names = vehicleMap.keySet();

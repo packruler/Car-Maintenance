@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.packruler.carmaintenance.sql.CarSql;
+import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
 
 import java.sql.SQLDataException;
@@ -48,23 +48,23 @@ public class ServiceTask {
     //    protected ContentValues contentValues = new ContentValues();
     protected int taskNum;
     protected String carName;
-    protected CarSql carSql;
+    protected CarSQL carSQL;
     protected SQLDataHandler sqlDataHandler;
 
     protected ServiceTask() {
 
     }
 
-    public ServiceTask(CarSql carSql, String carName, int taskNum) {
+    public ServiceTask(CarSQL carSQL, String carName, int taskNum) {
 
         this.taskNum = taskNum;
         this.carName = carName;
-        this.carSql = carSql;
+        this.carSQL = carSQL;
 
-        sqlDataHandler = new SQLDataHandler(carSql, TABLE_NAME,
+        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
                 VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum);
 
-        SQLiteDatabase database = carSql.getWritableDatabase();
+        SQLiteDatabase database = carSQL.getWritableDatabase();
         Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME},
                 VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null);
 
@@ -172,9 +172,9 @@ public class ServiceTask {
         sqlDataHandler.setContentValues(contentValues);
     }
 
-    public static List<ServiceTask> getServiceTasksForCar(CarSql carSql, String carName) {
+    public static List<ServiceTask> getServiceTasksForCar(CarSQL carSQL, String carName) {
         LinkedList<ServiceTask> list = new LinkedList<>();
-        Cursor cursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, TASK_NUM},
+        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, TASK_NUM},
                 VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
 
         if (!cursor.moveToFirst())
@@ -182,7 +182,7 @@ public class ServiceTask {
 
         int taskNum = 0;
         while (!cursor.isAfterLast()) {
-            list.add(new ServiceTask(carSql, carName, ++taskNum));
+            list.add(new ServiceTask(carSQL, carName, ++taskNum));
             cursor.moveToNext();
         }
         cursor.close();
@@ -190,8 +190,8 @@ public class ServiceTask {
         return list;
     }
 
-    public static int getServiceTasksCountForCar(CarSql carSql, String carName) {
-        Cursor cursor = carSql.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, TASK_NUM},
+    public static int getServiceTasksCountForCar(CarSQL carSQL, String carName) {
+        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, TASK_NUM},
                 VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
         int count = cursor.getCount();
         cursor.close();

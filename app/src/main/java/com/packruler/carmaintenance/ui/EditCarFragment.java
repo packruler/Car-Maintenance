@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.packruler.carmaintenance.R;
-import com.packruler.carmaintenance.sql.CarSql;
+import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.sql.SQLDataException;
@@ -27,7 +27,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     private ListView listView;
     private MainActivity mainActivity;
     private SharedPreferences sharedPreferences;
-    private CarSql carSql;
+    private CarSQL carSQL;
 
 
     public EditCarFragment() {
@@ -214,9 +214,9 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         }
     };
 
-    public void setCarSql(CarSql carSql) {
-        this.carSql = carSql;
+    public void setCarSQL(CarSQL carSQL) {
+        this.carSQL = carSQL;
         if (vehicle == null)
-            vehicle = new Vehicle(carSql, "");
+            vehicle = new Vehicle(carSQL, "");
     }
 }

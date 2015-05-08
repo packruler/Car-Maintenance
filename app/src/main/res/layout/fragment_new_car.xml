@@ -6,7 +6,7 @@
             tools:context=".ui.MainActivity"
             android:padding="@dimen/abc_action_bar_content_inset_material">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -18,7 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
-            card_view:cardElevation="1dp">
+            card_view:cardElevation="1dp"
+            android:id="@+id/name_card"
+            android:layout_toLeftOf="@+id/vehicle_image_card">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -31,18 +33,16 @@
                     android:text="@string/name"
                     android:id="@+id/name_textView"
                     android:gravity="center_vertical"
-                    android:layout_alignTop="@+id/edit_name"
-                    android:layout_alignBottom="@+id/edit_name"/>
+                    style="@android:style/TextAppearance.DeviceDefault.Medium"/>
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/edit_name"
-                    android:layout_toRightOf="@+id/name_textView"
                     android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
-                    android:layout_alignParentRight="true"
                     android:inputType="textShortMessage"
-                    android:gravity="right"/>
+                    android:layout_below="@+id/name_textView"
+                    />
 
             </RelativeLayout>
 
@@ -52,7 +52,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
-            card_view:cardElevation="1dp">
+            card_view:cardElevation="1dp"
+            android:id="@+id/year_card"
+            android:layout_below="@+id/name_card"
+            android:layout_toLeftOf="@+id/vehicle_image_card">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -66,8 +69,7 @@
                     android:text="@string/year"
                     android:id="@+id/year_textView"
                     android:gravity="center_vertical"
-                    android:layout_alignTop="@+id/edit_year"
-                    android:layout_alignBottom="@+id/edit_year"/>
+                    style="@style/Base.TextAppearance.AppCompat.Medium"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -75,11 +77,10 @@
                     android:id="@+id/edit_year"
                     android:gravity="right"
                     android:calendarViewShown="false"
-                    android:layout_alignParentRight="true"
                     android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
-                    android:layout_toRightOf="@id/year_textView"
                     android:inputType="number"
-                    android:numeric="integer"/>
+                    android:numeric="integer"
+                    android:layout_below="@+id/year_textView"/>
 
             </RelativeLayout>
 
@@ -89,7 +90,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
-            card_view:cardElevation="1dp">
+            card_view:cardElevation="1dp"
+            android:id="@+id/manufacturer_card"
+            android:layout_below="@+id/year_card">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -102,14 +105,12 @@
                     android:text="@string/make"
                     android:id="@+id/make_textView"
                     android:gravity="center_vertical"
-                    android:layout_alignTop="@+id/edit_make"
-                    android:layout_alignBottom="@+id/edit_make"/>
+                    />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/edit_make"
-                    android:layout_toRightOf="@+id/make_textView"
                     android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
                     android:layout_alignParentRight="true"
                     android:inputType="textShortMessage"
@@ -123,7 +124,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
-            card_view:cardElevation="1dp">
+            card_view:cardElevation="1dp"
+            android:id="@+id/model_card"
+            android:layout_below="@+id/manufacturer_card">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -157,7 +160,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
-            card_view:cardElevation="1dp">
+            card_view:cardElevation="1dp"
+            android:id="@+id/submodel_card"
+            android:layout_below="@+id/model_card">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -191,7 +196,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
-            card_view:cardElevation="1dp">
+            card_view:cardElevation="1dp"
+            android:id="@+id/mileage_card"
+            android:layout_below="@+id/submodel_card">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -226,7 +233,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
             android:layout_marginBottom="@dimen/abc_action_bar_default_padding_material"
-            card_view:cardElevation="1dp">
+            card_view:cardElevation="1dp"
+            android:id="@+id/purchase_cost_card"
+            android:layout_below="@+id/mileage_card">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -260,7 +269,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
-            card_view:cardElevation="1dp">
+            card_view:cardElevation="1dp"
+            android:id="@+id/purchase_date_card"
+            android:layout_below="@+id/purchase_cost_card">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -272,7 +283,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/purchase_date"
                     android:id="@+id/purchase_date_textView"
-                    android:gravity="center_vertical"                    />
+                    android:gravity="center_vertical"/>
 
                 <DatePicker
                     android:layout_width="wrap_content"
@@ -292,7 +303,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/save_discard_view"
+            android:layout_below="@+id/purchase_date_card">
 
             <Button
                 android:layout_width="wrap_content"
@@ -308,6 +321,20 @@
                 android:id="@+id/discard_changes"/>
         </RelativeLayout>
 
-    </LinearLayout>
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/vehicle_image_card"
+            android:layout_alignParentRight="true">
+
+            <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/vehicle_image"
+                android:layout_alignParentRight="true"/>
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
 
 </ScrollView>

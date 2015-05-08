@@ -10,12 +10,12 @@ import java.sql.SQLDataException;
  */
 public class SQLDataHandler {
     private final String TAG = getClass().getName();
-    private CarSql carSql;
+    private CarSQL carSQL;
     private String tableName;
     private String selection;
 
-    public SQLDataHandler(CarSql carSql, String tableName, String selection) {
-        this.carSql = carSql;
+    public SQLDataHandler(CarSQL carSQL, String tableName, String selection) {
+        this.carSQL = carSQL;
         this.tableName = tableName;
         this.selection = selection;
     }
@@ -25,7 +25,7 @@ public class SQLDataHandler {
     }
 
     public String getString(String column) {
-        Cursor cursor = carSql.getReadableDatabase().query(tableName, new String[]{column},
+        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
         String output = cursor.getString(cursor.getColumnIndex(column));
         cursor.close();
@@ -46,7 +46,7 @@ public class SQLDataHandler {
     }
 
     public void putString(String column, String value, int minimumLength) throws SQLDataException {
-        if (carSql.checkString(value, minimumLength)) {
+        if (carSQL.checkString(value, minimumLength)) {
             ContentValues contentValues = new ContentValues();
             contentValues.put(column, value);
             setContentValues(contentValues);
@@ -54,7 +54,7 @@ public class SQLDataHandler {
     }
 
     public float getFloat(String column) {
-        Cursor cursor = carSql.getReadableDatabase().query(tableName, new String[]{column},
+        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
         float output = cursor.getFloat(cursor.getColumnIndex(column));
         cursor.close();
@@ -68,7 +68,7 @@ public class SQLDataHandler {
     }
 
     public int getInt(String column) {
-        Cursor cursor = carSql.getReadableDatabase().query(tableName, new String[]{column},
+        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
         int output = cursor.getInt(cursor.getColumnIndex(column));
         cursor.close();
@@ -82,7 +82,7 @@ public class SQLDataHandler {
     }
 
     public double getDouble(String column) {
-        Cursor cursor = carSql.getReadableDatabase().query(tableName, new String[]{column},
+        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
         double output = cursor.getDouble(cursor.getColumnIndex(column));
         cursor.close();
@@ -96,7 +96,7 @@ public class SQLDataHandler {
     }
 
     public long getLong(String column) {
-        Cursor cursor = carSql.getReadableDatabase().query(tableName, new String[]{column},
+        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
         long output = cursor.getLong(cursor.getColumnIndex(column));
         cursor.close();
@@ -110,7 +110,7 @@ public class SQLDataHandler {
     }
 
     public boolean getBoolean(String column) {
-        Cursor cursor = carSql.getReadableDatabase().query(tableName, new String[]{column},
+        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
         boolean output = cursor.getInt(cursor.getColumnIndex(column)) == 1;
         cursor.close();
@@ -125,6 +125,10 @@ public class SQLDataHandler {
 
     public void setContentValues(ContentValues contentValues) {
 //        Log.i(TAG, "Content Values: " + contentValues.toString());
-        carSql.getWritableDatabase().update(tableName, contentValues, selection, null);
+        carSQL.getWritableDatabase().update(tableName, contentValues, selection, null);
+    }
+
+    public void removeRow() {
+        carSQL.getWritableDatabase().delete(tableName, selection, null);
     }
 }

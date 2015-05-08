@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.packruler.carmaintenance.R;
-import com.packruler.carmaintenance.sql.CarSql;
+import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.util.LinkedList;
@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, CarSql.VehicleContainer {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, CarSQL.VehicleContainer {
 
     private final String TAG = getClass().getName();
     private static final String CAR_NAME_SET = "CAR_NAME_SET";
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
     private Map<String, Vehicle> vehicleMap = new TreeMap<>();
 
     private SharedPreferences sharedPreferences;
-    private CarSql carsSQL;
+    private CarSQL carsSQL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity
 
         mNavigationDrawerFragment.updateDrawer();
 
-        carsSQL = new CarSql(this);
+        carsSQL = new CarSQL(this);
         for (Vehicle vehicle : carsSQL.getCars()) {
             vehicleMap.put(vehicle.getName(), vehicle);
         }
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity
         else
             editCarFragment = new EditCarFragment();
 
-        editCarFragment.setCarSql(carsSQL);
+        editCarFragment.setCarSQL(carsSQL);
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         fragmentManager.beginTransaction()
