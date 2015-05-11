@@ -1,20 +1,45 @@
 package com.packruler.carmaintenance.sql;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by Packruler on 5/8/15.
  */
 public class AvailableCarsSQL {
     private final String TAG = getClass().getName();
+
+    public static final String TABLE_NAME = "full_data";
+    public static final String MAKE = "make";
+    public static final String MODEL = "model";
+    public static final String YEAR = "year";
+    public static final String CYLINDERS = "cylinders";
+    public static final String DISPLACEMENT = "displ";
+    public static final String ENGINE_ID = "engId";
+    public static final String ENGINE_DESCRIPTION = "eng_dscr";
+    public static final String FUEL_TYPE = "fuelType";
+    public static final String FUEL_TYPE_1 = "fuelType1";
+    public static final String FUEL_TYPE_2 = "fuelType2";
+    public static final String DRIVE = "drive";
+    public static final String TRANSMISSION = "trany";
+    public static final String TRANSMISSION_DESCRIPTION = "trans_dscr";
+    public static final String TURBOCHARGED = "tCharger";
+    public static final String SUPERCHARGED = "sCharger";
+    public static final String ATV_TYPE = "atvType";
+    public static final String MANUFACTURER_CODE = "mfrCode";
 
     private Context context;
     private SQLHelper sqlHelper;
@@ -28,14 +53,12 @@ public class AvailableCarsSQL {
 
     private class SQLHelper extends SQLiteOpenHelper {
 
-        private String DATABASE_PATH = "/data/data/com.packruler.carmaintenance/databases/";
 
         public static final int DATABASE_VERSION = 1;
         public static final String DATABASE_NAME = "standard_cars.db";
+        private String DATABASE_PATH = "/data/data/com.packruler.carmaintenance/databases/";
 
         private SQLiteDatabase myDataBase;
-
-        private final Context context;
 
         /**
          * Constructor
@@ -45,9 +68,7 @@ public class AvailableCarsSQL {
          * @param context
          */
         public SQLHelper(Context context) {
-
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
-            this.context = context;
         }
 
         /**
@@ -68,7 +89,7 @@ public class AvailableCarsSQL {
 
                 } catch (IOException e) {
 
-                    throw new Error("Error copying database");
+                    e.printStackTrace();
 
                 }
             }
@@ -112,18 +133,22 @@ public class AvailableCarsSQL {
          */
         private void copyDataBase() throws IOException {
 
+            Log.i(TAG, "FILES: " + Arrays.toString(context.getAssets().list("")));
             //Open your local db as the input stream
             InputStream myInput = context.getAssets().open(DATABASE_NAME);
 
             // Path to the just created empty db
-            String outFileName = DATABASE_PATH + DATABASE_PATH;
+            File file = new File(DATABASE_PATH + DATABASE_NAME);
+            Log.i(TAG, "File: " + file.getPath());
+            Log.i(TAG, "Create db file: " + file.createNewFile());
 
             //Open the empty db as the output stream
-            OutputStream myOutput = new FileOutputStream(outFileName);
+            OutputStream myOutput = new FileOutputStream(file);
 
             //transfer bytes from the inputfile to the outputfile
             byte[] buffer = new byte[1024];
             int length;
+            Log.i(TAG, "START MOVING");
             while ((length = myInput.read(buffer)) > 0) {
                 myOutput.write(buffer, 0, length);
             }
@@ -132,13 +157,14 @@ public class AvailableCarsSQL {
             myOutput.flush();
             myOutput.close();
             myInput.close();
+            Log.i(TAG, "DONE MOVING");
 
         }
 
         public void openDataBase() {
 
             //Open the database
-            String myPath = DATABASE_PATH + DATABASE_PATH;
+            String myPath = DATABASE_PATH + DATABASE_NAME;
             myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 
         }
@@ -171,5 +197,25 @@ public class AvailableCarsSQL {
         // Add your public helper methods to access and get content from the database.
         // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
         // to you to create adapters for your views.
+    }
+
+    public Set<String> getAvailableMakes(String year) {
+        SQLiteDatabase database = sqlHelper.getReadableDatabase();
+        Cursor cursor = database.query(true, TABLE_NAME,
+                new String[]{MAKE}, YEAR + "= " + year,
+                null, null, null, null, null);
+        cursor.moveToFirst();
+        Log.i(TAG, "Total make count: " + cursor.getCount());
+        TreeSet<String> makes = new TreeSet<>();
+        while (!cursor.isAfterLast()) {
+            makes.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        Log.i(TAG, "List size: " + makes.size());
+        return makes;
+    }
+
+    public SQLiteDatabase getReadableDatabase() {
+        return sqlHelper.getReadableDatabase();
     }
 }

@@ -1,8 +1,12 @@
 package com.packruler.carmaintenance.ui;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,33 +14,50 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.packruler.carmaintenance.R;
+import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.sql.SQLDataException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class EditCarFragment extends android.support.v4.app.Fragment {
     private final String TAG = getClass().getName();
 
     private Vehicle vehicle;
     private ListView listView;
-    private MainActivity mainActivity;
+    private Activity activity;
     private SharedPreferences sharedPreferences;
     private CarSQL carSQL;
+    private LinkedList<String> years = new LinkedList<>();
+    private LinkedList<String> makes = new LinkedList<>();
+    private AvailableCarsSQL availableCarsSQL;
+    Handler mainHandler = new Handler(Looper.getMainLooper());
 
+    private LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
+    private int numProcessors = Runtime.getRuntime().availableProcessors();
+    private ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(numProcessors, numProcessors, 10, TimeUnit.SECONDS, workQueue);
 
-    public EditCarFragment() {
-        // Required empty public constructor
-//        sharedPreferences = getActivity().getSharedPreferences(getActivity().getApplication().getPackageName(), Context.MODE_MULTI_PROCESS);
+    public EditCarFragment(Activity activity, AvailableCarsSQL availableCarsSQL) {
+        for (int x = Calendar.getInstance().get(Calendar.YEAR) + 1; x >= 1984; x--) {
+            years.add("" + x);
+        }
+
+        this.availableCarsSQL = availableCarsSQL;
+        this.activity = activity;
     }
 
-    public EditCarFragment(Vehicle vehicle) {
-//        this();
+    public EditCarFragment(Activity activity, AvailableCarsSQL availableCarsSQL, Vehicle vehicle) {
+        this(activity, availableCarsSQL);
         this.vehicle = vehicle;
     }
 
@@ -59,7 +80,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mainActivity = (MainActivity) activity;
+        this.activity = activity;
     }
 
     @Override
@@ -70,7 +91,9 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
     private EditText nameText;
     private EditText yearText;
+    private TextView yearDisplay;
     private EditText makeText;
+    private TextView makeDisplay;
     private EditText modelText;
     private EditText submodelText;
     private EditText mileageText;
@@ -81,7 +104,13 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     private void setVariables(View view) {
         nameText = (EditText) view.findViewById(R.id.edit_name);
         yearText = (EditText) view.findViewById(R.id.edit_year);
+        view.findViewById(R.id.year_card).setOnClickListener(popupClickListener);
+        yearDisplay = (TextView) view.findViewById(R.id.year_selected_display);
+
         makeText = (EditText) view.findViewById(R.id.edit_make);
+        view.findViewById(R.id.make_card).setOnClickListener(popupClickListener);
+        makeDisplay = (TextView) view.findViewById(R.id.make_selected_display);
+
         modelText = (EditText) view.findViewById(R.id.edit_model);
         submodelText = (EditText) view.findViewById(R.id.edit_submodel);
         mileageText = (EditText) view.findViewById(R.id.edit_mileage);
@@ -94,6 +123,8 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
         view.findViewById(R.id.save_changes).setOnClickListener(saveDiscardListener);
         view.findViewById(R.id.discard_changes).setOnClickListener(saveDiscardListener);
+
+        setupAlertDialogs();
 
 //        loadVehicleDetails();
 //        variablesSet = true;
@@ -119,22 +150,22 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                     vehicle.setYear(Integer.valueOf(yearText.getText().toString()));
 
                 try {
-                if (makeText.getText().length() > 0)
-                    vehicle.setMake(makeText.getText().toString());
+                    if (makeText.getText().length() > 0)
+                        vehicle.setMake(makeText.getText().toString());
                 } catch (SQLDataException e) {
                     Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
-                try{
-                if (modelText.getText().length() > 0)
-                    vehicle.setModel(modelText.getText().toString());
+                try {
+                    if (modelText.getText().length() > 0)
+                        vehicle.setModel(modelText.getText().toString());
                 } catch (SQLDataException e) {
                     Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
-                try{
-                if (submodelText.getText().length() > 0)
-                    vehicle.setSubmodel(submodelText.getText().toString());
+                try {
+                    if (submodelText.getText().length() > 0)
+                        vehicle.setSubmodel(submodelText.getText().toString());
                 } catch (SQLDataException e) {
                     Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -218,5 +249,105 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         this.carSQL = carSQL;
         if (vehicle == null)
             vehicle = new Vehicle(carSQL, "");
+    }
+
+    private View.OnClickListener popupClickListener = new View.OnClickListener() {
+        private final String TAG = getClass().getName();
+
+        @Override
+        public void onClick(View v) {
+            Log.i(TAG, "onClick");
+            switch (v.getId()) {
+                case R.id.year_card:
+                    Log.i(TAG, "Year card");
+                    yearPopup.show();
+                    break;
+                case R.id.make_card:
+                    Log.i(TAG, "Make Card");
+                    makePopup.show();
+                    break;
+            }
+        }
+    };
+
+    private AlertDialog yearPopup;
+    private AlertDialog makePopup;
+    private AlertDialog modelPopup;
+
+    private void setupAlertDialogs() {
+        setYearPopup();
+        setMakePopup(false);
+    }
+
+    private void setYearPopup() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(R.string.year);
+
+        if (!years.contains(getString(R.string.other_selection)))
+            years.add(getString(R.string.other_selection));
+
+        String[] yearArray = years.toArray(new String[years.size()]);
+
+        builder.setSingleChoiceItems(yearArray, 0, yearMenuListener);
+
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                yearPopup = builder.create();
+            }
+        });
+    }
+
+    private void setMakePopup(boolean updated) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(R.string.make);
+
+        if (updated)
+            makes = new LinkedList<>(availableCarsSQL.getAvailableMakes(yearDisplay.getText().toString()));
+
+        if (!makes.contains(getString(R.string.other_selection)))
+            makes.add(getString(R.string.other_selection));
+
+        String[] array = makes.toArray(new String[makes.size()]);
+
+        int selection = makes.indexOf(makeDisplay.getText().toString());
+
+        builder.setSingleChoiceItems(array, selection, makeMenuListener);
+
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                makePopup = builder.create();
+            }
+        });
+    }
+
+    private AlertDialog.OnClickListener yearMenuListener = new AlertDialog.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            setYearDisplay(years.get(which));
+            dialog.dismiss();
+        }
+    };
+
+    private AlertDialog.OnClickListener makeMenuListener = new AlertDialog.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            setMakeDisplay(makes.get(which));
+            dialog.dismiss();
+        }
+    };
+
+    private void setYearDisplay(String year) {
+        if (!yearDisplay.getText().equals(year)) {
+            yearDisplay.setText(year);
+            setMakePopup(true);
+        }
+    }
+
+    private void setMakeDisplay(String make) {
+        if (!makeDisplay.getText().equals(make)) {
+            makeDisplay.setText(make);
+        }
     }
 }

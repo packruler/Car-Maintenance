@@ -16,13 +16,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.packruler.carmaintenance.R;
+import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, CarSQL.VehicleContainer {
@@ -44,6 +49,11 @@ public class MainActivity extends AppCompatActivity
 
     private SharedPreferences sharedPreferences;
     private CarSQL carsSQL;
+    private AvailableCarsSQL availableCarsSQL;
+
+    private LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
+    private int numProcessors = Runtime.getRuntime().availableProcessors();
+    private ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(numProcessors, numProcessors, 10, TimeUnit.SECONDS, workQueue);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +62,16 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         sharedPreferences = getSharedPreferences(getApplication().getPackageName(), MODE_MULTI_PROCESS);
+        poolExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    availableCarsSQL = new AvailableCarsSQL(MainActivity.this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 //        sharedPreferences.edit().clear().apply();
 //        Set<String> carNames = sharedPreferences.getStringSet(CAR_NAME_SET, new TreeSet<String>());
 //        Log.i(TAG, "Names " + carNames.toString());
@@ -91,9 +111,9 @@ public class MainActivity extends AppCompatActivity
         // update the main content by replacing fragments
         EditCarFragment editCarFragment;
         if (vehicleMap.containsKey(name))
-            editCarFragment = new EditCarFragment(vehicleMap.get(name));
+            editCarFragment = new EditCarFragment(this,availableCarsSQL,vehicleMap.get(name));
         else
-            editCarFragment = new EditCarFragment();
+            editCarFragment = new EditCarFragment(this,availableCarsSQL);
 
         editCarFragment.setCarSQL(carsSQL);
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -210,7 +230,7 @@ public class MainActivity extends AppCompatActivity
     private void setupNewCar() {
         if (editCarFragment == null) {
             Log.i(TAG, "New Car!");
-            editCarFragment = new EditCarFragment();
+            editCarFragment = new EditCarFragment(this,availableCarsSQL);
 //            getFragmentManager().beginTransaction().add(R.id.container, editCarFragment).commit();
         }
     }
