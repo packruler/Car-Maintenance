@@ -212,7 +212,27 @@ public class AvailableCarsSQL {
             cursor.moveToNext();
         }
         Log.i(TAG, "List size: " + makes.size());
+        cursor.close();
+        database.close();
         return makes;
+    }
+
+    public Set<String> getAvailableModels(String year, String make) {
+        SQLiteDatabase database = sqlHelper.getReadableDatabase();
+        Cursor cursor = database.query(true, TABLE_NAME,
+                new String[]{MODEL}, YEAR + "= " + year + " AND " + MAKE + "= \"" + make + "\"",
+                null, null, null, null, null);
+        cursor.moveToFirst();
+        Log.i(TAG, "Total model count: " + cursor.getCount());
+        TreeSet<String> models = new TreeSet<>();
+        while (!cursor.isAfterLast()) {
+            models.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        Log.i(TAG, "List size: " + models.size());
+        cursor.close();
+        database.close();
+        return models;
     }
 
     public SQLiteDatabase getReadableDatabase() {

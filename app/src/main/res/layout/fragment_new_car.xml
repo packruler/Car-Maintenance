@@ -85,7 +85,7 @@
                     android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
                     android:inputType="number"
                     android:numeric="integer"
-                    android:layout_below="@+id/year_textView"
+                    android:layout_below="@+id/year_selected_display"
                     android:visibility="gone"/>
 
             </RelativeLayout>
@@ -128,7 +128,7 @@
                     android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
                     android:inputType="textShortMessage"
                     android:gravity="right"
-                    android:layout_below="@+id/make_textView"
+                    android:layout_below="@+id/make_selected_display"
                     android:visibility="gone"/>
 
             </RelativeLayout>
@@ -171,7 +171,7 @@
                     android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
                     android:inputType="textShortMessage"
                     android:gravity="right"
-                    android:layout_below="@+id/model_textView"
+                    android:layout_below="@+id/model_selected_display"
                     android:visibility="gone"/>
 
             </RelativeLayout>
