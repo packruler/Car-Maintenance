@@ -20,7 +20,8 @@
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
             card_view:cardElevation="1dp"
             android:id="@+id/name_card"
-            android:layout_toLeftOf="@+id/vehicle_image_card">
+            android:layout_toLeftOf="@+id/vehicle_image_card"
+            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -55,7 +56,8 @@
             card_view:cardElevation="1dp"
             android:id="@+id/vin_card"
             android:layout_below="@+id/name_card"
-            android:layout_toLeftOf="@+id/vehicle_image_card">
+            android:layout_toLeftOf="@+id/vehicle_image_card"
+            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -94,7 +96,8 @@
             card_view:cardElevation="1dp"
             android:id="@+id/year_card"
             android:layout_below="@+id/vin_card"
-            android:layout_toLeftOf="@+id/vehicle_image_card">
+            android:layout_toLeftOf="@+id/vehicle_image_card"
+            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -127,7 +130,8 @@
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
             card_view:cardElevation="1dp"
             android:id="@+id/make_card"
-            android:layout_below="@+id/year_card">
+            android:layout_below="@+id/year_card"
+            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -161,7 +165,8 @@
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
             card_view:cardElevation="1dp"
             android:id="@+id/model_card"
-            android:layout_below="@+id/make_card">
+            android:layout_below="@+id/make_card"
+            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -195,7 +200,8 @@
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
             card_view:cardElevation="1dp"
             android:id="@+id/submodel_card"
-            android:layout_below="@+id/model_card">
+            android:layout_below="@+id/model_card"
+            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -229,7 +235,8 @@
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
             card_view:cardElevation="1dp"
             android:id="@+id/mileage_card"
-            android:layout_below="@+id/submodel_card">
+            android:layout_below="@+id/submodel_card"
+            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -264,7 +271,8 @@
             android:layout_marginBottom="@dimen/abc_action_bar_default_padding_material"
             card_view:cardElevation="1dp"
             android:id="@+id/purchase_cost_card"
-            android:layout_below="@+id/mileage_card">
+            android:layout_below="@+id/mileage_card"
+            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -298,7 +306,8 @@
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
             card_view:cardElevation="1dp"
             android:id="@+id/purchase_date_card"
-            android:layout_below="@+id/purchase_cost_card">
+            android:layout_below="@+id/purchase_cost_card"
+            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -349,13 +358,19 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/vehicle_image_card"
-            android:layout_alignParentRight="true">
+            android:layout_alignParentRight="true"
+            card_view:cardElevation="1dp"
+            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material"
+            >
 
-            <ImageButton
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/vehicle_image"
-                android:layout_alignParentRight="true"/>
+                android:layout_alignParentRight="true"
+                android:scaleType="centerCrop"
+                android:background="@android:color/darker_gray"
+                />
 
         </android.support.v7.widget.CardView>
 

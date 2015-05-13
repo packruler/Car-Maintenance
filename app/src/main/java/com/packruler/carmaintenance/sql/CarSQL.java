@@ -29,7 +29,7 @@ public class CarSQL {
     }
 
     private class SQLHelper extends SQLiteOpenHelper {
-        public static final int DATABASE_VERSION = 1;
+        public static final int DATABASE_VERSION = 2;
         public static final String DATABASE_NAME = "Cars.db";
 
         public SQLHelper(Context context) {
@@ -46,7 +46,10 @@ public class CarSQL {
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+            switch (newVersion) {
+                case 2:
+                    db.execSQL("ALTER TABLE " + Vehicle.TABLE_NAME + " ADD COLUMN " + Vehicle.IMAGE_URI);
+            }
         }
 
     }

@@ -43,6 +43,7 @@ public class Vehicle {
     public static final String HORSEPOWER_UNITS = "horsepower_units";
     public static final String TORQUE = "torque";
     public static final String TORQUE_UNITS = "torque_units";
+    public static final String IMAGE_URI = "image_uri";
 
     public static final String[] RESERVED_WORDS = new String[]{
             TABLE_NAME, VEHICLE_NAME, MAKE, MODEL, SUBMODEL, YEAR, VIN, WEIGHT, WEIGHT_UNITS, MILEAGE,
@@ -61,7 +62,8 @@ public class Vehicle {
                     TORQUE + " FLOAT," + TORQUE_UNITS + " STRING," +
                     MILEAGE + " FLOAT," + MILEAGE_UNITS + " STRING," + COLOR + " STRING," +
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " STRING," +
-                    PURCHASE_COST + " FLOAT," + COST_UNITS + " STRING" + ")";
+                    PURCHASE_COST + " FLOAT," + COST_UNITS + " STRING," +
+                    IMAGE_URI + " STRING" + ")";
 
     protected CarSQL carSQL;
     private String name = "";
@@ -270,6 +272,14 @@ public class Vehicle {
 
     public void setBoughtFrom(String boughtFrom) {
         sqlDataHandler.putString(BOUGHT_FROM, boughtFrom);
+    }
+
+    public String getImageUri() {
+        return sqlDataHandler.getString(IMAGE_URI);
+    }
+
+    public void setImageUri(String imageUri) {
+        sqlDataHandler.putString(IMAGE_URI, imageUri);
     }
 
     public void setContentValues(ContentValues contentValues) {

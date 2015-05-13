@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,6 +22,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +32,8 @@ import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -80,7 +87,6 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         return rootView;
     }
 
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -95,17 +101,14 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
     private TextView nameDisplay;
     private TextView vinDisplay;
-
     private TextView yearDisplay;
-
     private TextView makeDisplay;
-
     private TextView modelDisplay;
-
     private TextView submodelDisplay;
     private TextView mileageDisplay;
     private TextView purchaseCostDisplay;
     private TextView purchaseDateDisplay;
+    private ImageView vehicleImage;
     private boolean variablesSet = false;
 
     private void setVariables(View view) {
@@ -151,6 +154,17 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
         view.findViewById(R.id.save_changes).setOnClickListener(saveDiscardListener);
         view.findViewById(R.id.discard_changes).setOnClickListener(saveDiscardListener);
+
+        vehicleImage = (ImageView) view.findViewById(R.id.vehicle_image);
+        vehicleImage.setOnClickListener(new View.OnClickListener() {
+            private final String TAG = "ImageCardClick";
+
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "Open Selection");
+                openImageSelection();
+            }
+        });
 
         setupAlertDialogs();
 
@@ -210,6 +224,8 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                 if (vehicle.getPurchaseDate() != dateTime)
                     values.put(Vehicle.PURCHASE_DATE, dateTime);
             }
+
+            storeImageUri(values);
 
             vehicle.setContentValues(values);
         }
@@ -925,5 +941,63 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         Log.i(TAG, "Time: " + time);
         dateTime = time;
         purchaseDateDisplay.setText(DateFormat.getDateInstance().format(new Date(dateTime)));
+    }
+
+    private static final int SELECT_PICTURE_REQUEST_CODE = 1;
+
+    private void openImageSelection() {
+        Intent galleryIntent = new Intent();
+        galleryIntent.setType("image/*");
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        Intent intent = Intent.createChooser(galleryIntent, "Select Image Of Vehicle");
+        startActivityForResult(intent, SELECT_PICTURE_REQUEST_CODE);
+    }
+
+    private class LoadImageRunnable implements Runnable {
+        private Uri uri;
+
+        public LoadImageRunnable(Uri uri) {
+            this.uri = uri;
+        }
+
+        @Override
+        public void run() {
+            if (uri != null) {
+                try {
+                    InputStream stream = getActivity().getContentResolver().openInputStream(uri);
+                    final Bitmap bitmap = BitmapFactory.decodeStream(stream);
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            vehicleImage.setImageBitmap(bitmap);
+                        }
+                    });
+                    imageUri = uri.toString();
+                    Log.i(TAG, "Image Loaded");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private String imageUri;
+
+    private void storeImageUri(ContentValues values) {
+        if (imageUri != null && !imageUri.equals(vehicle.getImageUri())) {
+            values.put(Vehicle.IMAGE_URI, imageUri);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case SELECT_PICTURE_REQUEST_CODE:
+                Log.i(TAG, "Result code: " + resultCode);
+                Uri selected = data == null ? null : data.getData();
+                Log.i(TAG, "Output: " + (data == null ? "null" : data.getData().toString()));
+                poolExecutor.execute(new LoadImageRunnable(selected));
+                break;
+        }
     }
 }
