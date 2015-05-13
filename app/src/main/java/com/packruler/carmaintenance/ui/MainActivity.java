@@ -30,7 +30,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, CarSQL.VehicleContainer {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     private final String TAG = getClass().getName();
     private static final String CAR_NAME_SET = "CAR_NAME_SET";
@@ -110,21 +110,21 @@ public class MainActivity extends AppCompatActivity
     public void onNavigationDrawerItemSelected(String name) {
         // update the main content by replacing fragments
         EditCarFragment editCarFragment;
-        if (vehicleMap.containsKey(name))
-            editCarFragment = new EditCarFragment(this,availableCarsSQL,vehicleMap.get(name));
-        else
-            editCarFragment = new EditCarFragment(this,availableCarsSQL);
+//        if (vehicleMap.containsKey(name))
+//            editCarFragment = new EditCarFragment(this,availableCarsSQL,vehicleMap.get(name));
+//        else
+        editCarFragment = new EditCarFragment(this, availableCarsSQL, carsSQL);
 
-        editCarFragment.setCarSQL(carsSQL);
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         fragmentManager.beginTransaction()
                 .replace(R.id.container, editCarFragment)
                 .commit();
-        Vehicle vehicle = vehicleMap.get(name);
-        Log.i(TAG, "Vehicle null " + (vehicle == null));
-        if (vehicle != null)
-            editCarFragment.setVehicle(vehicle);
+
+//        Vehicle vehicle = vehicleMap.get(name);
+//        Log.i(TAG, "Vehicle null " + (vehicle == null));
+//        if (vehicle != null)
+//            editCarFragment.setVehicle(vehicle);
 
 //        fragmentManager.beginTransaction()
 //                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
@@ -223,31 +223,5 @@ public class MainActivity extends AppCompatActivity
     public List<String> getVehicleNames() {
         LinkedList<String> names = new LinkedList<>(vehicleMap.keySet());
         return names;
-    }
-
-    private EditCarFragment editCarFragment;
-
-    private void setupNewCar() {
-        if (editCarFragment == null) {
-            Log.i(TAG, "New Car!");
-            editCarFragment = new EditCarFragment(this,availableCarsSQL);
-//            getFragmentManager().beginTransaction().add(R.id.container, editCarFragment).commit();
-        }
-    }
-
-    public boolean containsCar(String name) {
-        Log.i(TAG, "Contains: " + name);
-        return vehicleMap.containsKey(name);
-    }
-
-    public boolean updateCar(Vehicle vehicle) {
-        vehicleMap.put(vehicle.getName(), vehicle);
-        mNavigationDrawerFragment.updateDrawer();
-        return true;
-    }
-
-    public void loadCar(Vehicle vehicle) {
-        Log.i(TAG, "Loading car: " + vehicle.getName());
-        vehicleMap.put(vehicle.getName(), vehicle);
     }
 }

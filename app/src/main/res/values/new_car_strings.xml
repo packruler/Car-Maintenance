@@ -8,13 +8,19 @@
     <string name="mileage">Mileage:</string>
     <string name="purchase_cost">Purchase Cost:</string>
     <string name="purchase_date">Purchase Date:</string>
+    <string name="vin">Vin:</string>
 
     <string name="save">Save Changes</string>
     <string name="discard">Discard Changes</string>
+
     <string name="yes">Yes</string>
     <string name="no">No</string>
+
     <string-array name="verify">
         <item>@string/yes</item>
         <item>@string/no</item>
     </string-array>
+
+    <string name="other_selection">Other…</string>
+    <string name="click_to_set">Click to set</string>
 </resources>

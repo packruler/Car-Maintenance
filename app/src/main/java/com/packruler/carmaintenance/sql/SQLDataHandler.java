@@ -2,8 +2,7 @@ package com.packruler.carmaintenance.sql;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-
-import java.sql.SQLDataException;
+import android.util.Log;
 
 /**
  * Created by Packruler on 5/7/15.
@@ -27,35 +26,22 @@ public class SQLDataHandler {
     public String getString(String column) {
         Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
+        cursor.moveToFirst();
         String output = cursor.getString(cursor.getColumnIndex(column));
         cursor.close();
         return output;
     }
 
-    public void putString(String column, String value, boolean skipCheck) throws SQLDataException {
-        if (skipCheck) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(column, value);
-            setContentValues(contentValues);
-        } else
-            putString(column, value, 0);
-    }
-
-    public void putString(String column, String value) throws SQLDataException {
-        putString(column, value, 0);
-    }
-
-    public void putString(String column, String value, int minimumLength) throws SQLDataException {
-        if (carSQL.checkString(value, minimumLength)) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(column, value);
-            setContentValues(contentValues);
-        }
+    public void putString(String column, String value) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(column, value);
+        setContentValues(contentValues);
     }
 
     public float getFloat(String column) {
         Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
+        cursor.moveToFirst();
         float output = cursor.getFloat(cursor.getColumnIndex(column));
         cursor.close();
         return output;
@@ -70,6 +56,7 @@ public class SQLDataHandler {
     public int getInt(String column) {
         Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
+        cursor.moveToFirst();
         int output = cursor.getInt(cursor.getColumnIndex(column));
         cursor.close();
         return output;
@@ -84,6 +71,7 @@ public class SQLDataHandler {
     public double getDouble(String column) {
         Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
+        cursor.moveToFirst();
         double output = cursor.getDouble(cursor.getColumnIndex(column));
         cursor.close();
         return output;
@@ -98,6 +86,7 @@ public class SQLDataHandler {
     public long getLong(String column) {
         Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
+        cursor.moveToFirst();
         long output = cursor.getLong(cursor.getColumnIndex(column));
         cursor.close();
         return output;
@@ -112,6 +101,7 @@ public class SQLDataHandler {
     public boolean getBoolean(String column) {
         Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
+        cursor.moveToFirst();
         boolean output = cursor.getInt(cursor.getColumnIndex(column)) == 1;
         cursor.close();
         return output;
@@ -124,7 +114,7 @@ public class SQLDataHandler {
     }
 
     public void setContentValues(ContentValues contentValues) {
-//        Log.i(TAG, "Content Values: " + contentValues.toString());
+        Log.i(TAG, "Content Values: " + contentValues.toString());
         carSQL.getWritableDatabase().update(tableName, contentValues, selection, null);
     }
 

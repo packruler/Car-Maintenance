@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -54,7 +55,7 @@ public class AvailableCarsSQL {
     private class SQLHelper extends SQLiteOpenHelper {
 
 
-        public static final int DATABASE_VERSION = 1;
+        public static final int DATABASE_VERSION = 2;
         public static final String DATABASE_NAME = "standard_cars.db";
         private String DATABASE_PATH = "/data/data/com.packruler.carmaintenance/databases/";
 
@@ -76,9 +77,7 @@ public class AvailableCarsSQL {
          */
         public void createDataBase() throws IOException {
 
-            boolean dbExist = checkDataBase();
-
-            if (!dbExist) {
+            if (!doesDatabaseExist()) {
                 //By calling this method and empty database will be created into the default system path
                 //of your application so we are gonna be able to overwrite that database with our database.
                 this.getReadableDatabase();
@@ -102,7 +101,7 @@ public class AvailableCarsSQL {
          *
          * @return true if it exists, false if it doesn't
          */
-        private boolean checkDataBase() {
+        private boolean doesDatabaseExist() {
 
             SQLiteDatabase checkDB = null;
 
@@ -200,27 +199,44 @@ public class AvailableCarsSQL {
     }
 
     public Set<String> getAvailableMakes(String year) {
-        SQLiteDatabase database = sqlHelper.getReadableDatabase();
-        Cursor cursor = database.query(true, TABLE_NAME,
-                new String[]{MAKE}, YEAR + "= " + year,
-                null, null, null, null, null);
-        cursor.moveToFirst();
-        Log.i(TAG, "Total make count: " + cursor.getCount());
+
+        int yearInt;
         TreeSet<String> makes = new TreeSet<>();
-        while (!cursor.isAfterLast()) {
-            makes.add(cursor.getString(0));
-            cursor.moveToNext();
+
+        try {
+            yearInt = Integer.valueOf(year);
+        } catch (NumberFormatException e) {
+            yearInt = 0;
         }
-        Log.i(TAG, "List size: " + makes.size());
-        cursor.close();
-        database.close();
+
+        if (yearInt >= 1984 && yearInt <= Calendar.getInstance().get(Calendar.YEAR) + 1) {
+
+            SQLiteDatabase database = sqlHelper.getReadableDatabase();
+
+            Cursor cursor = database.query(true, TABLE_NAME,
+                    new String[]{MAKE}, YEAR + "= " + year,
+                    null, null, null, null, null);
+            cursor.moveToFirst();
+
+            Log.i(TAG, "Total make count: " + cursor.getCount());
+            while (!cursor.isAfterLast()) {
+                makes.add(cursor.getString(0));
+                cursor.moveToNext();
+            }
+
+            Log.i(TAG, "List size: " + makes.size());
+
+            cursor.close();
+            database.close();
+        }
         return makes;
     }
 
     public Set<String> getAvailableModels(String year, String make) {
         SQLiteDatabase database = sqlHelper.getReadableDatabase();
+
         Cursor cursor = database.query(true, TABLE_NAME,
-                new String[]{MODEL}, YEAR + "= " + year + " AND " + MAKE + "= \"" + make + "\"",
+                new String[]{MODEL}, YEAR + "= \"" + year + "\" AND " + MAKE + "= \"" + make + "\"",
                 null, null, null, null, null);
         cursor.moveToFirst();
         Log.i(TAG, "Total model count: " + cursor.getCount());

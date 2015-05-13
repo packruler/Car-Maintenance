@@ -11,7 +11,6 @@ import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.packruler.carmaintenance.vehicle.maintenence.PartReplacement;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
-import java.sql.SQLDataException;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -66,17 +65,6 @@ public class Vehicle {
 
     protected CarSQL carSQL;
     private String name = "";
-    private String make = "";
-    private String model = "";
-    private String submodel = "";
-    private int year;
-    private String vin = "";
-    private long weight;
-    private float mileage;
-    private Date purchaseDate = new Date();
-    private float purchaseCost;
-    private String color = "";
-    private String boughtFrom = "";
 
     private SQLDataHandler sqlDataHandler;
     private ContentValues contentValues = new ContentValues();
@@ -96,6 +84,7 @@ public class Vehicle {
                 VEHICLE_NAME + "= \"" + name + "\"", null, null, null, null, null);
 
         if (!cursor.moveToFirst()) {
+            Log.i(TAG, "New Vehicle Name");
             ContentValues contentValues = new ContentValues();
             contentValues.put(VEHICLE_NAME, name);
             database.insert(TABLE_NAME, null, contentValues);
@@ -107,7 +96,7 @@ public class Vehicle {
         partCount = PartReplacement.getPartReplacementCountForCar(carSQL, name);
     }
 
-    public void setName(String name) throws SQLDataException {
+    public void setName(String name) {
         if (canUseCarName(name)) {
             ContentValues contentValues = new ContentValues();
             contentValues.put(VEHICLE_NAME, name);
@@ -135,43 +124,48 @@ public class Vehicle {
             Log.i(TAG, "Fuel task: " + (doneFuel - doneService));
             Log.i(TAG, "Part task: " + (done - doneFuel));
             Log.i(TAG, "All task: " + (done - start));
-        }
+        } else
+            Log.i(TAG, "Name already used");
     }
 
-    public boolean canUseCarName(String carName) throws SQLDataException {
-        return carSQL.checkString(carName, 3);
+    public boolean canUseCarName(String carName) {
+        if (name.equals(carName))
+            return false;
+
+        SQLiteDatabase database = carSQL.getReadableDatabase();
+        Cursor cursor = database.query(Vehicle.TABLE_NAME, new String[]{Vehicle.VEHICLE_NAME},
+                Vehicle.VEHICLE_NAME + "= \"" + carName + "\"",
+                null, null, null, null);
+        boolean canUse = cursor.getCount() == 0;
+        cursor.close();
+        return canUse;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setMake(String make) throws SQLDataException {
-        if (canUseMake(make)) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(MAKE, make);
-            sqlDataHandler.setContentValues(contentValues);
-        }
+    public void setMake(String make) {
+        if (!make.equals(getMake()))
+            sqlDataHandler.putString(MAKE, make);
     }
 
     public String getMake() {
         return sqlDataHandler.getString(MAKE);
     }
 
-    public boolean canUseMake(String make) throws SQLDataException {
-        return carSQL.checkString(make, 3);
-    }
-
-    public void setModel(String model) throws SQLDataException {
-        sqlDataHandler.putString(MODEL, model);
+    public void setModel(String model) {
+        if (!model.equals(getModel()))
+            sqlDataHandler.putString(MODEL, model);
     }
 
     public String getModel() {
         return sqlDataHandler.getString(MODEL);
     }
 
-    public void setSubmodel(String submodel) throws SQLDataException {
-        sqlDataHandler.putString(SUBMODEL, submodel);
+    public void setSubmodel(String submodel) {
+        if (!submodel.equals(getSubmodel()))
+            sqlDataHandler.putString(SUBMODEL, submodel);
     }
 
     public String getSubmodel() {
@@ -194,7 +188,7 @@ public class Vehicle {
         return sqlDataHandler.getFloat(MILEAGE);
     }
 
-    public void setMileageUnits(String units) throws SQLDataException {
+    public void setMileageUnits(String units) {
         sqlDataHandler.putString(MILEAGE_UNITS, units);
     }
 
@@ -202,8 +196,8 @@ public class Vehicle {
         sqlDataHandler.putLong(PURCHASE_DATE, purchaseDate.getTime());
     }
 
-    public Date getPurchaseDate() {
-        return new Date(sqlDataHandler.getLong(PURCHASE_DATE));
+    public long getPurchaseDate() {
+        return sqlDataHandler.getLong(PURCHASE_DATE);
     }
 
     public synchronized ServiceTask getNewServiceTask() {
@@ -234,7 +228,7 @@ public class Vehicle {
         return sqlDataHandler.getString(COST_UNITS);
     }
 
-    public void setCostUnits(String costUnits) throws SQLDataException {
+    public void setCostUnits(String costUnits) {
         sqlDataHandler.putString(COST_UNITS, costUnits);
     }
 
@@ -242,7 +236,7 @@ public class Vehicle {
         return sqlDataHandler.getString(VIN);
     }
 
-    public void setVin(String vin) throws SQLDataException {
+    public void setVin(String vin) {
         sqlDataHandler.putString(VIN, vin);
     }
 
@@ -250,7 +244,7 @@ public class Vehicle {
         return sqlDataHandler.getString(COLOR);
     }
 
-    public void setColor(String color) throws SQLDataException {
+    public void setColor(String color) {
         sqlDataHandler.putString(COLOR, color);
     }
 
@@ -266,7 +260,7 @@ public class Vehicle {
         return sqlDataHandler.getString(WEIGHT);
     }
 
-    public void setWeightUnits(String weightUnits) throws SQLDataException {
+    public void setWeightUnits(String weightUnits) {
         sqlDataHandler.putString(WEIGHT_UNITS, weightUnits);
     }
 
@@ -274,7 +268,7 @@ public class Vehicle {
         return sqlDataHandler.getString(BOUGHT_FROM);
     }
 
-    public void setBoughtFrom(String boughtFrom) throws SQLDataException {
+    public void setBoughtFrom(String boughtFrom) {
         sqlDataHandler.putString(BOUGHT_FROM, boughtFrom);
     }
 

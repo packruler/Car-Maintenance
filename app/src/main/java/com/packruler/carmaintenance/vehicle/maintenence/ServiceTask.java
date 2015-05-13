@@ -81,17 +81,10 @@ public class ServiceTask {
         return carName;
     }
 
-    public void setCarName(String carName) throws SQLDataException {
-        sqlDataHandler.putString(VEHICLE_NAME, carName, 3);
+    public void setCarName(String carName){
+        sqlDataHandler.putString(VEHICLE_NAME, carName);
         this.carName = carName;
         sqlDataHandler.setSelection(VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum);
-    }
-
-    public void setCarName(String carName, boolean skipCheck) throws SQLDataException {
-        if (skipCheck)
-            sqlDataHandler.putString(VEHICLE_NAME, carName, skipCheck);
-        else
-            setCarName(carName);
     }
 
     public int getTaskNum() {

@@ -35,14 +35,14 @@
                     android:gravity="center_vertical"
                     style="@android:style/TextAppearance.DeviceDefault.Large"/>
 
-                <EditText
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/edit_name"
+                    android:id="@+id/name_display"
+                    android:text="@string/click_to_set"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
-                    android:inputType="textShortMessage"
-                    android:layout_below="@+id/name_textView"
-                    />
+                    android:layout_below="@+id/name_textView"/>
 
             </RelativeLayout>
 
@@ -53,8 +53,47 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
             card_view:cardElevation="1dp"
-            android:id="@+id/year_card"
+            android:id="@+id/vin_card"
             android:layout_below="@+id/name_card"
+            android:layout_toLeftOf="@+id/vehicle_image_card">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/vin_textView"
+                    android:text="@string/vin"
+                    style="@style/Base.TextAppearance.AppCompat.Large"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/click_to_set"
+                    android:id="@+id/vin_display"
+                    android:layout_below="@+id/vin_textView"
+                    android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Decode VIN"
+                    android:id="@+id/decode_button"
+                    android:visibility="gone"
+                    android:layout_below="@+id/vin_textView"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
+            card_view:cardElevation="1dp"
+            android:id="@+id/year_card"
+            android:layout_below="@+id/vin_card"
             android:layout_toLeftOf="@+id/vehicle_image_card">
 
             <RelativeLayout
@@ -74,19 +113,9 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/click_to_set"
-                    android:id="@+id/year_selected_display"
-                    android:layout_below="@+id/year_textView"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/edit_year"
-                    android:calendarViewShown="false"
-                    android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
-                    android:inputType="number"
-                    android:numeric="integer"
-                    android:layout_below="@+id/year_selected_display"
-                    android:visibility="gone"/>
+                    android:id="@+id/year_display"
+                    android:layout_below="@+id/year_textView"
+                    android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"/>
 
             </RelativeLayout>
 
@@ -118,18 +147,9 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/click_to_set"
-                    android:id="@+id/make_selected_display"
-                    android:layout_below="@+id/make_textView"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/edit_make"
+                    android:id="@+id/make_display"
                     android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
-                    android:inputType="textShortMessage"
-                    android:gravity="right"
-                    android:layout_below="@+id/make_selected_display"
-                    android:visibility="gone"/>
+                    android:layout_below="@+id/make_textView"/>
 
             </RelativeLayout>
 
@@ -161,18 +181,9 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/click_to_set"
-                    android:id="@+id/model_selected_display"
-                    android:layout_below="@+id/model_textView"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/edit_model"
+                    android:id="@+id/model_display"
                     android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
-                    android:inputType="textShortMessage"
-                    android:gravity="right"
-                    android:layout_below="@+id/model_selected_display"
-                    android:visibility="gone"/>
+                    android:layout_below="@+id/model_textView"/>
 
             </RelativeLayout>
 
@@ -199,14 +210,14 @@
                     android:gravity="center_vertical"
                     />
 
-                <EditText
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/edit_submodel"
-                    android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
-                    android:inputType="textShortMessage"
-                    android:gravity="right"
-                    android:layout_below="@+id/submodel_textView"/>
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/click_to_set"
+                    android:id="@+id/submodel_display"
+                    android:layout_below="@+id/submodel_textView"
+                    android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"/>
 
             </RelativeLayout>
 
@@ -233,13 +244,13 @@
                     android:gravity="center_vertical"
                     />
 
-                <EditText
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/edit_mileage"
+                    android:id="@+id/mileage_display"
+                    android:text="@string/click_to_set"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
-                    android:inputType="number"
-                    android:gravity="right"
                     android:layout_below="@+id/mileage_textView"/>
 
             </RelativeLayout>
@@ -266,18 +277,16 @@
                     android:text="@string/purchase_cost"
                     android:id="@+id/purchase_cost_textView"
                     android:gravity="center_vertical"
-                    android:layout_alignTop="@+id/edit_purchase_cost"
-                    android:layout_alignBottom="@+id/edit_purchase_cost"/>
+                    />
 
-                <EditText
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/edit_purchase_cost"
-                    android:layout_toRightOf="@+id/purchase_cost_textView"
+                    android:id="@+id/purchase_cost_display"
+                    android:text="@string/click_to_set"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
-                    android:layout_alignParentRight="true"
-                    android:inputType="numberDecimal"
-                    android:gravity="right"/>
+                    android:layout_below="@+id/purchase_cost_textView"/>
 
             </RelativeLayout>
 
@@ -303,17 +312,14 @@
                     android:id="@+id/purchase_date_textView"
                     android:gravity="center_vertical"/>
 
-                <DatePicker
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/edit_purchase_date"
-                    android:gravity="right"
-                    android:spinnersShown="true"
-                    android:calendarViewShown="false"
-                    android:layout_below="@+id/purchase_date_textView"
-                    android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
-                    android:layout_alignParentRight="true"
-                    android:datePickerMode="spinner"/>
+                    android:id="@+id/purchase_date_display"
+                    android:text="@string/click_to_set"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="@dimen/abc_action_bar_default_padding_material"
+                    android:layout_below="@+id/purchase_date_textView"/>
 
             </RelativeLayout>
 
