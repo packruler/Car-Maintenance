@@ -21,7 +21,7 @@ import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -98,22 +98,25 @@ public class MainActivity extends AppCompatActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        mNavigationDrawerFragment.updateDrawer();
 
         carsSQL = new CarSQL(this);
-        for (Vehicle vehicle : carsSQL.getCars()) {
-            vehicleMap.put(vehicle.getName(), vehicle);
+        for (String name : carsSQL.getCarNames()) {
+            vehicleMap.put(name, new Vehicle(carsSQL, name));
         }
+
+        mNavigationDrawerFragment.updateDrawer();
     }
 
     @Override
     public void onNavigationDrawerItemSelected(String name) {
         // update the main content by replacing fragments
+        Log.v(TAG, "Selected car name: " + name);
         EditCarFragment editCarFragment;
-//        if (vehicleMap.containsKey(name))
-//            editCarFragment = new EditCarFragment(this,availableCarsSQL,vehicleMap.get(name));
-//        else
+
         editCarFragment = new EditCarFragment(this, availableCarsSQL, carsSQL);
+
+        if (vehicleMap.containsKey(name))
+            editCarFragment.setVehicle(vehicleMap.get(name));
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -221,7 +224,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     public List<String> getVehicleNames() {
-        LinkedList<String> names = new LinkedList<>(vehicleMap.keySet());
+        List<String> names = carsSQL.getCarNames();
+        Collections.sort(names);
         return names;
     }
 }

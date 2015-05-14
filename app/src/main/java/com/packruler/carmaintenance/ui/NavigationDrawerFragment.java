@@ -110,7 +110,7 @@ public class NavigationDrawerFragment extends Fragment {
         selectedCarName = (TextView) getActivity().findViewById(R.id.selected_car_name);
         selectedCarView = (RelativeLayout) getActivity().findViewById(R.id.selected_car_view);
         selectedCarName.setText("TEST");
-        Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(),R.mipmap.ic_launcher);
+        Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.ic_launcher);
         selectedCarIcon.setImageBitmap(icon);
         selectedCarView.setBackgroundColor(Palette.from(icon).generate().getLightVibrantColor(Color.WHITE));
     }
@@ -128,7 +128,7 @@ public class NavigationDrawerFragment extends Fragment {
             }
         });
 
-        updateDrawer();
+//        updateDrawer();
         return mDrawerListView;
     }
 
@@ -213,6 +213,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void selectItem(int position) {
+        Log.v(TAG, "selectItem: " + position);
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
@@ -222,7 +223,7 @@ public class NavigationDrawerFragment extends Fragment {
         }
         if (mCallbacks != null) {
             if (nameArray.length > position)
-                mCallbacks.onNavigationDrawerItemSelected(nameArray[position]);
+                mCallbacks.onNavigationDrawerItemSelected(nameArray[position-1]);
             else
                 mCallbacks.onNavigationDrawerItemSelected("");
         }
@@ -325,7 +326,7 @@ public class NavigationDrawerFragment extends Fragment {
         Log.i(TAG, "Names: " + vehicleNames.toString());
     }
 
-    private void updateSelectedCar(Vehicle vehicle){
+    private void updateSelectedCar(Vehicle vehicle) {
         selectedCarName.setText(vehicle.getName());
     }
 }

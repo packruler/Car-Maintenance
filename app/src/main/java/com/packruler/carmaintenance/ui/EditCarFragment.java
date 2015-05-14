@@ -11,10 +11,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.Spanned;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,8 +34,9 @@ import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -65,11 +68,6 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         this.availableCarsSQL = availableCarsSQL;
         this.activity = activity;
         this.carSQL = carSQL;
-    }
-
-    public EditCarFragment(Activity activity, AvailableCarsSQL availableCarsSQL, CarSQL carSQL, Vehicle vehicle) {
-        this(activity, availableCarsSQL, carSQL);
-        this.vehicle = vehicle;
     }
 
     @Override
@@ -109,6 +107,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     private TextView purchaseCostDisplay;
     private TextView purchaseDateDisplay;
     private ImageView vehicleImage;
+    private View loadingImageSpinner;
     private boolean variablesSet = false;
 
     private void setVariables(View view) {
@@ -119,9 +118,11 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         view.findViewById(R.id.vin_card).setOnClickListener(popupClickListener);
         vinDisplay = (TextView) view.findViewById(R.id.vin_display);
         view.findViewById(R.id.decode_button).setOnClickListener(new View.OnClickListener() {
+            private final String TAG = "decode_button";
+
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "onClick");
+                Log.d(TAG, "onClick");
                 poolExecutor.execute(new Runnable() {
                     @Override
                     public void run() {
@@ -161,20 +162,27 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "Open Selection");
+                Log.d(TAG, "Open Selection");
                 openImageSelection();
             }
         });
 
+        loadingImageSpinner = view.findViewById(R.id.loading_image_display);
+
         setupAlertDialogs();
 
-//        loadVehicleDetails();
-//        variablesSet = true;
+        if (vehicle != null) {
+            loadVehicleDetails();
+        } else
+            loadingImageSpinner.setVisibility(View.GONE);
+
+        variablesSet = true;
     }
 
     private void storeVehicle() {
         if (!nameDisplay.getText().equals(getString(R.string.click_to_set))) {
             String tempString = nameDisplay.getText().toString();
+            String clickToSet = getString(R.string.click_to_set);
             int tempInt;
             float tempFloat;
             long tempLong;
@@ -188,31 +196,32 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                 vehicle.setName(tempString);
 
             tempString = vinDisplay.getText().toString();
-            if (!tempString.equals(getString(R.string.click_to_set)) &&
+            if (!tempString.equals(clickToSet) &&
                     !vehicle.getVin().equals(tempString))
                 values.put(Vehicle.VIN, tempString);
 
-            try {
-                Log.i(TAG, "Year: " + yearDisplay.getText().toString());
-                tempInt = Integer.valueOf(yearDisplay.getText().toString());
-                if (vehicle.getYear() != tempInt)
-                    values.put(Vehicle.YEAR, tempInt);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
+            if (!yearDisplay.getText().toString().equals(getString(R.string.click_to_set)))
+                try {
+                    Log.d(TAG, "Year: " + yearDisplay.getText().toString());
+                    tempInt = Integer.valueOf(yearDisplay.getText().toString());
+                    if (vehicle.getYear() != tempInt)
+                        values.put(Vehicle.YEAR, tempInt);
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, e.getMessage());
+                }
 
             tempString = makeDisplay.getText().toString();
-            if (!tempString.equals(getString(R.string.click_to_set)) &&
+            if (!tempString.equals(clickToSet) &&
                     (vehicle.getMake() == null || !vehicle.getMake().equals(tempString)))
                 values.put(Vehicle.MAKE, tempString);
 
             tempString = modelDisplay.getText().toString();
-            if (!tempString.equals(getString(R.string.click_to_set)) &&
+            if (!tempString.equals(clickToSet) &&
                     (vehicle.getModel() == null || !vehicle.getModel().equals(tempString)))
                 values.put(Vehicle.MODEL, tempString);
 
             tempString = submodelDisplay.getText().toString();
-            if (!tempString.equals(getString(R.string.click_to_set)) &&
+            if (!tempString.equals(clickToSet) &&
                     (vehicle.getSubmodel() == null || !vehicle.getSubmodel().equals(tempString)))
                 values.put(Vehicle.SUBMODEL, tempString);
 
@@ -220,43 +229,53 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
             storePurchaseCost(values);
 
-            if (!purchaseDateDisplay.getText().toString().equals(getString(R.string.click_to_set))) {
+            if (!purchaseDateDisplay.getText().toString().equals(clickToSet)) {
                 if (vehicle.getPurchaseDate() != dateTime)
                     values.put(Vehicle.PURCHASE_DATE, dateTime);
             }
 
-            storeImageUri(values);
+            storeImage();
 
-            vehicle.setContentValues(values);
+            if (values.size() > 0)
+                vehicle.setContentValues(values);
         }
     }
 
-    private String verifyEntries(String toastError) {
-        if (nameDisplay.length() == 0)
-            toastError += "\n" + getString(R.string.name).substring(0, getString(R.string.name).length() - 1);
-
-//        if (yearText.length() == 0)
-//            toastError += "\n" + getString(R.string.year).substring(0, getString(R.string.year).length() - 1);
-//
-//        if (makeText.length() == 0)
-//            toastError += "\n" + getString(R.string.make).substring(0, getString(R.string.make).length() - 1);
-//
-//        if (modelText.length() == 0)
-//            toastError += "\n" + getString(R.string.model).substring(0, getString(R.string.model).length() - 1);
-//
-//        if (mileageText.length() == 0)
-//            toastError += "\n" + getString(R.string.mileage).substring(0, getString(R.string.mileage).length() - 1);
-//
-//        if (purchaseCost.length() == 0)
-//            toastError += "\n" + getString(R.string.purchase_cost).substring(0, getString(R.string.purchase_cost).length() - 1);
-
-        return toastError;
-    }
-
     private void loadVehicleDetails() {
+        Log.v(TAG, "loadVehicleDetails");
+        String tempString = vehicle.getName();
+        String clickToSetString = getString(R.string.click_to_set);
+
+        loadImage();
+
+        setNameDisplay(tempString);
+
+        setYearDisplay(vehicle.getYear() + "");
+
+        tempString = vehicle.getMake();
+        if (tempString != null)
+            setMakeDisplay(tempString);
+        else setNameDisplay(clickToSetString);
+
+        tempString = vehicle.getModel();
+        if (tempString != null)
+            setModelDisplay(tempString);
+        else setNameDisplay(clickToSetString);
+
+        tempString = vehicle.getSubmodel();
+        if (tempString != null)
+            setSubmodelDisplay(tempString);
+        else setNameDisplay(clickToSetString);
+
+        setMileageDisplay(vehicle.getMileage() + "");
+
+        setPurchaseCostDisplay(vehicle.getPurchaseCost() + "");
+
+        setPurchaseDateDisplay(vehicle.getPurchaseDate());
     }
 
     public void setVehicle(Vehicle vehicle) {
+        Log.v(TAG, "setVehicle: " + vehicle.getName());
         this.vehicle = vehicle;
         if (variablesSet)
             loadVehicleDetails();
@@ -267,14 +286,14 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
         @Override
         public void onClick(View v) {
-            Log.i(TAG, "onClick");
+            Log.d(TAG, "onClick");
             switch (v.getId()) {
                 case R.id.save_changes:
-                    Log.i(TAG, "Name Length: " + nameDisplay.getText().length());
+                    Log.v(TAG, "Name Length: " + nameDisplay.getText().length());
                     storeVehicle();
                     break;
                 case R.id.discard_changes:
-                    Log.i(TAG, "Discard Changes");
+                    Log.v(TAG, "Discard Changes");
                     loadVehicleDetails();
                     break;
             }
@@ -286,42 +305,42 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
         @Override
         public void onClick(View v) {
-            Log.i(TAG, "onClick");
+            Log.v(TAG, "onClick");
             switch (v.getId()) {
                 case R.id.name_card:
-                    Log.i(TAG, "Name Card");
+                    Log.v(TAG, "Name Card");
                     showNamePopup();
                     break;
                 case R.id.vin_card:
-                    Log.i(TAG, "VIN Card");
+                    Log.v(TAG, "VIN Card");
                     showVINPopup();
                     break;
                 case R.id.year_card:
-                    Log.i(TAG, "Year Card");
+                    Log.v(TAG, "Year Card");
                     yearPopup.show();
                     break;
                 case R.id.make_card:
-                    Log.i(TAG, "Make Card");
+                    Log.v(TAG, "Make Card");
                     makePopup.show();
                     break;
                 case R.id.model_card:
-                    Log.i(TAG, "Model Card");
+                    Log.v(TAG, "Model Card");
                     modelPopup.show();
                     break;
                 case R.id.submodel_card:
-                    Log.i(TAG, "Submodel Card");
+                    Log.v(TAG, "Submodel Card");
                     showSubmodelPopup();
                     break;
                 case R.id.mileage_card:
-                    Log.i(TAG, "Mileage Card");
+                    Log.v(TAG, "Mileage Card");
                     showMileagePopup();
                     break;
                 case R.id.purchase_cost_card:
-                    Log.i(TAG, "Purchase Cost Card");
+                    Log.v(TAG, "Purchase Cost Card");
                     showPurchaseCostPopup();
                     break;
                 case R.id.purchase_date_card:
-                    Log.i(TAG, "Purchase Date Card");
+                    Log.v(TAG, "Purchase Date Card");
                     showPurchaseDatePopup();
                     break;
 
@@ -441,7 +460,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
                         for (int i = start; i < end; i++) {
                             if (!Character.isDigit(source.charAt(i))) {
-                                Log.i(TAG, "Char removed");
+                                Log.v(TAG, "Char removed");
                                 return "";
                             }
                         }
@@ -513,7 +532,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
                         for (int i = start; i < end; i++) {
                             if (!(Character.isLetterOrDigit(source.charAt(i)) || Character.isSpaceChar(source.charAt(i)))) {
-                                Log.i(TAG, "Char removed");
+                                Log.v(TAG, "Char removed");
                                 return "";
                             }
                         }
@@ -571,7 +590,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
                         for (int i = start; i < end; i++) {
                             if (!(Character.isLetterOrDigit(source.charAt(i)) || Character.isSpaceChar(source.charAt(i)))) {
-                                Log.i(TAG, "Char removed");
+                                Log.v(TAG, "Char removed");
                                 return "";
                             }
                         }
@@ -592,16 +611,9 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                         otherDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-//                                try {
-//                                    if (carSQL.checkString(editText.getText().toString(), 2)) {
                                 setModelDisplay(editText.getText().toString());
                                 setModelPopup(false);
                                 otherDialog.cancel();
-//                                    }
-//                                } catch (SQLDataException e) {
-//                                    Log.i(TAG, e.getMessage());
-//                                    Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG).show();
-//                                }
                             }
                         });
                     }
@@ -616,7 +628,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     };
 
     private void setYearDisplay(String year) {
-        Log.i(TAG, "Set year to " + year);
+        Log.v(TAG, "Set year to " + year);
         if (!yearDisplay.getText().equals(year)) {
             yearDisplay.setText(year);
 
@@ -626,7 +638,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     }
 
     private void setMakeDisplay(String make) {
-        Log.i(TAG, "Set make to " + make);
+        Log.v(TAG, "Set make to " + make);
         if (!makeDisplay.getText().equals(make)) {
             makeDisplay.setText(make);
             setModelDisplay(getString(R.string.click_to_set));
@@ -635,7 +647,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     }
 
     private void setModelDisplay(String model) {
-        Log.i(TAG, "Set Model to " + model);
+        Log.v(TAG, "Set Model to " + model);
         if (!modelDisplay.getText().equals(model)) {
             modelDisplay.setText(model);
         }
@@ -655,13 +667,16 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
                 for (int i = start; i < end; i++) {
                     if (!(Character.isLetterOrDigit(source.charAt(i)) || Character.isSpaceChar(source.charAt(i)))) {
-                        Log.i(TAG, "Char removed");
+                        Log.v(TAG, "Char removed: " + source.charAt(i));
                         return "";
                     }
                 }
                 return null;
             }
         }});
+
+        if (!nameDisplay.getText().toString().equals(getString(R.string.click_to_set)))
+            editText.setText(nameDisplay.getText());
 
         builder.setView(editText);
 
@@ -701,7 +716,9 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     }
 
     private void setNameDisplay(String name) {
+        Log.v(TAG, "Set name: " + name);
         nameDisplay.setText(name);
+        Log.v(TAG, nameDisplay.getText().toString());
     }
 
     private void showVINPopup() {
@@ -718,13 +735,16 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
                 for (int i = start; i < end; i++) {
                     if (!(Character.isUpperCase(source.charAt(i)) || Character.isDigit(source.charAt(i)))) {
-                        Log.i(TAG, "Char removed");
+                        Log.v(TAG, "Char removed: " + source.charAt(i));
                         return "";
                     }
                 }
                 return null;
             }
         }});
+
+        if (!vinDisplay.getText().toString().equals(getString(R.string.click_to_set)))
+            editText.setText(vinDisplay.getText());
 
         builder.setView(editText);
 
@@ -780,13 +800,16 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
                 for (int i = start; i < end; i++) {
                     if (!(Character.isLetterOrDigit(source.charAt(i)) || Character.isSpaceChar(source.charAt(i)))) {
-                        Log.i(TAG, "Char removed");
+                        Log.v(TAG, "Char removed: " + source.charAt(i));
                         return "";
                     }
                 }
                 return null;
             }
         }});
+
+        if (!submodelDisplay.getText().toString().equals(getString(R.string.click_to_set)))
+            editText.setText(submodelDisplay.getText());
 
         builder.setView(editText);
 
@@ -823,6 +846,9 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         final EditText editText = new EditText(activity);
         editText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
+        if (!mileageDisplay.getText().toString().equals(getString(R.string.click_to_set)))
+            editText.setText(mileageDisplay.getText());
+
         builder.setView(editText);
 
         builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
@@ -857,19 +883,19 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
             String current = mileageDisplay.getText().toString();
             if (!current.equals(getString(R.string.click_to_set))) {
                 StringBuffer buffer = new StringBuffer();
-                Log.i(TAG, "Initial: " + current);
+                Log.v("storeMileage", "Initial: " + current);
                 DecimalFormatSymbols decimalFormatSymbols = DecimalFormatSymbols.getInstance();
                 for (char c : current.toCharArray()) {
                     if (Character.isDigit(c))
                         buffer.append(c);
                 }
                 int tempInt = Integer.valueOf(buffer.toString());
-                Log.i(TAG, "Output: " + tempInt);
+                Log.v("storeMileage", "Output: " + tempInt);
                 if (vehicle.getMileage() != tempInt)
                     values.put(Vehicle.MILEAGE, tempInt);
             }
         } catch (NumberFormatException e) {
-            Log.e(TAG, "Non valid number");
+            Log.e("storeMileage", "Non valid number");
         }
     }
 
@@ -879,6 +905,9 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
         final EditText editText = new EditText(activity);
         editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
+        if (!purchaseCostDisplay.getText().toString().equals(getString(R.string.click_to_set)))
+            editText.setText(purchaseCostDisplay.getText());
 
         builder.setView(editText);
 
@@ -914,33 +943,43 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
             String current = purchaseCostDisplay.getText().toString();
             if (!current.equals(getString(R.string.click_to_set))) {
                 StringBuffer buffer = new StringBuffer();
-                Log.i(TAG, "Initial: " + current);
+                Log.v("storePurchaseCost", "Initial: " + current);
                 DecimalFormatSymbols decimalFormatSymbols = DecimalFormatSymbols.getInstance();
                 for (char c : current.toCharArray()) {
                     if (Character.isDigit(c) || c == decimalFormatSymbols.getDecimalSeparator())
                         buffer.append(c);
                 }
                 float tempFloat = Float.valueOf(buffer.toString());
+                Log.v("storePurchaseCost", "Output: " + tempFloat);
                 if (vehicle.getPurchaseCost() != tempFloat)
                     values.put(Vehicle.PURCHASE_COST, tempFloat);
             }
         } catch (NumberFormatException e) {
-            Log.e(TAG, "Non valid number");
+            Log.e("storePurchaseCost", "Non valid number");
         }
     }
 
     private DatePickerDialog datePickerDialog;
 
     private void showPurchaseDatePopup() {
+        if (dateTime != 0) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(dateTime);
+            datePickerDialog.getDatePicker().init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), null);
+        }
         datePickerDialog.show();
     }
 
     long dateTime;
 
     private void setPurchaseDateDisplay(long time) {
-        Log.i(TAG, "Time: " + time);
-        dateTime = time;
-        purchaseDateDisplay.setText(DateFormat.getDateInstance().format(new Date(dateTime)));
+        Log.d(TAG, "Time: " + time);
+        if (time == 0)
+            purchaseDateDisplay.setText(getString(R.string.click_to_set));
+        else {
+            dateTime = time;
+            purchaseDateDisplay.setText(DateFormat.getDateInstance().format(new Date(dateTime)));
+        }
     }
 
     private static final int SELECT_PICTURE_REQUEST_CODE = 1;
@@ -953,39 +992,103 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         startActivityForResult(intent, SELECT_PICTURE_REQUEST_CODE);
     }
 
-    private class LoadImageRunnable implements Runnable {
-        private Uri uri;
+    private void loadImage(final Uri uri) {
+        loadingImageSpinner.setVisibility(View.VISIBLE);
 
-        public LoadImageRunnable(Uri uri) {
-            this.uri = uri;
-        }
-
-        @Override
-        public void run() {
-            if (uri != null) {
+        poolExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
                 try {
-                    InputStream stream = getActivity().getContentResolver().openInputStream(uri);
-                    final Bitmap bitmap = BitmapFactory.decodeStream(stream);
+                    bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
                     mainHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            vehicleImage.setImageBitmap(bitmap);
+                            vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+                                    bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
+                            loadingImageSpinner.setVisibility(View.GONE);
                         }
                     });
-                    imageUri = uri.toString();
-                    Log.i(TAG, "Image Loaded");
-                } catch (FileNotFoundException e) {
+                    Log.d(TAG, "Image Loaded");
+                } catch (IOException e) {
                     e.printStackTrace();
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(), "Error loading image", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
             }
-        }
+        });
     }
 
-    private String imageUri;
+    private void loadImage() {
+        final File file = new File(getActivity().getFilesDir().getPath() + "/Images/" + vehicle.getName() + "/" + "/vehicle.jpg");
 
-    private void storeImageUri(ContentValues values) {
-        if (imageUri != null && !imageUri.equals(vehicle.getImageUri())) {
-            values.put(Vehicle.IMAGE_URI, imageUri);
+        if (file.exists()) {
+            loadingImageSpinner.setVisibility(View.VISIBLE);
+
+            poolExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    final Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+                                    bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
+                            loadingImageSpinner.setVisibility(View.GONE);
+                        }
+                    });
+                    Log.d(TAG, "Image Loaded");
+                }
+            });
+        } else
+            loadingImageSpinner.setVisibility(View.GONE);
+    }
+
+    private Bitmap bitmap;
+
+    private void storeImage() {
+        if (bitmap != null) {
+            poolExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    FileOutputStream out = null;
+                    try {
+                        File outFile = new File(getActivity().getFilesDir().getPath() + "/Images/" + vehicle.getName() + "/" + "/vehicle.jpg");
+
+                        if (!outFile.getParentFile().exists())
+                            Log.v(TAG, "Make dirs success: " + outFile.getParentFile().mkdirs());
+
+                        if (!outFile.exists())
+                            Log.v(TAG, "Create new file success: " + outFile.createNewFile());
+
+                        out = new FileOutputStream(outFile);
+
+                        Log.v(TAG, "Resize bitmap");
+                        Bitmap output = Bitmap.createScaledBitmap(bitmap,
+                                bitmap.getScaledHeight(DisplayMetrics.DENSITY_HIGH), bitmap.getScaledHeight(DisplayMetrics.DENSITY_HIGH), false);
+                        Log.v(TAG, "Resize height: " + output.getHeight() + " width: " + output.getWidth());
+                        Log.v(TAG, "Compress bitmap");
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                        Log.v(TAG, "Done copying");
+
+                        vehicle.setImagePath(outFile.getPath());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            if (out != null) {
+                                out.flush();
+                                out.close();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -993,10 +1096,11 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case SELECT_PICTURE_REQUEST_CODE:
-                Log.i(TAG, "Result code: " + resultCode);
+                Log.d(TAG, "Result code: " + resultCode);
                 Uri selected = data == null ? null : data.getData();
-                Log.i(TAG, "Output: " + (data == null ? "null" : data.getData().toString()));
-                poolExecutor.execute(new LoadImageRunnable(selected));
+                Log.d(TAG, "Output: " + (data == null ? "null" : data.getData().toString()));
+                if (selected != null)
+                    loadImage(selected);
                 break;
         }
     }

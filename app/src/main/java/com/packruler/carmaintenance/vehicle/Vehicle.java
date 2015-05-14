@@ -60,7 +60,7 @@ public class Vehicle {
                     DISPLACEMENT + " FLOAT," + DISPLACEMENT_UNITS + " STRING," +
                     HORSEPOWER + " FLOAT," + HORSEPOWER_UNITS + " STRING," +
                     TORQUE + " FLOAT," + TORQUE_UNITS + " STRING," +
-                    MILEAGE + " FLOAT," + MILEAGE_UNITS + " STRING," + COLOR + " STRING," +
+                    MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," + COLOR + " STRING," +
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " STRING," +
                     PURCHASE_COST + " FLOAT," + COST_UNITS + " STRING," +
                     IMAGE_URI + " STRING" + ")";
@@ -182,12 +182,12 @@ public class Vehicle {
         return sqlDataHandler.getInt(YEAR);
     }
 
-    public void setMileage(float mileage) {
-        sqlDataHandler.putFloat(MILEAGE, mileage);
+    public void setMileage(long mileage) {
+        sqlDataHandler.putLong(MILEAGE, mileage);
     }
 
-    public float getMileage() {
-        return sqlDataHandler.getFloat(MILEAGE);
+    public long getMileage() {
+        return sqlDataHandler.getLong(MILEAGE);
     }
 
     public void setMileageUnits(String units) {
@@ -274,11 +274,11 @@ public class Vehicle {
         sqlDataHandler.putString(BOUGHT_FROM, boughtFrom);
     }
 
-    public String getImageUri() {
+    public String getImagePath() {
         return sqlDataHandler.getString(IMAGE_URI);
     }
 
-    public void setImageUri(String imageUri) {
+    public void setImagePath(String imageUri) {
         sqlDataHandler.putString(IMAGE_URI, imageUri);
     }
 

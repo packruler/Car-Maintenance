@@ -114,7 +114,7 @@ public class SQLDataHandler {
     }
 
     public void setContentValues(ContentValues contentValues) {
-        Log.i(TAG, "Content Values: " + contentValues.toString());
+        Log.v(TAG, "Content Values: " + contentValues.toString());
         carSQL.getWritableDatabase().update(tableName, contentValues, selection, null);
     }
 

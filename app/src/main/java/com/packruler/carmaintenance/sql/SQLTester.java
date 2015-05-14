@@ -1,6 +1,8 @@
 package com.packruler.carmaintenance.sql;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -16,14 +18,21 @@ import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
-public class SQLTester extends ActionBarActivity{
+public class SQLTester extends ActionBarActivity {
     private final String TAG = getClass().getName();
 
     private Button fillSQL;
     private Button loadSQL;
     private CarSQL carSQL;
     private Map<String, Vehicle> vehicleMap = new TreeMap<>();
+
+    private LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
+    private int numProcessors = Runtime.getRuntime().availableProcessors();
+    private ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(numProcessors, numProcessors, 10, TimeUnit.SECONDS, workQueue);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,36 +86,46 @@ public class SQLTester extends ActionBarActivity{
 
     private void fillSQL() {
         Log.i(TAG, "Start Fill");
+        HandlerThread handlerThread = new HandlerThread("fillSQL");
+        handlerThread.start();
+        Handler handler = new Handler(handlerThread.getLooper());
         for (int x = 0; x < 5; x++) {
-            Vehicle vehicle = new Vehicle(carSQL, "Car " + x);
+            final Vehicle vehicle = new Vehicle(carSQL, "Car " + x);
+            handler.post(new Runnable() {
+                private final String TAG = "fillSQL Runnable";
 
-            vehicle.setMake("Mini");
-            vehicle.setModel("Cooper ");
-            vehicle.setSubmodel("S");
-            vehicle.setYear((int) (Math.random() * 1000));
-//                Log.i(TAG, "Adding service to " + vehicle.getName());
-            long start = System.currentTimeMillis();
-            for (int y = 0; y < 1000; y++) {
-                ServiceTask serviceTask;
-                if (y % 4 == 0) {
-                    serviceTask = vehicle.getNewFuelStop();
-                    ((FuelStop) serviceTask).setOctane(93);
-                    ((FuelStop) serviceTask).setCostPerVolume((float) (Math.random() * 10));
-                } else
-                    serviceTask = vehicle.getNewServiceTask();
+                @Override
+                public void run() {
+                    vehicle.setMake("Mini");
+                    vehicle.setModel("Cooper ");
+                    vehicle.setSubmodel("S");
+                    vehicle.setYear((int) (Math.random() * 1000));
 
-                serviceTask.setMileage((float) (Math.random() * 10000));
-                serviceTask.setCarName(vehicle.getName());
-//                    Log.i(TAG, "Added new task");
-            }
-            Log.i(TAG, "1000 tasks took: " + (System.currentTimeMillis() - start));
+                    Log.d(TAG, "Adding service to " + vehicle.getName());
+                    long start = System.currentTimeMillis();
+                    for (int y = 0; y < 1000; y++) {
+                        ServiceTask serviceTask;
+                        if (y % 4 == 0) {
+                            serviceTask = vehicle.getNewFuelStop();
+                            ((FuelStop) serviceTask).setOctane(93);
+                            ((FuelStop) serviceTask).setCostPerVolume((float) (Math.random() * 10));
+                        } else
+                            serviceTask = vehicle.getNewServiceTask();
 
+                        serviceTask.setMileage((long) (Math.random() * 10000));
+                        serviceTask.setCarName(vehicle.getName());
+
+                        Log.v(TAG, "Added new task to " + vehicle.getName());
+                    }
+                    Log.i(TAG, "1000 tasks took: " + (System.currentTimeMillis() - start));
+                }
+            });
         }
     }
 
     public void loadSQL() {
-        for (Vehicle vehicle : carSQL.getCars()) {
-            vehicleMap.put(vehicle.getName(), vehicle);
+        for (String name : carSQL.getCarNames()) {
+            vehicleMap.put(name, new Vehicle(carSQL, name));
         }
         Set<String> names = vehicleMap.keySet();
         Log.i(TAG, "Car names: " + names.toString());
@@ -115,7 +134,7 @@ public class SQLTester extends ActionBarActivity{
 
         vehicle.setName("THIS CHANGED");
 
-        Log.i(TAG, "Name Changed");
-        Log.i(TAG, "SQL updated");
+        Log.d(TAG, "Name Changed");
+        Log.d(TAG, "SQL updated");
     }
 }
