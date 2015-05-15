@@ -2,11 +2,14 @@ package com.packruler.carmaintenance.ui;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,9 +43,11 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -738,10 +743,14 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                         Log.v(TAG, "Char removed: " + source.charAt(i));
                         return "";
                     }
+                    if (editText.getText().length() < 16)
+                        editText.setTextColor(Color.RED);
+                    else
+                        editText.setTextColor(Color.BLACK);
                 }
                 return null;
             }
-        }});
+        }, new InputFilter.LengthFilter(17)});
 
         if (!vinDisplay.getText().toString().equals(getString(R.string.click_to_set)))
             editText.setText(vinDisplay.getText());
@@ -985,11 +994,78 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     private static final int SELECT_PICTURE_REQUEST_CODE = 1;
 
     private void openImageSelection() {
-        Intent galleryIntent = new Intent();
-        galleryIntent.setType("image/*");
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        Intent intent = Intent.createChooser(galleryIntent, "Select Image Of Vehicle");
-        startActivityForResult(intent, SELECT_PICTURE_REQUEST_CODE);
+        Log.v(TAG, "openImageSelection");
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        photoPickerIntent.setType("image/*");
+        photoPickerIntent.putExtra("crop", "true");
+        photoPickerIntent.putExtra("return-data", true);
+        photoPickerIntent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        startActivityForResult(photoPickerIntent, SELECT_PICTURE_REQUEST_CODE);
+    }
+
+    private static final int PIC_CROP = 2;
+
+    private void doCrop(final Uri uri) {
+        final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setType("image/*");
+
+        List<ResolveInfo> list = activity.getPackageManager().queryIntentActivities(intent, 0);
+
+        int size = list.size();
+
+        if (size == 0) {
+            Toast.makeText(activity, "Can not find image crop app", Toast.LENGTH_SHORT).show();
+
+            return;
+        } else {
+            intent.setData(uri);
+
+            intent.putExtra("outputX", 200);
+            intent.putExtra("outputY", 200);
+            intent.putExtra("aspectX", 1);
+            intent.putExtra("aspectY", 1);
+            intent.putExtra("scale", true);
+            intent.putExtra("return-data", true);
+
+            if (size == 1) {
+                Intent i = new Intent(intent);
+                ResolveInfo res = list.get(0);
+
+                i.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+
+                startActivityForResult(i, PIC_CROP);
+            } else {
+                for (ResolveInfo res : list) {
+                    final CropOption co = new CropOption();
+
+                    co.title = activity.getPackageManager().getApplicationLabel(res.activityInfo.applicationInfo);
+                    co.icon = activity.getPackageManager().getApplicationIcon(res.activityInfo.applicationInfo);
+                    co.appIntent = new Intent(intent);
+
+                    co.appIntent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+
+                    cropOptions.add(co);
+                }
+
+                CropOptionAdapter adapter = new CropOptionAdapter(activity.getApplicationContext(), cropOptions);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                builder.setTitle("Choose Crop App");
+                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+                        startActivityForResult(cropOptions.get(item).appIntent, PIC_CROP);
+                    }
+                });
+
+                builder.setOnCancelListener(null);
+
+                AlertDialog alert = builder.create();
+
+                alert.show();
+            }
+        }
     }
 
     private void loadImage(final Uri uri) {
@@ -1094,11 +1170,18 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.v(TAG, "Result code: " + (Activity.RESULT_OK == resultCode));
+        Uri selected = data == null ? null : data.getData();
+        Log.v(TAG, "Output: " + selected);
+        Log.v(TAG, "requestCode " + requestCode);
         switch (requestCode) {
             case SELECT_PICTURE_REQUEST_CODE:
-                Log.d(TAG, "Result code: " + resultCode);
-                Uri selected = data == null ? null : data.getData();
-                Log.d(TAG, "Output: " + (data == null ? "null" : data.getData().toString()));
+                Log.v(TAG, "Select image");
+                if (selected != null)
+//                    loadImage(selected);
+                    doCrop(selected);
+                break;
+            case PIC_CROP:
                 if (selected != null)
                     loadImage(selected);
                 break;

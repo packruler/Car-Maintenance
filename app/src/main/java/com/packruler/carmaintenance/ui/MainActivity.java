@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity
     public void onNavigationDrawerItemSelected(String name) {
         // update the main content by replacing fragments
         Log.v(TAG, "Selected car name: " + name);
-        EditCarFragment editCarFragment;
 
         editCarFragment = new EditCarFragment(this, availableCarsSQL, carsSQL);
 
@@ -228,4 +227,13 @@ public class MainActivity extends AppCompatActivity
         Collections.sort(names);
         return names;
     }
+
+    EditCarFragment editCarFragment;
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        Log.i(TAG, "requestCode " + requestCode);
+//        if (editCarFragment != null)
+//            editCarFragment.onActivityResult(requestCode, resultCode, data);
+//    }
 }
