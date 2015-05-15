@@ -997,12 +997,11 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
     private void openImageSelection() {
         Log.v(TAG, "openImageSelection");
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent photoPickerIntent = new Intent();
+        photoPickerIntent.setAction(Intent.ACTION_GET_CONTENT);
         photoPickerIntent.setType("image/*");
         photoPickerIntent.putExtra("crop", "true");
         photoPickerIntent.putExtra("return-data", true);
-        photoPickerIntent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         startActivityForResult(photoPickerIntent, SELECT_PICTURE_REQUEST_CODE);
     }
 
