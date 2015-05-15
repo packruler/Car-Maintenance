@@ -1108,32 +1108,27 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
     private void loadImage(final Uri uri, boolean doCrop) {
         if (doCrop) {
-            poolExecutor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        File file = getTempFile();
-                        if (file != null) {
-                            FileOutputStream outputStream = new FileOutputStream(file);
+            try {
+                File file = getTempFile();
+                if (file != null) {
+                    FileOutputStream outputStream = new FileOutputStream(file);
 
-                            MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri)
-                                    .compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+                    MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri)
+                            .compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
 
-                            Uri out = FileProvider.getUriForFile(activity, "com.packruler.carmaintenance", file);
-                            doCrop(out);
-                        }
-                        Log.d(TAG, "Image Loaded");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        mainHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getActivity(), "Error loading image", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }
+                    Uri out = FileProvider.getUriForFile(activity, "com.packruler.carmaintenance", file);
+                    doCrop(out);
                 }
-            });
+                Log.d(TAG, "Image Loaded");
+            } catch (IOException e) {
+                e.printStackTrace();
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "Error loading image", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
         } else
             loadImage(uri);
     }
