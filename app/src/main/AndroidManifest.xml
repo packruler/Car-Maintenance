@@ -31,6 +31,16 @@
         </activity>
 
         <activity android:name="com.android.camera.CropImage"/>
+
+        <provider
+            android:authorities="com.packruler.carmaintenance"
+            android:name="android.support.v4.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/paths"/>
+        </provider>
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -38,6 +39,7 @@ import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -1006,7 +1008,19 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
     private static final int PIC_CROP = 2;
 
+    private void cropImage(Uri uri) {
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setType("image/*");
+        intent.setData(uri);
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("scale", true);
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, PIC_CROP);
+    }
+
     private void doCrop(final Uri uri) {
+        Log.v(TAG, "doCrop Uri: " + uri);
         final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setType("image/*");
@@ -1020,20 +1034,24 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
             return;
         } else {
-            intent.setData(uri);
-
-            intent.putExtra("outputX", 200);
-            intent.putExtra("outputY", 200);
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//            intent.putExtra("outputX", 200);
+//            intent.putExtra("outputY", 200);
             intent.putExtra("aspectX", 1);
             intent.putExtra("aspectY", 1);
             intent.putExtra("scale", true);
             intent.putExtra("return-data", true);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 
             if (size == 1) {
                 Intent i = new Intent(intent);
                 ResolveInfo res = list.get(0);
 
                 i.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+                activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                i.setData(uri);
 
                 startActivityForResult(i, PIC_CROP);
             } else {
@@ -1042,12 +1060,17 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
                     co.title = activity.getPackageManager().getApplicationLabel(res.activityInfo.applicationInfo);
                     co.icon = activity.getPackageManager().getApplicationIcon(res.activityInfo.applicationInfo);
-                    co.appIntent = new Intent(intent);
+                    activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    Intent i = new Intent(intent);
+                    i.setData(uri);
+                    co.appIntent = i;
 
                     co.appIntent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
 
                     cropOptions.add(co);
                 }
+
 
                 CropOptionAdapter adapter = new CropOptionAdapter(activity.getApplicationContext(), cropOptions);
 
@@ -1066,6 +1089,54 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                 alert.show();
             }
         }
+    }
+
+    private File getTempFile() {
+        File parent = new File(activity.getFilesDir() + "/cache/");
+        File temp = new File(parent.getPath() + "/temp.jpg");
+        try {
+            if (!parent.exists())
+                Log.v(TAG, "Make cache dir: " + parent.mkdirs());
+
+            if (!temp.exists())
+                Log.v(TAG, "Create temp file: " + temp.createNewFile());
+            return temp;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private void loadImage(final Uri uri, boolean doCrop) {
+        if (doCrop) {
+            poolExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        File file = getTempFile();
+                        if (file != null) {
+                            FileOutputStream outputStream = new FileOutputStream(file);
+
+                            MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri)
+                                    .compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+
+                            Uri out = FileProvider.getUriForFile(activity, "com.packruler.carmaintenance", file);
+                            doCrop(out);
+                        }
+                        Log.d(TAG, "Image Loaded");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getActivity(), "Error loading image", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }
+            });
+        } else
+            loadImage(uri);
     }
 
     private void loadImage(final Uri uri) {
@@ -1126,11 +1197,13 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     private Bitmap bitmap;
 
     private void storeImage() {
-        if (bitmap != null) {
+        final File temp = getTempFile();
+        if (temp != null && temp.exists()) {
             poolExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
                     FileOutputStream out = null;
+                    FileInputStream in = null;
                     try {
                         File outFile = new File(getActivity().getFilesDir().getPath() + "/Images/" + vehicle.getName() + "/" + "/vehicle.jpg");
 
@@ -1141,16 +1214,16 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                             Log.v(TAG, "Create new file success: " + outFile.createNewFile());
 
                         out = new FileOutputStream(outFile);
+                        in = new FileInputStream(temp);
+                        Log.v(TAG, "Begin move");
+                        byte[] buffer = new byte[1024];
+                        int read;
+                        while ((read = in.read(buffer)) != -1) {
+                            out.write(buffer, 0, read);
+                        }
 
-                        Log.v(TAG, "Resize bitmap");
-                        Bitmap output = Bitmap.createScaledBitmap(bitmap,
-                                bitmap.getScaledHeight(DisplayMetrics.DENSITY_HIGH), bitmap.getScaledHeight(DisplayMetrics.DENSITY_HIGH), false);
-                        Log.v(TAG, "Resize height: " + output.getHeight() + " width: " + output.getWidth());
-                        Log.v(TAG, "Compress bitmap");
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-                        Log.v(TAG, "Done copying");
-
-                        vehicle.setImagePath(outFile.getPath());
+                        Log.v(TAG, "Delete temp: " + getTempFile().delete());
+//                        vehicle.setImagePath(outFile.getPath());
                     } catch (IOException e) {
                         e.printStackTrace();
                     } finally {
@@ -1158,6 +1231,9 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                             if (out != null) {
                                 out.flush();
                                 out.close();
+                            }
+                            if (in != null) {
+                                in.close();
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -1178,8 +1254,8 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
             case SELECT_PICTURE_REQUEST_CODE:
                 Log.v(TAG, "Select image");
                 if (selected != null)
-//                    loadImage(selected);
-                    doCrop(selected);
+                    loadImage(selected, true);
+//                    doCrop(selected);
                 break;
             case PIC_CROP:
                 if (selected != null)
