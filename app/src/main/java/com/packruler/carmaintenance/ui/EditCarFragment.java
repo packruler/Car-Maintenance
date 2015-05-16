@@ -1172,16 +1172,20 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
             poolExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    final Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
-                    mainHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
-                                    bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
-                            loadingImageSpinner.setVisibility(View.GONE);
-                        }
-                    });
-                    Log.d(TAG, "Image Loaded");
+                    try {
+                        final Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+                                        bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
+                                loadingImageSpinner.setVisibility(View.GONE);
+                            }
+                        });
+                        Log.d(TAG, "Image Loaded");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         } else

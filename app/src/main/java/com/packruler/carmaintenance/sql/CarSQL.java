@@ -46,11 +46,13 @@ public class CarSQL {
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//            switch (newVersion) {
-//
-//            }
+
         }
 
+        @Override
+        public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            
+        }
     }
 
 
