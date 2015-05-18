@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -8,9 +9,159 @@
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context="com.packruler.carmaintenance.ui.MainActivity$PlaceholderFragment">
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:padding="@dimen/abc_action_bar_default_padding_material"
+        >
 
+        <android.support.v7.widget.CardView
+            android:layout_width="@dimen/main_button_width"
+            android:layout_height="@dimen/main_button_height"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:id="@+id/edit_car_button"
+            card_view:cardBackgroundColor="@color/cardview_dark_background"
+            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material"
+            card_view:cardCornerRadius="@dimen/cardview_default_radius"
+            card_view:cardElevation="@dimen/cardview_default_elevation"
+            android:layout_margin="@dimen/abc_action_bar_default_padding_material">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@android:dimen/notification_large_icon_height"
+                    android:id="@+id/imageView"
+                    android:src="@android:drawable/ic_dialog_info"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_car"
+                    android:id="@+id/edit_car_textView"
+                    android:layout_below="@+id/imageView"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/abc_primary_text_material_dark"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="@dimen/main_button_width"
+            android:layout_height="@dimen/main_button_height"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:id="@+id/services_button"
+            card_view:cardBackgroundColor="@color/cardview_dark_background"
+            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material"
+            card_view:cardCornerRadius="@dimen/cardview_default_radius"
+            card_view:cardElevation="@dimen/cardview_default_elevation"
+            android:layout_margin="@dimen/abc_action_bar_default_padding_material">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:layout_width="@android:dimen/notification_large_icon_width"
+                    android:layout_height="@android:dimen/notification_large_icon_height"
+                    android:id="@+id/imageView2"
+                    android:src="@android:drawable/ic_dialog_alert"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:text="@string/services"
+                    android:id="@+id/services_textView"
+                    android:textColor="@color/abc_primary_text_material_dark"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/imageView2"/>
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="@dimen/main_button_width"
+            android:layout_height="@dimen/main_button_height"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:id="@+id/fuel_stop_button"
+            card_view:cardBackgroundColor="@color/cardview_dark_background"
+            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material"
+            card_view:cardCornerRadius="@dimen/cardview_default_radius"
+            card_view:cardElevation="@dimen/cardview_default_elevation"
+            android:layout_margin="@dimen/abc_action_bar_default_padding_material">
+
+            <RelativeLayout
+                android:layout_width="@dimen/main_button_width"
+                android:layout_height="@dimen/main_button_height"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@android:dimen/notification_large_icon_width"
+                    android:layout_height="@android:dimen/notification_large_icon_height"
+                    android:id="@+id/fuel_stop_imageView"
+                    android:src="@android:drawable/ic_dialog_info"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fuel_stops"
+                    android:id="@+id/fuel_stop_textView"
+                    android:layout_below="@+id/fuel_stop_imageView"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/abc_primary_text_material_dark"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="@dimen/main_button_width"
+            android:layout_height="@dimen/main_button_height"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:id="@+id/parts_button"
+            card_view:cardBackgroundColor="@color/cardview_dark_background"
+            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material"
+            card_view:cardCornerRadius="@dimen/cardview_default_radius"
+            card_view:cardElevation="@dimen/cardview_default_elevation"
+            android:layout_margin="@dimen/abc_action_bar_default_padding_material">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@android:dimen/notification_large_icon_width"
+                    android:layout_height="@android:dimen/notification_large_icon_height"
+                    android:id="@+id/parts_imageView"
+                    android:src="@android:drawable/ic_dialog_info"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fuel_stops"
+                    android:id="@+id/parts_textView"
+                    android:gravity="center"
+                    android:layout_below="@+id/parts_imageView"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/abc_primary_text_material_dark"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </GridLayout>
 </RelativeLayout>

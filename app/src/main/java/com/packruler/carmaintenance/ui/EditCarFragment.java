@@ -58,7 +58,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     private final String TAG = getClass().getName();
 
     private Vehicle vehicle;
-    private Activity activity;
+    private MainActivity activity;
     private CarSQL carSQL;
     private AvailableCarsSQL availableCarsSQL;
     Handler mainHandler = new Handler(Looper.getMainLooper());
@@ -67,7 +67,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     private int numProcessors = Runtime.getRuntime().availableProcessors();
     private ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(numProcessors, numProcessors, 10, TimeUnit.SECONDS, workQueue);
 
-    public EditCarFragment(Activity activity, AvailableCarsSQL availableCarsSQL, CarSQL carSQL) {
+    public EditCarFragment(MainActivity activity, AvailableCarsSQL availableCarsSQL, CarSQL carSQL) {
         for (int x = Calendar.getInstance().get(Calendar.YEAR) + 1; x >= 1984; x--) {
             years.add("" + x);
         }
@@ -87,7 +87,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_new_car, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_edit_car, container, false);
         setVariables(rootView);
         return rootView;
     }
@@ -95,7 +95,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.activity = activity;
+        this.activity = (MainActivity) activity;
     }
 
     @Override
@@ -495,9 +495,9 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                                     int value = Integer.valueOf(entry);
 
                                     if (entry.length() != 4)
-                                        Toast.makeText(activity, "Please enter full year\nExample: 2015", Toast.LENGTH_LONG).show();
+                                        sendToast("Please enter full year\nExample: 2015");
                                     else if (value < 1900 || value > Calendar.getInstance().get(Calendar.YEAR) + 1)
-                                        Toast.makeText(activity, "Please enter valid year\n(1900-Current Year + 1)", Toast.LENGTH_LONG).show();
+                                        sendToast("Please enter valid year\n(1900-Current Year + 1)");
                                     else {
                                         setMakeDisplay(entry);
                                         setMakePopup(false);
@@ -505,7 +505,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                                     }
 
                                 } catch (NumberFormatException e) {
-                                    Toast.makeText(activity, "Please enter valid year\nExample: 2015", Toast.LENGTH_LONG).show();
+                                    sendToast("Please enter valid year\nExample: 2015");
                                 }
                             }
                         });
@@ -703,7 +703,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                             setNameDisplay(tempName);
                             dialog.cancel();
                         } else {
-                            Toast.makeText(activity, "Name already in use", Toast.LENGTH_LONG).show();
+                            sendToast("Name already in use");
                         }
                     }
                 });
@@ -775,7 +775,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                             setVinDisplay(tempName);
                             dialog.cancel();
                         } else {
-                            Toast.makeText(activity, "Please enter valid VIN\n17 characters long", Toast.LENGTH_LONG).show();
+                            sendToast("Please enter valid VIN\n17 characters long");
                         }
                     }
                 });
@@ -1029,7 +1029,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         int size = list.size();
 
         if (size == 0) {
-            Toast.makeText(activity, "Can not find image crop app", Toast.LENGTH_SHORT).show();
+            sendToast("Can not find image crop app");
 
             return;
         } else {
@@ -1125,7 +1125,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getActivity(), "Error loading image", Toast.LENGTH_LONG).show();
+                        sendToast("Error loading image");
                     }
                 });
             }
@@ -1152,12 +1152,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                     Log.d(TAG, "Image Loaded");
                 } catch (IOException e) {
                     e.printStackTrace();
-                    mainHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getActivity(), "Error loading image", Toast.LENGTH_LONG).show();
-                        }
-                    });
+                    sendToast("Error loading image");
                 }
             }
         });
@@ -1221,9 +1216,12 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                         }
 
                         Log.v(TAG, "Delete temp: " + getTempFile().delete());
+                        sendToast("Vehicle Data Stored Successfully");
+
 //                        vehicle.setImagePath(outFile.getPath());
                     } catch (IOException e) {
                         e.printStackTrace();
+                        sendToast("Error storing image");
                     } finally {
                         try {
                             if (out != null) {
@@ -1260,5 +1258,14 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                     loadImage(selected);
                 break;
         }
+    }
+
+    private void sendToast(final CharSequence message) {
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
