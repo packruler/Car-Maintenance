@@ -104,6 +104,7 @@ public class SQLTester extends ActionBarActivity {
             @Override
             public void run() {
                 Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(0);
                 for (int x = 0; x < 5; x++) {
                     final Vehicle vehicle = new Vehicle(carSQL, "Car " + x);
                     vehicle.setMake("Mini");
