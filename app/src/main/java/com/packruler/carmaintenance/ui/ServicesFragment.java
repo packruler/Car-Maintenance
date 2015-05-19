@@ -178,13 +178,13 @@ public class ServicesFragment extends Fragment {
                 switch (compareBy) {
                     default:
                     case DATE_INV:
-                        return Float.compare(o1.getDateLong(), o2.getDateLong());
+                        return Float.compare(o2.getDateLong(), o1.getDateLong());
                     case DATE:
                         return Float.compare(o1.getDateLong(), o2.getDateLong());
                     case COST:
                         return Float.compare(o1.getCost(), o2.getCost());
                     case COST_INV:
-                        return Float.compare(o1.getCost(), o2.getCost());
+                        return Float.compare(o2.getCost(), o1.getCost());
                 }
             }
 
