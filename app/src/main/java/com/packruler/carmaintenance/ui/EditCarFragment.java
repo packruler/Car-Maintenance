@@ -50,9 +50,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 public class EditCarFragment extends android.support.v4.app.Fragment {
     private final String TAG = getClass().getName();
@@ -62,10 +59,6 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     private CarSQL carSQL;
     private AvailableCarsSQL availableCarsSQL;
     Handler mainHandler = new Handler(Looper.getMainLooper());
-
-    private LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
-    private int numProcessors = Runtime.getRuntime().availableProcessors();
-    private ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(numProcessors, numProcessors, 10, TimeUnit.SECONDS, workQueue);
 
     public EditCarFragment(MainActivity activity, AvailableCarsSQL availableCarsSQL, CarSQL carSQL) {
         for (int x = Calendar.getInstance().get(Calendar.YEAR) + 1; x >= 1984; x--) {
@@ -130,7 +123,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick");
-                poolExecutor.execute(new Runnable() {
+                activity.getPoolExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
                         VINDecoder.decode(vinDisplay.getText().toString());
@@ -1136,7 +1129,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     private void loadImage(final Uri uri) {
         loadingImageSpinner.setVisibility(View.VISIBLE);
 
-        poolExecutor.execute(new Runnable() {
+        activity.getPoolExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -1164,7 +1157,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         if (file.exists()) {
             loadingImageSpinner.setVisibility(View.VISIBLE);
 
-            poolExecutor.execute(new Runnable() {
+            activity.getPoolExecutor().execute(new Runnable() {
                 @Override
                 public void run() {
                     try {
@@ -1192,7 +1185,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     private void storeImage() {
         final File temp = getTempFile();
         if (temp != null && temp.exists()) {
-            poolExecutor.execute(new Runnable() {
+            activity.getPoolExecutor().execute(new Runnable() {
                 @Override
                 public void run() {
                     FileOutputStream out = null;

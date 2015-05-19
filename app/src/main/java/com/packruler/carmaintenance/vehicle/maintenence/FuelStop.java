@@ -47,26 +47,31 @@ public class FuelStop extends ServiceTask {
                     DISTANCE_PER_VOLUME_UNIT + " STRING" + ")";
 
 
-    public FuelStop(CarSQL carSQL, String carName, int taskNum) {
+    public FuelStop(CarSQL carSQL, String carName, int taskNum, boolean skipCheck) {
         this.taskNum = taskNum;
         this.carName = carName;
         this.carSQL = carSQL;
 
-
         sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
                 VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum);
 
-        SQLiteDatabase database = carSQL.getWritableDatabase();
-        Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME},
-                VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null);
+        if (!skipCheck) {
+            SQLiteDatabase database = carSQL.getWritableDatabase();
+            Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME},
+                    VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null);
 
-        if (!cursor.moveToFirst()) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(VEHICLE_NAME, carName);
-            contentValues.put(TASK_NUM, taskNum);
-            database.insert(TABLE_NAME, null, contentValues);
+            if (!cursor.moveToFirst()) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(VEHICLE_NAME, carName);
+                contentValues.put(TASK_NUM, taskNum);
+                database.insert(TABLE_NAME, null, contentValues);
+            }
+            cursor.close();
         }
-        cursor.close();
+    }
+
+    public FuelStop(CarSQL carSQL, String carName, int taskNum) {
+        this(carSQL, carName, taskNum, false);
     }
 
     public float getVolume() {

@@ -3,7 +3,6 @@ package com.packruler.carmaintenance.ui;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -72,20 +71,6 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
-//        sharedPreferences.edit().clear().apply();
-//        Set<String> carNames = sharedPreferences.getStringSet(CAR_NAME_SET, new TreeSet<String>());
-//        Log.i(TAG, "Names " + carNames.toString());
-//        for (String carName : carNames) {
-//            try {
-//                String car = sharedPreferences.getString(carName, "");
-//                Log.i(TAG, "Imported JSON: " + car);
-//                Vehicle vehicle = new Vehicle(new JSONObject(car));
-//                vehicleMap.put(carName, vehicle);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//                Log.i(TAG, "ERROR STRING: " + sharedPreferences.getString(carName, ""));
-//            }
-//        }
 
         Log.i(TAG, "Car map size: " + vehicleMap.size());
 
@@ -103,6 +88,7 @@ public class MainActivity extends AppCompatActivity
         for (String name : carsSQL.getCarNames()) {
             vehicleMap.put(name, new Vehicle(carsSQL, name));
         }
+        getFragmentManager().beginTransaction().replace(R.id.container, new PlaceholderFragment()).commit();
 
         mNavigationDrawerFragment.updateDrawer();
     }
@@ -181,24 +167,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
+    public class PlaceholderFragment extends android.app.Fragment {
 
         public PlaceholderFragment() {
         }
@@ -207,14 +176,27 @@ public class MainActivity extends AppCompatActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            rootView.findViewById(R.id.services_button).setOnClickListener(new View.OnClickListener() {
+                private final String TAG = "Services Button";
+
+                @Override
+                public void onClick(View v) {
+                    Log.v(TAG, "onClick");
+                    poolExecutor.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            ServicesFragment servicesFragment = new ServicesFragment(vehicleMap.get("THIS CHANGED"), carsSQL);
+                            getFragmentManager().beginTransaction().replace(R.id.container, servicesFragment).commit();
+                        }
+                    });
+                }
+            });
             return rootView;
         }
 
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-//            ((MainActivity) activity).onSectionAttached(
-//                    getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
 
@@ -226,6 +208,10 @@ public class MainActivity extends AppCompatActivity
         List<String> names = carsSQL.getCarNames();
         Collections.sort(names);
         return names;
+    }
+
+    public ThreadPoolExecutor getPoolExecutor() {
+        return poolExecutor;
     }
 
     EditCarFragment editCarFragment;

@@ -41,7 +41,7 @@ public class PartReplacement extends ServiceTask {
                     DETAILS + " STRING," + LOCATION_ID + " STRING," + LOCATION_NAME + " STRING" +
                     ")";
 
-    public PartReplacement(CarSQL carSQL, String carName, int taskNum) {
+    public PartReplacement(CarSQL carSQL, String carName, int taskNum, boolean skipCheck) {
         this.taskNum = taskNum;
         this.carName = carName;
         this.carSQL = carSQL;
@@ -49,17 +49,23 @@ public class PartReplacement extends ServiceTask {
         sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
                 VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum);
 
-        SQLiteDatabase database = carSQL.getWritableDatabase();
-        Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME},
-                VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null);
+        if (!skipCheck) {
+            SQLiteDatabase database = carSQL.getWritableDatabase();
+            Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME},
+                    VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null);
 
-        if (!cursor.moveToFirst()) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(VEHICLE_NAME, carName);
-            contentValues.put(TASK_NUM, taskNum);
-            database.insert(TABLE_NAME, null, contentValues);
+            if (!cursor.moveToFirst()) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(VEHICLE_NAME, carName);
+                contentValues.put(TASK_NUM, taskNum);
+                database.insert(TABLE_NAME, null, contentValues);
+            }
+            cursor.close();
         }
-        cursor.close();
+    }
+
+    public PartReplacement(CarSQL carSQL, String carName, int taskNum) {
+        this(carSQL, carName, taskNum, false);
     }
 
     public String getPartName() {

@@ -55,7 +55,7 @@ public class ServiceTask {
 
     }
 
-    public ServiceTask(CarSQL carSQL, String carName, int taskNum) {
+    public ServiceTask(CarSQL carSQL, String carName, int taskNum, boolean skipCheck) {
 
         this.taskNum = taskNum;
         this.carName = carName;
@@ -64,24 +64,31 @@ public class ServiceTask {
         sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
                 VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum);
 
-        SQLiteDatabase database = carSQL.getWritableDatabase();
-        Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME},
-                VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null);
+        if (!skipCheck) {
+            SQLiteDatabase database = carSQL.getWritableDatabase();
+            Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME},
+                    VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null);
 
-        if (!cursor.moveToFirst()) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(VEHICLE_NAME, carName);
-            contentValues.put(TASK_NUM, taskNum);
-            database.insert(TABLE_NAME, null, contentValues);
+            if (!cursor.moveToFirst()) {
+                Log.v(TAG, "New Service Task");
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(VEHICLE_NAME, carName);
+                contentValues.put(TASK_NUM, taskNum);
+                database.insert(TABLE_NAME, null, contentValues);
+            }
+            cursor.close();
         }
-        cursor.close();
+    }
+
+    public ServiceTask(CarSQL carSQL, String carName, int taskNum) {
+        this(carSQL, carName, taskNum, false);
     }
 
     public String getCarName() {
         return carName;
     }
 
-    public void setCarName(String carName){
+    public void setCarName(String carName) {
         sqlDataHandler.putString(VEHICLE_NAME, carName);
         this.carName = carName;
         sqlDataHandler.setSelection(VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum);
@@ -153,16 +160,21 @@ public class ServiceTask {
         return sqlDataHandler.getString(COST_UNITS);
     }
 
-    public void setMileage(float mileage) {
-        sqlDataHandler.putFloat(MILEAGE, mileage);
+    public void setMileage(long mileage) {
+        sqlDataHandler.putLong(MILEAGE, mileage);
     }
 
-    public float getMileage() {
-        return sqlDataHandler.getFloat(MILEAGE);
+    public long getMileage() {
+        return sqlDataHandler.getLong(MILEAGE);
     }
 
     public void setContentValues(ContentValues contentValues) {
         sqlDataHandler.setContentValues(contentValues);
+    }
+
+    public static Cursor getServiceTaskCursorForCar(CarSQL carSQL, String carName) {
+        return carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, TASK_NUM},
+                VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
     }
 
     public static List<ServiceTask> getServiceTasksForCar(CarSQL carSQL, String carName) {
@@ -187,6 +199,7 @@ public class ServiceTask {
         Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, TASK_NUM},
                 VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
         int count = cursor.getCount();
+        Log.v("ServiceTaskCount", "Name: " + carName + " Count: " + count);
         cursor.close();
         return count;
     }

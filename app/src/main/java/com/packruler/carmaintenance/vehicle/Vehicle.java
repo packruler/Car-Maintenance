@@ -84,7 +84,7 @@ public class Vehicle {
                 VEHICLE_NAME + "= \"" + name + "\"", null, null, null, null, null);
 
         if (!cursor.moveToFirst()) {
-            Log.i(TAG, "New Vehicle Name");
+            Log.i(TAG, "New Vehicle Name: " + name);
             ContentValues contentValues = new ContentValues();
             contentValues.put(VEHICLE_NAME, name);
             database.insert(TABLE_NAME, null, contentValues);
@@ -212,8 +212,16 @@ public class Vehicle {
         return new PartReplacement(carSQL, name, ++partCount);
     }
 
+    public Cursor getServiceTaskCursor() {
+        return ServiceTask.getServiceTaskCursorForCar(carSQL, name);
+    }
+
     public List<ServiceTask> getServiceTasks() {
         return ServiceTask.getServiceTasksForCar(carSQL, name);
+    }
+
+    public int getServiceTaskCount() {
+        return serviceTaskCount;
     }
 
     public float getPurchaseCost() {
