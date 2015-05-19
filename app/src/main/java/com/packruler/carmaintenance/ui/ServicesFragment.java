@@ -3,36 +3,28 @@ package com.packruler.carmaintenance.ui;
 import android.app.Activity;
 import android.app.Fragment;
 import android.database.Cursor;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.util.SortedListAdapterCallback;
+import android.text.format.DateFormat;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebHistoryItem;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.CarSQL;
-import com.packruler.carmaintenance.ui.dummy.DummyContent;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
-import java.io.InputStream;
-import java.security.PublicKey;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -68,7 +60,7 @@ public class ServicesFragment extends Fragment {
      * The Adapter which will be used to populate the ListView/GridView with
      * Views.
      */
-    private RecyclerView.Adapter mAdapter;
+    private Adapter mAdapter = new Adapter();
 
     private List<ServiceTask> serviceTasks = new ArrayList<>();
     private Vehicle vehicle;
@@ -89,8 +81,6 @@ public class ServicesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mAdapter = new Adapter();
     }
 
     @Override
@@ -115,36 +105,56 @@ public class ServicesFragment extends Fragment {
         poolExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                final Cursor cursor = vehicle.getServiceTaskCursor();
-                cursor.moveToFirst();
-
-                int taskNum = 0;
-                final String carName = vehicle.getName();
-                final int taskCount = vehicle.getServiceTaskCount();
+//                final Cursor cursor = vehicle.getServiceTaskCursor();
+//                cursor.moveToFirst();
+//
+//                int taskNum = 0;
+//                String carName = vehicle.getName();
+//                int taskCount = vehicle.getServiceTaskCount();
 //                if (taskCount > 1500) {
 //                    long start = Calendar.getInstance().getTimeInMillis();
-//                    carSQL.getWritableDatabase().delete(ServiceTask.TABLE_NAME,
-//                            ServiceTask.TASK_NUM + "> " + 1500, null);
+                carSQL.getWritableDatabase().delete(ServiceTask.TABLE_NAME,
+                        ServiceTask.DATE + "< " + 1000, null);
 //                    Log.v(TAG, "Took " + (Calendar.getInstance().getTimeInMillis() - start) +
 //                            " ms to delete " + (taskCount - 1500) + " tasks");
 //                }
+//
+//                Log.d(TAG, "taskCount: " + taskCount);
+//                final long start = Calendar.getInstance().getTimeInMillis();
+//                while (taskNum < taskCount) {
+//                    serviceTasks.add(new ServiceTask(carSQL, carName, ++taskNum, true));
+//                    Log.v(TAG, "added task: " + taskNum);
+//                    if (taskNum == taskCount)
+//                        mainHandler.post(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Log.d(TAG, "Tasks Took " + (Calendar.getInstance().getTimeInMillis() - start) + " to load");
+//                                recyclerView.getAdapter().notifyDataSetChanged();
+//                            }
+//                        });
+//                }
 
-                Log.v(TAG, "taskCount: " + taskCount);
                 final long start = Calendar.getInstance().getTimeInMillis();
-                while (taskNum < taskCount) {
-                    final int useTask = ++taskNum;
-                    serviceTasks.add(new ServiceTask(carSQL, carName, useTask, true));
-                    Log.i(TAG, "added task: " + useTask);
-                    if (useTask == taskCount)
-                        mainHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Log.v(TAG, useTask + " Tasks Took " + (Calendar.getInstance().getTimeInMillis() - start) + " to load");
-                                recyclerView.getAdapter().notifyDataSetChanged();
+                final Cursor cursor = ServiceTask.getServiceTaskCursorForCar(carSQL, vehicle.getName());
+
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (cursor.moveToFirst()) {
+                            String carName = vehicle.getName();
+                            Log.v(TAG, "Cursor size: " + cursor.getCount());
+                            while (!cursor.isAfterLast()) {
+                                mAdapter.addItem(new ServiceTask(carSQL, carName, cursor.getLong(cursor.getColumnIndex(ServiceTask.DATE)), false));
+                                cursor.moveToNext();
                             }
-                        });
-                }
-                serviceTasks = vehicle.getServiceTasks();
+                        }
+                        cursor.close();
+                        long done = Calendar.getInstance().getTimeInMillis();
+                        Log.v(TAG, "Getting list of " + mAdapter.size() +
+                                "\nThe whole process took : " + (done - start));
+                        recyclerView.getAdapter().notifyDataSetChanged();
+                    }
+                });
             }
         });
     }
@@ -156,6 +166,44 @@ public class ServicesFragment extends Fragment {
 
     private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         private NumberFormat moneyFormat = NumberFormat.getCurrencyInstance();
+        private SortedList<ServiceTask> taskList = new SortedList<>(ServiceTask.class, new SortedListAdapterCallback<ServiceTask>(this) {
+            private int compareBy = -1;
+            public static final int DATE = 0;
+            public static final int COST = 1;
+            public static final int DATE_INV = -1;
+            public static final int COST_INV = -2;
+
+            @Override
+            public int compare(ServiceTask o1, ServiceTask o2) {
+                switch (compareBy) {
+                    default:
+                    case DATE_INV:
+                        return Float.compare(o1.getDateLong(), o2.getDateLong());
+                    case DATE:
+                        return Float.compare(o1.getDateLong(), o2.getDateLong());
+                    case COST:
+                        return Float.compare(o1.getCost(), o2.getCost());
+                    case COST_INV:
+                        return Float.compare(o1.getCost(), o2.getCost());
+                }
+            }
+
+            @Override
+            public boolean areContentsTheSame(ServiceTask oldItem, ServiceTask newItem) {
+                switch (compareBy) {
+                    default:
+                    case DATE:
+                        return oldItem.getDateLong() == newItem.getDateLong();
+                    case COST:
+                        return oldItem.getCost() == newItem.getCost();
+                }
+            }
+
+            @Override
+            public boolean areItemsTheSame(ServiceTask item1, ServiceTask item2) {
+                return item1.equals(item2);
+            }
+        });
 
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
@@ -165,6 +213,7 @@ public class ServicesFragment extends Fragment {
             public TextView typeDisplay;
             public TextView mileageDisplay;
             public TextView costDisplay;
+            public TextView dateDisplay;
             public int position;
 
             public ViewHolder(View v) {
@@ -172,6 +221,7 @@ public class ServicesFragment extends Fragment {
                 typeDisplay = (TextView) v.findViewById(R.id.typeDisplay);
                 mileageDisplay = (TextView) v.findViewById(R.id.mileageDisplay);
                 costDisplay = (TextView) v.findViewById(R.id.costDisplay);
+                dateDisplay = (TextView) v.findViewById(R.id.dateDisplay);
                 v.setOnClickListener(onClickListener);
             }
 
@@ -195,21 +245,55 @@ public class ServicesFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            ServiceTask task = serviceTasks.get(position);
+            ServiceTask task = taskList.get(position);
             holder.typeDisplay.setText(task.getType());
             holder.costDisplay.setText(moneyFormat.format(task.getCost()));
-            holder.mileageDisplay.setText(task.getMileage() + "");
+            holder.mileageDisplay.setText("Mileage: " + NumberFormat.getInstance().format(task.getMileage()));
             holder.position = position;
+            holder.dateDisplay.setText(DateFormat.getDateFormat(activity).format(task.getDate()));
         }
 
         @Override
         public int getItemCount() {
-            return serviceTasks.size();
+            return taskList.size();
+        }
+
+        public void addAll(final List<ServiceTask> serviceTasks) {
+            mainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    for (ServiceTask task : serviceTasks) {
+                        taskList.add(task);
+                    }
+                }
+            });
+        }
+
+        public void addItem(final ServiceTask task) {
+            mainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    taskList.add(task);
+                }
+            });
+        }
+
+        public ServiceTask getItem(int position) {
+            return taskList.get(position);
+        }
+
+        public boolean removeItem(ServiceTask task) {
+            return taskList.remove(task);
+        }
+
+        public int size() {
+            return taskList.size();
         }
     }
 
     private void onItemSelected(int position) {
-
+        ServiceTask task = mAdapter.getItem(position);
+        Log.d(TAG, "Date: " + task.getDate() + " dateLong: " + task.getDateLong());
     }
 
 }

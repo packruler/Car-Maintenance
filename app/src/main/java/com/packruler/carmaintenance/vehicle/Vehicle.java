@@ -200,16 +200,16 @@ public class Vehicle {
         return sqlDataHandler.getLong(PURCHASE_DATE);
     }
 
-    public synchronized ServiceTask getNewServiceTask() {
-        return new ServiceTask(carSQL, name, ++serviceTaskCount);
+    public synchronized ServiceTask getNewServiceTask(long date) {
+        return new ServiceTask(carSQL, name, date, true);
     }
 
-    public synchronized FuelStop getNewFuelStop() {
-        return new FuelStop(carSQL, name, ++fuelStopCount);
+    public synchronized FuelStop getNewFuelStop(long date) {
+        return new FuelStop(carSQL, name, date, true);
     }
 
-    public synchronized PartReplacement getNewPartReplacement() {
-        return new PartReplacement(carSQL, name, ++partCount);
+    public synchronized PartReplacement getNewPartReplacement(long date) {
+        return new PartReplacement(carSQL, name, date, true);
     }
 
     public Cursor getServiceTaskCursor() {

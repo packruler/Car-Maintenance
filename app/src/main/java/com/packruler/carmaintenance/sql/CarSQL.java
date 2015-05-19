@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
@@ -38,6 +39,7 @@ public class CarSQL {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
+            Log.v(TAG, "Create new database");
             db.execSQL(Vehicle.SQL_CREATE);
             db.execSQL(ServiceTask.SQL_CREATE);
             db.execSQL(FuelStop.SQL_CREATE);
@@ -51,7 +53,7 @@ public class CarSQL {
 
         @Override
         public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            
+
         }
     }
 

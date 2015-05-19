@@ -9,6 +9,8 @@ import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
 
 import java.sql.SQLDataException;
+import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,7 +23,6 @@ public class ServiceTask {
     public static final String TABLE_NAME = "service";
     public static final String GENERAL_TYPE = "GENERAL";
     public static final String VEHICLE_NAME = "vehicle_name";
-    public static final String TASK_NUM = "task_num";
     public static final String TYPE = "type";
     public static final String DETAILS = "details";
     public static final String COST = "cost";
@@ -33,20 +34,17 @@ public class ServiceTask {
     public static final String LOCATION_NAME = "location_name";
 
 
-    public static final String[] RESERVED_WORDS = new String[]{TABLE_NAME, GENERAL_TYPE, VEHICLE_NAME,
-            TASK_NUM, TYPE, DETAILS, COST, COST_UNITS, MILEAGE, MILEAGE_UNITS, DATE, LOCATION_ID};
-
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + VEHICLE_NAME + " STRING," +
-                    TASK_NUM + " INTEGER," + TYPE + " STRING," + COST + " FLOAT," +
-                    MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," + DATE + " STRING," +
-                    DETAILS + " STRING," + LOCATION_ID + " STRING," + LOCATION_NAME + " STRING," +
+                    DATE + " LONG," + TYPE + " STRING," + COST + " FLOAT," +
+                    MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," + DETAILS + " STRING," +
+                    LOCATION_ID + " STRING," + LOCATION_NAME + " STRING," +
                     COST_UNITS + " STRING" + ")";
 
 //    GeoDataApi geoDataApi = new G
 
     //    protected ContentValues contentValues = new ContentValues();
-    protected int taskNum;
+    protected long date;
     protected String carName;
     protected CarSQL carSQL;
     protected SQLDataHandler sqlDataHandler;
@@ -55,33 +53,26 @@ public class ServiceTask {
 
     }
 
-    public ServiceTask(CarSQL carSQL, String carName, int taskNum, boolean skipCheck) {
-
-        this.taskNum = taskNum;
+    public ServiceTask(CarSQL carSQL, String carName, long date, boolean isNew) {
         this.carName = carName;
         this.carSQL = carSQL;
 
-        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum);
-
-        if (!skipCheck) {
+        if (isNew) {
             SQLiteDatabase database = carSQL.getWritableDatabase();
-            Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME},
-                    VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum, null, null, null, null, null);
-
-            if (!cursor.moveToFirst()) {
-                Log.v(TAG, "New Service Task");
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(VEHICLE_NAME, carName);
-                contentValues.put(TASK_NUM, taskNum);
-                database.insert(TABLE_NAME, null, contentValues);
-            }
-            cursor.close();
+            date = checkDate(date);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(VEHICLE_NAME, carName);
+            contentValues.put(DATE, date);
+            database.insert(TABLE_NAME, null, contentValues);
         }
+
+        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
+                VEHICLE_NAME + "= \"" + carName + "\" AND " + DATE + "= " + date);
+        this.date = date;
     }
 
-    public ServiceTask(CarSQL carSQL, String carName, int taskNum) {
-        this(carSQL, carName, taskNum, false);
+    public ServiceTask(CarSQL carSQL, String carName, long date) {
+        this(carSQL, carName, date, false);
     }
 
     public String getCarName() {
@@ -91,20 +82,10 @@ public class ServiceTask {
     public void setCarName(String carName) {
         sqlDataHandler.putString(VEHICLE_NAME, carName);
         this.carName = carName;
-        sqlDataHandler.setSelection(VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum);
+        sqlDataHandler.setSelection(VEHICLE_NAME + "= \"" + carName + "\" AND " + DATE + "= " + date);
     }
 
-    public int getTaskNum() {
-        return taskNum;
-    }
-
-    private void setTaskNum(int taskNum) {
-        sqlDataHandler.putInt(TASK_NUM, taskNum);
-        this.taskNum = taskNum;
-        sqlDataHandler.setSelection(VEHICLE_NAME + "= \"" + carName + "\" AND " + TASK_NUM + "= " + taskNum);
-    }
-
-    public void setType(String type) throws SQLDataException {
+    public void setType(String type) {
         sqlDataHandler.putString(TYPE, type);
     }
 
@@ -112,7 +93,7 @@ public class ServiceTask {
         return sqlDataHandler.getString(TYPE);
     }
 
-    public void setDetails(String details) throws SQLDataException {
+    public void setDetails(String details) {
         sqlDataHandler.putString(DETAILS, details);
     }
 
@@ -120,7 +101,7 @@ public class ServiceTask {
         return sqlDataHandler.getString(DETAILS);
     }
 
-    public void setLocationName(String locationName) throws SQLDataException {
+    public void setLocationName(String locationName) {
         sqlDataHandler.putString(LOCATION_NAME, locationName);
     }
 
@@ -128,7 +109,7 @@ public class ServiceTask {
         return sqlDataHandler.getString(LOCATION_NAME);
     }
 
-    public void setLocationId(String locationId) throws SQLDataException {
+    public void setLocationId(String locationId) {
         sqlDataHandler.putString(LOCATION_ID, locationId);
     }
 
@@ -136,8 +117,46 @@ public class ServiceTask {
         return sqlDataHandler.getString(LOCATION_ID);
     }
 
+    /**
+     * Check date for collisions and return value that is not colliding
+     *
+     * @param date
+     *         Requested date to set value to
+     *
+     * @return value that can be used with the same minute.
+     *
+     * @throws RuntimeException
+     *         if >60,000 values at the same minute have been added to database
+     */
+    public long checkDate(long date) {
+        return checkDate(date, carSQL.getReadableDatabase());
+    }
+
+    private long checkDate(long date, SQLiteDatabase database) {
+        Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
+                VEHICLE_NAME + "= \"" + carName + "\" AND " +
+                        DATE + ">= " + date + " AND " + DATE + "< " + (date + 60000), null, null, null, null, null);
+
+        if (!cursor.moveToLast())
+            Log.v(TAG, "Date input with no collisions");
+        else if (cursor.getLong(cursor.getColumnIndex(DATE)) == date + 60000)
+            //TODO: Develop method to go back through all values trying to find first open time
+            throw new RuntimeException("Attempted to store >60,000 service tasks on the same date");
+        else {
+            date = cursor.getLong(cursor.getColumnIndex(DATE)) + 1;
+            Log.e(TAG, "Collision at date moved to " + date);
+        }
+
+        cursor.close();
+        return date;
+    }
+
     public void setDate(long date) {
         sqlDataHandler.putLong(DATE, date);
+    }
+
+    public long getDateLong() {
+        return date;
     }
 
     public Date getDate() {
@@ -173,34 +192,50 @@ public class ServiceTask {
     }
 
     public static Cursor getServiceTaskCursorForCar(CarSQL carSQL, String carName) {
-        return carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, TASK_NUM},
+        return carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
                 VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
     }
 
     public static List<ServiceTask> getServiceTasksForCar(CarSQL carSQL, String carName) {
         LinkedList<ServiceTask> list = new LinkedList<>();
-        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, TASK_NUM},
-                VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
+        long start = Calendar.getInstance().getTimeInMillis();
+
+        Cursor cursor = getServiceTaskCursorForCar(carSQL, carName);
 
         if (!cursor.moveToFirst())
             return list;
 
-        int taskNum = 0;
         while (!cursor.isAfterLast()) {
-            list.add(new ServiceTask(carSQL, carName, ++taskNum));
+            list.add(new ServiceTask(carSQL, carName, cursor.getLong(cursor.getColumnIndex(DATE)), false));
             cursor.moveToNext();
         }
         cursor.close();
-        Log.i("ServiceTasks", "ServiceTask size: " + list.size());
+        Log.d("ServiceTasks", "ServiceTask size: " + list.size());
+
+        Log.d("ServiceTasks", "Task took " + (Calendar.getInstance().getTimeInMillis() - start));
         return list;
     }
 
     public static int getServiceTasksCountForCar(CarSQL carSQL, String carName) {
-        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, TASK_NUM},
+        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
                 VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
         int count = cursor.getCount();
         Log.v("ServiceTaskCount", "Name: " + carName + " Count: " + count);
         cursor.close();
         return count;
     }
+
+    public static Comparator<ServiceTask> compareByDate = new Comparator<ServiceTask>() {
+        @Override
+        public int compare(ServiceTask lhs, ServiceTask rhs) {
+            return Float.compare(lhs.getDateLong(), rhs.getDateLong());
+        }
+    };
+
+    public static Comparator<ServiceTask> compareByCost = new Comparator<ServiceTask>() {
+        @Override
+        public int compare(ServiceTask lhs, ServiceTask rhs) {
+            return Float.compare(lhs.getCost(), rhs.getCost());
+        }
+    };
 }

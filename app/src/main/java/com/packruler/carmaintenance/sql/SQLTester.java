@@ -15,6 +15,7 @@ import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
+import java.util.Calendar;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -86,16 +87,25 @@ public class SQLTester extends ActionBarActivity {
 
     private void fillSQL() {
         Log.i(TAG, "Start Fill");
+        long start = Calendar.getInstance().getTimeInMillis();
+        carSQL.getWritableDatabase().delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_NAME + " LIKE (\'Car%\')", null);
+        carSQL.getWritableDatabase().delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_NAME + " LIKE (\'Car%\')", null);
+        carSQL.getWritableDatabase().delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_NAME + " LIKE (\'Car%\')", null);
+        carSQL.getWritableDatabase().delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
+        carSQL.getWritableDatabase().delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
+        carSQL.getWritableDatabase().delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
+        Log.i(TAG, "Delete Took " + (Calendar.getInstance().getTimeInMillis() - start));
         HandlerThread handlerThread = new HandlerThread("fillSQL");
         handlerThread.start();
         Handler handler = new Handler(handlerThread.getLooper());
-        for (int x = 0; x < 5; x++) {
-            final Vehicle vehicle = new Vehicle(carSQL, "Car " + x);
-            handler.post(new Runnable() {
-                private final String TAG = "fillSQL Runnable";
+        handler.post(new Runnable() {
+            private final String TAG = "fillSQL Runnable";
 
-                @Override
-                public void run() {
+            @Override
+            public void run() {
+                Calendar calendar = Calendar.getInstance();
+                for (int x = 0; x < 5; x++) {
+                    final Vehicle vehicle = new Vehicle(carSQL, "Car " + x);
                     vehicle.setMake("Mini");
                     vehicle.setModel("Cooper ");
                     vehicle.setSubmodel("S");
@@ -103,24 +113,36 @@ public class SQLTester extends ActionBarActivity {
 
                     Log.d(TAG, "Adding service to " + vehicle.getName());
                     long start = System.currentTimeMillis();
-                    for (int y = 0; y < 1000; y++) {
+                    for (int y = 0; y < 3000; y++) {
                         ServiceTask serviceTask;
+                        Log.v(TAG, "Service date: " + ((int) (Math.random() * 20) + 1990) + "/" +
+                                ((int) (Math.random() * 11) + 1) + "/" +
+                                ((int) (Math.random() * 28) + 1));
+                        calendar.set((int) (Math.random() * 20) + 1990,
+                                (int) (Math.random() * 11) + 1,
+                                (int) (Math.random() * 28) + 1);
                         if (y % 4 == 0) {
-                            serviceTask = vehicle.getNewFuelStop();
+                            serviceTask = vehicle.getNewFuelStop(calendar.getTimeInMillis());
                             ((FuelStop) serviceTask).setOctane(93);
                             ((FuelStop) serviceTask).setCostPerVolume((float) (Math.random() * 10));
-                        } else
-                            serviceTask = vehicle.getNewServiceTask();
+                        } else {
+                            serviceTask = vehicle.getNewServiceTask(calendar.getTimeInMillis());
+                            if (Math.random() > .5)
+                                serviceTask.setType("Oil Change");
+                            else
+                                serviceTask.setType("Checkup");
+                        }
 
                         serviceTask.setMileage((long) (Math.random() * 10000));
+                        serviceTask.setCost((float) (Math.random() * 100));
                         serviceTask.setCarName(vehicle.getName());
 
                         Log.v(TAG, "Added new task to " + vehicle.getName());
                     }
-                    Log.i(TAG, "1000 tasks took: " + (System.currentTimeMillis() - start));
+                    Log.i(TAG, "3000 tasks took: " + (System.currentTimeMillis() - start));
                 }
-            });
-        }
+            }
+        });
     }
 
     public void loadSQL() {
