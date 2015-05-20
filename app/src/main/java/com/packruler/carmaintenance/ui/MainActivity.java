@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -53,13 +54,16 @@ public class MainActivity extends AppCompatActivity
     private LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
     private int numProcessors = Runtime.getRuntime().availableProcessors();
     private ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(numProcessors, numProcessors, 10, TimeUnit.SECONDS, workQueue);
+    private ActionBar actionBar;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "New MainActivity");
         setContentView(R.layout.activity_main);
-
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         sharedPreferences = getSharedPreferences(getApplication().getPackageName(), MODE_MULTI_PROCESS);
         poolExecutor.execute(new Runnable() {
             @Override
@@ -88,9 +92,15 @@ public class MainActivity extends AppCompatActivity
         for (String name : carsSQL.getCarNames()) {
             vehicleMap.put(name, new Vehicle(carsSQL, name));
         }
-        getFragmentManager().beginTransaction().replace(R.id.container, new PlaceholderFragment()).commit();
+        getFragmentManager().beginTransaction().replace(R.id.container, new MainFragment()).commit();
 
         mNavigationDrawerFragment.updateDrawer();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        carsSQL.close();
     }
 
     @Override
@@ -113,10 +123,6 @@ public class MainActivity extends AppCompatActivity
 //        Log.i(TAG, "Vehicle null " + (vehicle == null));
 //        if (vehicle != null)
 //            editCarFragment.setVehicle(vehicle);
-
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-//                .commit();
     }
 
     public void onSectionAttached(int number) {
@@ -124,17 +130,16 @@ public class MainActivity extends AppCompatActivity
             mTitle = vehicleMap.get(number).getName();
         } else if (mTitle != null && !mTitle.equals("New Car")) {
             mTitle = "New Car";
-//            setupNewCar();
         }
+        getSupportActionBar().setTitle(mTitle);
     }
 
     public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -167,9 +172,9 @@ public class MainActivity extends AppCompatActivity
     /**
      * A placeholder fragment containing a simple view.
      */
-    public class PlaceholderFragment extends android.app.Fragment {
+    public class MainFragment extends android.app.Fragment {
 
-        public PlaceholderFragment() {
+        public MainFragment() {
         }
 
         @Override
@@ -212,6 +217,10 @@ public class MainActivity extends AppCompatActivity
 
     public ThreadPoolExecutor getPoolExecutor() {
         return poolExecutor;
+    }
+
+    public Toolbar getToolbar() {
+        return toolbar;
     }
 
     EditCarFragment editCarFragment;

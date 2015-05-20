@@ -17,6 +17,7 @@ import android.os.Looper;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.graphics.Palette;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.Spanned;
@@ -272,6 +273,8 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         setPurchaseCostDisplay(vehicle.getPurchaseCost() + "");
 
         setPurchaseDateDisplay(vehicle.getPurchaseDate());
+
+        setPalette(vehicle.getPaletteInt());
     }
 
     public void setVehicle(Vehicle vehicle) {
@@ -986,6 +989,23 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         }
     }
 
+    private void setPalette(final int color) {
+        Log.d(TAG, "Color: " + color);
+        if (activity.getToolbar() != null)
+            mainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    activity.getToolbar().setBackgroundColor(color);
+                }
+            });
+        else Log.d(TAG, "actionbar null");
+    }
+
+    private void setPalette(Palette palette) {
+        if (activity.getToolbar() != null)
+            setPalette(palette.getVibrantColor(getResources().getColor(R.color.material_green_500)));
+    }
+
     private static final int SELECT_PICTURE_REQUEST_CODE = 1;
 
     private void openImageSelection() {
@@ -1028,19 +1048,16 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         } else {
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//            intent.putExtra("outputX", 200);
-//            intent.putExtra("outputY", 200);
             intent.putExtra("aspectX", 1);
             intent.putExtra("aspectY", 1);
             intent.putExtra("scale", true);
-            intent.putExtra("return-data", true);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 
             if (size == 1) {
                 Intent i = new Intent(intent);
                 ResolveInfo res = list.get(0);
 
-                i.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+//                i.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
                 activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 i.setData(uri);
@@ -1099,15 +1116,16 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         return null;
     }
 
-    private void loadImage(final Uri uri, boolean doCrop) {
-        if (doCrop) {
+    private void loadImage(final Uri uri, boolean crop) {
+        if (crop) {
             try {
                 File file = getTempFile();
                 if (file != null) {
                     FileOutputStream outputStream = new FileOutputStream(file);
 
-                    MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri)
-                            .compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+                    final Bitmap bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+                    bitmap.recycle();
 
                     Uri out = FileProvider.getUriForFile(activity, "com.packruler.carmaintenance", file);
                     doCrop(out);
@@ -1133,13 +1151,14 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
             @Override
             public void run() {
                 try {
-                    bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
+                    final Bitmap bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
                     mainHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
                                     bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
                             loadingImageSpinner.setVisibility(View.GONE);
+                            bitmap.recycle();
                         }
                     });
                     Log.d(TAG, "Image Loaded");
@@ -1152,6 +1171,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
     }
 
     private void loadImage() {
+        Log.v(TAG, "Load cache image");
         final File file = new File(getActivity().getFilesDir().getPath() + "/Images/" + vehicle.getName() + "/" + "/vehicle.jpg");
 
         if (file.exists()) {
@@ -1168,6 +1188,13 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
                                 vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
                                         bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
                                 loadingImageSpinner.setVisibility(View.GONE);
+                                activity.getPoolExecutor().execute(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        setPalette(Palette.from(bitmap).generate());
+                                        bitmap.recycle();
+                                    }
+                                });
                             }
                         });
                         Log.d(TAG, "Image Loaded");
@@ -1180,7 +1207,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
             loadingImageSpinner.setVisibility(View.GONE);
     }
 
-    private Bitmap bitmap;
+//    private Bitmap bitmap;
 
     private void storeImage() {
         final File temp = getTempFile();
@@ -1242,9 +1269,10 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
         switch (requestCode) {
             case SELECT_PICTURE_REQUEST_CODE:
                 Log.v(TAG, "Select image");
-                if (selected != null)
+                if (selected != null) {
                     loadImage(selected, true);
 //                    doCrop(selected);
+                }
                 break;
             case PIC_CROP:
                 if (selected != null)

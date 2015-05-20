@@ -64,7 +64,6 @@ public class ServicesFragment extends Fragment {
      */
     private Adapter mAdapter = new Adapter();
 
-    private List<ServiceTask> serviceTasks = new ArrayList<>();
     private Vehicle vehicle;
     private MainActivity activity;
     private ThreadPoolExecutor poolExecutor;
@@ -92,12 +91,7 @@ public class ServicesFragment extends Fragment {
 
         // Set the adapter
         recyclerView = (RecyclerView) view.findViewById(android.R.id.list);
-//        VerticalRecyclerViewFastScroller fastScroller = (VerticalRecyclerViewFastScroller) view.findViewById(R.id.fast_scroller);
-//        fastScroller.setRecyclerView(recyclerView);
-//        fastScroller.isInEditMode();
-//        recyclerView.addOnScrollListener(fastScroller.getOnScrollListener());
         recyclerView.setAdapter(mAdapter);
-        recyclerView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(container.getContext());
         recyclerView.setLayoutManager(layoutManager);
 

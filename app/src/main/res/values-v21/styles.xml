@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="AppTheme.Base">
+        <item name="colorPrimary">@color/material_green_500</item>
+        <item name="colorPrimaryDark">@color/material_green_700</item>
+        <item name="android:navigationBarColor">@color/material_green_700</item>
+        <item name="colorAccent">@color/material_green_500</item>
+    </style>
+</resources>

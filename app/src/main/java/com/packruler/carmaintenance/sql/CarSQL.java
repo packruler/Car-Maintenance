@@ -73,7 +73,6 @@ public class CarSQL {
         return list;
     }
 
-    private boolean inTransaction = false;
     private SQLiteDatabase database;
 
     public void beginTransaction() {
@@ -88,23 +87,26 @@ public class CarSQL {
 
     public void endTransaction() {
         database.endTransaction();
-        database.close();
-        database = null;
+    }
+
+    public boolean close() {
+        if (!database.inTransaction()) {
+            database.close();
+            return true;
+        }
+        Log.e(TAG, "Database open");
+        return false;
     }
 
     public SQLiteDatabase getWritableDatabase() {
-        if (database != null) {
+        if (database == null) {
             Log.v(TAG, "Database in transation");
-            return database;
+            database = sqlHelper.getWritableDatabase();
         }
-        return sqlHelper.getWritableDatabase();
+        return database;
     }
 
     public SQLiteDatabase getReadableDatabase() {
-        if (database != null) {
-            Log.v(TAG, "Database in transation");
-            return database;
-        }
         return sqlHelper.getReadableDatabase();
     }
 

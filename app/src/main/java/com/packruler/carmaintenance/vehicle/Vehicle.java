@@ -43,6 +43,7 @@ public class Vehicle {
     public static final String HORSEPOWER_UNITS = "horsepower_units";
     public static final String TORQUE = "torque";
     public static final String TORQUE_UNITS = "torque_units";
+    public static final String PALETTE = "palette";
 
     public static final String[] RESERVED_WORDS = new String[]{
             TABLE_NAME, VEHICLE_NAME, MAKE, MODEL, SUBMODEL, YEAR, VIN, WEIGHT, WEIGHT_UNITS, MILEAGE,
@@ -61,7 +62,8 @@ public class Vehicle {
                     TORQUE + " FLOAT," + TORQUE_UNITS + " STRING," +
                     MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," + COLOR + " STRING," +
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " STRING," +
-                    PURCHASE_COST + " FLOAT," + COST_UNITS + " STRING" + ")";
+                    PURCHASE_COST + " FLOAT," + COST_UNITS + " STRING," +
+                    PALETTE + " INTEGER" + ")";
 
     protected CarSQL carSQL;
     private String name = "";
@@ -278,6 +280,17 @@ public class Vehicle {
 
     public void setBoughtFrom(String boughtFrom) {
         sqlDataHandler.putString(BOUGHT_FROM, boughtFrom);
+    }
+
+    public void setPalette(int color) {
+        Log.v(TAG, "Store: " + color);
+        sqlDataHandler.putInt(PALETTE, color);
+    }
+
+    public int getPaletteInt() {
+        int out = sqlDataHandler.getInt(PALETTE);
+        Log.v(TAG, "Current palette: " + out);
+        return out;
     }
 
     public void setContentValues(ContentValues contentValues) {
