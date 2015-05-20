@@ -28,6 +28,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ThreadPoolExecutor;
 
+import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
+
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -90,7 +92,12 @@ public class ServicesFragment extends Fragment {
 
         // Set the adapter
         recyclerView = (RecyclerView) view.findViewById(android.R.id.list);
+//        VerticalRecyclerViewFastScroller fastScroller = (VerticalRecyclerViewFastScroller) view.findViewById(R.id.fast_scroller);
+//        fastScroller.setRecyclerView(recyclerView);
+//        fastScroller.isInEditMode();
+//        recyclerView.addOnScrollListener(fastScroller.getOnScrollListener());
         recyclerView.setAdapter(mAdapter);
+        recyclerView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(container.getContext());
         recyclerView.setLayoutManager(layoutManager);
 

@@ -73,11 +73,38 @@ public class CarSQL {
         return list;
     }
 
+    private boolean inTransaction = false;
+    private SQLiteDatabase database;
+
+    public void beginTransaction() {
+        if (database == null)
+            database = sqlHelper.getWritableDatabase();
+        database.beginTransaction();
+    }
+
+    public void setTransactionSuccessful() {
+        database.setTransactionSuccessful();
+    }
+
+    public void endTransaction() {
+        database.endTransaction();
+        database.close();
+        database = null;
+    }
+
     public SQLiteDatabase getWritableDatabase() {
+        if (database != null) {
+            Log.v(TAG, "Database in transation");
+            return database;
+        }
         return sqlHelper.getWritableDatabase();
     }
 
     public SQLiteDatabase getReadableDatabase() {
+        if (database != null) {
+            Log.v(TAG, "Database in transation");
+            return database;
+        }
         return sqlHelper.getReadableDatabase();
     }
 

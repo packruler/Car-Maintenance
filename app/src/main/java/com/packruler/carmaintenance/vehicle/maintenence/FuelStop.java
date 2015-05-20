@@ -96,7 +96,7 @@ public class FuelStop extends ServiceTask {
             throw new RuntimeException("Attempted to store >60,000 service tasks on the same date");
         else {
             date = cursor.getLong(cursor.getColumnIndex(DATE)) + 1;
-            Log.e(TAG, "Collision at date moved to " + date);
+            Log.v(TAG, "Collision at date moved to " + date);
         }
 
         cursor.close();

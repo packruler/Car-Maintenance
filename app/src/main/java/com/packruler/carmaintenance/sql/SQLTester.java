@@ -1,5 +1,6 @@
 package com.packruler.carmaintenance.sql;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -88,12 +89,16 @@ public class SQLTester extends ActionBarActivity {
     private void fillSQL() {
         Log.i(TAG, "Start Fill");
         long start = Calendar.getInstance().getTimeInMillis();
-        carSQL.getWritableDatabase().delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_NAME + " LIKE (\'Car%\')", null);
-        carSQL.getWritableDatabase().delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_NAME + " LIKE (\'Car%\')", null);
-        carSQL.getWritableDatabase().delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_NAME + " LIKE (\'Car%\')", null);
-        carSQL.getWritableDatabase().delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
-        carSQL.getWritableDatabase().delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
-        carSQL.getWritableDatabase().delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
+        SQLiteDatabase database = carSQL.getWritableDatabase();
+        database.beginTransaction();
+        database.delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_NAME + " LIKE (\'Car%\')", null);
+        database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_NAME + " LIKE (\'Car%\')", null);
+        database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_NAME + " LIKE (\'Car%\')", null);
+        database.delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
+        database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
+        database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
+        database.setTransactionSuccessful();
+        database.endTransaction();
         Log.i(TAG, "Delete Took " + (Calendar.getInstance().getTimeInMillis() - start));
         HandlerThread handlerThread = new HandlerThread("fillSQL");
         handlerThread.start();
@@ -114,15 +119,13 @@ public class SQLTester extends ActionBarActivity {
 
                     Log.d(TAG, "Adding service to " + vehicle.getName());
                     long start = System.currentTimeMillis();
+                    carSQL.beginTransaction();
                     for (int y = 0; y < 3000; y++) {
                         ServiceTask serviceTask;
-                        Log.v(TAG, "Service date: " + ((int) (Math.random() * 20) + 1990) + "/" +
-                                ((int) (Math.random() * 11) + 1) + "/" +
-                                ((int) (Math.random() * 28) + 1));
                         calendar.set((int) (Math.random() * 20) + 1990,
                                 (int) (Math.random() * 11) + 1,
                                 (int) (Math.random() * 28) + 1);
-                        if (y % 4 == 0) {
+                        if (y % 3 == 0) {
                             serviceTask = vehicle.getNewFuelStop(calendar.getTimeInMillis());
                             ((FuelStop) serviceTask).setOctane(93);
                             ((FuelStop) serviceTask).setCostPerVolume((float) (Math.random() * 10));
@@ -136,10 +139,11 @@ public class SQLTester extends ActionBarActivity {
 
                         serviceTask.setMileage((long) (Math.random() * 10000));
                         serviceTask.setCost((float) (Math.random() * 100));
-                        serviceTask.setCarName(vehicle.getName());
 
                         Log.v(TAG, "Added new task to " + vehicle.getName());
                     }
+                    carSQL.setTransactionSuccessful();
+                    carSQL.endTransaction();
                     Log.i(TAG, "3000 tasks took: " + (System.currentTimeMillis() - start));
                 }
             }
