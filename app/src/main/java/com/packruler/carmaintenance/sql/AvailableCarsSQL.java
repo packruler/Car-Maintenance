@@ -198,6 +198,12 @@ public class AvailableCarsSQL {
         // to you to create adapters for your views.
     }
 
+    public Cursor getAvailableMakesCursor(String year) {
+        return sqlHelper.getReadableDatabase().query(true, TABLE_NAME,
+                new String[]{MAKE + " as _id"}, YEAR + "= " + year,
+                null, null, null, "_id", null);
+    }
+
     public Set<String> getAvailableMakes(String year) {
 
         int yearInt;

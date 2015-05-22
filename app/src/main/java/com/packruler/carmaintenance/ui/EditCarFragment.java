@@ -37,6 +37,7 @@ import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.json.VINDecoder;
 import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
+import com.packruler.carmaintenance.ui.adapters.CropOptionAdapter;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.io.File;

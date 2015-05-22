@@ -192,7 +192,7 @@ public class ServiceTask {
     }
 
     public static Cursor getServiceTaskCursorForCar(CarSQL carSQL, String carName) {
-        return carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
+        return carSQL.getReadableDatabase().query(TABLE_NAME, null,
                 VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
     }
 

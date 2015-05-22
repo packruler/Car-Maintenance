@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity
         } else if (mTitle != null && !mTitle.equals("New Car")) {
             mTitle = "New Car";
         }
-        getSupportActionBar().setTitle(mTitle);
+        toolbar.setTitle(mTitle);
     }
 
     public void restoreActionBar() {
@@ -190,10 +190,17 @@ public class MainActivity extends AppCompatActivity
                     poolExecutor.execute(new Runnable() {
                         @Override
                         public void run() {
-                            ServicesFragment servicesFragment = new ServicesFragment(vehicleMap.get("THIS CHANGED"), carsSQL);
+                            ServicesFragment servicesFragment = new ServicesFragment(MainActivity.this, vehicleMap.get("THIS CHANGED"), carsSQL);
                             getFragmentManager().beginTransaction().replace(R.id.container, servicesFragment).commit();
                         }
                     });
+                }
+            });
+            rootView.findViewById(R.id.edit_car_button).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.v(TAG, "Edit Car Click");
+                    getFragmentManager().beginTransaction().replace(R.id.container, new EditCar(MainActivity.this, carsSQL)).commit();
                 }
             });
             return rootView;

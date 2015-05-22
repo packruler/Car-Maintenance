@@ -1,4 +1,4 @@
-package com.packruler.carmaintenance.ui;
+package com.packruler.carmaintenance.ui.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.packruler.carmaintenance.R;
+import com.packruler.carmaintenance.ui.CropOption;
 
 import java.util.ArrayList;
 

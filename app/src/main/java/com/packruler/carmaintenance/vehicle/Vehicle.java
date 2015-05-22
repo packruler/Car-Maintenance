@@ -214,16 +214,36 @@ public class Vehicle {
         return new PartReplacement(carSQL, name, date, true);
     }
 
-    public Cursor getServiceTaskCursor() {
-        return ServiceTask.getServiceTaskCursorForCar(carSQL, name);
-    }
-
     public List<ServiceTask> getServiceTasks() {
         return ServiceTask.getServiceTasksForCar(carSQL, name);
     }
 
+    public Cursor getServiceTaskCursor(String orderBy) {
+        return carSQL.getReadableDatabase().query(ServiceTask.TABLE_NAME, null, VEHICLE_NAME + "= \"" + name + "\"", null, null, null, orderBy);
+    }
+
+    public Cursor getServiceTaskCursor(String orderBy, boolean inverse) {
+        if (inverse)
+            orderBy += " DESC";
+        else
+            orderBy += " ASC";
+        return getServiceTaskCursor(orderBy);
+    }
+
+    public Cursor getServiceTaskCursor() {
+        return ServiceTask.getServiceTaskCursorForCar(carSQL, name);
+    }
+
     public int getServiceTaskCount() {
-        return serviceTaskCount;
+        return ServiceTask.getServiceTasksCountForCar(carSQL, name);
+    }
+
+    public int getFuelStopCount() {
+        return FuelStop.getFuelStopCountForCar(carSQL, name);
+    }
+
+    public int getPartCount() {
+        return PartReplacement.getPartReplacementCountForCar(carSQL, name);
     }
 
     public float getPurchaseCost() {

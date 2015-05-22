@@ -153,6 +153,11 @@ public class PartReplacement extends ServiceTask {
         sqlDataHandler.putLong(WARRANTY_LIFE_TIME, warrantyLifeTime);
     }
 
+    public static Cursor getPartReplacementCursorForCar(CarSQL carSQL, String carName) {
+        return carSQL.getReadableDatabase().query(TABLE_NAME, null,
+                VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
+    }
+
     public static List<PartReplacement> getPartReplacementsForCar(CarSQL carSQL, String carName) {
         LinkedList<PartReplacement> list = new LinkedList<>();
         Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
