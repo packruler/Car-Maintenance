@@ -7,9 +7,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="@string/name"
+        android:hint="@string/name"
         android:ems="10"
-        android:id="@+id/edit_vehicle_name"
+        android:id="@+id/vehicle_name"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -21,8 +21,8 @@
         android:inputType="textPersonName"
         android:hint="@string/year"
         android:ems="4"
-        android:id="@+id/year_spinner"
-        android:layout_below="@id/edit_vehicle_name"
+        android:id="@+id/year"
+        android:layout_below="@id/vehicle_name"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <com.weiwangcn.betterspinner.library.BetterSpinner
@@ -30,18 +30,30 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:hint="@string/make"
-        android:id="@+id/make_spinner"
-        android:layout_below="@id/edit_vehicle_name"
+        android:id="@+id/make"
+        android:layout_below="@id/vehicle_name"
         android:spinnerMode="dropdown"
-        android:layout_toRightOf="@+id/year_spinner"/>
+        android:layout_toRightOf="@+id/year"/>
+
+    <com.weiwangcn.betterspinner.library.BetterSpinner
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/model"
+        android:id="@+id/model"
+        android:layout_below="@id/vehicle_name"
+        android:spinnerMode="dropdown"
+        android:layout_toRightOf="@+id/make"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="@string/name"
+        android:hint="@string/submodel"
         android:ems="10"
-        android:id="@+id/edit_model"
+        android:id="@+id/edit_submodel"
+        android:layout_below="@id/year"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
 </RelativeLayout>
