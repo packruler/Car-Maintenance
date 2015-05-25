@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="edit_car">Edit Car</string>
-    <string name="name">Vehicle Name:</string>
-    <string name="make">Manufacturer:</string>
-    <string name="model">Model:</string>
-    <string name="submodel">Sub-Model:</string>
-    <string name="year">Year:</string>
-    <string name="mileage">Mileage:</string>
-    <string name="purchase_cost">Purchase Cost:</string>
-    <string name="purchase_date">Purchase Date:</string>
-    <string name="vin">Vin:</string>
+    <string name="name">Vehicle Name</string>
+    <string name="make">Make</string>
+    <string name="model">Model</string>
+    <string name="submodel">Sub-Model</string>
+    <string name="year">Year</string>
+    <string name="purchase_cost">Purchase Cost</string>
+    <string name="purchase_date">Purchase Date</string>
+    <string name="vin">VIN</string>
+
+    <string name="mileage">Mileage</string>
+    <string-array name="large_distance_units">
+        <item name="mile">Miles</item>
+        <item name="kilometer">Kilometers</item>
+    </string-array>
+    <string-array name="small_distance_units">
+        <item name="feet">ft</item>
+        <item name="inch">in</item>
+        <item name="meter">meter</item>
+        <item name="centimeter">cm</item>
+    </string-array>
+
+    <string name="power">Power</string>
+    <string-array name="power_units">
+        <item name="horsepower">HP</item>
+        <item name="kw">kW</item>
+    </string-array>
+
+    <string name="torque">Torque</string>
+    <string-array name="torque_units">
+        <item name="lb_ft">lb·ft</item>
+        <item name="n_m">N·m</item>
+    </string-array>
 
     <string name="save">Save Changes</string>
     <string name="discard">Discard Changes</string>
@@ -24,5 +47,13 @@
 
     <string name="other_selection">Other…</string>
     <string name="click_to_set">Click to set</string>
+    <string name="units">Units</string>
     <string name="display_color">Display Color:</string>
+    <string name="vehicle_color">Vehicle Color</string>
+
+    <string name="store_vehicle_image_message">Store Vehicle Image</string>
+    <string name="general_info">General Info:</string>
+    <string name="vehicle_details">Performance Details:</string>
+    <string name="visual_details">Visual Details:</string>
+
 </resources>

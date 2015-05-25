@@ -39,8 +39,8 @@ public class Vehicle {
     public static final String COST_UNITS = "cost_units";
     public static final String DISPLACEMENT = "displacement";
     public static final String DISPLACEMENT_UNITS = "displacement_units";
-    public static final String HORSEPOWER = "horsepower";
-    public static final String HORSEPOWER_UNITS = "horsepower_units";
+    public static final String POWER = "power";
+    public static final String POWER_UNITS = "power_units";
     public static final String TORQUE = "torque";
     public static final String TORQUE_UNITS = "torque_units";
     public static final String PALETTE = "palette";
@@ -48,7 +48,7 @@ public class Vehicle {
     public static final String[] RESERVED_WORDS = new String[]{
             TABLE_NAME, VEHICLE_NAME, MAKE, MODEL, SUBMODEL, YEAR, VIN, WEIGHT, WEIGHT_UNITS, MILEAGE,
             MILEAGE_UNITS, COLOR, PURCHASE_DATE, BOUGHT_FROM, PURCHASE_COST, COST_UNITS,
-            DISPLACEMENT, DISPLACEMENT_UNITS, HORSEPOWER, HORSEPOWER_UNITS, TORQUE, TORQUE_UNITS
+            DISPLACEMENT, DISPLACEMENT_UNITS, POWER, POWER_UNITS, TORQUE, TORQUE_UNITS
     };
 
     public static final String SQL_CREATE =
@@ -58,7 +58,7 @@ public class Vehicle {
                     SUBMODEL + " STRING," + YEAR + " INTEGER," +
                     VIN + " STRING," + WEIGHT + " LONG," + WEIGHT_UNITS + " STRING," +
                     DISPLACEMENT + " FLOAT," + DISPLACEMENT_UNITS + " STRING," +
-                    HORSEPOWER + " FLOAT," + HORSEPOWER_UNITS + " STRING," +
+                    POWER + " FLOAT," + POWER_UNITS + " STRING," +
                     TORQUE + " FLOAT," + TORQUE_UNITS + " STRING," +
                     MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," + COLOR + " STRING," +
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " STRING," +

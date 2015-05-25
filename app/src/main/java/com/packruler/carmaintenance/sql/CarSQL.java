@@ -90,11 +90,13 @@ public class CarSQL {
     }
 
     public boolean close() {
-        if (!database.inTransaction()) {
-            database.close();
-            return true;
+        if (database != null) {
+            if (!database.inTransaction()) {
+                database.close();
+                return true;
+            }
+            Log.e(TAG, "Database open");
         }
-        Log.e(TAG, "Database open");
         return false;
     }
 
