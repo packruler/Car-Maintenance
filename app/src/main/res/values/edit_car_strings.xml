@@ -16,21 +16,21 @@
         <item name="kilometer">Kilometers</item>
     </string-array>
     <string-array name="small_distance_units">
-        <item name="feet">ft</item>
-        <item name="inch">in</item>
-        <item name="meter">meter</item>
-        <item name="centimeter">cm</item>
+        <item name="feet">Feet</item>
+        <item name="inch">Inches</item>
+        <item name="meter">Meter</item>
+        <item name="centimeter">Centimeter</item>
     </string-array>
 
     <string name="power">Power</string>
     <string-array name="power_units">
-        <item name="horsepower">HP</item>
-        <item name="kw">kW</item>
+        <item name="horsepower">Horsepower</item>
+        <item name="kw">Kilowatts</item>
     </string-array>
 
     <string name="torque">Torque</string>
     <string-array name="torque_units">
-        <item name="lb_ft">lb·ft</item>
+        <item name="lb_ft">LB·FT</item>
         <item name="n_m">N·m</item>
     </string-array>
 
@@ -56,4 +56,10 @@
     <string name="vehicle_details">Performance Details:</string>
     <string name="visual_details">Visual Details:</string>
 
+    <string name="palette_colors">Palette Colors(from image)</string>
+    <string name="custom_color">Custom Color</string>
+    <string-array name="set_color_options">
+        <item>@string/palette_colors</item>
+        <item>@string/custom_color</item>
+    </string-array>
 </resources>

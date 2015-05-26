@@ -313,7 +313,7 @@ public class Vehicle {
         return out;
     }
 
-    public void setContentValues(ContentValues contentValues) {
+    public void putContentValues(ContentValues contentValues) {
         sqlDataHandler.setContentValues(contentValues);
     }
 

@@ -1,1 +1,2 @@
-include ':app'
+include ':app', ':mobihelp_sdk_android_v1.4'
+project(':mobihelp_sdk_android_v1.4').projectDir = new File('app/libraries/mobihelp_sdk_android_v1.4')

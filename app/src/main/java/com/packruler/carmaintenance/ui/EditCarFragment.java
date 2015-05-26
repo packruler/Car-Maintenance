@@ -239,7 +239,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
             storeImage();
 
             if (values.size() > 0)
-                vehicle.setContentValues(values);
+                vehicle.putContentValues(values);
         }
     }
 

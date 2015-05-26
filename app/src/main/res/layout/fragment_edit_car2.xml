@@ -159,6 +159,7 @@
                     android:id="@+id/mileage_units"
                     android:layout_toRightOf="@id/mileage"
                     android:layout_below="@id/details_title"
+                    android:dropDownWidth="100dp"
                     app:met_floatingLabel="highlight"/>
 
                 <com.rengwuxian.materialedittext.MaterialEditText
@@ -181,6 +182,7 @@
                     android:hint="@string/units"
                     android:layout_below="@id/mileage_units"
                     android:layout_marginRight="@dimen/margin_small"
+                    android:dropDownWidth="100dp"
                     app:met_floatingLabel="highlight"/>
 
                 <com.rengwuxian.materialedittext.MaterialEditText
@@ -203,6 +205,7 @@
                     android:ems="3"
                     android:hint="@string/units"
                     android:layout_below="@id/mileage_units"
+                    android:dropDownWidth="wrap_content"
                     app:met_floatingLabel="highlight"/>
 
             </RelativeLayout>
