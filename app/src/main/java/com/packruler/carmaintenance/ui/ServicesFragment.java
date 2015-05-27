@@ -97,9 +97,7 @@ public class ServicesFragment extends Fragment {
             public void onItemClick(View view, int position) {
                 long start = Calendar.getInstance().getTimeInMillis();
                 Cursor cursor = mAdapter.getItem(position);
-                ServiceTask task = new ServiceTask(carSQL,
-                        cursor.getString(cursor.getColumnIndex(ServiceTask.VEHICLE_NAME)),
-                        cursor.getLong(cursor.getColumnIndex(ServiceTask.DATE)), false);
+                ServiceTask task = new ServiceTask(carSQL, cursor.getLong(0));
                 Log.v(TAG, "Loading task took " + (Calendar.getInstance().getTimeInMillis() - start));
                 setSortOrder(ServiceTask.DATE, position % 2 == 0);
             }

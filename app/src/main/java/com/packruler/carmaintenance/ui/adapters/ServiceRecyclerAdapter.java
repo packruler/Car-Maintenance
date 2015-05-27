@@ -103,6 +103,6 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
     }
 
     public interface onRecyclerItemClickListener {
-        public void onItemClick(View view, int position);
+        void onItemClick(View view, int position);
     }
 }

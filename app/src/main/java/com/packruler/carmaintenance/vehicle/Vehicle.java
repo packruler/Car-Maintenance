@@ -43,7 +43,7 @@ public class Vehicle {
     public static final String POWER_UNITS = "power_units";
     public static final String TORQUE = "torque";
     public static final String TORQUE_UNITS = "torque_units";
-    public static final String PALETTE = "palette";
+    public static final String DISPLAY_COLOR = "display_color";
 
     public static final String[] RESERVED_WORDS = new String[]{
             TABLE_NAME, VEHICLE_NAME, MAKE, MODEL, SUBMODEL, YEAR, VIN, WEIGHT, WEIGHT_UNITS, MILEAGE,
@@ -63,7 +63,7 @@ public class Vehicle {
                     MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," + COLOR + " STRING," +
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " STRING," +
                     PURCHASE_COST + " FLOAT," + COST_UNITS + " STRING," +
-                    PALETTE + " INTEGER" + ")";
+                    DISPLAY_COLOR + " INTEGER" + ")";
 
     protected CarSQL carSQL;
     private String name = "";
@@ -202,16 +202,16 @@ public class Vehicle {
         return sqlDataHandler.getLong(PURCHASE_DATE);
     }
 
-    public synchronized ServiceTask getNewServiceTask(long date) {
-        return new ServiceTask(carSQL, name, date, true);
+    public synchronized ServiceTask getNewServiceTask() {
+        return new ServiceTask(carSQL, name);
     }
 
-    public synchronized FuelStop getNewFuelStop(long date) {
-        return new FuelStop(carSQL, name, date, true);
+    public synchronized FuelStop getNewFuelStop() {
+        return new FuelStop(carSQL, name);
     }
 
-    public synchronized PartReplacement getNewPartReplacement(long date) {
-        return new PartReplacement(carSQL, name, date, true);
+    public synchronized PartReplacement getNewPartReplacement() {
+        return new PartReplacement(carSQL, name);
     }
 
     public List<ServiceTask> getServiceTasks() {
@@ -302,13 +302,13 @@ public class Vehicle {
         sqlDataHandler.putString(BOUGHT_FROM, boughtFrom);
     }
 
-    public void setPalette(int color) {
+    public void setDisplayColor(int color) {
         Log.v(TAG, "Store: " + color);
-        sqlDataHandler.putInt(PALETTE, color);
+        sqlDataHandler.putInt(DISPLAY_COLOR, color);
     }
 
-    public int getPaletteInt() {
-        int out = sqlDataHandler.getInt(PALETTE);
+    public int getDisplayColor() {
+        int out = sqlDataHandler.getInt(DISPLAY_COLOR);
         Log.v(TAG, "Current palette: " + out);
         return out;
     }

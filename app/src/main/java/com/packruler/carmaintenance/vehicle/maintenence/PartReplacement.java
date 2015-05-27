@@ -41,26 +41,22 @@ public class PartReplacement extends ServiceTask {
                     DETAILS + " STRING," + LOCATION_ID + " STRING," + LOCATION_NAME + " STRING" +
                     ")";
 
-    public PartReplacement(CarSQL carSQL, String carName, long date, boolean isNew) {
-        this.carName = carName;
+    public PartReplacement(CarSQL carSQL, String carName) {
         this.carSQL = carSQL;
 
-        if (isNew) {
-            SQLiteDatabase database = carSQL.getWritableDatabase();
-            date = checkDate(date);
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(VEHICLE_NAME, carName);
-            contentValues.put(DATE, date);
-            database.insert(TABLE_NAME, null, contentValues);
-        }
+        SQLiteDatabase database = carSQL.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(VEHICLE_NAME, carName);
+        row = database.insert(TABLE_NAME, null, contentValues);
+        Log.v(TAG, "Row: " + row);
 
         sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                VEHICLE_NAME + "= \"" + carName + "\" AND " + DATE + "= " + date);
-        this.date = date;
+                ID + "= " + row);
     }
 
-    public PartReplacement(CarSQL carSQL, String carName, long date) {
-        this(carSQL, carName, date, false);
+    public PartReplacement(CarSQL carSQL, long row) {
+        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
+                ID + "= " + row);
     }
 
     /**
@@ -73,30 +69,30 @@ public class PartReplacement extends ServiceTask {
      *
      * @throws RuntimeException
      *         if >60,000 values at the same minute have been added to database
+     *         //
      */
-    public long checkDate(long date) {
-        return checkDate(date, carSQL.getReadableDatabase());
-    }
-
-    private long checkDate(long date, SQLiteDatabase database) {
-        Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
-                VEHICLE_NAME + "= \"" + carName + "\" AND " +
-                        DATE + ">= " + date + " AND " + DATE + "< " + (date + 60000), null, null, null, null, null);
-
-        if (!cursor.moveToLast())
-            Log.v(TAG, "Date input with no collisions");
-        else if (cursor.getLong(cursor.getColumnIndex(DATE)) == date + 60000)
-            //TODO: Develop method to go back through all values trying to find first open time
-            throw new RuntimeException("Attempted to store >60,000 service tasks on the same date");
-        else {
-            date = cursor.getLong(cursor.getColumnIndex(DATE)) + 1;
-            Log.v(TAG, "Collision at date moved to " + date);
-        }
-
-        cursor.close();
-        return date;
-    }
-
+//    public long checkDate(long date) {
+//        return checkDate(date, carSQL.getReadableDatabase());
+//    }
+//
+//    private long checkDate(long date, SQLiteDatabase database) {
+//        Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
+//                VEHICLE_NAME + "= \"" + carName + "\" AND " +
+//                        DATE + ">= " + date + " AND " + DATE + "< " + (date + 60000), null, null, null, null, null);
+//
+//        if (!cursor.moveToLast())
+//            Log.v(TAG, "Date input with no collisions");
+//        else if (cursor.getLong(cursor.getColumnIndex(DATE)) == date + 60000)
+//            //TODO: Develop method to go back through all values trying to find first open time
+//            throw new RuntimeException("Attempted to store >60,000 service tasks on the same date");
+//        else {
+//            date = cursor.getLong(cursor.getColumnIndex(DATE)) + 1;
+//            Log.v(TAG, "Collision at date moved to " + date);
+//        }
+//
+//        cursor.close();
+//        return date;
+//    }
     public String getPartName() {
         return sqlDataHandler.getString(PART_NAME);
     }
@@ -160,15 +156,17 @@ public class PartReplacement extends ServiceTask {
 
     public static List<PartReplacement> getPartReplacementsForCar(CarSQL carSQL, String carName) {
         LinkedList<PartReplacement> list = new LinkedList<>();
-        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
+
+        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{ID},
                 VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
+        ;
 
         if (!cursor.moveToFirst())
             return list;
 
         int taskNum = 0;
         while (!cursor.isAfterLast()) {
-            list.add(new PartReplacement(carSQL, carName, ++taskNum));
+            list.add(new PartReplacement(carSQL, cursor.getLong(0)));
             cursor.moveToNext();
         }
         cursor.close();

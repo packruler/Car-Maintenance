@@ -37,10 +37,10 @@ public class FuelStop extends ServiceTask {
     };
 
     public static final String SQL_CREATE =
-            "CREATE TABLE " + TABLE_NAME + " (" + VEHICLE_NAME + " STRING," +
-                    DATE + " LONG," + TYPE + " STRING," + COST_UNITS + " STRING," +
-                    COST + " FLOAT," + MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," +
-                    DETAILS + " STRING," + LOCATION_ID + " STRING," +
+            "CREATE TABLE " + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    VEHICLE_NAME + " STRING," + DATE + " LONG," + TYPE + " STRING," +
+                    COST_UNITS + " STRING," + COST + " FLOAT," + MILEAGE + " LONG," +
+                    MILEAGE_UNITS + " STRING," + DETAILS + " STRING," + LOCATION_ID + " STRING," +
                     LOCATION_NAME + " STRING," + COST_PER_VOLUME + " FLOAT," +
                     VOLUME + " FLOAT," + VOLUME_UNITS + " STRING," +
                     OCTANE + " INT," + OCTANE_UNITS + " STRING," + MISSED_FILL_UP + " INTEGER," +
@@ -48,27 +48,24 @@ public class FuelStop extends ServiceTask {
                     DISTANCE_PER_VOLUME_UNIT + " STRING" + ")";
 
 
-    public FuelStop(CarSQL carSQL, String carName, long date, boolean isNew) {
-        this.carName = carName;
+    public FuelStop(CarSQL carSQL, String carName) {
         this.carSQL = carSQL;
 
-        if (isNew) {
-            SQLiteDatabase database = carSQL.getWritableDatabase();
-            date = checkDate(date);
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(VEHICLE_NAME, carName);
-            contentValues.put(DATE, date);
-            database.insert(TABLE_NAME, null, contentValues);
-        }
+        SQLiteDatabase database = carSQL.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(VEHICLE_NAME, carName);
+        row = database.insert(TABLE_NAME, null, contentValues);
+        Log.v(TAG, "Row: " + row);
 
         sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                VEHICLE_NAME + "= \"" + carName + "\" AND " + DATE + "= " + date);
-        this.date = date;
+                ID + "= " + row);
     }
 
-    public FuelStop(CarSQL carSQL, String carName, long date) {
-        this(carSQL, carName, date, false);
+    public FuelStop(CarSQL carSQL, long row) {
+        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
+                ID + "= " + row);
     }
+
     /**
      * Check date for collisions and return value that is not colliding
      *
@@ -79,29 +76,29 @@ public class FuelStop extends ServiceTask {
      *
      * @throws RuntimeException
      *         if >60,000 values at the same minute have been added to database
-     */
-    public long checkDate(long date) {
-        return checkDate(date, carSQL.getReadableDatabase());
-    }
-
-    private long checkDate(long date, SQLiteDatabase database) {
-        Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
-                VEHICLE_NAME + "= \"" + carName + "\" AND " +
-                        DATE + ">= " + date + " AND " + DATE + "< " + (date + 60000), null, null, null, null, null);
-
-        if (!cursor.moveToLast())
-            Log.v(TAG, "Date input with no collisions");
-        else if (cursor.getLong(cursor.getColumnIndex(DATE)) == date + 60000)
-            //TODO: Develop method to go back through all values trying to find first open time
-            throw new RuntimeException("Attempted to store >60,000 service tasks on the same date");
-        else {
-            date = cursor.getLong(cursor.getColumnIndex(DATE)) + 1;
-            Log.v(TAG, "Collision at date moved to " + date);
-        }
-
-        cursor.close();
-        return date;
-    }
+//     */
+//    public long checkDate(long date) {
+//        return checkDate(date, carSQL.getReadableDatabase());
+//    }
+//
+//    private long checkDate(long date, SQLiteDatabase database) {
+//        Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
+//                VEHICLE_NAME + "= \"" + carName + "\" AND " +
+//                        DATE + ">= " + date + " AND " + DATE + "< " + (date + 60000), null, null, null, null, null);
+//
+//        if (!cursor.moveToLast())
+//            Log.v(TAG, "Date input with no collisions");
+//        else if (cursor.getLong(cursor.getColumnIndex(DATE)) == date + 60000)
+//            //TODO: Develop method to go back through all values trying to find first open time
+//            throw new RuntimeException("Attempted to store >60,000 service tasks on the same date");
+//        else {
+//            date = cursor.getLong(cursor.getColumnIndex(DATE)) + 1;
+//            Log.v(TAG, "Collision at date moved to " + date);
+//        }
+//
+//        cursor.close();
+//        return date;
+//    }
 
     public float getVolume() {
         return sqlDataHandler.getFloat(VOLUME);
@@ -166,7 +163,7 @@ public class FuelStop extends ServiceTask {
 
     public static List<FuelStop> getFuelStopsForCar(CarSQL carSQL, String carName) {
         LinkedList<FuelStop> list = new LinkedList<>();
-        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
+        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{ID},
                 VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
 
         if (!cursor.moveToFirst())
@@ -174,7 +171,7 @@ public class FuelStop extends ServiceTask {
 
         int taskNum = 0;
         while (!cursor.isAfterLast()) {
-            list.add(new FuelStop(carSQL, carName, cursor.getLong(cursor.getColumnIndex(DATE))));
+            list.add(new FuelStop(carSQL, cursor.getLong(0)));
             cursor.moveToNext();
         }
         cursor.close();

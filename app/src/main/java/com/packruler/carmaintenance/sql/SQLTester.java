@@ -127,11 +127,11 @@ public class SQLTester extends ActionBarActivity {
                                 (int) (Math.random() * 11) + 1,
                                 (int) (Math.random() * 28) + 1);
                         if (y % 3 == 0) {
-                            serviceTask = vehicle.getNewFuelStop(calendar.getTimeInMillis());
+                            serviceTask = vehicle.getNewFuelStop();
                             ((FuelStop) serviceTask).setOctane(93);
                             ((FuelStop) serviceTask).setCostPerVolume((float) (Math.random() * 10));
                         } else {
-                            serviceTask = vehicle.getNewServiceTask(calendar.getTimeInMillis());
+                            serviceTask = vehicle.getNewServiceTask();
                             if (Math.random() > .5)
                                 serviceTask.setType("Oil Change");
                             else
