@@ -110,6 +110,8 @@ public class SQLTester extends ActionBarActivity {
             public void run() {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(0);
+                long begin = Calendar.getInstance().getTimeInMillis();
+                carSQL.beginTransaction();
                 for (int x = 0; x < 5; x++) {
                     final Vehicle vehicle = new Vehicle(carSQL, "Car " + x);
                     vehicle.setMake("Mini");
@@ -119,7 +121,6 @@ public class SQLTester extends ActionBarActivity {
 
                     Log.d(TAG, "Adding service to " + vehicle.getName());
                     long start = System.currentTimeMillis();
-                    carSQL.beginTransaction();
                     for (int y = 0; y < 3000; y++) {
                         ServiceTask serviceTask;
                         calendar.set((int) (Math.random() * 20) + 1990,
@@ -142,10 +143,11 @@ public class SQLTester extends ActionBarActivity {
 
                         Log.v(TAG, "Added new task to " + vehicle.getName());
                     }
-                    carSQL.setTransactionSuccessful();
-                    carSQL.endTransaction();
                     Log.i(TAG, "3000 tasks took: " + (System.currentTimeMillis() - start));
                 }
+                carSQL.setTransactionSuccessful();
+                carSQL.endTransaction();
+                Log.d(TAG, "Done filling values in " + (Calendar.getInstance().getTimeInMillis() - begin));
             }
         });
     }

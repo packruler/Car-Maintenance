@@ -25,16 +25,13 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.freshdesk.mobihelp.Mobihelp;
 import com.freshdesk.mobihelp.MobihelpConfig;
 import com.packruler.carmaintenance.R;
-import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +61,6 @@ public class MainActivity extends AppCompatActivity
 
     private SharedPreferences sharedPreferences;
     private CarSQL carsSQL;
-    private AvailableCarsSQL availableCarsSQL;
 
     private LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
     private int numProcessors = Runtime.getRuntime().availableProcessors();
@@ -82,16 +78,6 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         sharedPreferences = getSharedPreferences(getApplication().getPackageName(), MODE_MULTI_PROCESS);
-        poolExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    availableCarsSQL = new AvailableCarsSQL(MainActivity.this);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
         Log.i(TAG, "Car map size: " + vehicleMap.size());
 
@@ -125,10 +111,10 @@ public class MainActivity extends AppCompatActivity
         // update the main content by replacing fragments
         Log.v(TAG, "Selected car name: " + name);
 
-        editCarFragment = new EditCarFragment(this, availableCarsSQL, carsSQL);
+        editCarFragment = new EditCar(this, carsSQL);
 
         if (vehicleMap.containsKey(name))
-            editCarFragment.setVehicle(vehicleMap.get(name));
+            editCarFragment.loadVehicle(vehicleMap.get(name));
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -217,7 +203,7 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     Log.v(TAG, "Edit Car Click");
-                    getFragmentManager().beginTransaction().replace(R.id.container, new EditCar(MainActivity.this, carsSQL)).addToBackStack("EditCar").commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new EditCar(MainActivity.this, carsSQL)).addToBackStack("EditCar").commit();
                 }
             });
             return rootView;
@@ -247,7 +233,7 @@ public class MainActivity extends AppCompatActivity
         return toolbar;
     }
 
-    EditCarFragment editCarFragment;
+    EditCar editCarFragment;
 
     public void setUIColor(int color) {
         Palette.Swatch swatch = new Palette.Swatch(color, 100);
@@ -278,9 +264,6 @@ public class MainActivity extends AppCompatActivity
 
         for (int i = 0; i < toolbarView.getChildCount(); i++) {
             final View v = toolbarView.getChildAt(i);
-
-            if (v instanceof TextView)
-                ((TextView) v).setTextColor(toolbarIconsColor);
 
             //Step 1 : Changing the color of back button (or open drawer button).
             if (v instanceof ImageButton) {

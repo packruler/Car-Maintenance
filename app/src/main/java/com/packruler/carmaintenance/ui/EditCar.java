@@ -2,7 +2,6 @@ package com.packruler.carmaintenance.ui;
 
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -16,10 +15,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
@@ -29,6 +29,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,6 +90,7 @@ public class EditCar extends Fragment {
     private ImageView vehicleImage;
     private RelativeLayout displayColorIcon;
     private RelativeLayout loadingImageSpinner;
+    private MaterialEditText vehicleColor;
 
     public EditCar() {
         // Required empty public constructor
@@ -108,7 +110,7 @@ public class EditCar extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setHasOptionsMenu(true);
     }
 
     private View rootView;
@@ -118,6 +120,24 @@ public class EditCar extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_edit_car2, container, false);
         rootView.isInEditMode();
+        initializeView();
+
+        return rootView;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        try {
+            Log.v(TAG, "Delete Temp: " + getTempFile().delete());
+        } catch (NullPointerException e) {
+            Log.v(TAG, "Temp NullPointerException");
+        }
+    }
+
+    boolean viewInitialized = false;
+
+    private void initializeView() {
         initializeNameText();
         initializeYearSpinner();
         initializeMakeSpinner();
@@ -128,14 +148,19 @@ public class EditCar extends Fragment {
         initializePower();
         initializeTorque();
         initializeVehicleImage();
-        setMenu();
-        setHighlightColors(getResources().getColor(R.color.material_blue_700));
+        if (vehicle != null && vehicle.getDisplayColor() != 0) {
+            Log.v(TAG, "Palette: " + vehicle.getDisplayColor());
+            setHighlightColors(vehicle.getDisplayColor());
+        } else
+            setHighlightColors(getResources().getColor(R.color.material_deep_orange_500));
 
-        return rootView;
+        viewInitialized = true;
+        if (vehicle != null)
+            loadVehicle();
     }
 
-    private void setMenu() {
-        Menu menu = activity.getToolbar().getMenu();
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         menu.add(getString(R.string.save));
         menu.add(getString(R.string.discard));
@@ -146,21 +171,63 @@ public class EditCar extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
                 Log.v(TAG, item.getTitle().toString());
                 if (item.getTitle().equals(getString(R.string.save)))
-                    saveCar();
+                    saveVehicle();
                 else loadVehicle(null);
                 return false;
             }
         });
+        Log.v(TAG, "onCreateOptionsMenu");
+        Log.v(TAG, "Menu size: " + menu.size());
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getTitle().equals(getString(R.string.save)))
+            saveVehicle();
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void loadVehicle() {
+        if (viewInitialized) {
+            String tempString = vehicle.getName();
+            if (tempString != null) {
+                vehicleName.setText(tempString);
+            }
+            long tempLong = vehicle.getYear();
+            if (tempLong != 0)
+                yearSpinner.setText(tempLong + "");
+
+            tempString = vehicle.getMake();
+            Log.v(TAG, "Make: " + tempString);
+            if (tempString != null)
+                makeSpinner.setText(tempString);
+
+            tempString = vehicle.getModel();
+            if (tempString != null)
+                modelSpinner.setText(tempString);
+
+            tempString = vehicle.getSubmodel();
+            if (tempString != null)
+                modelSpinner.setText(tempString);
+
+            tempString = vehicle.getModel();
+            if (tempString != null)
+                modelSpinner.setText(tempString);
+
+            tempString = vehicle.getModel();
+            if (tempString != null)
+                modelSpinner.setText(tempString);
+
+            tempString = vehicle.getModel();
+            if (tempString != null)
+                modelSpinner.setText(tempString);
+        }
     }
 
     public void loadVehicle(Vehicle in) {
         vehicle = in;
-        String temp = vehicle.getName();
-        Log.v(TAG, "Make: " + vehicle.getMake());
-        if (temp != null) {
-            vehicleName.setText(temp);
-        }
-        Log.v(TAG, "Make: " + vehicle.getMake());
+        loadVehicle();
     }
 
     private int currentColor;
@@ -189,7 +256,7 @@ public class EditCar extends Fragment {
         }
     }
 
-    private void saveCar() {
+    private void saveVehicle() {
         if (vehicle == null) {
             if (vehicleName.getText().length() > 0)
                 vehicle = new Vehicle(carSQL, vehicleName.getText().toString());
@@ -203,9 +270,35 @@ public class EditCar extends Fragment {
             saveModel(values);
             saveSubModel(values);
             saveVIN(values);
-            saveMileage(values);
-            savePower(values);
-            saveTorque(values);
+            StringBuilder alert = null;
+            if (!saveMileage(values)) {
+                Log.v(TAG, "No units selected");
+                alert = new StringBuilder("Please select units for Mileage value");
+            }
+            if (!savePower(values)) {
+                Log.v(TAG, "No units selected");
+
+                if (alert == null)
+                    alert = new StringBuilder("Please select units for Power value");
+                else
+                    alert.append("Please select units for Power value");
+            }
+            if (!saveTorque(values)) {
+                Log.v(TAG, "No units selected");
+
+                if (alert == null)
+                    alert = new StringBuilder("Please select units for Torque value");
+                else
+                    alert.append("Please select units for Torque value");
+            }
+            if (alert != null) {
+                sendToast(alert.toString());
+                return;
+            }
+
+            Log.v(TAG, "Continue past unit check");
+            saveVehicleColor(values);
+            saveDisplayColor(values);
             vehicle.putContentValues(values);
             storeImage();
         }
@@ -511,11 +604,14 @@ public class EditCar extends Fragment {
 //        mileageUnit.setDropDownWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
-    private void saveMileage(ContentValues values) {
-        if (mileage.getText().toString().length() > 0 && !mileageUnit.getText().toString().equals(getString(R.string.units))) {
+    private boolean saveMileage(ContentValues values) {
+        if (mileage.getText().toString().length() > 0) {
+            if (mileageUnit.getText().toString().length() == 0)
+                return false;
             values.put(Vehicle.MILEAGE, Long.valueOf(mileage.getText().toString()));
             values.put(Vehicle.MILEAGE_UNITS, mileageUnit.getText().toString());
         }
+        return true;
     }
 
     private void initializePower() {
@@ -525,11 +621,14 @@ public class EditCar extends Fragment {
 //        powerUnit.setDropDownWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
-    private void savePower(ContentValues values) {
-        if (power.getText().toString().length() > 0 && !powerUnit.getText().toString().equals(getString(R.string.units))) {
+    private boolean savePower(ContentValues values) {
+        if (power.getText().toString().length() > 0) {
+            if (powerUnit.getText().toString().length() == 0)
+                return false;
             values.put(Vehicle.POWER, Integer.valueOf(power.getText().toString()));
             values.put(Vehicle.POWER_UNITS, powerUnit.getText().toString());
         }
+        return true;
     }
 
     private void initializeTorque() {
@@ -539,10 +638,24 @@ public class EditCar extends Fragment {
 //        torqueUnit.setDropDownWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
-    private void saveTorque(ContentValues values) {
-        if (torque.getText().toString().length() > 0 && !torqueUnit.getText().toString().equals(getString(R.string.units))) {
+    private boolean saveTorque(ContentValues values) {
+        if (torque.getText().toString().length() > 0) {
+            if (torqueUnit.getText().toString().length() == 0)
+                return false;
             values.put(Vehicle.TORQUE, Integer.valueOf(torque.getText().toString()));
             values.put(Vehicle.TORQUE_UNITS, powerUnit.getText().toString());
+        }
+        return true;
+    }
+
+    private void saveVehicleColor(ContentValues values) {
+        if (vehicleColor.getText().toString().length() > 0)
+            values.put(Vehicle.COLOR, vehicleColor.getText().toString());
+    }
+
+    private void saveDisplayColor(ContentValues values) {
+        if (currentColor != getResources().getColor(R.color.default_ui_color)) {
+            values.put(Vehicle.DISPLAY_COLOR, currentColor);
         }
     }
 
@@ -550,6 +663,7 @@ public class EditCar extends Fragment {
 
     private void initializeVehicleImage() {
         vehicleImage = (ImageView) rootView.findViewById(R.id.vehicle_image);
+        vehicleColor = (MaterialEditText) rootView.findViewById(R.id.vehicle_color);
         vehicleImage.setOnClickListener(new View.OnClickListener() {
             private final String TAG = "VehicleImageClick";
 
@@ -567,6 +681,7 @@ public class EditCar extends Fragment {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 builder.setItems(getResources().getStringArray(R.array.set_color_options), new DialogInterface.OnClickListener() {
                     private String TAG = "InitialDialog";
+                    private AlertDialog paletteDialog;
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -574,9 +689,7 @@ public class EditCar extends Fragment {
                             case 0:
                                 if (palette != null) {
                                     AlertDialog.Builder secondBuilder = new AlertDialog.Builder(activity);
-                                    RelativeLayout view = new RelativeLayout(activity);
-                                    view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                                            ViewGroup.LayoutParams.MATCH_PARENT));
+                                    paletteDialog = secondBuilder.create();
                                     RecyclerView recyclerView = new RecyclerView(activity);
                                     PaletteAdapter adapter = new PaletteAdapter(activity, palette);
                                     adapter.setOnItemClickListener(new PaletteAdapter.OnItemClickListener() {
@@ -585,19 +698,21 @@ public class EditCar extends Fragment {
                                         @Override
                                         public void onItemClick(int color) {
                                             setLoadedColor(color);
+                                            paletteDialog.dismiss();
                                         }
                                     });
                                     recyclerView.setAdapter(adapter);
-                                    recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-                                    view.addView(recyclerView);
-                                    builder.setView(view);
-                                    builder.setNegativeButton(R.string.cancelbutton, null);
-                                    builder.show();
+                                    recyclerView.setLayoutManager(new GridLayoutManager(activity, 2));
+                                    secondBuilder.setTitle("Select Color");
+                                    secondBuilder.setView(recyclerView);
+                                    secondBuilder.setNegativeButton(R.string.cancelbutton, null);
+                                    paletteDialog = secondBuilder.create();
+                                    paletteDialog.show();
 
                                 } else sendToast("No Image Loaded");
                                 break;
                             case 1:
-                                ColorSelector colorSelector = new ColorSelector(activity, selectedColor, new ColorSelector.OnColorSelectedListener() {
+                                ColorSelector colorSelector = new ColorSelector(activity, currentColor, new ColorSelector.OnColorSelectedListener() {
                                     @Override
                                     public void onColorSelected(int i) {
                                         setLoadedColor(i);
@@ -630,17 +745,6 @@ public class EditCar extends Fragment {
     }
 
     private static final int PIC_CROP = 2;
-
-    private void cropImage(Uri uri) {
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setType("image/*");
-        intent.setData(uri);
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        intent.putExtra("scale", true);
-        intent.putExtra("return-data", true);
-        startActivityForResult(intent, PIC_CROP);
-    }
 
     private void doCrop(final Uri uri) {
         Log.v(TAG, "doCrop Uri: " + uri);
@@ -806,10 +910,9 @@ public class EditCar extends Fragment {
                             mainHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
-                                            bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
+                                    vehicleImage.setImageBitmap(bitmap);
                                     loadingImageSpinner.setVisibility(View.GONE);
-                                    bitmap.recycle();
+
                                 }
                             });
                             Log.d(TAG, "Image Loaded");
@@ -832,15 +935,13 @@ public class EditCar extends Fragment {
             setLoadedColor(palette.getMutedSwatch().getRgb());
     }
 
-    private int selectedColor = Integer.MAX_VALUE;
-
     private void setLoadedColor(final int color) {
         mainHandler.post(new Runnable() {
             private final String TAG = "setLoadedColor";
 
             @Override
             public void run() {
-                selectedColor = color;
+                setHighlightColors(color);
                 displayColorIcon.setBackgroundColor(color);
             }
         });
@@ -860,13 +961,18 @@ public class EditCar extends Fragment {
                         if (!outFile.getParentFile().exists())
                             Log.v(TAG, "Make dirs success: " + outFile.getParentFile().mkdirs());
 
-                        if (!outFile.exists())
+                        boolean fileExisted = outFile.exists();
+                        if (!fileExisted)
                             Log.v(TAG, "Create new file success: " + outFile.createNewFile());
 
                         out = new FileOutputStream(outFile);
                         Bitmap bitmap = BitmapFactory.decodeFile(getTempFile().getPath());
-                        Bitmap.createScaledBitmap(bitmap, bitmap.getScaledWidth(DisplayMetrics.DENSITY_MEDIUM), bitmap.getScaledHeight(DisplayMetrics.DENSITY_MEDIUM), false)
-                                .compress(Bitmap.CompressFormat.JPEG, 90, out);
+                        if (bitmap != null)
+                            Bitmap.createScaledBitmap(bitmap, bitmap.getScaledWidth(DisplayMetrics.DENSITY_MEDIUM), bitmap.getScaledHeight(DisplayMetrics.DENSITY_MEDIUM), false)
+                                    .compress(Bitmap.CompressFormat.JPEG, 90, out);
+                        else
+//                        if (!fileExisted) Log.v(TAG, "Delete outFile: " + outFile.delete());
+
 //                        in = new FileInputStream(temp);
 //                        Log.v(TAG, "Begin move");
 //                        byte[] buffer = new byte[1024];
@@ -875,7 +981,7 @@ public class EditCar extends Fragment {
 //                            out.write(buffer, 0, read);
 //                        }
 
-                        Log.v(TAG, "Delete temp: " + getTempFile().delete());
+                            Log.v(TAG, "Delete temp: " + getTempFile().delete());
                         sendToast("Vehicle Data Stored Successfully");
 
 //                        vehicle.setImagePath(outFile.getPath());
@@ -911,7 +1017,6 @@ public class EditCar extends Fragment {
                 Log.v(TAG, "Select image");
                 if (selected != null) {
                     loadImage(selected, true);
-//                    doCrop(selected);
                 }
                 break;
             case PIC_CROP:
@@ -921,11 +1026,15 @@ public class EditCar extends Fragment {
         }
     }
 
-    private void sendToast(final CharSequence message) {
+    private void sendToast(CharSequence message) {
+        sendToast(message, Toast.LENGTH_LONG);
+    }
+
+    private void sendToast(final CharSequence message, final int length) {
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, message, length).show();
             }
         });
     }

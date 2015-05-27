@@ -4,9 +4,9 @@
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">@color/material_red_500</item>
-        <item name="colorPrimaryDark">@color/material_red_700</item>
-        <item name="colorAccent">@color/material_red_500</item>
+        <item name="colorPrimary">@color/default_ui_color</item>
+        <item name="colorPrimaryDark">@color/default_ui_color</item>
+        <item name="colorAccent">@color/default_ui_color</item>
         <item name="titleTextAppearance">@style/TextAppearance.Widget.AppCompat.Toolbar.Title</item>
 
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>

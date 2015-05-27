@@ -275,7 +275,7 @@ public class EditCarFragment extends android.support.v4.app.Fragment {
 
         setPurchaseDateDisplay(vehicle.getPurchaseDate());
 
-        setPalette(vehicle.getPaletteInt());
+        setPalette(vehicle.getDisplayColor());
     }
 
     public void setVehicle(Vehicle vehicle) {
