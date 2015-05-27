@@ -42,9 +42,6 @@ public class ServiceTask {
                     DETAILS + " STRING," + LOCATION_ID + " STRING," + LOCATION_NAME + " STRING," +
                     COST_UNITS + " STRING" + ")";
 
-//    GeoDataApi geoDataApi = new G
-
-    //    protected ContentValues contentValues = new ContentValues();
     protected long row;
     protected CarSQL carSQL;
     protected SQLDataHandler sqlDataHandler;
@@ -111,40 +108,6 @@ public class ServiceTask {
         return sqlDataHandler.getString(LOCATION_ID);
     }
 
-//    /**
-//     * Check date for collisions and return value that is not colliding
-//     *
-//     * @param date
-//     *         Requested date to set value to
-//     *
-//     * @return value that can be used with the same minute.
-//     *
-//     * @throws RuntimeException
-//     *         if >60,000 values at the same minute have been added to database
-//     */
-//    public long checkDate(long date) {
-//        return checkDate(date, carSQL.getReadableDatabase());
-//    }
-//
-//    private long checkDate(long date, SQLiteDatabase database) {
-//        Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
-//                VEHICLE_NAME + "= \"" + carName + "\" AND " +
-//                        DATE + ">= " + date + " AND " + DATE + "< " + (date + 60000), null, null, null, null, null);
-//
-//        if (!cursor.moveToLast())
-//            Log.v(TAG, "Date input with no collisions");
-//        else if (cursor.getLong(cursor.getColumnIndex(DATE)) == date + 60000)
-//            //TODO: Develop method to go back through all values trying to find first open time
-//            throw new RuntimeException("Attempted to store >60,000 service tasks on the same date");
-//        else {
-//            date = cursor.getLong(cursor.getColumnIndex(DATE)) + 1;
-//            Log.v(TAG, "Collision at date moved to " + date);
-//        }
-//
-//        cursor.close();
-//        return date;
-//    }
-
     public void setDate(long date) {
         sqlDataHandler.putLong(DATE, date);
     }
@@ -154,7 +117,7 @@ public class ServiceTask {
     }
 
     public Date getDate() {
-        return new Date(sqlDataHandler.getLong(DATE));
+        return new Date(getDateLong());
     }
 
     public void setCost(float cost) {

@@ -4,12 +4,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Looper;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.vehicle.Vehicle;
@@ -137,7 +139,7 @@ public class SQLTester extends ActionBarActivity {
                             else
                                 serviceTask.setType("Checkup");
                         }
-
+                        serviceTask.setDate(calendar.getTimeInMillis());
                         serviceTask.setMileage((long) (Math.random() * 10000));
                         serviceTask.setCost((float) (Math.random() * 100));
 
@@ -147,6 +149,12 @@ public class SQLTester extends ActionBarActivity {
                 }
                 carSQL.setTransactionSuccessful();
                 carSQL.endTransaction();
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Done Filling", Toast.LENGTH_LONG).show();
+                    }
+                });
                 Log.d(TAG, "Done filling values in " + (Calendar.getInstance().getTimeInMillis() - begin));
             }
         });

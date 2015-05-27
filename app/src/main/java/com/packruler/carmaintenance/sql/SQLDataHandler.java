@@ -24,6 +24,7 @@ public class SQLDataHandler {
     }
 
     public String getString(String column) {
+        Log.v(TAG, "Selection: " + selection);
         Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
         cursor.moveToFirst();
@@ -114,7 +115,7 @@ public class SQLDataHandler {
     }
 
     public void setContentValues(ContentValues contentValues) {
-        Log.v(TAG, "Content Values: " + contentValues.toString());
+//        Log.v(TAG, "Content Values: " + contentValues.toString());
         carSQL.getWritableDatabase().update(tableName, contentValues, selection, null);
     }
 

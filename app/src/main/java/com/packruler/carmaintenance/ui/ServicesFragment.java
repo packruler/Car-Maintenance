@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -97,7 +98,8 @@ public class ServicesFragment extends Fragment {
             public void onItemClick(View view, int position) {
                 long start = Calendar.getInstance().getTimeInMillis();
                 Cursor cursor = mAdapter.getItem(position);
-                ServiceTask task = new ServiceTask(carSQL, cursor.getLong(0));
+                ServiceTask task = new ServiceTask(carSQL, cursor.getLong(cursor.getColumnIndex(ServiceTask.ID)));
+                Log.v(TAG, "Type: " + task.getType() + " Date: " + DateFormat.getMediumDateFormat(activity).format(task.getDate()));
                 Log.v(TAG, "Loading task took " + (Calendar.getInstance().getTimeInMillis() - start));
                 setSortOrder(ServiceTask.DATE, position % 2 == 0);
             }
