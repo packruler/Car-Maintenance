@@ -33,6 +33,7 @@ public class Vehicle {
     public static final String MILEAGE = "mileage";
     public static final String MILEAGE_UNITS = "mileage_units";
     public static final String COLOR = "color";
+    public static final String PURCHASE_MILEAGE = "purchase_mileage";
     public static final String PURCHASE_DATE = "purchase_date";
     public static final String BOUGHT_FROM = "bought_from";
     public static final String PURCHASE_COST = "purchase_cost";
@@ -44,12 +45,6 @@ public class Vehicle {
     public static final String TORQUE = "torque";
     public static final String TORQUE_UNITS = "torque_units";
     public static final String DISPLAY_COLOR = "display_color";
-
-    public static final String[] RESERVED_WORDS = new String[]{
-            TABLE_NAME, VEHICLE_NAME, MAKE, MODEL, SUBMODEL, YEAR, VIN, WEIGHT, WEIGHT_UNITS, MILEAGE,
-            MILEAGE_UNITS, COLOR, PURCHASE_DATE, BOUGHT_FROM, PURCHASE_COST, COST_UNITS,
-            DISPLACEMENT, DISPLACEMENT_UNITS, POWER, POWER_UNITS, TORQUE, TORQUE_UNITS
-    };
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" +
@@ -63,7 +58,7 @@ public class Vehicle {
                     MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," + COLOR + " STRING," +
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " STRING," +
                     PURCHASE_COST + " FLOAT," + COST_UNITS + " STRING," +
-                    DISPLAY_COLOR + " INTEGER" + ")";
+                    PURCHASE_MILEAGE + " LONG," + DISPLAY_COLOR + " INTEGER" + ")";
 
     protected CarSQL carSQL;
     private String name = "";
@@ -285,6 +280,7 @@ public class Vehicle {
     public void setWeight(long weight) {
         sqlDataHandler.putLong(WEIGHT, weight);
     }
+
 
     public String getWeightUnits() {
         return sqlDataHandler.getString(WEIGHT);

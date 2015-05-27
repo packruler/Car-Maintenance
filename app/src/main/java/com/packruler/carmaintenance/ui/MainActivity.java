@@ -42,7 +42,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, FragmentManager.OnBackStackChangedListener {
 
     private final String TAG = getClass().getName();
     private static final String CAR_NAME_SET = "CAR_NAME_SET";
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity
         getFragmentManager().beginTransaction().replace(R.id.container, new MainFragment()).commit();
 
         mNavigationDrawerFragment.updateDrawer();
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
 
     @Override
@@ -120,12 +121,8 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager.beginTransaction()
                 .replace(R.id.container, editCarFragment)
+                .addToBackStack(name)
                 .commit();
-
-//        Vehicle vehicle = vehicleMap.get(name);
-//        Log.i(TAG, "Vehicle null " + (vehicle == null));
-//        if (vehicle != null)
-//            editCarFragment.setVehicle(vehicle);
     }
 
     public void onSectionAttached(int number) {
@@ -172,6 +169,15 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackStackChanged() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        Log.v("onBackStackChanged", "Count: " + count);
+        if (count == 0) {
+            setUIColor(getResources().getColor(R.color.default_ui_color));
+        }
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -194,7 +200,7 @@ public class MainActivity extends AppCompatActivity
                         @Override
                         public void run() {
                             ServicesFragment servicesFragment = new ServicesFragment(MainActivity.this, vehicleMap.get("THIS CHANGED"), carsSQL);
-                            getFragmentManager().beginTransaction().replace(R.id.container, servicesFragment).commit();
+                            getFragmentManager().beginTransaction().replace(R.id.container, servicesFragment).addToBackStack("Services").commit();
                         }
                     });
                 }

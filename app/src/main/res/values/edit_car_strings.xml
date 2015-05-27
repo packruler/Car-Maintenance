@@ -6,8 +6,8 @@
     <string name="model">Model</string>
     <string name="submodel">Sub-Model</string>
     <string name="year">Year</string>
-    <string name="purchase_cost">Purchase Cost</string>
-    <string name="purchase_date">Purchase Date</string>
+    <string name="cost">Cost</string>
+    <string name="date">Date</string>
     <string name="vin">VIN</string>
 
     <string name="mileage">Mileage</string>
@@ -34,6 +34,12 @@
         <item name="n_m">N·m</item>
     </string-array>
 
+    <string name="weight">Weight</string>
+    <string-array name="weight_units">
+        <item>Pounds</item>
+        <item>Kilogram</item>
+    </string-array>
+
     <string name="save">Save Changes</string>
     <string name="discard">Discard Changes</string>
 
@@ -53,8 +59,9 @@
 
     <string name="store_vehicle_image_message">Store Vehicle Image</string>
     <string name="general_info">General Info:</string>
-    <string name="vehicle_details">Performance Details:</string>
+    <string name="performance_details">Performance Details:</string>
     <string name="visual_details">Visual Details:</string>
+    <string name="purchase_details">Purchase Details:</string>
 
     <string name="palette_colors">Palette Colors(from image)</string>
     <string name="custom_color">Custom Color</string>

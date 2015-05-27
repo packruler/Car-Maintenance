@@ -2,7 +2,6 @@ package com.packruler.carmaintenance.sql;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.util.Log;
 
 /**
  * Created by Packruler on 5/7/15.
@@ -24,7 +23,6 @@ public class SQLDataHandler {
     }
 
     public String getString(String column) {
-        Log.v(TAG, "Selection: " + selection);
         Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
         cursor.moveToFirst();
