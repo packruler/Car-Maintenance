@@ -1,6 +1,5 @@
 package com.packruler.carmaintenance.sql;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -59,6 +58,12 @@ public class SQLTester extends ActionBarActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        poolExecutor.shutdown();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -91,16 +96,18 @@ public class SQLTester extends ActionBarActivity {
     private void fillSQL() {
         Log.i(TAG, "Start Fill");
         long start = Calendar.getInstance().getTimeInMillis();
-        SQLiteDatabase database = carSQL.getWritableDatabase();
-        database.beginTransaction();
-        database.delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_NAME + " LIKE (\'Car%\')", null);
-        database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_NAME + " LIKE (\'Car%\')", null);
-        database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_NAME + " LIKE (\'Car%\')", null);
-        database.delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
-        database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
-        database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
-        database.setTransactionSuccessful();
-        database.endTransaction();
+
+//        SQLiteDatabase database = carSQL.getWritableDatabase();
+//        database.beginTransaction();
+//        database.delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_NAME + " LIKE (\'Car%\')", null);
+//        database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_NAME + " LIKE (\'Car%\')", null);
+//        database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_NAME + " LIKE (\'Car%\')", null);
+//        database.delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
+//        database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
+//        database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
+//        database.setTransactionSuccessful();
+//        database.endTransaction();
+
         Log.i(TAG, "Delete Took " + (Calendar.getInstance().getTimeInMillis() - start));
         HandlerThread handlerThread = new HandlerThread("fillSQL");
         handlerThread.start();
@@ -111,8 +118,7 @@ public class SQLTester extends ActionBarActivity {
             @Override
             public void run() {
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTimeInMillis(0);
-                long begin = Calendar.getInstance().getTimeInMillis();
+                long begin = calendar.getTimeInMillis();
                 carSQL.beginTransaction();
                 for (int x = 0; x < 5; x++) {
                     final Vehicle vehicle = new Vehicle(carSQL, "Car " + x);
@@ -143,7 +149,8 @@ public class SQLTester extends ActionBarActivity {
                         serviceTask.setMileage((long) (Math.random() * 10000));
                         serviceTask.setCost((float) (Math.random() * 100));
 
-                        Log.v(TAG, "Added new task to " + vehicle.getName());
+                        if (y % 100 == 0)
+                            Log.v(TAG, "Added task: " + y + " to " + vehicle.getName());
                     }
                     Log.i(TAG, "3000 tasks took: " + (System.currentTimeMillis() - start));
                 }
@@ -161,17 +168,23 @@ public class SQLTester extends ActionBarActivity {
     }
 
     public void loadSQL() {
-        for (String name : carSQL.getCarNames()) {
-            vehicleMap.put(name, new Vehicle(carSQL, name));
-        }
-        Set<String> names = vehicleMap.keySet();
-        Log.i(TAG, "Car names: " + names.toString());
-        Vehicle vehicle = vehicleMap.get(names.iterator().next());
-        String oldName = vehicle.getName();
+        HandlerThread thread = new HandlerThread("LoadSQL");
+        thread.start();
+        new Handler(thread.getLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                for (String name : carSQL.getCarNames()) {
+                    vehicleMap.put(name, new Vehicle(carSQL, name));
+                }
+                Set<String> names = vehicleMap.keySet();
+                Log.i(TAG, "Car names: " + names.toString());
+                Vehicle vehicle = vehicleMap.get(names.iterator().next());
 
-        vehicle.setName("THIS CHANGED");
+                vehicle.setName("THIS CHANGED");
 
-        Log.d(TAG, "Name Changed");
-        Log.d(TAG, "SQL updated");
+                Log.d(TAG, "Name Changed");
+                Log.d(TAG, "SQL updated");
+            }
+        });
     }
 }

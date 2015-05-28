@@ -162,18 +162,11 @@ public class EditCar extends Fragment {
                 initializeVehicleImage();
 
                 viewInitialized = true;
-                mainHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (vehicle != null && vehicle.getDisplayColor() != 0) {
-                            Log.v(TAG, "Palette: " + vehicle.getDisplayColor());
-                            setHighlightColors(vehicle.getDisplayColor());
-                        } else
-                            setHighlightColors(getResources().getColor(R.color.material_deep_orange_500));
-                        if (vehicle != null)
-                            loadVehicle();
-                    }
-                });
+                if (vehicle == null || vehicle.getDisplayColor() == 0)
+                    setHighlightColors(getResources().getColor(R.color.default_ui_color));
+
+                if (vehicle != null)
+                    loadVehicle();
             }
         });
     }
@@ -260,24 +253,30 @@ public class EditCar extends Fragment {
     private void setHighlightColors(int color) {
         if (currentColor != color) {
             currentColor = color;
-            activity.setUIColor(color);
-            yearSpinner.setPrimaryColor(color);
-            makeSpinner.setPrimaryColor(color);
-            modelSpinner.setPrimaryColor(color);
+            mainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    activity.setUIColor(currentColor);
+                    yearSpinner.setPrimaryColor(currentColor);
+                    makeSpinner.setPrimaryColor(currentColor);
+                    modelSpinner.setPrimaryColor(currentColor);
 
-            ((TextView) rootView.findViewById(R.id.general_info_title)).setTextColor(color);
-            ((TextView) rootView.findViewById(R.id.details_title)).setTextColor(color);
-            ((TextView) rootView.findViewById(R.id.visual_details_title)).setTextColor(color);
+                    ((TextView) rootView.findViewById(R.id.general_info_title)).setTextColor(currentColor);
+                    ((TextView) rootView.findViewById(R.id.performance_details_title)).setTextColor(currentColor);
+                    ((TextView) rootView.findViewById(R.id.visual_details_title)).setTextColor(currentColor);
+                    ((TextView) rootView.findViewById(R.id.purchase_details_title)).setTextColor(currentColor);
 
-            vehicleName.setPrimaryColor(color);
-            vin.setPrimaryColor(color);
-            subModel.setPrimaryColor(color);
-            mileage.setPrimaryColor(color);
-            mileageUnit.setPrimaryColor(color);
-            power.setPrimaryColor(color);
-            powerUnit.setPrimaryColor(color);
-            torque.setPrimaryColor(color);
-            torqueUnit.setPrimaryColor(color);
+                    vehicleName.setPrimaryColor(currentColor);
+                    vin.setPrimaryColor(currentColor);
+                    subModel.setPrimaryColor(currentColor);
+                    mileage.setPrimaryColor(currentColor);
+                    mileageUnit.setPrimaryColor(currentColor);
+                    power.setPrimaryColor(currentColor);
+                    powerUnit.setPrimaryColor(currentColor);
+                    torque.setPrimaryColor(currentColor);
+                    torqueUnit.setPrimaryColor(currentColor);
+                }
+            });
         }
     }
 
@@ -359,69 +358,63 @@ public class EditCar extends Fragment {
         for (int x = 1984; x <= Calendar.getInstance().get(Calendar.YEAR) + 1; x++) {
             yearList.add(0, x + "");
         }
-        mainHandler.post(new Runnable() {
+        yearSpinner.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, yearList));
+        yearSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            private final String TAG = "YearSpinnerItemClick";
+
             @Override
-            public void run() {
-                yearSpinner.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, yearList));
-                ((ArrayAdapter) yearSpinner.getAdapter()).setNotifyOnChange(true);
-                yearSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    private final String TAG = "YearSpinnerItemClick";
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (yearSpinner.getAdapter().getItem(position).equals(getString(R.string.other_selection))) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                    builder.setTitle(R.string.year);
 
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        if (yearSpinner.getAdapter().getItem(position).equals(getString(R.string.other_selection))) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                            builder.setTitle(R.string.year);
+                    final MaterialEditText editText = new MaterialEditText(activity);
+                    editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
+                    editText.setPrimaryColor(currentColor);
 
-                            final MaterialEditText editText = new MaterialEditText(activity);
-                            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
-                            editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
-                            editText.setPrimaryColor(currentColor);
+                    builder.setView(editText);
+                    builder.setPositiveButton(R.string.accept, null);
+                    builder.setNegativeButton(R.string.discard, null);
+                    final AlertDialog dialog = builder.create();
 
-                            builder.setView(editText);
-                            builder.setPositiveButton(R.string.accept, null);
-                            builder.setNegativeButton(R.string.discard, null);
-                            final AlertDialog dialog = builder.create();
+                    dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                        private String TAG = "YearOther";
 
-                            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                                private String TAG = "YearOther";
+                        @Override
+                        public void onShow(DialogInterface d) {
+                            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                                private final String TAG = "PositiveClick";
 
                                 @Override
-                                public void onShow(DialogInterface d) {
-                                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-                                        private final String TAG = "PositiveClick";
+                                public void onClick(View v) {
 
-                                        @Override
-                                        public void onClick(View v) {
+                                    String entry = editText.getText().toString();
+                                    try {
+                                        int value = Integer.valueOf(entry);
 
-                                            String entry = editText.getText().toString();
-                                            try {
-                                                int value = Integer.valueOf(entry);
-
-                                                if (entry.length() != 4)
-                                                    sendToast("Please enter full year\nExample: 2015");
-                                                else if (value < 1900 || value > Calendar.getInstance().get(Calendar.YEAR) + 1)
-                                                    sendToast("Please enter valid year\n(1900-Current Year + 1)");
-                                                else {
-                                                    yearSpinner.setText(editText.getText().toString());
-                                                    updateMakeSpinner();
-                                                    dialog.cancel();
-                                                }
-
-                                            } catch (NumberFormatException e) {
-                                                sendToast("Please enter valid year\nExample: 2015");
-                                            }
+                                        if (entry.length() != 4)
+                                            sendToast("Please enter full year\nExample: 2015");
+                                        else if (value < 1900 || value > Calendar.getInstance().get(Calendar.YEAR) + 1)
+                                            sendToast("Please enter valid year\n(1900-Current Year + 1)");
+                                        else {
+                                            yearSpinner.setText(editText.getText().toString());
+                                            updateMakeSpinner();
+                                            dialog.cancel();
                                         }
-                                    });
+
+                                    } catch (NumberFormatException e) {
+                                        sendToast("Please enter valid year\nExample: 2015");
+                                    }
                                 }
                             });
-
-                            dialog.show();
-                        } else {
-                            updateMakeSpinner();
                         }
-                    }
-                });
+                    });
+
+                    dialog.show();
+                } else {
+                    updateMakeSpinner();
+                }
             }
         });
     }
@@ -437,12 +430,8 @@ public class EditCar extends Fragment {
         makeList.add(getString(R.string.other_selection));
 
         makeSpinner = (MaterialBetterSpinner) rootView.findViewById(R.id.make);
-        mainHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                makeSpinner.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, makeList));
-            }
-        });
+
+        makeSpinner.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, makeList));
 
         makeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -528,12 +517,7 @@ public class EditCar extends Fragment {
         modelSpinner = (MaterialBetterSpinner) rootView.findViewById(R.id.model);
         modelList.add(getString(R.string.other_selection));
 
-        mainHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                modelSpinner.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, modelList));
-            }
-        });
+        modelSpinner.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, modelList));
 
         modelSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             private final String TAG = "ModelSpinnerItemClick";
@@ -741,8 +725,6 @@ public class EditCar extends Fragment {
         }
     }
 
-    private Palette palette;
-
     private void initializeVehicleImage() {
         vehicleImage = (ImageView) rootView.findViewById(R.id.vehicle_image);
         vehicleColor = (MaterialEditText) rootView.findViewById(R.id.vehicle_color);
@@ -769,11 +751,11 @@ public class EditCar extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
-                                if (palette != null) {
+                                if (swatches != null) {
                                     AlertDialog.Builder secondBuilder = new AlertDialog.Builder(activity);
                                     paletteDialog = secondBuilder.create();
                                     RecyclerView recyclerView = new RecyclerView(activity);
-                                    PaletteAdapter adapter = new PaletteAdapter(activity, palette);
+                                    PaletteAdapter adapter = new PaletteAdapter(swatches);
                                     adapter.setOnItemClickListener(new PaletteAdapter.OnItemClickListener() {
                                         private String TAG = "AdapterOnClick";
 
@@ -997,7 +979,7 @@ public class EditCar extends Fragment {
                                 }
                             });
                             Log.d(TAG, "Image Loaded");
-                            palette = Palette.from(bitmap).maximumColorCount(30).generate();
+                            loadSwatches(Palette.from(bitmap).maximumColorCount(30).generate());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -1009,12 +991,39 @@ public class EditCar extends Fragment {
             loadingImageSpinner.setVisibility(View.GONE);
     }
 
+    List<Palette.Swatch> swatches;
+
+    private void loadSwatches(Palette palette) {
+        swatches = palette.getSwatches();
+//        swatches = new LinkedList<>();
+//        for (Palette.Swatch swatch : palette.getSwatches()) {
+//            if (swatches.isEmpty())
+//                swatches.add(swatch);
+//            else {
+//                boolean added = false;
+//                for (int x = 0; x < swatches.size(); x++) {
+//                    if (swatch.getPopulation() > swatches.get(x).getPopulation()) {
+//                        swatches.add(x, swatch);
+//                        added = true;
+//                        break;
+//                    }
+//                }
+//                if (!added)
+//                    swatches.add(swatch);
+//            }
+//        }
+    }
+
     private void setLoadedColor(Palette palette) {
-        this.palette = palette;
+        loadSwatches(palette);
         if (palette.getVibrantSwatch() != null)
             setLoadedColor(palette.getVibrantSwatch().getRgb());
+        else if (palette.getDarkMutedSwatch() != null)
+            setLoadedColor(palette.getDarkMutedSwatch().getRgb());
         else if (palette.getMutedSwatch() != null)
             setLoadedColor(palette.getMutedSwatch().getRgb());
+        else
+            setLoadedColor(swatches.get(0).getRgb());
     }
 
     private void setLoadedColor(final int color) {
@@ -1086,6 +1095,10 @@ public class EditCar extends Fragment {
                 }
             });
         }
+    }
+
+    private void initializePurchaseDate() {
+
     }
 
     @Override

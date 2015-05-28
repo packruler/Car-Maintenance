@@ -1,8 +1,8 @@
 package com.packruler.carmaintenance.ui.adapters;
 
-import android.content.Context;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +15,16 @@ import java.util.List;
  * Created by Packruler on 5/26/15.
  */
 public class PaletteAdapter extends RecyclerView.Adapter<PaletteAdapter.ViewHolder> {
+    private final String TAG = getClass().getName();
     private List<Palette.Swatch> swatches;
-    private Context context;
 
-    public PaletteAdapter(Context context, Palette palette) {
-        swatches = palette.getSwatches();
-        this.context = context;
+    public PaletteAdapter(List<Palette.Swatch> swatches) {
+        this.swatches = swatches;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.palette_selector, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.palette_selector, parent, false);
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,6 +36,8 @@ public class PaletteAdapter extends RecyclerView.Adapter<PaletteAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        Palette.Swatch swatch = swatches.get(position);
+        Log.v(TAG, "Postition: " + position + " Population: " + swatch.getPopulation());
         holder.setColor(swatches.get(position).getRgb());
     }
 

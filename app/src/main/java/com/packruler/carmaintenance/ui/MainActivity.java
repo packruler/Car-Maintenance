@@ -30,6 +30,7 @@ import com.freshdesk.mobihelp.Mobihelp;
 import com.freshdesk.mobihelp.MobihelpConfig;
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.CarSQL;
+import com.packruler.carmaintenance.ui.utilities.ToolbarColorizeHelper;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.util.ArrayList;
@@ -71,6 +72,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        }
         Mobihelp.init(this, new MobihelpConfig("https://packruler.freshdesk.com", "carmaintenance-1-6a1ff09c57e9c2df0374ba007bcc9be7", "684a7217edaf7a384db1a10d98b76164430821db"));
 
         Log.i(TAG, "New MainActivity");
@@ -244,11 +249,10 @@ public class MainActivity extends AppCompatActivity
     public void setUIColor(int color) {
         Palette.Swatch swatch = new Palette.Swatch(color, 100);
         toolbar.setBackgroundColor(color);
-        MainActivity.colorizeToolbar(toolbar, swatch.getBodyTextColor(), this);
+        ToolbarColorizeHelper.colorizeToolbar(toolbar, swatch.getTitleTextColor(), this);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(color);
             window.setNavigationBarColor(color);
         }

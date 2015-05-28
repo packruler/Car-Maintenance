@@ -48,7 +48,7 @@ public class PartReplacement extends ServiceTask {
         ContentValues contentValues = new ContentValues();
         contentValues.put(VEHICLE_NAME, carName);
         row = database.insert(TABLE_NAME, null, contentValues);
-        Log.v(TAG, "Row: " + row);
+//        Log.v(TAG, "Row: " + row);
 
         sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
                 ID + "= " + row);
