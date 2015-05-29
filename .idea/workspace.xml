@@ -56,12 +56,9 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.packruler.carmaintenance" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b150856a-4955-4538-bbe1-94377f603e98" name="Default" comment="Reworked EditCar menus for better reliability&#10;Updated unit strings">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_custom_webview_screen.xml" afterPath="$PROJECT_DIR$/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_custom_webview_screen.xml" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_custom_webview_screen.xml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_custom_webview_screen.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_video_loading.xml" afterPath="$PROJECT_DIR$/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_video_loading.xml" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_video_loading.xml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_video_loading.xml" />
+    <list default="true" id="b150856a-4955-4538-bbe1-94377f603e98" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/workspace.xml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/workspace.xml" />
     </list>
     <ignored path="Material Car Maintenance.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -174,7 +171,7 @@
       <file leaf-file-name="EditCar.java" pinned="false" current-in-tab="true">
         <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47684392">
+            <state vertical-scroll-proportion="0.38421956">
               <caret line="1141" column="81" selection-start-line="1141" selection-start-column="81" selection-end-line="1141" selection-end-column="81" />
               <folding>
                 <element signature="e#2280#2313#0" expanded="true" />
@@ -208,12 +205,14 @@
                 <element signature="method#initializeYearSpinner#0;class#EditCar#0" expanded="true" />
                 <element signature="e#13167#13203#0" expanded="true" />
                 <element signature="e#13383#13418#0" expanded="true" />
+                <element signature="e#13463#16395#0" expanded="true" />
                 <element signature="e#13630#13665#0" expanded="true" />
                 <element signature="e#13792#13805#0" expanded="true" />
                 <element signature="e#14214#14229#0" expanded="true" />
                 <element signature="e#14231#14235#0" expanded="true" />
                 <element signature="e#14284#14300#0" expanded="true" />
                 <element signature="e#14302#14306#0" expanded="true" />
+                <element signature="e#16394#16395#0" expanded="true" />
                 <element signature="method#saveYear#0;class#EditCar#0" expanded="true" />
                 <element signature="method#initializeMakeSpinner#0;class#EditCar#0" expanded="true" />
                 <element signature="e#16714#16749#0" expanded="true" />
@@ -3260,14 +3259,8 @@
               <option name="myItemId" value="Material Car Maintenance" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Material Car Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="mobihelp_sdk_android_v1.4" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3277,7 +3270,7 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="mobihelp_sdk_android_v1.4" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -3291,7 +3284,7 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="mobihelp_sdk_android_v1.4" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -3299,7 +3292,7 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
+              <option name="myItemId" value="menu" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3309,7 +3302,7 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="mobihelp_sdk_android_v1.4" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -3319,6 +3312,48 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Material Car Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Material Car Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Material Car Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="carmaintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -3351,21 +3386,21 @@
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///home/packruler/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="250" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="253" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="267" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="270" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="271" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="275" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1047" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1050" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="252" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="255" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="266" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="269" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="271" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="275" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1046" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1049" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="com.google.gct.idea.git.username" value="packruler@gmail.com" />
     <property name="restartRequiresConfirmation" value="true" />
@@ -3991,6 +4026,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="224" column="78" selection-start-line="224" selection-start-column="78" selection-end-line="224" selection-end-column="78" />
+          <folding>
+            <element signature="method#onOptionsItemSelected#0;class#NavigationDrawerFragment#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -4033,6 +4071,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="180" column="66" selection-start-line="180" selection-start-column="66" selection-end-line="180" selection-end-column="72" />
+          <folding>
+            <element signature="e#1342#1344#0" expanded="false" />
+            <element signature="e#1564#1574#0" expanded="false" />
+            <element signature="method#onCreateOptionsMenu#0;class#SQLTester#0" expanded="false" />
+            <element signature="method#onDestroy#0;class#SQLTester#0" expanded="false" />
+            <element signature="method#onOptionsItemSelected#0;class#SQLTester#0" expanded="false" />
+            <element signature="e#2844#2853#0" expanded="false" />
+            <element signature="method#fillSQL#0;class#SQLTester#0" expanded="false" />
+            <element signature="e#3156#3168#0" expanded="false" />
+            <element signature="class#4303:6993" expanded="false" />
+            <element signature="method#run#0;class#4303:6993" expanded="false" />
+            <element signature="e#6626#6859#0" expanded="false" />
+            <element signature="e#6777#6791#0" expanded="false" />
+            <element signature="e#6858#6859#0" expanded="false" />
+            <element signature="e#7161#7733#0" expanded="false" />
+            <element signature="e#7650#7664#0" expanded="false" />
+            <element signature="e#7694#7707#0" expanded="false" />
+            <element signature="e#7732#7733#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -4065,6 +4122,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.39609236">
           <caret line="65" column="24" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="24" />
+          <folding>
+            <element signature="method#close#0;class#CarSQL#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -4499,7 +4559,7 @@
     </entry>
     <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47684392">
+        <state vertical-scroll-proportion="0.38421956">
           <caret line="1141" column="81" selection-start-line="1141" selection-start-column="81" selection-end-line="1141" selection-end-column="81" />
           <folding>
             <element signature="e#2280#2313#0" expanded="true" />
@@ -4533,12 +4593,14 @@
             <element signature="method#initializeYearSpinner#0;class#EditCar#0" expanded="true" />
             <element signature="e#13167#13203#0" expanded="true" />
             <element signature="e#13383#13418#0" expanded="true" />
+            <element signature="e#13463#16395#0" expanded="true" />
             <element signature="e#13630#13665#0" expanded="true" />
             <element signature="e#13792#13805#0" expanded="true" />
             <element signature="e#14214#14229#0" expanded="true" />
             <element signature="e#14231#14235#0" expanded="true" />
             <element signature="e#14284#14300#0" expanded="true" />
             <element signature="e#14302#14306#0" expanded="true" />
+            <element signature="e#16394#16395#0" expanded="true" />
             <element signature="method#saveYear#0;class#EditCar#0" expanded="true" />
             <element signature="method#initializeMakeSpinner#0;class#EditCar#0" expanded="true" />
             <element signature="e#16714#16749#0" expanded="true" />
