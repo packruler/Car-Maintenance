@@ -6,39 +6,19 @@
     <string name="model">Model</string>
     <string name="submodel">Sub-Model</string>
     <string name="year">Year</string>
-    <string name="cost">Cost</string>
+    <string name="purchase_cost">Purchase Cost</string>
     <string name="date">Date</string>
     <string name="vin">VIN</string>
 
     <string name="mileage">Mileage</string>
-    <string-array name="large_distance_units">
-        <item name="mile">Miles</item>
-        <item name="kilometer">Kilometers</item>
-    </string-array>
-    <string-array name="small_distance_units">
-        <item name="feet">Feet</item>
-        <item name="inch">Inches</item>
-        <item name="meter">Meter</item>
-        <item name="centimeter">Centimeter</item>
-    </string-array>
 
     <string name="power">Power</string>
-    <string-array name="power_units">
-        <item name="horsepower">Horsepower</item>
-        <item name="kw">Kilowatts</item>
-    </string-array>
 
     <string name="torque">Torque</string>
-    <string-array name="torque_units">
-        <item name="lb_ft">LB·FT</item>
-        <item name="n_m">N·m</item>
-    </string-array>
+
 
     <string name="weight">Weight</string>
-    <string-array name="weight_units">
-        <item>Pounds</item>
-        <item>Kilogram</item>
-    </string-array>
+
 
     <string name="save">Save Changes</string>
     <string name="discard">Discard Changes</string>

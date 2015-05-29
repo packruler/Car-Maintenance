@@ -20,11 +20,13 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.Spanned;
+import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,8 +35,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -46,10 +47,10 @@ import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.ui.adapters.CropOptionAdapter;
 import com.packruler.carmaintenance.ui.adapters.PaletteAdapter;
+import com.packruler.carmaintenance.ui.utilities.MaterialPopupHandler;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rengwuxian.materialedittext.validation.METValidator;
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -57,6 +58,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -76,23 +78,29 @@ public class EditCar extends Fragment {
     private Vehicle vehicle;
 
     private MaterialEditText vehicleName;
-    private MaterialBetterSpinner yearSpinner;
-    private MaterialBetterSpinner makeSpinner;
-    private MaterialBetterSpinner modelSpinner;
+    private MaterialEditText yearSpinner;
+    private MaterialEditText make;
+    private MaterialPopupHandler makePopup;
+    private MaterialEditText model;
+    private MaterialPopupHandler modelPopup;
     private MaterialEditText subModel;
     private MaterialEditText vin;
     private MaterialEditText mileage;
-    private MaterialBetterSpinner mileageUnit;
+    private MaterialEditText mileageUnit;
     private MaterialEditText power;
-    private MaterialBetterSpinner powerUnit;
+    private MaterialEditText powerUnit;
     private MaterialEditText torque;
-    private MaterialBetterSpinner torqueUnit;
+    private MaterialEditText torqueUnit;
     private ImageView vehicleImage;
     private RelativeLayout displayColorIcon;
     private RelativeLayout loadingImageSpinner;
     private MaterialEditText vehicleColor;
     private MaterialEditText weight;
-    private MaterialBetterSpinner weightUnits;
+    private MaterialEditText weightUnits;
+    private MaterialEditText purchaseDate;
+    private AlertDialog datePickerDialog;
+    private MaterialEditText purchaseCost;
+    private MaterialEditText purchaseCostUnit;
 
     public EditCar() {
         // Required empty public constructor
@@ -101,11 +109,7 @@ public class EditCar extends Fragment {
     public EditCar(MainActivity activity, CarSQL carSQL) {
         this.carSQL = carSQL;
         this.activity = activity;
-        try {
-            availableCarsSQL = new AvailableCarsSQL(this.activity);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        availableCarsSQL = activity.getAvailableCarsSQL();
     }
 
 
@@ -160,6 +164,7 @@ public class EditCar extends Fragment {
                 initializePower();
                 initializeTorque();
                 initializeVehicleImage();
+                initializePurchaseCost();
 
                 viewInitialized = true;
                 if (vehicle == null || vehicle.getDisplayColor() == 0)
@@ -167,6 +172,8 @@ public class EditCar extends Fragment {
 
                 if (vehicle != null)
                     loadVehicle();
+
+                initializePurchaseDate();
             }
         });
     }
@@ -215,27 +222,27 @@ public class EditCar extends Fragment {
             tempString = vehicle.getMake();
             Log.v(TAG, "Make: " + tempString);
             if (tempString != null)
-                makeSpinner.setText(tempString);
+                make.setText(tempString);
 
             tempString = vehicle.getModel();
             if (tempString != null)
-                modelSpinner.setText(tempString);
+                model.setText(tempString);
 
             tempString = vehicle.getSubmodel();
             if (tempString != null)
-                modelSpinner.setText(tempString);
+                model.setText(tempString);
 
             tempString = vehicle.getModel();
             if (tempString != null)
-                modelSpinner.setText(tempString);
+                model.setText(tempString);
 
             tempString = vehicle.getModel();
             if (tempString != null)
-                modelSpinner.setText(tempString);
+                model.setText(tempString);
 
             tempString = vehicle.getModel();
             if (tempString != null)
-                modelSpinner.setText(tempString);
+                model.setText(tempString);
 
             tempLong = vehicle.getDisplayColor();
             if (tempLong != 0)
@@ -246,6 +253,7 @@ public class EditCar extends Fragment {
     public void loadVehicle(Vehicle in) {
         vehicle = in;
         loadVehicle();
+        loadPurchaseDate();
     }
 
     private int currentColor;
@@ -258,8 +266,8 @@ public class EditCar extends Fragment {
                 public void run() {
                     activity.setUIColor(currentColor);
                     yearSpinner.setPrimaryColor(currentColor);
-                    makeSpinner.setPrimaryColor(currentColor);
-                    modelSpinner.setPrimaryColor(currentColor);
+                    make.setPrimaryColor(currentColor);
+                    model.setPrimaryColor(currentColor);
 
                     ((TextView) rootView.findViewById(R.id.general_info_title)).setTextColor(currentColor);
                     ((TextView) rootView.findViewById(R.id.performance_details_title)).setTextColor(currentColor);
@@ -297,34 +305,43 @@ public class EditCar extends Fragment {
             StringBuilder alert = null;
             if (!saveMileage(values)) {
                 Log.v(TAG, "No units selected");
-                alert = new StringBuilder("Please select units for Mileage value");
+                alert = new StringBuilder("Please select units for " + getString(R.string.mileage) + " value");
             }
 
             if (!saveWeight(values)) {
                 Log.v(TAG, "No units selected");
 
                 if (alert == null)
-                    alert = new StringBuilder("Please select units for Weight value");
+                    alert = new StringBuilder("Please select units for " + getString(R.string.weight) + " value");
                 else
-                    alert.append("Please select units for Weight value");
+                    alert.append("Please select units for " + getString(R.string.weight) + " value");
             }
 
             if (!savePower(values)) {
                 Log.v(TAG, "No units selected");
 
                 if (alert == null)
-                    alert = new StringBuilder("Please select units for Power value");
+                    alert = new StringBuilder("Please select units for " + getString(R.string.power) + " value");
                 else
-                    alert.append("Please select units for Power value");
+                    alert.append("Please select units for " + getString(R.string.power) + " value");
             }
 
             if (!saveTorque(values)) {
                 Log.v(TAG, "No units selected");
 
                 if (alert == null)
-                    alert = new StringBuilder("Please select units for Torque value");
+                    alert = new StringBuilder("Please select units for " + getString(R.string.torque) + " value");
                 else
-                    alert.append("Please select units for Torque value");
+                    alert.append("Please select units for " + getString(R.string.torque) + " value");
+            }
+
+            if (!savePurchaseCost(values)) {
+                Log.v(TAG, "No units selected");
+
+                if (alert == null)
+                    alert = new StringBuilder("Please select units for " + getString(R.string.purchase_cost) + " value");
+                else
+                    alert.append("Please select units for " + getString(R.string.purchase_cost) + " value");
             }
 
             if (alert != null) {
@@ -335,6 +352,7 @@ public class EditCar extends Fragment {
             Log.v(TAG, "Continue past unit check");
             saveVehicleColor(values);
             saveDisplayColor(values);
+            savePurchaseDate(values);
             vehicle.putContentValues(values);
             storeImage();
         }
@@ -345,26 +363,21 @@ public class EditCar extends Fragment {
         vehicleName.setInputType(InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
     }
 
-    private void saveName(ContentValues values) {
-        if (vehicleName.getText().toString().length() > 0)
-            values.put(Vehicle.YEAR, yearSpinner.getText().toString());
-    }
-
     private void initializeYearSpinner() {
-        yearSpinner = (MaterialBetterSpinner) rootView.findViewById(R.id.year);
-        final List<String> yearList = new LinkedList<>();
+        yearSpinner = (MaterialEditText) rootView.findViewById(R.id.year);
+        yearSpinner.setPrimaryColor(currentColor);
+        final MaterialPopupHandler popup = new MaterialPopupHandler((RelativeLayout) rootView.findViewWithTag(getString(R.string.container_layout))
+                , yearSpinner);
 
-        yearList.add(getString(R.string.other_selection));
-        for (int x = 1984; x <= Calendar.getInstance().get(Calendar.YEAR) + 1; x++) {
-            yearList.add(0, x + "");
+        for (int x = Calendar.getInstance().get(Calendar.YEAR) + 1; x >= 1984; x--) {
+            popup.add(x + "");
         }
-        yearSpinner.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, yearList));
-        yearSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            private final String TAG = "YearSpinnerItemClick";
+        popup.add(getString(R.string.other_selection));
 
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (yearSpinner.getAdapter().getItem(position).equals(getString(R.string.other_selection))) {
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getTitle().equals(getString(R.string.other_selection))) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     builder.setTitle(R.string.year);
 
@@ -376,14 +389,14 @@ public class EditCar extends Fragment {
                     builder.setView(editText);
                     builder.setPositiveButton(R.string.accept, null);
                     builder.setNegativeButton(R.string.discard, null);
-                    final AlertDialog dialog = builder.create();
+                    final AlertDialog otherDialog = builder.create();
 
-                    dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    otherDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                         private String TAG = "YearOther";
 
                         @Override
                         public void onShow(DialogInterface d) {
-                            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                            otherDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
                                 private final String TAG = "PositiveClick";
 
                                 @Override
@@ -400,7 +413,7 @@ public class EditCar extends Fragment {
                                         else {
                                             yearSpinner.setText(editText.getText().toString());
                                             updateMakeSpinner();
-                                            dialog.cancel();
+                                            otherDialog.cancel();
                                         }
 
                                     } catch (NumberFormatException e) {
@@ -411,10 +424,12 @@ public class EditCar extends Fragment {
                         }
                     });
 
-                    dialog.show();
+                    otherDialog.show();
                 } else {
+                    yearSpinner.setText(item.getTitle());
                     updateMakeSpinner();
                 }
+                return true;
             }
         });
     }
@@ -429,29 +444,18 @@ public class EditCar extends Fragment {
     private void initializeMakeSpinner() {
         makeList.add(getString(R.string.other_selection));
 
-        makeSpinner = (MaterialBetterSpinner) rootView.findViewById(R.id.make);
+        make = (MaterialEditText) rootView.findViewById(R.id.make);
 
-        makeSpinner.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, makeList));
+        makePopup = new MaterialPopupHandler((RelativeLayout) rootView.findViewWithTag(getString(R.string.container_layout))
+                , make);
+        makePopup.setList(makeList);
 
-        makeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.v(TAG, "Item selected");
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Log.v(TAG, "Nothing Selected");
-            }
-        });
-
-        makeSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            private final String TAG = "MakeSpinnerItemClick";
+        makePopup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            private final String TAG = "MakeItemClick";
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.v(TAG, "Selected: " + makeSpinner.getAdapter().getItem(position));
-                if (makeSpinner.getAdapter().getItem(position).equals(getString(R.string.other_selection))) {
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getTitle().equals(getString(R.string.other_selection))) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     builder.setTitle(R.string.make);
 
@@ -474,7 +478,7 @@ public class EditCar extends Fragment {
 
                                 @Override
                                 public void onClick(View v) {
-                                    makeSpinner.setText(editText.getText().toString());
+                                    make.setText(editText.getText().toString());
                                     updateModelSpinner();
                                     dialog.cancel();
                                 }
@@ -484,9 +488,10 @@ public class EditCar extends Fragment {
 
                     dialog.show();
                 } else {
+                    make.setText(item.getTitle());
                     updateModelSpinner();
                 }
-
+                return true;
             }
         });
     }
@@ -498,34 +503,36 @@ public class EditCar extends Fragment {
         makeList.addAll(availableCarsSQL.getAvailableMakes(yearSpinner.getText().toString()));
         makeList.add(getString(R.string.other_selection));
 
-        ((ArrayAdapter) makeSpinner.getAdapter()).notifyDataSetChanged();
+        makePopup.setList(makeList);
 
-        if (!makeList.contains(makeSpinner.getText().toString())) {
-            makeSpinner.setText("");
+        if (!makeList.contains(make.getText().toString())) {
+            make.setText("");
             updateModelSpinner();
         }
     }
 
     private void saveMake(ContentValues values) {
-        if (makeSpinner.getText().toString().length() > 0)
-            values.put(Vehicle.MAKE, makeSpinner.getText().toString());
+        if (make.getText().toString().length() > 0)
+            values.put(Vehicle.MAKE, make.getText().toString());
     }
 
     private List<String> modelList = new LinkedList<>();
 
     private void initializeModelSpinner() {
-        modelSpinner = (MaterialBetterSpinner) rootView.findViewById(R.id.model);
+        model = (MaterialEditText) rootView.findViewById(R.id.model);
         modelList.add(getString(R.string.other_selection));
 
-        modelSpinner.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, modelList));
+        modelPopup = new MaterialPopupHandler((RelativeLayout) rootView.findViewWithTag(getString(R.string.container_layout))
+                , model);
+        modelPopup.setList(modelList);
 
-        modelSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        modelPopup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             private final String TAG = "ModelSpinnerItemClick";
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.v(TAG, "Selected: " + modelSpinner.getAdapter().getItem(position));
-                if (modelSpinner.getAdapter().getItem(position).equals(getString(R.string.other_selection))) {
+            public boolean onMenuItemClick(MenuItem item) {
+                Log.v(TAG, "Selected: " + item.getTitle());
+                if (item.getTitle().equals(getString(R.string.other_selection))) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     builder.setTitle(R.string.model);
 
@@ -548,7 +555,7 @@ public class EditCar extends Fragment {
 
                                 @Override
                                 public void onClick(View v) {
-                                    modelSpinner.setText(editText.getText().toString());
+                                    model.setText(editText.getText().toString());
                                     dialog.cancel();
                                 }
                             });
@@ -556,7 +563,10 @@ public class EditCar extends Fragment {
                     });
 
                     dialog.show();
-                }
+                } else
+                    model.setText(item.getTitle());
+
+                return true;
             }
         });
     }
@@ -564,18 +574,18 @@ public class EditCar extends Fragment {
     private void updateModelSpinner() {
         modelList.clear();
 
-        modelList.addAll(availableCarsSQL.getAvailableModels(yearSpinner.getText().toString(), makeSpinner.getText().toString()));
+        modelList.addAll(availableCarsSQL.getAvailableModels(yearSpinner.getText().toString(), make.getText().toString()));
         modelList.add(getString(R.string.other_selection));
 
-        ((ArrayAdapter) modelSpinner.getAdapter()).notifyDataSetChanged();
+        modelPopup.setList(modelList);
 
-        if (!modelList.contains(modelSpinner.getText().toString()))
-            modelSpinner.setText("");
+        if (!modelList.contains(model.getText().toString()))
+            model.setText("");
     }
 
     private void saveModel(ContentValues values) {
-        if (modelSpinner.getText().toString().length() > 0)
-            values.put(Vehicle.MODEL, modelSpinner.getText().toString());
+        if (model.getText().toString().length() > 0)
+            values.put(Vehicle.MODEL, model.getText().toString());
     }
 
     private void initializeSubModel() {
@@ -621,19 +631,20 @@ public class EditCar extends Fragment {
 
     private void initializeMileage() {
         mileage = (MaterialEditText) rootView.findViewById(R.id.mileage);
-        mileageUnit = (MaterialBetterSpinner) rootView.findViewById(R.id.mileage_units);
-        mileageUnit.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getTextArray(R.array.large_distance_units)));
-        mileageUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mileageUnit = (MaterialEditText) rootView.findViewById(R.id.mileage_units);
+
+        final MaterialPopupHandler popupHandler = new MaterialPopupHandler(
+                (RelativeLayout) rootView.findViewById(R.id.performance_details_card).findViewWithTag(getString(R.string.container_layout))
+                , mileageUnit);
+        popupHandler.setList(R.array.large_distance_units);
+        popupHandler.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        mileageUnit.setText("Mi");
-                        break;
-                    case 1:
-                        mileageUnit.setText("KM");
-                        break;
-                }
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getTitle().equals(getString(R.string.miles)))
+                    mileageUnit.setText(getString(R.string.miles_short));
+                else
+                    mileageUnit.setText(getString(R.string.kilometers_short));
+                return true;
             }
         });
 //        mileageUnit.setDropDownWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -651,21 +662,21 @@ public class EditCar extends Fragment {
 
     private void initializeWeight() {
         weight = (MaterialEditText) rootView.findViewById(R.id.weight);
-        weightUnits = (MaterialBetterSpinner) rootView.findViewById(R.id.weight_units);
+        weightUnits = (MaterialEditText) rootView.findViewById(R.id.weight_units);
 
-        weightUnits.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getTextArray(R.array.weight_units)));
+        final MaterialPopupHandler popupHandler = new MaterialPopupHandler(
+                (RelativeLayout) rootView.findViewById(R.id.performance_details_card).findViewWithTag(getString(R.string.container_layout))
+                , weightUnits);
+        popupHandler.setList(R.array.weight_units);
 
-        weightUnits.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        popupHandler.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        weightUnits.setText("LB");
-                        break;
-                    case 1:
-                        weightUnits.setText("KG");
-                        break;
-                }
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getTitle().equals(getString(R.string.pounds)))
+                    weightUnits.setText(getString(R.string.pounds_short));
+                else
+                    weightUnits.setText(getString(R.string.kilogram_short));
+                return true;
             }
         });
     }
@@ -682,9 +693,23 @@ public class EditCar extends Fragment {
 
     private void initializePower() {
         power = (MaterialEditText) rootView.findViewById(R.id.power);
-        powerUnit = (MaterialBetterSpinner) rootView.findViewById(R.id.power_units);
-        powerUnit.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getTextArray(R.array.power_units)));
-//        powerUnit.setDropDownWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        powerUnit = (MaterialEditText) rootView.findViewById(R.id.power_units);
+
+        final MaterialPopupHandler popupHandler = new MaterialPopupHandler(
+                (RelativeLayout) rootView.findViewById(R.id.performance_details_card).findViewWithTag(getString(R.string.container_layout))
+                , powerUnit);
+        popupHandler.setList(R.array.power_units);
+
+        popupHandler.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getTitle().equals(getString(R.string.horsepower)))
+                    powerUnit.setText(getString(R.string.horsepower_short));
+                else
+                    powerUnit.setText(getString(R.string.kilowatt_short));
+                return true;
+            }
+        });
     }
 
     private boolean savePower(ContentValues values) {
@@ -699,9 +724,20 @@ public class EditCar extends Fragment {
 
     private void initializeTorque() {
         torque = (MaterialEditText) rootView.findViewById(R.id.torque);
-        torqueUnit = (MaterialBetterSpinner) rootView.findViewById(R.id.torque_units);
-        torqueUnit.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getTextArray(R.array.torque_units)));
-//        torqueUnit.setDropDownWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        torqueUnit = (MaterialEditText) rootView.findViewById(R.id.torque_units);
+
+        final MaterialPopupHandler popupHandler = new MaterialPopupHandler(
+                (RelativeLayout) rootView.findViewById(R.id.performance_details_card).findViewWithTag(getString(R.string.container_layout))
+                , torqueUnit);
+        popupHandler.setList(R.array.torque_units);
+
+        popupHandler.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                torqueUnit.setText(item.getTitle());
+                return true;
+            }
+        });
     }
 
     private boolean saveTorque(ContentValues values) {
@@ -769,7 +805,7 @@ public class EditCar extends Fragment {
                                     recyclerView.setLayoutManager(new GridLayoutManager(activity, 2));
                                     secondBuilder.setTitle("Select Color");
                                     secondBuilder.setView(recyclerView);
-                                    secondBuilder.setNegativeButton(R.string.cancelbutton, null);
+                                    secondBuilder.setNegativeButton(R.string.cancel, null);
                                     paletteDialog = secondBuilder.create();
                                     paletteDialog.show();
 
@@ -787,7 +823,7 @@ public class EditCar extends Fragment {
                     }
                 });
 
-                builder.setNegativeButton(R.string.cancelbutton, null);
+                builder.setNegativeButton(R.string.cancel, null);
                 builder.show();
             }
         });
@@ -1061,8 +1097,7 @@ public class EditCar extends Fragment {
                         if (bitmap != null)
                             Bitmap.createScaledBitmap(bitmap, bitmap.getScaledWidth(DisplayMetrics.DENSITY_MEDIUM), bitmap.getScaledHeight(DisplayMetrics.DENSITY_MEDIUM), false)
                                     .compress(Bitmap.CompressFormat.JPEG, 90, out);
-                        else
-//                        if (!fileExisted) Log.v(TAG, "Delete outFile: " + outFile.delete());
+                        else if (!fileExisted) Log.v(TAG, "Delete outFile: " + outFile.delete());
 
 //                        in = new FileInputStream(temp);
 //                        Log.v(TAG, "Begin move");
@@ -1072,7 +1107,7 @@ public class EditCar extends Fragment {
 //                            out.write(buffer, 0, read);
 //                        }
 
-                            Log.v(TAG, "Delete temp: " + getTempFile().delete());
+                        Log.v(TAG, "Delete temp: " + getTempFile().delete());
                         sendToast("Vehicle Data Stored Successfully");
 
 //                        vehicle.setImagePath(outFile.getPath());
@@ -1097,8 +1132,95 @@ public class EditCar extends Fragment {
         }
     }
 
-    private void initializePurchaseDate() {
+    long datePurchased;
 
+    private void initializePurchaseCost() {
+        purchaseCost = (MaterialEditText) rootView.findViewById(R.id.purchase_cost);
+        purchaseCostUnit = (MaterialEditText) rootView.findViewById(R.id.purchase_cost_unit);
+
+        final MaterialPopupHandler popupHandler = new MaterialPopupHandler(
+                (RelativeLayout) rootView.findViewById(R.id.purchase_details_card).findViewWithTag(getString(R.string.container_layout))
+                , purchaseCostUnit);
+        popupHandler.setList(R.array.cost_units);
+
+        popupHandler.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getTitle().equals(getString(R.string.dollar)))
+                    purchaseCostUnit.setText(getString(R.string.dollar_short));
+                else if (item.getTitle().equals(getString(R.string.euro)))
+                    purchaseCostUnit.setText(getString(R.string.euro_short));
+                else
+                    purchaseCostUnit.setText(getString(R.string.english_pound_short));
+                return true;
+            }
+        });
+    }
+
+    private boolean savePurchaseCost(ContentValues values) {
+        if (purchaseCost.getText().toString().length() > 0) {
+            if (purchaseCostUnit.getText().toString().length() == 0)
+                return false;
+            values.put(Vehicle.PURCHASE_COST, purchaseCost.getText().toString());
+            values.put(Vehicle.PURCHASE_COST_UNITS, purchaseCostUnit.getText().toString());
+        }
+        return true;
+    }
+
+    boolean datePurchasedSet = false;
+
+    private void initializePurchaseDate() {
+        purchaseDate = (MaterialEditText) rootView.findViewById(R.id.purchase_date);
+
+        rootView.findViewById(R.id.purchase_date_click).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadPurchaseDate();
+            }
+        });
+    }
+
+    private void loadPurchaseDate() {
+        final Calendar calendar = Calendar.getInstance();
+        if (vehicle != null && vehicle.getPurchaseDate() != 0) {
+            calendar.setTime(new Date(vehicle.getPurchaseDate()));
+            setDisplayPurchaseDate();
+        } else {
+            purchaseDate.setText("");
+        }
+
+        Log.v(TAG, calendar.get(Calendar.YEAR) + " " +
+                calendar.get(Calendar.MONTH) + " " +
+                calendar.get(Calendar.DAY_OF_MONTH));
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(R.string.purchase_date);
+
+        DatePicker datePicker = new DatePicker(activity);
+        datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                datePurchasedSet = true;
+                calendar.set(year, monthOfYear, dayOfMonth);
+                datePurchased = calendar.getTimeInMillis();
+                setDisplayPurchaseDate();
+                datePickerDialog.dismiss();
+            }
+        });
+
+        builder.setView(datePicker);
+
+        datePickerDialog = builder.create();
+        datePickerDialog.show();
+    }
+
+    private void setDisplayPurchaseDate() {
+        purchaseDate.setText(DateFormat.getMediumDateFormat(activity).format(datePurchased));
+    }
+
+    private void savePurchaseDate(ContentValues values) {
+        if (datePurchasedSet)
+            values.put(Vehicle.PURCHASE_DATE, datePurchased);
     }
 
     @Override

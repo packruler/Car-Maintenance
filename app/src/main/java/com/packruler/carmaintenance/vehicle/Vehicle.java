@@ -37,7 +37,7 @@ public class Vehicle {
     public static final String PURCHASE_DATE = "purchase_date";
     public static final String BOUGHT_FROM = "bought_from";
     public static final String PURCHASE_COST = "purchase_cost";
-    public static final String COST_UNITS = "cost_units";
+    public static final String PURCHASE_COST_UNITS = "cost_units";
     public static final String DISPLACEMENT = "displacement";
     public static final String DISPLACEMENT_UNITS = "displacement_units";
     public static final String POWER = "power";
@@ -57,7 +57,7 @@ public class Vehicle {
                     TORQUE + " FLOAT," + TORQUE_UNITS + " STRING," +
                     MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," + COLOR + " STRING," +
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " STRING," +
-                    PURCHASE_COST + " FLOAT," + COST_UNITS + " STRING," +
+                    PURCHASE_COST + " FLOAT," + PURCHASE_COST_UNITS + " STRING," +
                     PURCHASE_MILEAGE + " LONG," + DISPLAY_COLOR + " INTEGER" + ")";
 
     protected CarSQL carSQL;
@@ -250,11 +250,11 @@ public class Vehicle {
     }
 
     public String getCostUnits() {
-        return sqlDataHandler.getString(COST_UNITS);
+        return sqlDataHandler.getString(PURCHASE_COST_UNITS);
     }
 
     public void setCostUnits(String costUnits) {
-        sqlDataHandler.putString(COST_UNITS, costUnits);
+        sqlDataHandler.putString(PURCHASE_COST_UNITS, costUnits);
     }
 
     public String getVin() {

@@ -23,7 +23,8 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/abc_button_padding_vertical_material">
+                android:id="@+id/general_info_layout"
+                android:tag="@string/container_layout">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -48,7 +49,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     app:met_floatingLabel="highlight"/>
 
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/margin_small"
@@ -61,7 +62,7 @@
                     app:met_floatingLabel="highlight"
                     app:met_primaryColor="?attr/colorPrimary"/>
 
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/margin_small"
@@ -74,7 +75,7 @@
                     app:met_floatingLabel="highlight"
                     app:met_primaryColor="?attr/colorPrimary"/>
 
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                <com.rengwuxian.materialedittext.MaterialEditText
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,7 +126,8 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/abc_button_padding_vertical_material">
+                android:padding="@dimen/abc_button_padding_vertical_material"
+                android:tag="@string/container_layout">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -149,7 +151,7 @@
                     android:layout_marginRight="@dimen/margin_small"
                     app:met_floatingLabel="highlight"/>
 
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/units"
@@ -172,7 +174,7 @@
                     app:met_floatingLabel="highlight"
                     android:inputType="number"/>
 
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/weight_units"
@@ -195,7 +197,7 @@
                     app:met_floatingLabel="highlight"
                     android:inputType="number"/>
 
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/power_units"
@@ -220,7 +222,7 @@
                     app:met_floatingLabel="highlight"
                     android:inputType="number"/>
 
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/torque_units"
@@ -247,7 +249,8 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/abc_button_padding_vertical_material">
+                android:padding="@dimen/abc_button_padding_vertical_material"
+                android:tag="@string/container_layout">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -319,6 +322,7 @@
                         android:layout_below="@id/vehicle_color"
                         android:text="@string/display_color"
                         android:layout_marginRight="@dimen/margin_small"
+                        android:gravity="center_vertical"
                         android:textColor="@color/material_grey_900"/>
 
                     <android.support.v7.widget.CardView
@@ -350,7 +354,8 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:tag="@string/container_layout">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -362,7 +367,7 @@
                     android:textColor="?attr/colorPrimary"
                     android:layout_marginBottom="@dimen/margin_medium"/>
 
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/margin_small"
@@ -379,8 +384,8 @@
                     android:id="@+id/purchase_cost"
                     android:layout_below="@id/purchase_details_title"
                     android:layout_toRightOf="@id/purchase_cost_unit"
-                    android:hint="@string/cost"
-                    android:ems="5"
+                    android:hint="@string/purchase_cost"
+                    android:minEms="2"
                     app:met_floatingLabel="highlight"/>
 
                 <com.rengwuxian.materialedittext.MaterialEditText

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="horsepower">Horsepower</string>
+    <string name="horsepower_short">hp</string>
+    <string name="kilowatt">Kilowatts</string>
+    <string name="kilowatt_short">kW</string>
+
+    <string-array name="power_units">
+        <item name="horsepower">Horsepower</item>
+        <item name="kw">Kilowatts</item>
+    </string-array>
+
+    <string name="miles">Miles</string>
+    <string name="miles_short">Mi</string>
+
+    <string name="kilometers">Kilometers</string>
+    <string name="kilometers_short">km</string>
+
+    <string-array name="large_distance_units">
+        <item>@string/miles</item>
+        <item>@string/kilometers</item>
+    </string-array>
+
+    <string name="feet">Feet</string>
+    <string name="feet_short">ft</string>
+
+    <string name="inches">Inches</string>
+    <string name="inches_short">in</string>
+
+    <string name="meters">Meter</string>
+    <string name="meters_short">m</string>
+
+    <string name="centimeters">Centimeter</string>
+    <string name="centimeters_short">cm</string>
+
+    <string-array name="small_distance_units">
+        <item>@string/feet</item>
+        <item>@string/inches</item>
+        <item>@string/meters</item>
+        <item>@string/centimeters</item>
+    </string-array>
+
+    <string-array name="torque_units">
+        <item name="lb_ft">LB·FT</item>
+        <item name="n_m">N·m</item>
+    </string-array>
+
+    <string name="pounds">Pounds</string>
+    <string name="pounds_short">lb</string>
+
+    <string name="kilogram">Kilogram</string>
+    <string name="kilogram_short">kg</string>
+    <string-array name="weight_units">
+        <item>@string/pounds</item>
+        <item>@string/kilogram</item>
+    </string-array>
+
+    <string name="dollar">Dollars</string>
+    <string name="dollar_short">$</string>
+
+    <string name="euro">Euro</string>
+    <string name="euro_short">€</string>
+
+    <string name="english_pound">Pounds</string>
+    <string name="english_pound_short">£</string>
+
+    <string-array name="cost_units">
+        <item>@string/dollar</item>
+        <item>@string/euro</item>
+        <item>@string/english_pound</item>
+    </string-array>
+</resources>
