@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gc.materialdesign.views.ButtonFloat;
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.ui.adapters.ServiceRecyclerAdapter;
@@ -60,6 +61,7 @@ public class ServicesFragment extends Fragment {
     private MainActivity activity;
     private CarSQL carSQL;
     Handler mainHandler = new Handler(Looper.getMainLooper());
+    com.gc.materialdesign.views.ButtonFloat buttonFloat;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -70,6 +72,7 @@ public class ServicesFragment extends Fragment {
         this.vehicle = vehicle;
         this.carSQL = carSQL;
         mAdapter = new ServiceRecyclerAdapter(ServicesFragment.this.activity, vehicle.getServiceTaskCursor());
+        setUIColor(vehicle.getDisplayColor());
     }
 
     @Override
@@ -105,6 +108,7 @@ public class ServicesFragment extends Fragment {
             }
         });
 
+        buttonFloat = (ButtonFloat) view.findViewById(R.id.buttonFloat);
         return view;
     }
 
@@ -122,5 +126,12 @@ public class ServicesFragment extends Fragment {
         long start = Calendar.getInstance().getTimeInMillis();
         mAdapter.changeCursor(vehicle.getServiceTaskCursor(column, inverse));
         Log.v(TAG, "Sort took: " + (Calendar.getInstance().getTimeInMillis() - start));
+    }
+
+    private void setUIColor(int color) {
+        if (color != 0) {
+            buttonFloat.setBackgroundColor(color);
+            activity.setUIColor(color);
+        }
     }
 }

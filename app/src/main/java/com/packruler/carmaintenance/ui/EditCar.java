@@ -42,6 +42,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gc.materialdesign.widgets.ColorSelector;
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
@@ -163,6 +164,7 @@ public class EditCar extends Fragment {
                 initializeTorque();
                 initializeVehicleImage();
                 initializePurchaseCost();
+                initializePurchaseDate();
 
                 viewInitialized = true;
                 if (vehicle == null || vehicle.getDisplayColor() == 0)
@@ -171,7 +173,6 @@ public class EditCar extends Fragment {
                 if (vehicle != null)
                     loadVehicle();
 
-                initializePurchaseDate();
             }
         });
     }
@@ -245,13 +246,14 @@ public class EditCar extends Fragment {
             tempLong = vehicle.getDisplayColor();
             if (tempLong != 0)
                 setLoadedColor((int) tempLong);
+
+            loadPurchaseDate();
         }
     }
 
     public void loadVehicle(Vehicle in) {
         vehicle = in;
         loadVehicle();
-        loadPurchaseDate();
     }
 
     private int currentColor;
@@ -781,13 +783,13 @@ public class EditCar extends Fragment {
                                 } else sendToast("No Image Loaded");
                                 break;
                             case 1:
-//                                ColorSelector colorSelector = new ColorSelector(activity, currentColor, new ColorSelector.OnColorSelectedListener() {
-//                                    @Override
-//                                    public void onColorSelected(int i) {
-//                                        setLoadedColor(i);
-//                                    }
-//                                });
-//                                colorSelector.show();
+                                ColorSelector colorSelector = new ColorSelector(activity, currentColor, new ColorSelector.OnColorSelectedListener() {
+                                    @Override
+                                    public void onColorSelected(int i) {
+                                        setLoadedColor(i);
+                                    }
+                                });
+                                colorSelector.show();
                         }
                     }
                 });
@@ -1206,6 +1208,8 @@ public class EditCar extends Fragment {
                     loadImage(selected);
                 break;
         }
+        if (resultCode != Activity.RESULT_OK)
+            Log.e(TAG, "Error in photo crop. Delete temp file " + (getTempFile().delete() ? "SUCCESS" : "FAILED"));
     }
 
     private void sendToast(CharSequence message) {
