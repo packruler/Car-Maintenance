@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity
     private LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
     private int numProcessors = Runtime.getRuntime().availableProcessors();
     private ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(numProcessors, numProcessors, 10, TimeUnit.SECONDS, workQueue);
-    private ActionBar actionBar;
+
     private Toolbar toolbar;
 
     @Override
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void restoreActionBar() {
-        actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
@@ -263,5 +264,11 @@ public class MainActivity extends AppCompatActivity
             window.setStatusBarColor(color);
             window.setNavigationBarColor(color);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) Log.v(TAG, "Back button press");
+        return super.onKeyDown(keyCode, event);
     }
 }

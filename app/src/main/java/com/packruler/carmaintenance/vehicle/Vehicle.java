@@ -189,6 +189,10 @@ public class Vehicle {
         sqlDataHandler.putString(MILEAGE_UNITS, units);
     }
 
+    public String getMileageUnits() {
+        return sqlDataHandler.getString(MILEAGE_UNITS);
+    }
+
     public void setPurchaseDate(Date purchaseDate) {
         sqlDataHandler.putLong(PURCHASE_DATE, purchaseDate.getTime());
     }
@@ -249,11 +253,11 @@ public class Vehicle {
         sqlDataHandler.putFloat(PURCHASE_COST, purchaseCost);
     }
 
-    public String getCostUnits() {
+    public String getPurchaseCostUnits() {
         return sqlDataHandler.getString(PURCHASE_COST_UNITS);
     }
 
-    public void setCostUnits(String costUnits) {
+    public void setPurchaseCostUnits(String costUnits) {
         sqlDataHandler.putString(PURCHASE_COST_UNITS, costUnits);
     }
 
@@ -288,6 +292,38 @@ public class Vehicle {
 
     public void setWeightUnits(String weightUnits) {
         sqlDataHandler.putString(WEIGHT_UNITS, weightUnits);
+    }
+
+    public long getPower() {
+        return sqlDataHandler.getLong(POWER);
+    }
+
+    public void setPower(long power) {
+        sqlDataHandler.putLong(POWER, power);
+    }
+
+    public String getPowerUnits() {
+        return sqlDataHandler.getString(POWER_UNITS);
+    }
+
+    public void setPowerUnits(String units) {
+        sqlDataHandler.putString(POWER_UNITS, units);
+    }
+
+    public long getTorque() {
+        return sqlDataHandler.getLong(TORQUE);
+    }
+
+    public void setTorque(long torque) {
+        sqlDataHandler.putLong(TORQUE, torque);
+    }
+
+    public String getTorqueUnits() {
+        return sqlDataHandler.getString(TORQUE_UNITS);
+    }
+
+    public void setTorqueUnits(String units) {
+        sqlDataHandler.putString(TORQUE_UNITS, units);
     }
 
     public String getBoughtFrom() {

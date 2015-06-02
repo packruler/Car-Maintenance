@@ -2,7 +2,8 @@ package com.packruler.carmaintenance.ui;
 
 
 import android.app.Activity;
-import android.content.ComponentName;
+import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,8 +11,10 @@ import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -46,7 +49,6 @@ import com.gc.materialdesign.widgets.ColorSelector;
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
-import com.packruler.carmaintenance.ui.adapters.CropOptionAdapter;
 import com.packruler.carmaintenance.ui.adapters.PaletteAdapter;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -62,6 +64,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,6 +80,11 @@ public class EditCar extends Fragment {
     private AvailableCarsSQL availableCarsSQL;
     private MainActivity activity;
     private Handler mainHandler = new Handler(Looper.getMainLooper());
+
+    private LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
+    private int numProcessors = Runtime.getRuntime().availableProcessors();
+    private ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(numProcessors, numProcessors, 10, TimeUnit.SECONDS, workQueue);
+    private Handler backgroundHandler;
 
     private Vehicle vehicle;
 
@@ -97,20 +107,22 @@ public class EditCar extends Fragment {
     private MaterialEditText weight;
     private MaterialBetterSpinner weightUnits;
     private MaterialEditText purchaseDate;
-    private AlertDialog datePickerDialog;
+    private DatePickerDialog datePickerDialog;
     private MaterialEditText purchaseCost;
     private MaterialBetterSpinner purchaseCostUnit;
 
     public EditCar() {
-        // Required empty public constructor
+        HandlerThread thread = new HandlerThread(getClass().getName() + ".BACKGROUND");
+        thread.start();
+        backgroundHandler = new Handler(thread.getLooper());
     }
 
     public EditCar(MainActivity activity, CarSQL carSQL) {
+        this();
         this.carSQL = carSQL;
         this.activity = activity;
         availableCarsSQL = activity.getAvailableCarsSQL();
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -133,7 +145,12 @@ public class EditCar extends Fragment {
 
     @Override
     public void onDestroy() {
+        Log.v(TAG, "onDestroy");
         super.onDestroy();
+        if (Build.VERSION.SDK_INT >= 18)
+            backgroundHandler.getLooper().quitSafely();
+        else backgroundHandler.getLooper().quit();
+
         try {
             Log.v(TAG, "Delete Temp: " + getTempFile().delete());
         } catch (NullPointerException e) {
@@ -150,7 +167,7 @@ public class EditCar extends Fragment {
                 try {
                     Looper.prepare();
                 } catch (RuntimeException e) {
-                    //Looper already prepared
+                    //Looper prepared already
                 }
                 initializeNameText();
                 initializeYearSpinner();
@@ -172,7 +189,6 @@ public class EditCar extends Fragment {
 
                 if (vehicle != null)
                     loadVehicle();
-
             }
         });
     }
@@ -229,25 +245,64 @@ public class EditCar extends Fragment {
 
             tempString = vehicle.getSubmodel();
             if (tempString != null)
-                model.setText(tempString);
+                subModel.setText(tempString);
 
-            tempString = vehicle.getModel();
-            if (tempString != null)
-                model.setText(tempString);
+            tempLong = vehicle.getMileage();
+            if (tempLong != 0) {
+                mileage.setText(tempLong + "");
 
-            tempString = vehicle.getModel();
-            if (tempString != null)
-                model.setText(tempString);
+                tempString = vehicle.getMileageUnits();
+                if (tempString != null)
+                    mileageUnit.setText(tempString);
+            }
 
-            tempString = vehicle.getModel();
+            tempLong = vehicle.getWeight();
+            if (tempLong != 0) {
+                weight.setText(tempLong + "");
+
+                tempString = vehicle.getWeightUnits();
+                if (tempString != null)
+                    weightUnits.setText(tempString);
+            }
+
+            tempLong = vehicle.getPower();
+            if (tempLong != 0) {
+                power.setText(tempLong + "");
+
+                tempString = vehicle.getPowerUnits();
+                if (tempString != null)
+                    powerUnit.setText(tempString);
+            }
+
+            tempLong = vehicle.getTorque();
+            if (tempLong != 0) {
+                torque.setText(tempLong + "");
+
+                tempString = vehicle.getTorqueUnits();
+                if (tempString != null)
+                    torqueUnit.setText(tempString);
+            }
+
+            float tempFloat = vehicle.getPurchaseCost();
+            if (tempFloat != 0) {
+                purchaseCost.setText(tempFloat + "");
+
+                tempString = vehicle.getPurchaseCostUnits();
+                if (tempString != null)
+                    purchaseCostUnit.setText(tempString);
+            }
+
+            tempString = vehicle.getColor();
             if (tempString != null)
-                model.setText(tempString);
+                vehicleColor.setText(tempString);
 
             tempLong = vehicle.getDisplayColor();
             if (tempLong != 0)
                 setLoadedColor((int) tempLong);
 
-            loadPurchaseDate();
+            datePurchased = vehicle.getPurchaseDate();
+            if (datePurchased != 0)
+                setDisplayPurchaseDate();
         }
     }
 
@@ -592,9 +647,11 @@ public class EditCar extends Fragment {
     private void initializeVIN() {
         vin = (MaterialEditText) rootView.findViewById(R.id.vin);
 //        vin.setBottomTextSize(0);
-        vin.addValidator(new METValidator("Length must be 17 characters") {
+        vin.setMaxCharacters(17);
+        vin.addValidator(new METValidator("") {
             @Override
             public boolean isValid(@NonNull CharSequence charSequence, boolean b) {
+//                this.errorMessage = charSequence.length() + "/17";
                 return charSequence.length() == 0 || charSequence.length() == 17;
             }
         });
@@ -665,7 +722,7 @@ public class EditCar extends Fragment {
         if (weight.getText().toString().length() > 0) {
             if (weightUnits.getText().toString().length() == 0)
                 return false;
-            values.put(Vehicle.WEIGHT, Integer.valueOf(weightUnits.getText().toString()));
+            values.put(Vehicle.WEIGHT, Integer.valueOf(weight.getText().toString()));
             values.put(Vehicle.WEIGHT_UNITS, weightUnits.getText().toString());
         }
         return true;
@@ -716,7 +773,7 @@ public class EditCar extends Fragment {
             if (torqueUnit.getText().toString().length() == 0)
                 return false;
             values.put(Vehicle.TORQUE, Integer.valueOf(torque.getText().toString()));
-            values.put(Vehicle.TORQUE_UNITS, powerUnit.getText().toString());
+            values.put(Vehicle.TORQUE_UNITS, torqueUnit.getText().toString());
         }
         return true;
     }
@@ -822,79 +879,122 @@ public class EditCar extends Fragment {
         final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setType("image/*");
+        intent.setClass(activity, this.getClass());
 
         List<ResolveInfo> list = activity.getPackageManager().queryIntentActivities(intent, 0);
 
-        int size = list.size();
+//        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("scale", true);
+        intent.putExtra("return-data", false);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, getTempUri());
 
-        if (size == 0) {
-            sendToast("Can not find image crop app");
-
-            return;
-        } else {
-            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.putExtra("aspectX", 1);
-            intent.putExtra("aspectY", 1);
-            intent.putExtra("scale", true);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-
-            if (size == 1) {
-                Intent i = new Intent(intent);
-                ResolveInfo res = list.get(0);
-
-//                i.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-                activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                i.setData(uri);
-
-                startActivityForResult(i, PIC_CROP);
-            } else {
-                for (ResolveInfo res : list) {
-                    final CropOption co = new CropOption();
-
-                    co.title = activity.getPackageManager().getApplicationLabel(res.activityInfo.applicationInfo);
-                    co.icon = activity.getPackageManager().getApplicationIcon(res.activityInfo.applicationInfo);
-                    activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                    activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    Intent i = new Intent(intent);
-                    i.setData(uri);
-                    co.appIntent = i;
-
-                    co.appIntent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-
-                    cropOptions.add(co);
-                }
-
-
-                CropOptionAdapter adapter = new CropOptionAdapter(activity.getApplicationContext(), cropOptions);
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                builder.setTitle("Choose Crop App");
-                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int item) {
-                        startActivityForResult(cropOptions.get(item).appIntent, PIC_CROP);
-                    }
-                });
-
-                builder.setOnCancelListener(null);
-
-                AlertDialog alert = builder.create();
-
-                alert.show();
-            }
+        try {
+            PendingIntent.getActivity(activity, PIC_CROP, intent, PendingIntent.FLAG_CANCEL_CURRENT).send();
+        } catch (PendingIntent.CanceledException e) {
+            e.printStackTrace();
         }
+//
+//        startActivityForResult(intent, PIC_CROP);
     }
 
+//    private void doCrop(final Uri uri) {
+//        Log.v(TAG, "doCrop Uri: " + uri);
+//        final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();
+//        Intent intent = new Intent("com.android.camera.action.CROP");
+//        intent.setType("image/*");
+//
+//        List<ResolveInfo> list = activity.getPackageManager().queryIntentActivities(intent, 0);
+//
+//        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//        intent.putExtra("aspectX", 1);
+//        intent.putExtra("aspectY", 1);
+//        intent.putExtra("scale", true);
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+//        startActivityForResult(intent, PIC_CROP);
+//        int size = list.size();
+//
+//        if (size == 0) {
+//            sendToast("Can not find image crop app");
+//
+//            return;
+//        } else {
+//            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//            intent.putExtra("aspectX", 1);
+//            intent.putExtra("aspectY", 1);
+//            intent.putExtra("scale", true);
+//            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+//
+//            if (size == 1) {
+//                Intent i = new Intent(intent);
+//                ResolveInfo res = list.get(0);
+//
+////                i.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+//                activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//                activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                i.setData(uri);
+//
+//                try {
+//                    PendingIntent.getActivity(activity, PIC_CROP, i, PendingIntent.FLAG_CANCEL_CURRENT).send();
+//                } catch (PendingIntent.CanceledException e) {
+//                    e.printStackTrace();
+//                }
+////                startActivityForResult(i, PIC_CROP);
+//            } else {
+//                for (ResolveInfo res : list) {
+//                    final CropOption co = new CropOption();
+//
+//                    co.title = activity.getPackageManager().getApplicationLabel(res.activityInfo.applicationInfo);
+//                    co.icon = activity.getPackageManager().getApplicationIcon(res.activityInfo.applicationInfo);
+//                    activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//                    activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                    Intent i = new Intent(intent);
+//                    i.setData(uri);
+//                    co.appIntent = i;
+//
+//                    co.appIntent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+//
+//                    cropOptions.add(co);
+//                }
+//
+//
+//                CropOptionAdapter adapter = new CropOptionAdapter(activity.getApplicationContext(), cropOptions);
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+//                builder.setTitle("Choose Crop App");
+//                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int item) {
+////                        startActivityForResult(cropOptions.get(item).appIntent, PIC_CROP);
+//                        try {
+//                            PendingIntent.getActivity(activity, PIC_CROP, cropOptions.get(item).appIntent, PendingIntent.FLAG_CANCEL_CURRENT).send();
+//                        } catch (PendingIntent.CanceledException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                });
+//
+//                builder.setOnCancelListener(null);
+//
+//                AlertDialog alert = builder.create();
+//
+//                alert.show();
+//            }
+//        }
+//    }
+
     private File getTempFile() {
-        File parent = new File(activity.getFilesDir() + "/cache/");
-        File temp = new File(parent.getPath() + "/temp.jpg");
+        File temp = new File(activity.getCacheDir() + "/temp.jpg");
         try {
-            if (!parent.exists())
-                Log.v(TAG, "Make cache dir: " + parent.mkdirs());
+            if (!activity.getCacheDir().exists())
+                Log.v(TAG, "Create cache folder: " + activity.getCacheDir());
 
             if (!temp.exists())
                 Log.v(TAG, "Create temp file: " + temp.createNewFile());
+
             return temp;
         } catch (IOException e) {
             e.printStackTrace();
@@ -902,38 +1002,68 @@ public class EditCar extends Fragment {
         return null;
     }
 
+    private Uri getTempUri() {
+        return FileProvider.getUriForFile(activity, "com.packruler.carmaintenance", getTempFile());
+    }
+
     private void loadImage(final Uri uri, boolean crop) {
-        if (crop) {
-            try {
-                File file = getTempFile();
-                if (file != null) {
-                    FileOutputStream outputStream = new FileOutputStream(file);
+        try {
+            File file = getTempFile();
+            if (file != null) {
+                FileOutputStream outputStream = new FileOutputStream(file);
 
-                    final Bitmap bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-                    bitmap.recycle();
-
-                    Uri out = FileProvider.getUriForFile(activity, "com.packruler.carmaintenance", file);
-                    doCrop(out);
+                final Bitmap bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+                bitmap.recycle();
+                if (crop)
+                    doCrop(getTempUri());
+                else
+                    loadImage(getTempFile());
+            }
+            Log.d(TAG, "Image Loaded");
+        } catch (IOException e) {
+            e.printStackTrace();
+            mainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    sendToast("Error loading image");
                 }
-                Log.d(TAG, "Image Loaded");
-            } catch (IOException e) {
-                e.printStackTrace();
+            });
+        }
+    }
+
+    private void loadImage(final File image) {
+        loadingImageSpinner.setVisibility(View.VISIBLE);
+
+        backgroundHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                final Bitmap bitmap = BitmapFactory.decodeFile(image.getPath());
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        sendToast("Error loading image");
+                        vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+                                bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
+                        loadingImageSpinner.setVisibility(View.GONE);
                     }
                 });
+
+                setLoadedColor(Palette.from(bitmap).maximumColorCount(30).generate());
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        bitmap.recycle();
+                    }
+                });
+                Log.d(TAG, "Image Loaded");
             }
-        } else
-            loadImage(uri);
+        });
     }
 
     private void loadImage(final Uri uri) {
         loadingImageSpinner.setVisibility(View.VISIBLE);
 
-        activity.getPoolExecutor().execute(new Runnable() {
+        backgroundHandler.post(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -970,9 +1100,10 @@ public class EditCar extends Fragment {
             final File file = new File(getActivity().getFilesDir().getPath() + "/Images/" + vehicle.getName() + "/" + "/vehicle.jpg");
 
             if (file.exists()) {
+                Log.v(TAG, "Cached file exists");
                 loadingImageSpinner.setVisibility(View.VISIBLE);
 
-                activity.getPoolExecutor().execute(new Runnable() {
+                backgroundHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         try {
@@ -1035,8 +1166,6 @@ public class EditCar extends Fragment {
 
     private void setLoadedColor(final int color) {
         mainHandler.post(new Runnable() {
-            private final String TAG = "setLoadedColor";
-
             @Override
             public void run() {
                 setHighlightColors(color);
@@ -1048,7 +1177,7 @@ public class EditCar extends Fragment {
     private void storeImage() {
         final File temp = getTempFile();
         if (temp != null && temp.exists()) {
-            activity.getPoolExecutor().execute(new Runnable() {
+            backgroundHandler.post(new Runnable() {
                 @Override
                 public void run() {
                     FileOutputStream out = null;
@@ -1159,25 +1288,40 @@ public class EditCar extends Fragment {
         Log.v(TAG, calendar.get(Calendar.YEAR) + " " +
                 calendar.get(Calendar.MONTH) + " " +
                 calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
+            private String TAG = "OnDateSetListener";
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.purchase_date);
-
-        DatePicker datePicker = new DatePicker(activity);
-        datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
             @Override
-            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 datePurchasedSet = true;
                 calendar.set(year, monthOfYear, dayOfMonth);
                 datePurchased = calendar.getTimeInMillis();
                 setDisplayPurchaseDate();
                 datePickerDialog.dismiss();
             }
-        });
+        },
+                calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
-        builder.setView(datePicker);
+//        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+//        builder.setTitle(R.string.purchase_date);
+//
+//        DatePicker datePicker = new DatePicker(activity);
+//        datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
+//            @Override
+//            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                datePurchasedSet = true;
+//                calendar.set(year, monthOfYear, dayOfMonth);
+//                datePurchased = calendar.getTimeInMillis();
+//                setDisplayPurchaseDate();
+//                datePickerDialog.dismiss();
+//            }
+//        });
+//
+//        builder.setView(datePicker);
+//
+//        datePickerDialog = builder.create();
 
-        datePickerDialog = builder.create();
+        datePickerDialog.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis());
         datePickerDialog.show();
     }
 
@@ -1200,7 +1344,8 @@ public class EditCar extends Fragment {
             case SELECT_PICTURE_REQUEST_CODE:
                 Log.v(TAG, "Select image");
                 if (selected != null) {
-                    loadImage(selected, true);
+                    loadImage(selected, false);
+//                    doCrop(selected);
                 }
                 break;
             case PIC_CROP:
