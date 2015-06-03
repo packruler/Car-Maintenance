@@ -57,6 +57,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -84,8 +85,8 @@ public class EditCar extends Fragment {
     private MaterialBetterSpinner model;
     private MaterialEditText subModel;
     private MaterialEditText vin;
-    private MaterialEditText mileage;
-    private MaterialBetterSpinner mileageUnit;
+    private MaterialEditText currentMileage;
+    private MaterialBetterSpinner currentMileageUnit;
     private MaterialEditText power;
     private MaterialBetterSpinner powerUnit;
     private MaterialEditText torque;
@@ -100,6 +101,8 @@ public class EditCar extends Fragment {
     private DatePickerDialog datePickerDialog;
     private MaterialEditText purchaseCost;
     private MaterialBetterSpinner purchaseCostUnit;
+    private MaterialEditText purchaseMileage;
+    private MaterialBetterSpinner purchaseMilageUnits;
 
     public EditCar() {
     }
@@ -158,13 +161,14 @@ public class EditCar extends Fragment {
                 initializeModelSpinner();
                 initializeSubModel();
                 initializeVIN();
-                initializeMileage();
+                initializeCurrentMileage();
                 initializeWeight();
                 initializePower();
                 initializeTorque();
                 initializeVehicleImage();
                 initializePurchaseCost();
                 initializePurchaseDate();
+                initializePurchaseMileage();
 
                 viewInitialized = true;
                 if (vehicle == null || vehicle.getDisplayColor() == 0)
@@ -231,11 +235,11 @@ public class EditCar extends Fragment {
                     if (vehicle.getSubmodel() != null)
                         subModel.setText(vehicle.getSubmodel());
 
-                    if (vehicle.getMileage() != 0) {
-                        mileage.setText(vehicle.getMileage() + "");
+                    if (vehicle.getCurrentMileage() != 0) {
+                        currentMileage.setText(vehicle.getCurrentMileage() + "");
 
-                        if (vehicle.getMileageUnits() != null)
-                            mileageUnit.setText(vehicle.getMileageUnits());
+                        if (vehicle.getCurrentMileageUnits() != null)
+                            currentMileageUnit.setText(vehicle.getCurrentMileageUnits());
                     }
 
                     if (vehicle.getWeight() != 0) {
@@ -260,10 +264,17 @@ public class EditCar extends Fragment {
                     }
 
                     if (vehicle.getPurchaseCost() != 0) {
-                        purchaseCost.setText(vehicle.getPurchaseCost() + "");
+                        purchaseCost.setText(new DecimalFormat("0.00").format(vehicle.getPurchaseCost()));
 
                         if (vehicle.getPurchaseCostUnits() != null)
                             purchaseCostUnit.setText(vehicle.getPurchaseCostUnits());
+                    }
+
+                    if (vehicle.getPurchaseMileage() != 0) {
+                        purchaseMileage.setText(vehicle.getPurchaseMileage() + "");
+
+                        if (vehicle.getPurchaseMileageUnits() != null)
+                            purchaseMilageUnits.setText(vehicle.getPurchaseMileageUnits());
                     }
 
                     if (vehicle.getColor() != null)
@@ -304,8 +315,8 @@ public class EditCar extends Fragment {
                     vehicleName.setPrimaryColor(currentColor);
                     vin.setPrimaryColor(currentColor);
                     subModel.setPrimaryColor(currentColor);
-                    mileage.setPrimaryColor(currentColor);
-                    mileageUnit.setPrimaryColor(currentColor);
+                    currentMileage.setPrimaryColor(currentColor);
+                    currentMileageUnit.setPrimaryColor(currentColor);
                     weight.setPrimaryColor(currentColor);
                     weightUnits.setPrimaryColor(currentColor);
                     power.setPrimaryColor(currentColor);
@@ -348,45 +359,44 @@ public class EditCar extends Fragment {
             saveSubModel(values);
             saveVIN(values);
             StringBuilder alert = null;
-            if (!saveMileage(values)) {
+            if (!saveCurrentMileage(values)) {
                 Log.v(TAG, "No units selected");
-                alert = new StringBuilder("Please select units for " + getString(R.string.mileage) + " value");
+                alert = new StringBuilder("Please select units for " + getString(R.string.current_mileage) + " value");
             }
 
             if (!saveWeight(values)) {
-                Log.v(TAG, "No units selected");
-
                 if (alert == null)
                     alert = new StringBuilder("Please select units for " + getString(R.string.weight) + " value");
                 else
-                    alert.append("Please select units for " + getString(R.string.weight) + " value");
+                    alert.append("\nPlease select units for ").append(getString(R.string.weight)).append(" value");
             }
 
             if (!savePower(values)) {
-                Log.v(TAG, "No units selected");
-
                 if (alert == null)
                     alert = new StringBuilder("Please select units for " + getString(R.string.power) + " value");
                 else
-                    alert.append("Please select units for " + getString(R.string.power) + " value");
+                    alert.append("\nPlease select units for ").append(getString(R.string.power)).append(" value");
             }
 
             if (!saveTorque(values)) {
-                Log.v(TAG, "No units selected");
-
                 if (alert == null)
                     alert = new StringBuilder("Please select units for " + getString(R.string.torque) + " value");
                 else
-                    alert.append("Please select units for " + getString(R.string.torque) + " value");
+                    alert.append("\nPlease select units for ").append(getString(R.string.torque)).append(" value");
             }
 
             if (!savePurchaseCost(values)) {
-                Log.v(TAG, "No units selected");
-
                 if (alert == null)
                     alert = new StringBuilder("Please select units for " + getString(R.string.purchase_cost) + " value");
                 else
-                    alert.append("Please select units for " + getString(R.string.purchase_cost) + " value");
+                    alert.append("\nPlease select units for ").append(getString(R.string.purchase_cost)).append(" value");
+            }
+
+            if (!savePurchaseMileage(values)) {
+                if (alert == null)
+                    alert = new StringBuilder("Please select units for " + getString(R.string.purchase_mileage) + " value");
+                else
+                    alert.append("\nPlease select units for ").append(getString(R.string.purchase_mileage)).append(" value");
             }
 
             if (alert != null) {
@@ -675,27 +685,27 @@ public class EditCar extends Fragment {
             values.put(Vehicle.VIN, vin.getText().toString());
     }
 
-    private void initializeMileage() {
-        mileage = (MaterialEditText) rootView.findViewById(R.id.mileage);
+    private void initializeCurrentMileage() {
+        currentMileage = (MaterialEditText) rootView.findViewById(R.id.current_mileage);
 
-        mileageUnit = (MaterialBetterSpinner) rootView.findViewById(R.id.mileage_units);
-        mileageUnit.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getStringArray(R.array.large_distance_units)));
-        mileageUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        currentMileageUnit = (MaterialBetterSpinner) rootView.findViewById(R.id.current_mileage_units);
+        currentMileageUnit.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getStringArray(R.array.large_distance_units)));
+        currentMileageUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (parent.getAdapter().getItem(position).equals(getString(R.string.miles)))
-                    mileageUnit.setText(getString(R.string.miles_short));
+                    currentMileageUnit.setText(getString(R.string.miles_short));
                 else
-                    mileageUnit.setText(getString(R.string.kilometers_short));
+                    currentMileageUnit.setText(getString(R.string.kilometers_short));
             }
         });
     }
 
-    private boolean saveMileage(ContentValues values) {
-        if (mileage.getText().toString().length() > 0) {
-            if (mileageUnit.getText().toString().length() == 0)
+    private boolean saveCurrentMileage(ContentValues values) {
+        if (currentMileage.getText().toString().length() > 0) {
+            if (currentMileageUnit.getText().toString().length() == 0)
                 return false;
-            values.put(Vehicle.MILEAGE, Long.valueOf(mileage.getText().toString()));
-            values.put(Vehicle.MILEAGE_UNITS, mileageUnit.getText().toString());
+            values.put(Vehicle.CURRENT_MILEAGE, Long.valueOf(currentMileage.getText().toString()));
+            values.put(Vehicle.CURRENT_MILEAGE_UNITS, currentMileageUnit.getText().toString());
         }
         return true;
     }
@@ -1243,6 +1253,36 @@ public class EditCar extends Fragment {
     private void savePurchaseDate(ContentValues values) {
         if (datePurchasedSet)
             values.put(Vehicle.PURCHASE_DATE, datePurchased);
+    }
+
+    private void initializePurchaseMileage() {
+        purchaseMileage = (MaterialEditText) rootView.findViewById(R.id.purchase_mileage);
+        purchaseMilageUnits = (MaterialBetterSpinner) rootView.findViewById(R.id.purchase_mileage_units);
+
+        purchaseMilageUnits.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getTextArray(R.array.cost_units)));
+        purchaseMilageUnits.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getAdapter().getItem(position).equals(getString(R.string.miles)))
+                    purchaseMilageUnits.setText(getString(R.string.miles_short));
+                else
+                    purchaseMilageUnits.setText(getString(R.string.kilometers_short));
+            }
+        });
+    }
+
+    private boolean savePurchaseMileage(ContentValues values) {
+        if (purchaseMileage.getText().toString().length() == 0) {
+            if (currentMileage.getText().toString().length() > 0 &&
+                    currentMileageUnit.getText().toString().length() > 0) {
+                values.put(Vehicle.PURCHASE_MILEAGE, Long.valueOf(currentMileage.getText().toString()));
+                values.put(Vehicle.PURCHASE_MILEAGE_UNITS, currentMileageUnit.getText().toString());
+            }
+        } else if (purchaseMilageUnits.getText().toString().length() != 0) {
+            values.put(Vehicle.PURCHASE_MILEAGE, Long.valueOf(purchaseMileage.getText().toString()));
+            values.put(Vehicle.PURCHASE_MILEAGE_UNITS, purchaseMilageUnits.getText().toString());
+        } else return false;
+
+        return true;
     }
 
     @Override

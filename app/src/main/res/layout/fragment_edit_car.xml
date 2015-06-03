@@ -147,12 +147,12 @@
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/mileage"
+                    android:id="@+id/current_mileage"
                     android:singleLine="true"
                     android:layout_alignParentLeft="true"
                     android:minEms="4"
                     android:maxEms="10"
-                    android:hint="@string/mileage"
+                    android:hint="@string/current_mileage"
                     android:inputType="textShortMessage|number"
                     android:layout_below="@id/performance_details_title"
                     android:layout_marginRight="@dimen/margin_small"
@@ -164,8 +164,8 @@
                     android:hint="@string/units"
                     android:minEms="2"
                     android:maxEms="3"
-                    android:id="@+id/mileage_units"
-                    android:layout_toRightOf="@id/mileage"
+                    android:id="@+id/current_mileage_units"
+                    android:layout_toRightOf="@id/current_mileage"
                     android:layout_below="@id/performance_details_title"
                     android:dropDownWidth="100dp"
                     app:met_floatingLabel="highlight"/>
@@ -178,7 +178,7 @@
                     android:ems="4"
                     android:hint="@string/weight"
                     android:layout_marginRight="@dimen/margin_small"
-                    android:layout_below="@id/mileage_units"
+                    android:layout_below="@id/current_mileage_units"
                     app:met_floatingLabel="highlight"
                     android:inputType="number"/>
 
@@ -190,7 +190,7 @@
                     android:minEms="2"
                     android:maxEms="3"
                     android:hint="@string/units"
-                    android:layout_below="@id/mileage_units"
+                    android:layout_below="@id/current_mileage_units"
                     android:dropDownWidth="100dp"
                     app:met_floatingLabel="highlight"/>
 
@@ -418,6 +418,33 @@
                     android:layout_alignLeft="@id/purchase_date"
                     android:layout_alignRight="@id/purchase_date"
                     android:layout_alignBottom="@id/purchase_date"/>
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/purchase_mileage"
+                    android:singleLine="true"
+                    android:layout_alignParentLeft="true"
+                    android:minEms="4"
+                    android:maxEms="10"
+                    android:hint="@string/purchase_mileage"
+                    android:inputType="textShortMessage|number"
+                    android:layout_below="@id/purchase_date"
+                    android:layout_marginRight="@dimen/margin_small"
+                    app:met_floatingLabel="highlight"/>
+
+                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/units"
+                    android:minEms="2"
+                    android:maxEms="3"
+                    android:id="@+id/purchase_mileage_units"
+                    android:layout_toRightOf="@id/purchase_mileage"
+                    android:layout_below="@id/purchase_date"
+                    android:dropDownWidth="100dp"
+                    app:met_floatingLabel="highlight"/>
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>

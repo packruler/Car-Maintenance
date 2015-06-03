@@ -30,14 +30,15 @@ public class Vehicle {
     public static final String VIN = "vin";
     public static final String WEIGHT = "weight";
     public static final String WEIGHT_UNITS = "weight_units";
-    public static final String MILEAGE = "mileage";
-    public static final String MILEAGE_UNITS = "mileage_units";
+    public static final String CURRENT_MILEAGE = "current_mileage";
+    public static final String CURRENT_MILEAGE_UNITS = "current_mileage_units";
     public static final String COLOR = "color";
     public static final String PURCHASE_MILEAGE = "purchase_mileage";
+    public static final String PURCHASE_MILEAGE_UNITS = "purchase_mileage_units";
     public static final String PURCHASE_DATE = "purchase_date";
     public static final String BOUGHT_FROM = "bought_from";
     public static final String PURCHASE_COST = "purchase_cost";
-    public static final String PURCHASE_COST_UNITS = "cost_units";
+    public static final String PURCHASE_COST_UNITS = "purchase_cost_units";
     public static final String DISPLACEMENT = "displacement";
     public static final String DISPLACEMENT_UNITS = "displacement_units";
     public static final String POWER = "power";
@@ -55,10 +56,11 @@ public class Vehicle {
                     DISPLACEMENT + " FLOAT," + DISPLACEMENT_UNITS + " STRING," +
                     POWER + " FLOAT," + POWER_UNITS + " STRING," +
                     TORQUE + " FLOAT," + TORQUE_UNITS + " STRING," +
-                    MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," + COLOR + " STRING," +
+                    CURRENT_MILEAGE + " LONG," + CURRENT_MILEAGE_UNITS + " STRING," + COLOR + " STRING," +
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " STRING," +
                     PURCHASE_COST + " FLOAT," + PURCHASE_COST_UNITS + " STRING," +
-                    PURCHASE_MILEAGE + " LONG," + DISPLAY_COLOR + " INTEGER" + ")";
+                    PURCHASE_MILEAGE + " LONG," + PURCHASE_MILEAGE_UNITS + " STRING," +
+                    DISPLAY_COLOR + " INTEGER" + ")";
 
     protected CarSQL carSQL;
     private String name = "";
@@ -177,20 +179,36 @@ public class Vehicle {
         return sqlDataHandler.getInt(YEAR);
     }
 
-    public void setMileage(long mileage) {
-        sqlDataHandler.putLong(MILEAGE, mileage);
+    public void setCurrentMileage(long mileage) {
+        sqlDataHandler.putLong(CURRENT_MILEAGE, mileage);
     }
 
-    public long getMileage() {
-        return sqlDataHandler.getLong(MILEAGE);
+    public long getCurrentMileage() {
+        return sqlDataHandler.getLong(CURRENT_MILEAGE);
     }
 
-    public void setMileageUnits(String units) {
-        sqlDataHandler.putString(MILEAGE_UNITS, units);
+    public void setCurrentMileageUnits(String units) {
+        sqlDataHandler.putString(CURRENT_MILEAGE_UNITS, units);
     }
 
-    public String getMileageUnits() {
-        return sqlDataHandler.getString(MILEAGE_UNITS);
+    public String getCurrentMileageUnits() {
+        return sqlDataHandler.getString(CURRENT_MILEAGE_UNITS);
+    }
+
+    public void setPurchaseMileage(long mileage) {
+        sqlDataHandler.putLong(PURCHASE_MILEAGE, mileage);
+    }
+
+    public long getPurchaseMileage() {
+        return sqlDataHandler.getLong(PURCHASE_MILEAGE);
+    }
+
+    public void setPurchaseMileageUnits(String units) {
+        sqlDataHandler.putString(PURCHASE_MILEAGE_UNITS, units);
+    }
+
+    public String getPurchaseMileageUnits() {
+        return sqlDataHandler.getString(PURCHASE_MILEAGE_UNITS);
     }
 
     public void setPurchaseDate(Date purchaseDate) {
