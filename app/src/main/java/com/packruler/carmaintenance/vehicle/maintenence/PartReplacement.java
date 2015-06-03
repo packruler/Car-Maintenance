@@ -26,13 +26,14 @@ public class PartReplacement extends ServiceTask {
     public static final String EXPECTED_LIFE_TIME = "expected_life_distance";
     public static final String WARRANTY_LIFE_DISTANCE = "warranty_life_distance";
     public static final String WARRANTY_LIFE_TIME = "warranty_life_distance";
+    public static final String SERVICE_TASK_ROW = "service_task_row";
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + VEHICLE_NAME + " STRING," +
                     DATE + " LONG," + TYPE + " STRING," + COST + " FLOAT," +
                     COST_UNITS + " STRING," + MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," +
-                    DETAILS + " STRING," + LOCATION_ID + " STRING," + LOCATION_NAME + " STRING" +
-                    ")";
+                    DETAILS + " STRING," + LOCATION_ID + " STRING," + LOCATION_NAME + " STRING," +
+                    SERVICE_TASK_ROW + " LONG" + ")";
 
     public PartReplacement(CarSQL carSQL, String carName) {
         this.carSQL = carSQL;
@@ -45,6 +46,11 @@ public class PartReplacement extends ServiceTask {
 
         sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
                 ID + "= " + row);
+    }
+
+    public PartReplacement(CarSQL carSQL, String carName, ServiceTask task) {
+        this(carSQL, carName);
+        sqlDataHandler.putLong(SERVICE_TASK_ROW, task.getRow());
     }
 
     public PartReplacement(CarSQL carSQL, long row) {
