@@ -8,7 +8,11 @@ import android.util.Log;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.sql.SQLDataException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
@@ -33,6 +37,7 @@ public class ServiceTask {
     public static final String DATE = "date";
     public static final String LOCATION_ID = "location_id";
     public static final String LOCATION_NAME = "location_name";
+    public static final String PARTS_REPLACED = "parts_replaced";
 
 
     public static final String SQL_CREATE =
@@ -40,7 +45,7 @@ public class ServiceTask {
                     VEHICLE_NAME + " STRING," + DATE + " LONG," + TYPE + " STRING," +
                     COST + " FLOAT," + MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," +
                     DETAILS + " STRING," + LOCATION_ID + " STRING," + LOCATION_NAME + " STRING," +
-                    COST_UNITS + " STRING" + ")";
+                    COST_UNITS + " STRING," + PARTS_REPLACED + " STRING" + ")";
 
     protected long row;
     protected CarSQL carSQL;
@@ -66,6 +71,10 @@ public class ServiceTask {
     public ServiceTask(CarSQL carSQL, long row) {
         sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
                 ID + "= " + row);
+    }
+
+    public long getRow() {
+        return row;
     }
 
     public String getCarName() {
@@ -144,6 +153,30 @@ public class ServiceTask {
         return sqlDataHandler.getLong(MILEAGE);
     }
 
+    public void setPartsReplaced(List<PartReplacement> partsReplaced) {
+        JSONArray jsonArray = new JSONArray();
+        for (PartReplacement part : partsReplaced) {
+            jsonArray.put(part.getRow());
+        }
+        sqlDataHandler.putString(PARTS_REPLACED, jsonArray.toString());
+    }
+
+    public List<PartReplacement> getPartsReplaced() {
+        if (sqlDataHandler.getString(PARTS_REPLACED) != null) {
+            try {
+                JSONArray jsonArray = new JSONArray(sqlDataHandler.getString(PARTS_REPLACED));
+                ArrayList<PartReplacement> parts = new ArrayList<>(jsonArray.length());
+                for (int x = 0; x < jsonArray.length(); x++) {
+                    parts.add(new PartReplacement(carSQL, jsonArray.getLong(x)));
+                }
+                return parts;
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return new LinkedList<>();
+    }
+
     public void setContentValues(ContentValues contentValues) {
         sqlDataHandler.setContentValues(contentValues);
     }
@@ -154,15 +187,15 @@ public class ServiceTask {
     }
 
     public static List<ServiceTask> getServiceTasksForCar(CarSQL carSQL, String carName) {
-        LinkedList<ServiceTask> list = new LinkedList<>();
         long start = Calendar.getInstance().getTimeInMillis();
 
         Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{ID},
                 VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
 
         if (!cursor.moveToFirst())
-            return list;
+            return new ArrayList<>(0);
 
+        ArrayList<ServiceTask> list = new ArrayList<>(cursor.getCount());
         while (!cursor.isAfterLast()) {
             list.add(new ServiceTask(carSQL, cursor.getLong(0)));
             cursor.moveToNext();

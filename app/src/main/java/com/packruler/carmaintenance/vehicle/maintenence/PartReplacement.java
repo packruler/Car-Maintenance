@@ -9,7 +9,7 @@ import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
 
 import java.sql.SQLDataException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,17 +22,10 @@ public class PartReplacement extends ServiceTask {
 
     public static final String PART_NAME = "part_name";
     public static final String MANUFACTURER = "manufacturer";
-    public static final String NUMBER = "number";
     public static final String EXPECTED_LIFE_DISTANCE = "expected_life_distance";
     public static final String EXPECTED_LIFE_TIME = "expected_life_distance";
     public static final String WARRANTY_LIFE_DISTANCE = "warranty_life_distance";
     public static final String WARRANTY_LIFE_TIME = "warranty_life_distance";
-
-
-    public static final String[] RESERVED_WORDS = new String[]{TABLE_NAME, PART_NAME,
-            MANUFACTURER, NUMBER, EXPECTED_LIFE_DISTANCE, EXPECTED_LIFE_TIME, WARRANTY_LIFE_DISTANCE,
-            WARRANTY_LIFE_TIME
-    };
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + VEHICLE_NAME + " STRING," +
@@ -59,40 +52,6 @@ public class PartReplacement extends ServiceTask {
                 ID + "= " + row);
     }
 
-    /**
-     * Check date for collisions and return value that is not colliding
-     *
-     * @param date
-     *         Requested date to set value to
-     *
-     * @return value that can be used with the same minute.
-     *
-     * @throws RuntimeException
-     *         if >60,000 values at the same minute have been added to database
-     *         //
-     */
-//    public long checkDate(long date) {
-//        return checkDate(date, carSQL.getReadableDatabase());
-//    }
-//
-//    private long checkDate(long date, SQLiteDatabase database) {
-//        Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
-//                VEHICLE_NAME + "= \"" + carName + "\" AND " +
-//                        DATE + ">= " + date + " AND " + DATE + "< " + (date + 60000), null, null, null, null, null);
-//
-//        if (!cursor.moveToLast())
-//            Log.v(TAG, "Date input with no collisions");
-//        else if (cursor.getLong(cursor.getColumnIndex(DATE)) == date + 60000)
-//            //TODO: Develop method to go back through all values trying to find first open time
-//            throw new RuntimeException("Attempted to store >60,000 service tasks on the same date");
-//        else {
-//            date = cursor.getLong(cursor.getColumnIndex(DATE)) + 1;
-//            Log.v(TAG, "Collision at date moved to " + date);
-//        }
-//
-//        cursor.close();
-//        return date;
-//    }
     public String getPartName() {
         return sqlDataHandler.getString(PART_NAME);
     }
@@ -105,16 +64,8 @@ public class PartReplacement extends ServiceTask {
         return sqlDataHandler.getString(MANUFACTURER);
     }
 
-    public void setManufacturer(String manufacturer) throws SQLDataException {
+    public void setManufacturer(String manufacturer) {
         sqlDataHandler.putString(MANUFACTURER, manufacturer);
-    }
-
-    public String getNumber() {
-        return sqlDataHandler.getString(NUMBER);
-    }
-
-    public void setNumber(String number) throws SQLDataException {
-        sqlDataHandler.putString(NUMBER, number);
     }
 
     public int getExpectedLifeDistance() {
@@ -155,16 +106,14 @@ public class PartReplacement extends ServiceTask {
     }
 
     public static List<PartReplacement> getPartReplacementsForCar(CarSQL carSQL, String carName) {
-        LinkedList<PartReplacement> list = new LinkedList<>();
-
         Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{ID},
                 VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
-        ;
 
         if (!cursor.moveToFirst())
-            return list;
+            return new ArrayList<>(0);
 
-        int taskNum = 0;
+        ArrayList<PartReplacement> list = new ArrayList<>(cursor.getCount());
+
         while (!cursor.isAfterLast()) {
             list.add(new PartReplacement(carSQL, cursor.getLong(0)));
             cursor.moveToNext();
