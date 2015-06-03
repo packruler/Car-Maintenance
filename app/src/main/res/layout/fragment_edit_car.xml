@@ -321,6 +321,7 @@
                         android:id="@+id/vehicle_color"
                         android:hint="@string/vehicle_color"
                         android:ems="10"
+                        android:inputType="textCapWords"
                         app:met_floatingLabel="highlight"/>
 
                     <TextView

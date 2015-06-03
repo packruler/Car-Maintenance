@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -37,11 +39,14 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+@SuppressWarnings("ConstantConditions")
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, FragmentManager.OnBackStackChangedListener {
 
     private final String TAG = getClass().getName();
     private static final String CAR_NAME_SET = "CAR_NAME_SET";
+
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -147,9 +152,11 @@ public class MainActivity extends AppCompatActivity
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
+        if (actionBar != null) {
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setTitle(mTitle);
+        }
     }
 
     @Override
@@ -186,6 +193,8 @@ public class MainActivity extends AppCompatActivity
         Log.v("onBackStackChanged", "Count: " + count);
         if (count == 0) {
             setUIColor(getResources().getColor(R.color.default_ui_color));
+            toolbar.setTitle(mTitle);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
         }
     }
 
@@ -250,20 +259,29 @@ public class MainActivity extends AppCompatActivity
         return poolExecutor;
     }
 
+    public void execute(Runnable runnable) {
+        poolExecutor.execute(runnable);
+    }
+
     public Toolbar getToolbar() {
         return toolbar;
     }
 
-    public void setUIColor(int color) {
-        Palette.Swatch swatch = new Palette.Swatch(color, 100);
-        toolbar.setBackgroundColor(color);
-        ToolbarColorizeHelper.colorizeToolbar(toolbar, swatch.getTitleTextColor(), this);
+    public void setUIColor(final int color) {
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Palette.Swatch swatch = new Palette.Swatch(color, 100);
+                toolbar.setBackgroundColor(color);
+                ToolbarColorizeHelper.colorizeToolbar(toolbar, swatch.getTitleTextColor(), MainActivity.this);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.setStatusBarColor(color);
-            window.setNavigationBarColor(color);
-        }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Window window = getWindow();
+                    window.setStatusBarColor(color);
+                    window.setNavigationBarColor(color);
+                }
+            }
+        });
     }
 
     @Override

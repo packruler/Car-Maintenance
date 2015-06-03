@@ -287,7 +287,7 @@ public class Vehicle {
 
 
     public String getWeightUnits() {
-        return sqlDataHandler.getString(WEIGHT);
+        return sqlDataHandler.getString(WEIGHT_UNITS);
     }
 
     public void setWeightUnits(String weightUnits) {

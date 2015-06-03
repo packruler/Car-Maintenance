@@ -11,10 +11,8 @@ import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -64,9 +62,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,11 +75,6 @@ public class EditCar extends Fragment {
     private AvailableCarsSQL availableCarsSQL;
     private MainActivity activity;
     private Handler mainHandler = new Handler(Looper.getMainLooper());
-
-    private LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
-    private int numProcessors = Runtime.getRuntime().availableProcessors();
-    private ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(numProcessors, numProcessors, 10, TimeUnit.SECONDS, workQueue);
-    private Handler backgroundHandler;
 
     private Vehicle vehicle;
 
@@ -112,9 +102,6 @@ public class EditCar extends Fragment {
     private MaterialBetterSpinner purchaseCostUnit;
 
     public EditCar() {
-        HandlerThread thread = new HandlerThread(getClass().getName() + ".BACKGROUND");
-        thread.start();
-        backgroundHandler = new Handler(thread.getLooper());
     }
 
     public EditCar(MainActivity activity, CarSQL carSQL) {
@@ -147,10 +134,6 @@ public class EditCar extends Fragment {
     public void onDestroy() {
         Log.v(TAG, "onDestroy");
         super.onDestroy();
-        if (Build.VERSION.SDK_INT >= 18)
-            backgroundHandler.getLooper().quitSafely();
-        else backgroundHandler.getLooper().quit();
-
         try {
             Log.v(TAG, "Delete Temp: " + getTempFile().delete());
         } catch (NullPointerException e) {
@@ -161,7 +144,7 @@ public class EditCar extends Fragment {
     boolean viewInitialized = false;
 
     private void initializeView() {
-        activity.getPoolExecutor().execute(new Runnable() {
+        activity.execute(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -224,85 +207,76 @@ public class EditCar extends Fragment {
 
     private void loadVehicle() {
         if (viewInitialized) {
-            String tempString = vehicle.getName();
-            if (tempString != null) {
-                activity.getToolbar().setTitle(tempString);
-                vehicleName.setText(tempString);
-            }
+            mainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (vehicle.getName() != null) {
+                        activity.getToolbar().setTitle(vehicle.getName());
 
-            long tempLong = vehicle.getYear();
-            if (tempLong != 0)
-                year.setText(tempLong + "");
+                        vehicleName.setText(vehicle.getName());
+                    }
 
-            tempString = vehicle.getMake();
-            Log.v(TAG, "Make: " + tempString);
-            if (tempString != null)
-                make.setText(tempString);
+                    if (vehicle.getYear() != 0)
+                        year.setText(vehicle.getYear() + "");
 
-            tempString = vehicle.getModel();
-            if (tempString != null)
-                model.setText(tempString);
+                    if (vehicle.getMake() != null)
+                        make.setText(vehicle.getMake());
 
-            tempString = vehicle.getSubmodel();
-            if (tempString != null)
-                subModel.setText(tempString);
+                    if (vehicle.getModel() != null) {
+                        model.setText(vehicle.getModel());
+                    }
 
-            tempLong = vehicle.getMileage();
-            if (tempLong != 0) {
-                mileage.setText(tempLong + "");
+                    updateMakeSpinner(false);
 
-                tempString = vehicle.getMileageUnits();
-                if (tempString != null)
-                    mileageUnit.setText(tempString);
-            }
+                    if (vehicle.getSubmodel() != null)
+                        subModel.setText(vehicle.getSubmodel());
 
-            tempLong = vehicle.getWeight();
-            if (tempLong != 0) {
-                weight.setText(tempLong + "");
+                    if (vehicle.getMileage() != 0) {
+                        mileage.setText(vehicle.getMileage() + "");
 
-                tempString = vehicle.getWeightUnits();
-                if (tempString != null)
-                    weightUnits.setText(tempString);
-            }
+                        if (vehicle.getMileageUnits() != null)
+                            mileageUnit.setText(vehicle.getMileageUnits());
+                    }
 
-            tempLong = vehicle.getPower();
-            if (tempLong != 0) {
-                power.setText(tempLong + "");
+                    if (vehicle.getWeight() != 0) {
+                        weight.setText(vehicle.getWeight() + "");
 
-                tempString = vehicle.getPowerUnits();
-                if (tempString != null)
-                    powerUnit.setText(tempString);
-            }
+                        if (vehicle.getWeightUnits() != null)
+                            weightUnits.setText(vehicle.getWeightUnits());
+                    }
 
-            tempLong = vehicle.getTorque();
-            if (tempLong != 0) {
-                torque.setText(tempLong + "");
+                    if (vehicle.getPower() != 0) {
+                        power.setText(vehicle.getPower() + "");
 
-                tempString = vehicle.getTorqueUnits();
-                if (tempString != null)
-                    torqueUnit.setText(tempString);
-            }
+                        if (vehicle.getPowerUnits() != null)
+                            powerUnit.setText(vehicle.getPowerUnits());
+                    }
 
-            float tempFloat = vehicle.getPurchaseCost();
-            if (tempFloat != 0) {
-                purchaseCost.setText(tempFloat + "");
+                    if (vehicle.getTorque() != 0) {
+                        torque.setText(vehicle.getTorque() + "");
 
-                tempString = vehicle.getPurchaseCostUnits();
-                if (tempString != null)
-                    purchaseCostUnit.setText(tempString);
-            }
+                        if (vehicle.getTorqueUnits() != null)
+                            torqueUnit.setText(vehicle.getTorqueUnits());
+                    }
 
-            tempString = vehicle.getColor();
-            if (tempString != null)
-                vehicleColor.setText(tempString);
+                    if (vehicle.getPurchaseCost() != 0) {
+                        purchaseCost.setText(vehicle.getPurchaseCost() + "");
 
-            tempLong = vehicle.getDisplayColor();
-            if (tempLong != 0)
-                setLoadedColor((int) tempLong);
+                        if (vehicle.getPurchaseCostUnits() != null)
+                            purchaseCostUnit.setText(vehicle.getPurchaseCostUnits());
+                    }
 
-            datePurchased = vehicle.getPurchaseDate();
-            if (datePurchased != 0)
-                setDisplayPurchaseDate();
+                    if (vehicle.getColor() != null)
+                        vehicleColor.setText(vehicle.getColor());
+
+                    datePurchased = vehicle.getPurchaseDate();
+                    if (datePurchased != 0)
+                        setDisplayPurchaseDate();
+                }
+            });
+
+            if (vehicle.getDisplayColor() != 0)
+                setLoadedColor((int) vehicle.getDisplayColor());
         }
     }
 
@@ -316,31 +290,47 @@ public class EditCar extends Fragment {
     private void setHighlightColors(int color) {
         if (currentColor != color) {
             currentColor = color;
-            mainHandler.post(new Runnable() {
+
+            activity.setUIColor(currentColor);
+            setCardTitleColors();
+
+            activity.execute(new Runnable() {
                 @Override
                 public void run() {
-                    activity.setUIColor(currentColor);
                     year.setPrimaryColor(currentColor);
                     make.setPrimaryColor(currentColor);
                     model.setPrimaryColor(currentColor);
-
-                    ((TextView) rootView.findViewById(R.id.general_info_title)).setTextColor(currentColor);
-                    ((TextView) rootView.findViewById(R.id.performance_details_title)).setTextColor(currentColor);
-                    ((TextView) rootView.findViewById(R.id.visual_details_title)).setTextColor(currentColor);
-                    ((TextView) rootView.findViewById(R.id.purchase_details_title)).setTextColor(currentColor);
 
                     vehicleName.setPrimaryColor(currentColor);
                     vin.setPrimaryColor(currentColor);
                     subModel.setPrimaryColor(currentColor);
                     mileage.setPrimaryColor(currentColor);
                     mileageUnit.setPrimaryColor(currentColor);
+                    weight.setPrimaryColor(currentColor);
+                    weightUnits.setPrimaryColor(currentColor);
                     power.setPrimaryColor(currentColor);
                     powerUnit.setPrimaryColor(currentColor);
                     torque.setPrimaryColor(currentColor);
                     torqueUnit.setPrimaryColor(currentColor);
+                    vehicleColor.setPrimaryColor(currentColor);
+                    purchaseCost.setPrimaryColor(currentColor);
+                    purchaseCostUnit.setPrimaryColor(currentColor);
+                    purchaseDate.setPrimaryColor(currentColor);
                 }
             });
         }
+    }
+
+    private void setCardTitleColors() {
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                ((TextView) rootView.findViewById(R.id.general_info_title)).setTextColor(currentColor);
+                ((TextView) rootView.findViewById(R.id.performance_details_title)).setTextColor(currentColor);
+                ((TextView) rootView.findViewById(R.id.visual_details_title)).setTextColor(currentColor);
+                ((TextView) rootView.findViewById(R.id.purchase_details_title)).setTextColor(currentColor);
+            }
+        });
     }
 
     private void saveVehicle() {
@@ -548,6 +538,10 @@ public class EditCar extends Fragment {
     }
 
     private void updateMakeSpinner() {
+        updateMakeSpinner(true);
+    }
+
+    private void updateMakeSpinner(boolean update) {
         Log.v(TAG, "UpdateMakeSpinner");
         makeList.clear();
         Log.v(TAG, "Year: " + year.getText().toString());
@@ -555,10 +549,10 @@ public class EditCar extends Fragment {
         makeList.add(getString(R.string.other_selection));
 
         ((ArrayAdapter) make.getAdapter()).notifyDataSetChanged();
-        if (!makeList.contains(make.getText().toString())) {
+        if (update && !makeList.contains(make.getText().toString())) {
             make.setText("");
         }
-        updateModelSpinner();
+        updateModelSpinner(update);
     }
 
     private void saveMake(ContentValues values) {
@@ -619,6 +613,10 @@ public class EditCar extends Fragment {
     }
 
     private void updateModelSpinner() {
+        updateModelSpinner(true);
+    }
+
+    private void updateModelSpinner(boolean update) {
         modelList.clear();
 
         modelList.addAll(availableCarsSQL.getAvailableModels(year.getText().toString(), make.getText().toString()));
@@ -626,7 +624,7 @@ public class EditCar extends Fragment {
 
         ((ArrayAdapter) model.getAdapter()).notifyDataSetChanged();
 
-        if (!modelList.contains(model.getText().toString()))
+        if (update && !modelList.contains(model.getText().toString()))
             model.setText("");
     }
 
@@ -646,7 +644,6 @@ public class EditCar extends Fragment {
 
     private void initializeVIN() {
         vin = (MaterialEditText) rootView.findViewById(R.id.vin);
-//        vin.setBottomTextSize(0);
         vin.setMaxCharacters(17);
         vin.addValidator(new METValidator("") {
             @Override
@@ -900,92 +897,6 @@ public class EditCar extends Fragment {
 //        startActivityForResult(intent, PIC_CROP);
     }
 
-//    private void doCrop(final Uri uri) {
-//        Log.v(TAG, "doCrop Uri: " + uri);
-//        final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();
-//        Intent intent = new Intent("com.android.camera.action.CROP");
-//        intent.setType("image/*");
-//
-//        List<ResolveInfo> list = activity.getPackageManager().queryIntentActivities(intent, 0);
-//
-//        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-//        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//        intent.putExtra("aspectX", 1);
-//        intent.putExtra("aspectY", 1);
-//        intent.putExtra("scale", true);
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-//        startActivityForResult(intent, PIC_CROP);
-//        int size = list.size();
-//
-//        if (size == 0) {
-//            sendToast("Can not find image crop app");
-//
-//            return;
-//        } else {
-//            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-//            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//            intent.putExtra("aspectX", 1);
-//            intent.putExtra("aspectY", 1);
-//            intent.putExtra("scale", true);
-//            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-//
-//            if (size == 1) {
-//                Intent i = new Intent(intent);
-//                ResolveInfo res = list.get(0);
-//
-////                i.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-//                activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-//                activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                i.setData(uri);
-//
-//                try {
-//                    PendingIntent.getActivity(activity, PIC_CROP, i, PendingIntent.FLAG_CANCEL_CURRENT).send();
-//                } catch (PendingIntent.CanceledException e) {
-//                    e.printStackTrace();
-//                }
-////                startActivityForResult(i, PIC_CROP);
-//            } else {
-//                for (ResolveInfo res : list) {
-//                    final CropOption co = new CropOption();
-//
-//                    co.title = activity.getPackageManager().getApplicationLabel(res.activityInfo.applicationInfo);
-//                    co.icon = activity.getPackageManager().getApplicationIcon(res.activityInfo.applicationInfo);
-//                    activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-//                    activity.grantUriPermission(res.activityInfo.packageName, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                    Intent i = new Intent(intent);
-//                    i.setData(uri);
-//                    co.appIntent = i;
-//
-//                    co.appIntent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-//
-//                    cropOptions.add(co);
-//                }
-//
-//
-//                CropOptionAdapter adapter = new CropOptionAdapter(activity.getApplicationContext(), cropOptions);
-//
-//                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-//                builder.setTitle("Choose Crop App");
-//                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int item) {
-////                        startActivityForResult(cropOptions.get(item).appIntent, PIC_CROP);
-//                        try {
-//                            PendingIntent.getActivity(activity, PIC_CROP, cropOptions.get(item).appIntent, PendingIntent.FLAG_CANCEL_CURRENT).send();
-//                        } catch (PendingIntent.CanceledException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                });
-//
-//                builder.setOnCancelListener(null);
-//
-//                AlertDialog alert = builder.create();
-//
-//                alert.show();
-//            }
-//        }
-//    }
-
     private File getTempFile() {
         File temp = new File(activity.getCacheDir() + "/temp.jpg");
         try {
@@ -1035,7 +946,7 @@ public class EditCar extends Fragment {
     private void loadImage(final File image) {
         loadingImageSpinner.setVisibility(View.VISIBLE);
 
-        backgroundHandler.post(new Runnable() {
+        activity.execute(new Runnable() {
             @Override
             public void run() {
                 final Bitmap bitmap = BitmapFactory.decodeFile(image.getPath());
@@ -1063,7 +974,7 @@ public class EditCar extends Fragment {
     private void loadImage(final Uri uri) {
         loadingImageSpinner.setVisibility(View.VISIBLE);
 
-        backgroundHandler.post(new Runnable() {
+        activity.execute(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -1103,7 +1014,7 @@ public class EditCar extends Fragment {
                 Log.v(TAG, "Cached file exists");
                 loadingImageSpinner.setVisibility(View.VISIBLE);
 
-                backgroundHandler.post(new Runnable() {
+                activity.execute(new Runnable() {
                     @Override
                     public void run() {
                         try {
@@ -1177,7 +1088,7 @@ public class EditCar extends Fragment {
     private void storeImage() {
         final File temp = getTempFile();
         if (temp != null && temp.exists()) {
-            backgroundHandler.post(new Runnable() {
+            activity.execute(new Runnable() {
                 @Override
                 public void run() {
                     FileOutputStream out = null;
