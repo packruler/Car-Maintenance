@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/abc_action_bar_default_padding_material"
-    card_view:cardCornerRadius="@dimen/cardview_default_radius"
-    card_view:cardElevation="@dimen/cardview_default_elevation"
-    card_view:contentPadding="@dimen/abc_action_bar_default_padding_material">
-
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?android:attr/listPreferredItemHeight"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+        android:paddingLeft="?android:attr/listPreferredItemPaddingLeft">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_marginBottom="@dimen/margin_tiny"
             android:text="(TYPE)"
             android:id="@+id/typeDisplay"
             android:layout_alignParentLeft="true"/>
@@ -31,7 +25,6 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="$0.00"
             android:id="@+id/costDisplay"
-            android:layout_marginBottom="@dimen/margin_tiny"
             android:layout_alignParentRight="true"/>
 
         <TextView
@@ -51,4 +44,4 @@
             android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
-</android.support.v7.widget.CardView>
+</LinearLayout>

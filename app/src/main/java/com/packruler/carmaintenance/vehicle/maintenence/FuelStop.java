@@ -3,12 +3,14 @@ package com.packruler.carmaintenance.vehicle.maintenence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
 
 import java.sql.SQLDataException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -37,7 +39,7 @@ public class FuelStop extends ServiceTask {
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    VEHICLE_NAME + " STRING," + DATE + " LONG," + TYPE + " STRING," +
+                    VEHICLE_ROW + " STRING," + DATE + " LONG," + TYPE + " STRING," +
                     COST_UNITS + " STRING," + COST + " FLOAT," + MILEAGE + " LONG," +
                     MILEAGE_UNITS + " STRING," + DETAILS + " STRING," + LOCATION_ID + " STRING," +
                     LOCATION_NAME + " STRING," + COST_PER_VOLUME + " FLOAT," +
@@ -47,20 +49,26 @@ public class FuelStop extends ServiceTask {
                     DISTANCE_PER_VOLUME_UNIT + " STRING" + ")";
 
 
-    public FuelStop(CarSQL carSQL, String carName) {
+    public FuelStop(CarSQL carSQL, long row, boolean carRow) {
         this.carSQL = carSQL;
-
-        SQLiteDatabase database = carSQL.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(VEHICLE_NAME, carName);
-        row = database.insert(TABLE_NAME, null, contentValues);
+        if (!carRow) {
+            sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
+                    ID + "= " + row);
+            this.row = row;
+        } else {
+            SQLiteDatabase database = carSQL.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(VEHICLE_ROW, row);
+            this.row = database.insert(TABLE_NAME, null, contentValues);
 //        Log.v(TAG, "Row: " + row);
 
-        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                ID + "= " + row);
+            sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
+                    ID + "= " + this.row);
+        }
     }
 
     public FuelStop(CarSQL carSQL, long row) {
+        this.row = row;
         sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
                 ID + "= " + row);
     }
@@ -121,32 +129,35 @@ public class FuelStop extends ServiceTask {
         sqlDataHandler.putFloat(COST_PER_VOLUME, costPerVolume);
     }
 
-    public static Cursor getFuelStopCursorForCar(CarSQL carSQL, String carName) {
+    public static Cursor getFuelStopCursorForCar(CarSQL carSQL, long vehicleRow) {
         return carSQL.getReadableDatabase().query(TABLE_NAME, null,
-                VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
+                VEHICLE_ROW + "= " + vehicleRow, null, null, null, null);
     }
 
-    public static List<FuelStop> getFuelStopsForCar(CarSQL carSQL, String carName) {
-        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{ID},
-                VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
+    public static List<FuelStop> getFuelStopsForCar(CarSQL carSQL, long vehicleRow) {
+        long start = Calendar.getInstance().getTimeInMillis();
 
+        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{ID},
+                VEHICLE_ROW + "= " + vehicleRow, null, null, null, null);
 
         if (!cursor.moveToFirst())
             return new ArrayList<>(0);
 
         ArrayList<FuelStop> list = new ArrayList<>(cursor.getCount());
-
         while (!cursor.isAfterLast()) {
             list.add(new FuelStop(carSQL, cursor.getLong(0)));
             cursor.moveToNext();
         }
         cursor.close();
+        Log.d("FuelStop", "FuelStop size: " + list.size());
+
+        Log.d("FuelStop", "Task took " + (Calendar.getInstance().getTimeInMillis() - start));
         return list;
     }
 
-    public static int getFuelStopCountForCar(CarSQL carSQL, String carName) {
-        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
-                VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
+    public static int getFuelStopCountForCar(CarSQL carSQL, long vehicleRow) {
+        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{ID},
+                VEHICLE_ROW + "= " + vehicleRow, null, null, null, null);
         int count = cursor.getCount();
         cursor.close();
         return count;

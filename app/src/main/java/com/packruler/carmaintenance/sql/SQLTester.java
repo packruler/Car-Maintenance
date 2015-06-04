@@ -99,12 +99,12 @@ public class SQLTester extends ActionBarActivity {
 
 //        SQLiteDatabase database = carSQL.getWritableDatabase();
 //        database.beginTransaction();
-//        database.delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_NAME + " LIKE (\'Car%\')", null);
-//        database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_NAME + " LIKE (\'Car%\')", null);
-//        database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_NAME + " LIKE (\'Car%\')", null);
-//        database.delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
-//        database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
-//        database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_NAME + " LIKE (\'THIS%\')", null);
+//        database.delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_ROW + " LIKE (\'Car%\')", null);
+//        database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_ROW + " LIKE (\'Car%\')", null);
+//        database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_ROW + " LIKE (\'Car%\')", null);
+//        database.delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_ROW + " LIKE (\'THIS%\')", null);
+//        database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_ROW + " LIKE (\'THIS%\')", null);
+//        database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_ROW + " LIKE (\'THIS%\')", null);
 //        database.setTransactionSuccessful();
 //        database.endTransaction();
 

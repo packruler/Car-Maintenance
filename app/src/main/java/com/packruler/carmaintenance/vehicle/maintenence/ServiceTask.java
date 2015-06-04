@@ -27,7 +27,7 @@ public class ServiceTask {
     public static final String TABLE_NAME = "service";
     public static final String ID = "_id";
     public static final String GENERAL_TYPE = "GENERAL";
-    public static final String VEHICLE_NAME = "vehicle_name";
+    public static final String VEHICLE_ROW = "vehicle_row";
     public static final String TYPE = "type";
     public static final String DETAILS = "details";
     public static final String COST = "cost";
@@ -42,7 +42,7 @@ public class ServiceTask {
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    VEHICLE_NAME + " STRING," + DATE + " LONG," + TYPE + " STRING," +
+                    VEHICLE_ROW + " LONG," + DATE + " LONG," + TYPE + " STRING," +
                     COST + " FLOAT," + MILEAGE + " LONG," + MILEAGE_UNITS + " STRING," +
                     DETAILS + " STRING," + LOCATION_ID + " STRING," + LOCATION_NAME + " STRING," +
                     COST_UNITS + " STRING," + PARTS_REPLACED + " STRING" + ")";
@@ -55,20 +55,26 @@ public class ServiceTask {
 
     }
 
-    public ServiceTask(CarSQL carSQL, String carName) {
+    public ServiceTask(CarSQL carSQL, long row, boolean carRow) {
         this.carSQL = carSQL;
-
-        SQLiteDatabase database = carSQL.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(VEHICLE_NAME, carName);
-        row = database.insert(TABLE_NAME, null, contentValues);
+        if (!carRow) {
+            sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
+                    ID + "= " + row);
+            this.row = row;
+        } else {
+            SQLiteDatabase database = carSQL.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(VEHICLE_ROW, row);
+            this.row = database.insert(TABLE_NAME, null, contentValues);
 //        Log.v(TAG, "Row: " + row);
 
-        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                ID + "= " + row);
+            sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
+                    ID + "= " + this.row);
+        }
     }
 
     public ServiceTask(CarSQL carSQL, long row) {
+        this.row = row;
         sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
                 ID + "= " + row);
     }
@@ -78,11 +84,11 @@ public class ServiceTask {
     }
 
     public String getCarName() {
-        return sqlDataHandler.getString(VEHICLE_NAME);
+        return sqlDataHandler.getString(VEHICLE_ROW);
     }
 
     public void setCarName(String carName) {
-        sqlDataHandler.putString(VEHICLE_NAME, carName);
+        sqlDataHandler.putString(VEHICLE_ROW, carName);
     }
 
     public void setType(String type) {
@@ -181,16 +187,16 @@ public class ServiceTask {
         sqlDataHandler.setContentValues(contentValues);
     }
 
-    public static Cursor getServiceTaskCursorForCar(CarSQL carSQL, String carName) {
+    public static Cursor getServiceTaskCursorForCar(CarSQL carSQL, long vehicleRow) {
         return carSQL.getReadableDatabase().query(TABLE_NAME, null,
-                VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
+                VEHICLE_ROW + "= " + vehicleRow, null, null, null, null);
     }
 
-    public static List<ServiceTask> getServiceTasksForCar(CarSQL carSQL, String carName) {
+    public static List<ServiceTask> getServiceTasksForCar(CarSQL carSQL, long vehicleRow) {
         long start = Calendar.getInstance().getTimeInMillis();
 
         Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{ID},
-                VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
+                VEHICLE_ROW + "= " + vehicleRow, null, null, null, null);
 
         if (!cursor.moveToFirst())
             return new ArrayList<>(0);
@@ -207,11 +213,10 @@ public class ServiceTask {
         return list;
     }
 
-    public static int getServiceTasksCountForCar(CarSQL carSQL, String carName) {
-        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{VEHICLE_NAME, DATE},
-                VEHICLE_NAME + "= \"" + carName + "\"", null, null, null, null);
+    public static int getServiceTasksCountForCar(CarSQL carSQL, long vehicleRow) {
+        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{ID},
+                VEHICLE_ROW + "= " + vehicleRow, null, null, null, null);
         int count = cursor.getCount();
-        Log.v("ServiceTaskCount", "Name: " + carName + " Count: " + count);
         cursor.close();
         return count;
     }

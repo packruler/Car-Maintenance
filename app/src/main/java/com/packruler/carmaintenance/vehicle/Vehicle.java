@@ -23,6 +23,7 @@ public class Vehicle {
 
     public static final String TABLE_NAME = "vehicles";
     public static final String VEHICLE_NAME = "vehicle_name";
+    public static final String ROW_ID = "_id";
     public static final String MAKE = "make";
     public static final String MODEL = "model";
     public static final String SUBMODEL = "submodel";
@@ -48,9 +49,8 @@ public class Vehicle {
     public static final String DISPLAY_COLOR = "display_color";
 
     public static final String SQL_CREATE =
-            "CREATE TABLE " + TABLE_NAME + " (" +
-                    VEHICLE_NAME + " STRING PRIMARY KEY," +
-                    MAKE + " STRING," + MODEL + " STRING," +
+            "CREATE TABLE " + TABLE_NAME + " (" + ROW_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    VEHICLE_NAME + " STRING," + MAKE + " STRING," + MODEL + " STRING," +
                     SUBMODEL + " STRING," + YEAR + " INTEGER," +
                     VIN + " STRING," + WEIGHT + " LONG," + WEIGHT_UNITS + " STRING," +
                     DISPLACEMENT + " FLOAT," + DISPLACEMENT_UNITS + " STRING," +
@@ -63,73 +63,71 @@ public class Vehicle {
                     DISPLAY_COLOR + " INTEGER" + ")";
 
     protected CarSQL carSQL;
-    private String name = "";
+    private long row;
 
     private SQLDataHandler sqlDataHandler;
-    private ContentValues contentValues = new ContentValues();
-    private Cursor cursor;
-    private int serviceTaskCount = 0;
-    private int fuelStopCount = 0;
-    private int partCount = 0;
 
     public Vehicle(CarSQL carSQL, String name) {
-        this.name = name;
         this.carSQL = carSQL;
-        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                VEHICLE_NAME + "= \"" + this.name + "\"");
 
         SQLiteDatabase database = carSQL.getWritableDatabase();
-        Cursor cursor = database.query(true, TABLE_NAME, new String[]{VEHICLE_NAME},
-                VEHICLE_NAME + "= \"" + name + "\"", null, null, null, null, null);
+        Cursor cursor = database.query(TABLE_NAME, null, VEHICLE_NAME + "= \"" + name + "\"",
+                null, null, null, null);
 
         if (!cursor.moveToFirst()) {
             Log.i(TAG, "New Vehicle Name: " + name);
             ContentValues contentValues = new ContentValues();
             contentValues.put(VEHICLE_NAME, name);
-            database.insert(TABLE_NAME, null, contentValues);
-        }
+            row = database.insert(TABLE_NAME, null, contentValues);
+        } else
+            row = cursor.getLong(0);
 
         cursor.close();
-        serviceTaskCount = ServiceTask.getServiceTasksCountForCar(carSQL, name);
-        fuelStopCount = FuelStop.getServiceTasksCountForCar(carSQL, name);
-        partCount = PartReplacement.getPartReplacementCountForCar(carSQL, name);
+        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
+                ROW_ID + "= " + row);
     }
 
-    public void setName(String name) {
+    public boolean setName(String name) {
+        if (getName().equals(name))
+            return true;
+
         if (canUseCarName(name)) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(VEHICLE_NAME, name);
-            sqlDataHandler.setContentValues(contentValues);
-
-            sqlDataHandler.setSelection(VEHICLE_NAME + "= \"" + this.name + "\"");
-
-            long start = System.currentTimeMillis();
-
-            carSQL.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
-                    VEHICLE_NAME + "= \"" + this.name + "\"", null);
-
-            long doneService = System.currentTimeMillis();
-            carSQL.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
-                    VEHICLE_NAME + "= \"" + this.name + "\"", null);
-
-            long doneFuel = System.currentTimeMillis();
-            carSQL.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
-                    VEHICLE_NAME + "= \"" + this.name + "\"", null);
-
-            long done = System.currentTimeMillis();
-            this.name = name;
-
-            Log.i(TAG, "Service task: " + (doneService - start));
-            Log.i(TAG, "Fuel task: " + (doneFuel - doneService));
-            Log.i(TAG, "Part task: " + (done - doneFuel));
-            Log.i(TAG, "All task: " + (done - start));
-        } else
-            Log.i(TAG, "Name already used");
+            sqlDataHandler.putString(VEHICLE_NAME, name);
+//            ContentValues contentValues = new ContentValues();
+//            contentValues.put(VEHICLE_NAME, name);
+//            sqlDataHandler.setContentValues(contentValues);
+//
+//            sqlDataHandler.setSelection(VEHICLE_NAME + "= \"" + this.name + "\"");
+//
+//            long start = System.currentTimeMillis();
+//
+//            carSQL.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
+//                    VEHICLE_NAME + "= \"" + this.name + "\"", null);
+//
+//            long doneService = System.currentTimeMillis();
+//            carSQL.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
+//                    VEHICLE_NAME + "= \"" + this.name + "\"", null);
+//
+//            long doneFuel = System.currentTimeMillis();
+//            carSQL.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
+//                    VEHICLE_NAME + "= \"" + this.name + "\"", null);
+//
+//            long done = System.currentTimeMillis();
+//            this.name = name;
+//
+//            Log.i(TAG, "Service task: " + (doneService - start));
+//            Log.i(TAG, "Fuel task: " + (doneFuel - doneService));
+//            Log.i(TAG, "Part task: " + (done - doneFuel));
+//            Log.i(TAG, "All task: " + (done - start));
+            return true;
+        }
+        Log.i(TAG, "Name already used");
+        return false;
     }
 
     public boolean canUseCarName(String carName) {
-        if (name.equals(carName))
-            return false;
+        if (getName().equals(carName))
+            return true;
 
         SQLiteDatabase database = carSQL.getReadableDatabase();
         Cursor cursor = database.query(Vehicle.TABLE_NAME, new String[]{Vehicle.VEHICLE_NAME},
@@ -141,7 +139,7 @@ public class Vehicle {
     }
 
     public String getName() {
-        return name;
+        return sqlDataHandler.getString(VEHICLE_NAME);
     }
 
     public void setMake(String make) {
@@ -220,23 +218,23 @@ public class Vehicle {
     }
 
     public synchronized ServiceTask getNewServiceTask() {
-        return new ServiceTask(carSQL, name);
+        return new ServiceTask(carSQL, row, true);
     }
 
     public synchronized FuelStop getNewFuelStop() {
-        return new FuelStop(carSQL, name);
+        return new FuelStop(carSQL, row, true);
     }
 
     public synchronized PartReplacement getNewPartReplacement() {
-        return new PartReplacement(carSQL, name);
+        return new PartReplacement(carSQL, row, true);
     }
 
     public List<ServiceTask> getServiceTasks() {
-        return ServiceTask.getServiceTasksForCar(carSQL, name);
+        return ServiceTask.getServiceTasksForCar(carSQL, row);
     }
 
     public Cursor getServiceTaskCursor(String orderBy) {
-        return carSQL.getReadableDatabase().query(ServiceTask.TABLE_NAME, null, VEHICLE_NAME + "= \"" + name + "\"", null, null, null, orderBy);
+        return carSQL.getReadableDatabase().query(ServiceTask.TABLE_NAME, null, ROW_ID + "= " + row, null, null, null, orderBy);
     }
 
     public Cursor getServiceTaskCursor(String orderBy, boolean inverse) {
@@ -248,19 +246,19 @@ public class Vehicle {
     }
 
     public Cursor getServiceTaskCursor() {
-        return ServiceTask.getServiceTaskCursorForCar(carSQL, name);
+        return ServiceTask.getServiceTaskCursorForCar(carSQL, row);
     }
 
     public int getServiceTaskCount() {
-        return ServiceTask.getServiceTasksCountForCar(carSQL, name);
+        return ServiceTask.getServiceTasksCountForCar(carSQL, row);
     }
 
     public int getFuelStopCount() {
-        return FuelStop.getFuelStopCountForCar(carSQL, name);
+        return FuelStop.getFuelStopCountForCar(carSQL, row);
     }
 
     public int getPartCount() {
-        return PartReplacement.getPartReplacementCountForCar(carSQL, name);
+        return PartReplacement.getPartReplacementCountForCar(carSQL, row);
     }
 
     public float getPurchaseCost() {
