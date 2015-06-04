@@ -20,28 +20,37 @@ import java.util.Date;
  * Created by Packruler on 5/22/15.
  */
 public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRecyclerAdapter.ViewHolder> {
+    private Context context;
 
     public ServiceRecyclerAdapter(Context context, Cursor cursor) {
-        super(context, cursor);
+        super(cursor);
+        this.context = context;
     }
 
     private onRecyclerItemClickListener onRecyclerItemClickListener;
+
+    @Override
+    public void onBindViewHolderCursor(ViewHolder holder, Cursor cursor) {
+        ServiceTaskItem item = new ServiceTaskItem(cursor);
+        holder.typeDisplay.setText(item.getType());
+        holder.costDisplay.setText(item.getCost());
+        holder.mileageDisplay.setText("Mileage: " + item.getMileage());
+        holder.dateDisplay.setText(item.getDate());
+    }
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        private View view;
         public TextView typeDisplay;
         public TextView mileageDisplay;
         public TextView costDisplay;
         public TextView dateDisplay;
-        public int position;
 
         public ViewHolder(View v) {
             super(v);
-            view = v;
+            View view = v;
             typeDisplay = (TextView) v.findViewById(R.id.typeDisplay);
             mileageDisplay = (TextView) v.findViewById(R.id.mileageDisplay);
             costDisplay = (TextView) v.findViewById(R.id.costDisplay);
@@ -49,7 +58,7 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClick(v, ViewHolder.this.getAdapterPosition());
+                    onItemClick(ViewHolder.this.getItemId());
                 }
             });
         }
@@ -60,15 +69,6 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.service_selector, parent, false);
         return new ViewHolder(v);
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, Cursor cursor) {
-        ServiceTaskItem item = new ServiceTaskItem(cursor);
-        holder.typeDisplay.setText(item.getType());
-        holder.costDisplay.setText(item.getCost());
-        holder.mileageDisplay.setText("Mileage: " + item.getMileage());
-        holder.dateDisplay.setText(item.getDate());
     }
 
     private class ServiceTaskItem {
@@ -91,13 +91,13 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
         }
 
         public String getDate() {
-            return DateFormat.getDateFormat(mContext).format(new Date(cursor.getLong(cursor.getColumnIndex(ServiceTask.DATE))));
+            return DateFormat.getDateFormat(context).format(new Date(cursor.getLong(cursor.getColumnIndex(ServiceTask.DATE))));
         }
     }
 
-    private void onItemClick(View view, int position) {
+    private void onItemClick(long position) {
         Log.v("onItemClick", "Position: " + position);
-        onRecyclerItemClickListener.onItemClick(view, position);
+        onRecyclerItemClickListener.onItemClick(position);
     }
 
     public void setOnItemClickListener(onRecyclerItemClickListener listener) {
@@ -105,6 +105,6 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
     }
 
     public interface onRecyclerItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(long rowId);
     }
 }

@@ -103,6 +103,7 @@ public class EditCar extends Fragment {
     private MaterialBetterSpinner purchaseCostUnit;
     private MaterialEditText purchaseMileage;
     private MaterialBetterSpinner purchaseMilageUnits;
+    private MaterialEditText purchaseLocation;
 
     public EditCar() {
     }
@@ -414,7 +415,7 @@ public class EditCar extends Fragment {
     }
 
     private void initializeNameText() {
-        vehicleName = (MaterialEditText) rootView.findViewById(R.id.vehicle_name);
+        vehicleName = (MaterialEditText) rootView.findViewById(R.id.task_type);
         vehicleName.setInputType(InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
     }
 
@@ -1223,25 +1224,6 @@ public class EditCar extends Fragment {
         },
                 calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
-//        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-//        builder.setTitle(R.string.purchase_date);
-//
-//        DatePicker datePicker = new DatePicker(activity);
-//        datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
-//            @Override
-//            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-//                datePurchasedSet = true;
-//                calendar.set(year, monthOfYear, dayOfMonth);
-//                datePurchased = calendar.getTimeInMillis();
-//                setDisplayPurchaseDate();
-//                datePickerDialog.dismiss();
-//            }
-//        });
-//
-//        builder.setView(datePicker);
-//
-//        datePickerDialog = builder.create();
-
         datePickerDialog.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis());
         datePickerDialog.show();
     }
@@ -1287,25 +1269,28 @@ public class EditCar extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.v(TAG, "Result code: " + (Activity.RESULT_OK == resultCode));
+        Log.v(TAG, "Result code: " + resultCode);
         Uri selected = data == null ? null : data.getData();
         Log.v(TAG, "Output: " + selected);
         Log.v(TAG, "requestCode " + requestCode);
         switch (requestCode) {
             case SELECT_PICTURE_REQUEST_CODE:
                 Log.v(TAG, "Select image");
-                if (selected != null) {
+                if (resultCode != Activity.RESULT_OK)
+                    Log.e(TAG, "Error in photo crop. Delete temp file " + (getTempFile().delete() ? "SUCCESS" : "FAILED"));
+                else if (selected != null) {
                     loadImage(selected, false);
 //                    doCrop(selected);
                 }
                 break;
             case PIC_CROP:
-                if (selected != null)
+                if (resultCode != Activity.RESULT_OK)
+                    Log.e(TAG, "Error in photo crop. Delete temp file " + (getTempFile().delete() ? "SUCCESS" : "FAILED"));
+                else if (selected != null)
                     loadImage(selected);
                 break;
         }
-        if (resultCode != Activity.RESULT_OK)
-            Log.e(TAG, "Error in photo crop. Delete temp file " + (getTempFile().delete() ? "SUCCESS" : "FAILED"));
+
     }
 
     private void sendToast(CharSequence message) {

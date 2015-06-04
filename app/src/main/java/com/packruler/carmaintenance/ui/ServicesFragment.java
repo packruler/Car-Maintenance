@@ -71,7 +71,8 @@ public class ServicesFragment extends Fragment {
         this.activity = activity;
         this.vehicle = vehicle;
         this.carSQL = carSQL;
-        mAdapter = new ServiceRecyclerAdapter(ServicesFragment.this.activity, vehicle.getServiceTaskCursor());
+        mAdapter = new ServiceRecyclerAdapter(activity, vehicle.getServiceTaskCursor());
+        mAdapter.setHasStableIds(true);
     }
 
     @Override
@@ -97,13 +98,12 @@ public class ServicesFragment extends Fragment {
 
         mAdapter.setOnItemClickListener(new ServiceRecyclerAdapter.onRecyclerItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(long rowId) {
                 long start = Calendar.getInstance().getTimeInMillis();
-                Cursor cursor = mAdapter.getItem(position);
-                ServiceTask task = new ServiceTask(carSQL, cursor.getLong(cursor.getColumnIndex(ServiceTask.ID)));
+                ServiceTask task = new ServiceTask(carSQL, rowId);
                 Log.v(TAG, "Type: " + task.getType() + " Date: " + DateFormat.getMediumDateFormat(activity).format(task.getDate()));
                 Log.v(TAG, "Loading task took " + (Calendar.getInstance().getTimeInMillis() - start));
-                setSortOrder(ServiceTask.DATE, position % 2 == 0);
+                setSortOrder(ServiceTask.DATE, rowId % 2 == 0);
             }
         });
 
@@ -111,7 +111,7 @@ public class ServicesFragment extends Fragment {
         buttonFloat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
         setUIColor(vehicle.getDisplayColor());

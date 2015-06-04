@@ -24,6 +24,9 @@ import android.view.WindowManager;
 
 import com.freshdesk.mobihelp.Mobihelp;
 import com.freshdesk.mobihelp.MobihelpConfig;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.places.Places;
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity
 
     private final String TAG = getClass().getName();
     private static final String CAR_NAME_SET = "CAR_NAME_SET";
+    private GoogleApiClient googleApiClient;
 
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
@@ -87,6 +91,17 @@ public class MainActivity extends AppCompatActivity
                 } catch (IOException e) {
                     Log.e(TAG, "availableCarsSQL ERROR: " + e.getMessage());
                 }
+                googleApiClient = new GoogleApiClient
+                        .Builder(MainActivity.this)
+                        .addApi(Places.GEO_DATA_API)
+                        .addApi(Places.PLACE_DETECTION_API)
+                        .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
+                            @Override
+                            public void onConnectionFailed(ConnectionResult connectionResult) {
+                                Log.e(TAG, "Connection Failed");
+                                Log.e(TAG, connectionResult.toString());
+                            }
+                        }).build();
             }
         });
         Log.i(TAG, "New MainActivity");
@@ -119,8 +134,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         carsSQL.close();
+        googleApiClient.disconnect();
+        super.onDestroy();
     }
 
     @Override
@@ -219,6 +235,11 @@ public class MainActivity extends AppCompatActivity
                     poolExecutor.execute(new Runnable() {
                         @Override
                         public void run() {
+                            try {
+                                Looper.prepare();
+                            } catch (Exception e) {
+                                //Thread already prepared
+                            }
                             ServicesFragment servicesFragment = new ServicesFragment(MainActivity.this, vehicleMap.get("THIS CHANGED"), carsSQL);
                             getFragmentManager().beginTransaction().replace(R.id.container, servicesFragment).addToBackStack("Services").commit();
                         }
@@ -282,6 +303,10 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
+    }
+
+    public GoogleApiClient getGoogleApiClient() {
+        return googleApiClient;
     }
 
     @Override

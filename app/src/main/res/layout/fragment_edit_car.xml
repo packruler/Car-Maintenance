@@ -37,7 +37,8 @@
                     android:textAppearance="@android:style/TextAppearance.Small"
                     android:id="@+id/general_info_title"
                     android:textStyle="bold"
-                    android:textColor="?attr/colorPrimary"/>
+                    android:textColor="?attr/colorPrimary"
+                    android:layout_marginBottom="@dimen/margin_small"/>
 
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="wrap_content"
@@ -46,11 +47,9 @@
                     android:singleLine="true"
                     android:hint="@string/name"
                     android:ems="10"
-                    android:id="@+id/vehicle_name"
-                    android:layout_alignParentTop="true"
+                    android:id="@+id/task_type"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@id/general_info_title"
-                    android:layout_marginTop="@dimen/margin_medium"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     app:met_floatingLabel="highlight"/>
 
@@ -61,7 +60,7 @@
                     android:hint="@string/year"
                     android:ems="4"
                     android:id="@+id/year"
-                    android:layout_below="@id/vehicle_name"
+                    android:layout_below="@id/task_type"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     app:met_floatingLabel="highlight"
                     app:met_primaryColor="?attr/colorPrimary"/>
@@ -73,7 +72,7 @@
                     android:inputType="textPersonName"
                     android:hint="@string/make"
                     android:id="@+id/make"
-                    android:layout_below="@id/vehicle_name"
+                    android:layout_below="@id/task_type"
                     android:ems="6"
                     android:layout_toRightOf="@+id/year"
                     app:met_floatingLabel="highlight"
@@ -87,7 +86,7 @@
                     android:hint="@string/model"
                     android:id="@+id/model"
                     android:ems="6"
-                    android:layout_below="@id/vehicle_name"
+                    android:layout_below="@id/task_type"
                     android:spinnerMode="dropdown"
                     android:layout_toRightOf="@+id/make"
                     app:met_floatingLabel="highlight"
@@ -142,7 +141,8 @@
                     android:textAppearance="@android:style/TextAppearance.Small"
                     android:id="@+id/performance_details_title"
                     android:textStyle="bold"
-                    android:textColor="?attr/colorPrimary"/>
+                    android:textColor="?attr/colorPrimary"
+                    android:layout_marginBottom="@dimen/margin_small"/>
 
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="wrap_content"
@@ -268,7 +268,7 @@
                     android:id="@+id/visual_details_title"
                     android:textStyle="bold"
                     android:textColor="?attr/colorPrimary"
-                    android:layout_marginBottom="@dimen/margin_medium"/>
+                    android:layout_marginBottom="@dimen/margin_small"/>
 
                 <android.support.v7.widget.CardView
                     android:layout_width="wrap_content"
@@ -376,7 +376,7 @@
                     android:id="@+id/purchase_details_title"
                     android:textStyle="bold"
                     android:textColor="?attr/colorPrimary"
-                    android:layout_marginBottom="@dimen/margin_medium"/>
+                    android:layout_marginBottom="@dimen/margin_small"/>
 
                 <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
                     android:layout_width="wrap_content"
@@ -419,7 +419,6 @@
                     android:layout_alignRight="@id/purchase_date"
                     android:layout_alignBottom="@id/purchase_date"/>
 
-
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -446,6 +445,18 @@
                     android:dropDownWidth="100dp"
                     app:met_floatingLabel="highlight"/>
 
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/purchase_location"
+                    android:singleLine="true"
+                    android:layout_alignParentLeft="true"
+                    android:minEms="4"
+                    android:hint="@string/purchase_location"
+                    android:inputType="textShortMessage"
+                    android:layout_below="@id/purchase_mileage"
+                    android:layout_marginRight="@dimen/margin_small"
+                    app:met_floatingLabel="highlight"/>
             </RelativeLayout>
         </android.support.v7.widget.CardView>
     </RelativeLayout>
