@@ -66,7 +66,6 @@ public class ServiceTask {
             ContentValues contentValues = new ContentValues();
             contentValues.put(VEHICLE_ROW, row);
             this.row = database.insert(TABLE_NAME, null, contentValues);
-//        Log.v(TAG, "Row: " + row);
 
             sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
                     ID + "= " + this.row);
@@ -188,8 +187,8 @@ public class ServiceTask {
     }
 
     public static Cursor getServiceTaskCursorForCar(CarSQL carSQL, long vehicleRow) {
-        return carSQL.getReadableDatabase().query(TABLE_NAME, null,
-                VEHICLE_ROW + "= " + vehicleRow, null, null, null, null);
+        return carSQL.getReadableDatabase().query(false, TABLE_NAME, null,
+                VEHICLE_ROW + "= " + vehicleRow, null, null, null, null, null);
     }
 
     public static List<ServiceTask> getServiceTasksForCar(CarSQL carSQL, long vehicleRow) {

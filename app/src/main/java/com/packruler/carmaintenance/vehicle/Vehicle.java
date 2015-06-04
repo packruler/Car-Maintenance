@@ -234,7 +234,7 @@ public class Vehicle {
     }
 
     public Cursor getServiceTaskCursor(String orderBy) {
-        return carSQL.getReadableDatabase().query(ServiceTask.TABLE_NAME, null, ROW_ID + "= " + row, null, null, null, orderBy);
+        return carSQL.getReadableDatabase().query(ServiceTask.TABLE_NAME, null, ServiceTask.VEHICLE_ROW + "= " + row, null, null, null, orderBy);
     }
 
     public Cursor getServiceTaskCursor(String orderBy, boolean inverse) {
