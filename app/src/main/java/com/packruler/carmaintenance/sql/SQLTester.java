@@ -142,14 +142,17 @@ public class SQLTester extends ActionBarActivity {
                             serviceTask = vehicle.getNewServiceTask();
                             if (Math.random() > .5)
                                 serviceTask.setType("Oil Change");
-                            else
+                            else {
                                 serviceTask.setType("Checkup");
+                                //TODO: Setup part test
+                            }
                         }
                         serviceTask.setDate(calendar.getTimeInMillis());
                         serviceTask.setMileage((long) (Math.random() * 10000));
                         serviceTask.setCost((float) (Math.random() * 100));
+                        serviceTask.setCostUnits("$");
 
-                        if (y % 100 == 0)
+                        if (y % 1000 == 0)
                             Log.v(TAG, "Added task: " + y + " to " + vehicle.getName());
                     }
                     Log.i(TAG, "3000 tasks took: " + (System.currentTimeMillis() - start));

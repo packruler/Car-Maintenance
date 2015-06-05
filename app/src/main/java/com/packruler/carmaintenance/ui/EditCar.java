@@ -545,7 +545,6 @@ public class EditCar extends Fragment {
                 }
             }
         });
-
     }
 
     private void updateMakeSpinner() {

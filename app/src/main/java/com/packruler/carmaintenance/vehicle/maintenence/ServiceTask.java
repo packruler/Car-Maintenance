@@ -12,7 +12,6 @@ import com.packruler.carmaintenance.sql.ServiceTypeCursorHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.sql.SQLDataException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -143,7 +142,7 @@ public class ServiceTask {
         return sqlDataHandler.getFloat(COST);
     }
 
-    public void setCostUnits(String units) throws SQLDataException {
+    public void setCostUnits(String units){
         sqlDataHandler.putString(COST_UNITS, units);
     }
 

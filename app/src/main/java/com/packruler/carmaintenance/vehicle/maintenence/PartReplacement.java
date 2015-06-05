@@ -25,9 +25,9 @@ public class PartReplacement extends ServiceTask {
     public static final String BRAND = "brand";
     public static final String PRODUCT_NUMBER = "product_number";
     public static final String EXPECTED_LIFE_DISTANCE = "expected_life_distance";
-    public static final String EXPECTED_LIFE_TIME = "expected_life_distance";
+    public static final String EXPECTED_LIFE_TIME = "expected_life_time";
     public static final String WARRANTY_LIFE_DISTANCE = "warranty_life_distance";
-    public static final String WARRANTY_LIFE_TIME = "warranty_life_distance";
+    public static final String WARRANTY_LIFE_TIME = "warranty_life_time";
     public static final String SERVICE_TASK_ROW = "service_task_row";
 
     public static final String SQL_CREATE =
