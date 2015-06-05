@@ -44,7 +44,8 @@ import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("ConstantConditions")
 public class MainActivity extends AppCompatActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, FragmentManager.OnBackStackChangedListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+        android.app.FragmentManager.OnBackStackChangedListener {
 
     private final String TAG = getClass().getName();
     private static final String CAR_NAME_SET = "CAR_NAME_SET";
@@ -126,10 +127,10 @@ public class MainActivity extends AppCompatActivity
         for (String name : carsSQL.getCarNames()) {
             vehicleMap.put(name, new Vehicle(carsSQL, name));
         }
+        getFragmentManager().addOnBackStackChangedListener(this);
         getFragmentManager().beginTransaction().replace(R.id.container, new MainFragment()).commit();
 
         mNavigationDrawerFragment.updateDrawer();
-        getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
 
     @Override
@@ -205,7 +206,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackStackChanged() {
-        int count = getSupportFragmentManager().getBackStackEntryCount();
+        int count = getFragmentManager().getBackStackEntryCount();
         Log.v("onBackStackChanged", "Count: " + count);
         if (count == 0) {
             setUIColor(getResources().getColor(R.color.default_ui_color));
@@ -232,18 +233,8 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     Log.v(TAG, "onClick");
-                    poolExecutor.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Looper.prepare();
-                            } catch (Exception e) {
-                                //Thread already prepared
-                            }
-                            ServicesFragment servicesFragment = new ServicesFragment(MainActivity.this, vehicleMap.get("THIS CHANGED"), carsSQL);
-                            getFragmentManager().beginTransaction().replace(R.id.container, servicesFragment).addToBackStack("Services").commit();
-                        }
-                    });
+                    ServicesFragment servicesFragment = new ServicesFragment(MainActivity.this, vehicleMap.get("THIS CHANGED"), carsSQL);
+                    getFragmentManager().beginTransaction().replace(R.id.container, servicesFragment).addToBackStack("Services").commit();
                 }
             });
             rootView.findViewById(R.id.edit_car_button).setOnClickListener(new View.OnClickListener() {
@@ -311,7 +302,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) Log.v(TAG, "Back button press");
+        if (keyCode == KeyEvent.KEYCODE_BACK && getFragmentManager().getBackStackEntryCount() > 0) {
+            Log.v(TAG, "Back button press");
+            getFragmentManager().popBackStack();
+            return true;
+        }
         return super.onKeyDown(keyCode, event);
     }
 }

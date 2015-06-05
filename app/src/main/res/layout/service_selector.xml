@@ -22,7 +22,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_marginBottom="@dimen/margin_tiny"
             android:text="(TYPE)"
-            android:id="@+id/typeDisplay"
+            android:id="@+id/type_display"
             android:layout_alignParentLeft="true"/>
 
         <TextView
@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/typeDisplay"
+            android:layout_below="@id/type_display"
             android:id="@+id/dateDisplay"
             android:text="Date:"/>
 
@@ -47,7 +47,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Mileage: 0,000 miles"
             android:id="@+id/mileageDisplay"
-            android:layout_below="@+id/typeDisplay"
+            android:layout_below="@+id/type_display"
             android:layout_alignParentRight="true"/>
 
     </RelativeLayout>

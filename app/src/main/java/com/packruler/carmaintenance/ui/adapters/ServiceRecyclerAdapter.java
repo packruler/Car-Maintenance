@@ -47,7 +47,7 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
 
         public ViewHolder(View v) {
             super(v);
-            typeDisplay = (TextView) v.findViewById(R.id.typeDisplay);
+            typeDisplay = (TextView) v.findViewById(R.id.type_display);
             mileageDisplay = (TextView) v.findViewById(R.id.mileageDisplay);
             costDisplay = (TextView) v.findViewById(R.id.costDisplay);
             dateDisplay = (TextView) v.findViewById(R.id.dateDisplay);

@@ -103,6 +103,9 @@ public class ServicesFragment extends Fragment {
                 ServiceTask task = new ServiceTask(carSQL, rowId);
                 Log.v(TAG, "Type: " + task.getType() + " Date: " + DateFormat.getMediumDateFormat(activity).format(task.getDate()));
                 Log.v(TAG, "Loading task took " + (Calendar.getInstance().getTimeInMillis() - start));
+                activity.getFragmentManager().beginTransaction()
+                        .replace(R.id.container, new EditService(task))
+                        .addToBackStack("EditService-" + rowId).commit();
             }
         });
 
