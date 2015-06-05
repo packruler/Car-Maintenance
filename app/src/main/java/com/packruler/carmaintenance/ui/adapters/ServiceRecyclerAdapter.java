@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Date;
 
@@ -31,11 +32,10 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
 
     @Override
     public void onBindViewHolderCursor(ViewHolder holder, Cursor cursor) {
-        ServiceTaskItem item = new ServiceTaskItem(cursor);
-        holder.typeDisplay.setText(item.getType());
-        holder.costDisplay.setText(item.getCost());
-        holder.mileageDisplay.setText("Mileage: " + item.getMileage());
-        holder.dateDisplay.setText(item.getDate());
+        holder.typeDisplay.setText(getType(cursor));
+        holder.costDisplay.setText(getCost(cursor));
+        holder.mileageDisplay.setText("Mileage: " + getMileage(cursor));
+        holder.dateDisplay.setText(getDate(cursor));
     }
 
     // Provide a reference to the views for each data item
@@ -50,7 +50,6 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
 
         public ViewHolder(View v) {
             super(v);
-            View view = v;
             typeDisplay = (TextView) v.findViewById(R.id.typeDisplay);
             mileageDisplay = (TextView) v.findViewById(R.id.mileageDisplay);
             costDisplay = (TextView) v.findViewById(R.id.costDisplay);
@@ -71,28 +70,21 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
         return new ViewHolder(v);
     }
 
-    private class ServiceTaskItem {
-        private Cursor cursor;
+    public String getType(Cursor cursor) {
+        return cursor.getString(cursor.getColumnIndex(ServiceTask.TYPE));
+    }
 
-        public ServiceTaskItem(Cursor cursor) {
-            this.cursor = cursor;
-        }
+    public String getCost(Cursor cursor) {
+        return cursor.getString(cursor.getColumnIndex(ServiceTask.COST_UNITS)) +
+                new DecimalFormat("0.00").format(cursor.getFloat(cursor.getColumnIndex(ServiceTask.COST)));
+    }
 
-        public String getType() {
-            return cursor.getString(cursor.getColumnIndex(ServiceTask.TYPE));
-        }
+    public String getMileage(Cursor cursor) {
+            return context.getString(R.string.mileage) + ": " + NumberFormat.getInstance().format(cursor.getLong(cursor.getColumnIndex(ServiceTask.MILEAGE)));
+    }
 
-        public String getCost() {
-            return NumberFormat.getCurrencyInstance().format(cursor.getFloat(cursor.getColumnIndex(ServiceTask.COST)));
-        }
-
-        public String getMileage() {
-            return NumberFormat.getInstance().format(cursor.getLong(cursor.getColumnIndex(ServiceTask.MILEAGE)));
-        }
-
-        public String getDate() {
-            return DateFormat.getDateFormat(context).format(new Date(cursor.getLong(cursor.getColumnIndex(ServiceTask.DATE))));
-        }
+    public String getDate(Cursor cursor) {
+        return DateFormat.getDateFormat(context).format(new Date(cursor.getLong(cursor.getColumnIndex(ServiceTask.DATE))));
     }
 
     private void onItemClick(long position) {

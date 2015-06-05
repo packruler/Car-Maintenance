@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
+import com.packruler.carmaintenance.sql.ServiceTypeCursorHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -184,6 +185,21 @@ public class ServiceTask {
 
     public void setContentValues(ContentValues contentValues) {
         sqlDataHandler.setContentValues(contentValues);
+    }
+
+    public void delete() {
+        String type = getType();
+        boolean success = carSQL.getWritableDatabase().delete(TABLE_NAME, ID + "= " + row, null) == 1;
+        Log.v(TAG, "Delete row " + row + ": " + (success ? "SUCCESS" : "FAILED"));
+        if (success && type != null)
+            ServiceTypeCursorHandler.removeType(carSQL, type);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass().equals(ServiceTask.class))
+            return row == ((ServiceTask) o).getRow();
+        return false;
     }
 
     public static Cursor getServiceTaskCursorForCar(CarSQL carSQL, long vehicleRow) {

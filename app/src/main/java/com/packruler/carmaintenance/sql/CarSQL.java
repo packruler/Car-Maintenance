@@ -57,7 +57,6 @@ public class CarSQL {
         }
     }
 
-
     public List<String> getCarNames() {
         LinkedList<String> list = new LinkedList<>();
         SQLiteDatabase database = getReadableDatabase();

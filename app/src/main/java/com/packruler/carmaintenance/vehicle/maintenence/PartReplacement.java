@@ -22,7 +22,8 @@ public class PartReplacement extends ServiceTask {
     public static final String TABLE_NAME = "parts";
 
     public static final String PART_NAME = "part_name";
-    public static final String MANUFACTURER = "manufacturer";
+    public static final String BRAND = "brand";
+    public static final String PRODUCT_NUMBER = "product_number";
     public static final String EXPECTED_LIFE_DISTANCE = "expected_life_distance";
     public static final String EXPECTED_LIFE_TIME = "expected_life_distance";
     public static final String WARRANTY_LIFE_DISTANCE = "warranty_life_distance";
@@ -34,7 +35,10 @@ public class PartReplacement extends ServiceTask {
                     VEHICLE_ROW + " LONG," + DATE + " LONG," + TYPE + " STRING," +
                     COST + " FLOAT," + COST_UNITS + " STRING," + MILEAGE + " LONG," +
                     MILEAGE_UNITS + " STRING," + DETAILS + " STRING," + LOCATION_ID + " STRING," +
-                    LOCATION_NAME + " STRING," + SERVICE_TASK_ROW + " LONG" + ")";
+                    LOCATION_NAME + " STRING," + SERVICE_TASK_ROW + " LONG," +
+                    BRAND + " STRING," + PRODUCT_NUMBER + " STRING," +
+                    EXPECTED_LIFE_DISTANCE + " LONG," + EXPECTED_LIFE_TIME + " LONG," +
+                    WARRANTY_LIFE_DISTANCE + " LONG," + WARRANTY_LIFE_TIME + " LONG" + ")";
 
     public PartReplacement(CarSQL carSQL, long row, boolean carRow) {
         this.carSQL = carSQL;
@@ -73,11 +77,19 @@ public class PartReplacement extends ServiceTask {
     }
 
     public String getManufacturer() {
-        return sqlDataHandler.getString(MANUFACTURER);
+        return sqlDataHandler.getString(BRAND);
     }
 
     public void setManufacturer(String manufacturer) {
-        sqlDataHandler.putString(MANUFACTURER, manufacturer);
+        sqlDataHandler.putString(BRAND, manufacturer);
+    }
+
+    public String getProductNumber() {
+        return sqlDataHandler.getString(PRODUCT_NUMBER);
+    }
+
+    public void setProductNumber(String productNumber) {
+        sqlDataHandler.putString(PRODUCT_NUMBER, productNumber);
     }
 
     public int getExpectedLifeDistance() {
@@ -142,5 +154,10 @@ public class PartReplacement extends ServiceTask {
         int count = cursor.getCount();
         cursor.close();
         return count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o.getClass().equals(PartReplacement.class) && row == ((PartReplacement) o).getRow();
     }
 }

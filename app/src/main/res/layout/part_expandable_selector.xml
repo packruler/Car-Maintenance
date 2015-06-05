@@ -2,7 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="wrap_content"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content"
+              android:divider="@android:drawable/divider_horizontal_dim_dark"
+              android:showDividers="middle"
+              android:dividerPadding="@dimen/margin_tiny">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,8 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="(TYPE)"
-            android:id="@+id/typeDisplay"
+            android:layout_marginBottom="@dimen/margin_tiny"
+            android:text="(Part)"
+            android:id="@+id/part"
             android:layout_alignParentLeft="true"/>
 
         <TextView
@@ -24,24 +28,57 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="$0.00"
-            android:id="@+id/costDisplay"
+            android:id="@+id/cost_display"
             android:layout_alignParentRight="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/typeDisplay"
-            android:id="@+id/dateDisplay"
-            android:text="Date:"/>
+            android:layout_below="@id/part"
+            android:id="@+id/brand_display"
+            android:text="@string/brand"/>
 
-        <TextView
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/expanded_menu"
+        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+        android:paddingLeft="?android:attr/listPreferredItemPaddingLeft">
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Mileage: 0,000 miles"
-            android:id="@+id/mileageDisplay"
-            android:layout_below="@+id/typeDisplay"
-            android:layout_alignParentRight="true"/>
+            android:id="@+id/extra_details"
+            android:orientation="vertical"
+            android:dividerPadding="@dimen/margin_tiny"
+            android:divider="@android:color/transparent"
+            android:showDividers="middle"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            android:id="@+id/delete"
+            android:layout_below="@id/extra_details"
+            android:paddingTop="@dimen/abc_button_padding_vertical_material"
+            android:paddingBottom="@dimen/abc_button_padding_vertical_material"
+            android:paddingLeft="@dimen/abc_button_padding_horizontal_material"
+            android:paddingRight="@dimen/abc_button_padding_horizontal_material"
+            android:textColor="@android:color/white"
+            android:clickable="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit"
+            android:id="@+id/edit"
+            android:layout_below="@id/extra_details"
+            android:layout_alignParentRight="true"
+            android:paddingTop="@dimen/abc_button_padding_vertical_material"
+            android:paddingBottom="@dimen/abc_button_padding_vertical_material"
+            android:paddingLeft="@dimen/abc_button_padding_horizontal_material"
+            android:paddingRight="@dimen/abc_button_padding_horizontal_material"/>
     </RelativeLayout>
 </LinearLayout>
