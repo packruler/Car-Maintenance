@@ -32,10 +32,7 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
 
     @Override
     public void onBindViewHolderCursor(ViewHolder holder, Cursor cursor) {
-        holder.typeDisplay.setText(getType(cursor));
-        holder.costDisplay.setText(getCost(cursor));
-        holder.mileageDisplay.setText("Mileage: " + getMileage(cursor));
-        holder.dateDisplay.setText(getDate(cursor));
+        holder.setDisplay(cursor);
     }
 
     // Provide a reference to the views for each data item
@@ -43,10 +40,10 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
     // you provide access to all the views for a data item in a view holder
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView typeDisplay;
-        public TextView mileageDisplay;
-        public TextView costDisplay;
-        public TextView dateDisplay;
+        private TextView typeDisplay;
+        private TextView mileageDisplay;
+        private TextView costDisplay;
+        private TextView dateDisplay;
 
         public ViewHolder(View v) {
             super(v);
@@ -60,6 +57,13 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
                     onItemClick(ViewHolder.this.getItemId());
                 }
             });
+        }
+
+        public void setDisplay(Cursor cursor){
+            typeDisplay.setText(getType(cursor));
+            costDisplay.setText(getCost(cursor));
+            mileageDisplay.setText(getMileage(cursor));
+            dateDisplay.setText(getDate(cursor));
         }
     }
 
