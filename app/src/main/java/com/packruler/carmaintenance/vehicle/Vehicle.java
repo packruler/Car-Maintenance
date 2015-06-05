@@ -365,13 +365,6 @@ public class Vehicle {
         sqlDataHandler.setContentValues(contentValues);
     }
 
-    public static Comparator<ServiceTask> dateComparator = new Comparator<ServiceTask>() {
-        @Override
-        public int compare(ServiceTask lhs, ServiceTask rhs) {
-            return lhs.getDate().compareTo(rhs.getDate());
-        }
-    };
-
     private static Comparator<ServiceTask> mileageComparator = new Comparator<ServiceTask>() {
         @Override
         public int compare(ServiceTask lhs, ServiceTask rhs) {

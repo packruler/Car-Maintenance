@@ -15,7 +15,6 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -126,13 +125,10 @@ public class ServiceTask {
         sqlDataHandler.putLong(DATE, date);
     }
 
-    public long getDateLong() {
+    public long getDate() {
         return sqlDataHandler.getLong(DATE);
     }
 
-    public Date getDate() {
-        return new Date(getDateLong());
-    }
 
     public void setCost(float cost) {
         sqlDataHandler.putFloat(COST, cost);
@@ -238,7 +234,7 @@ public class ServiceTask {
     public static Comparator<ServiceTask> compareByDate = new Comparator<ServiceTask>() {
         @Override
         public int compare(ServiceTask lhs, ServiceTask rhs) {
-            return Float.compare(lhs.getDateLong(), rhs.getDateLong());
+            return Float.compare(lhs.getDate(), rhs.getDate());
         }
     };
 

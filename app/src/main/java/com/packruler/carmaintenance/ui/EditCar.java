@@ -98,7 +98,6 @@ public class EditCar extends Fragment {
     private MaterialEditText weight;
     private MaterialBetterSpinner weightUnits;
     private MaterialEditText purchaseDate;
-    private DatePickerDialog datePickerDialog;
     private MaterialEditText purchaseCost;
     private MaterialBetterSpinner purchaseCostUnit;
     private MaterialEditText purchaseMileage;
@@ -1154,7 +1153,6 @@ public class EditCar extends Fragment {
         }
     }
 
-    long datePurchased;
 
     private void initializePurchaseCost() {
         purchaseCost = (MaterialEditText) rootView.findViewById(R.id.purchase_cost);
@@ -1184,7 +1182,9 @@ public class EditCar extends Fragment {
         return true;
     }
 
-    boolean datePurchasedSet = false;
+    private boolean datePurchasedSet = false;
+    private long datePurchased;
+    private DatePickerDialog datePickerDialog;
 
     private void initializePurchaseDate() {
         purchaseDate = (MaterialEditText) rootView.findViewById(R.id.purchase_date);

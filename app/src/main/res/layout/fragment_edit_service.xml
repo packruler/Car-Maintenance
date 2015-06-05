@@ -64,7 +64,8 @@
                     android:layout_alignRight="@id/date"
                     android:layout_alignLeft="@id/date"
                     android:layout_alignTop="@id/date"
-                    android:layout_alignBottom="@id/date"/>
+                    android:layout_alignBottom="@id/date"
+                    android:id="@+id/date_click"/>
 
                 <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
                     android:layout_width="wrap_content"
