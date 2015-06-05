@@ -302,9 +302,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && getFragmentManager().getBackStackEntryCount() > 0) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             Log.v(TAG, "Back button press");
-            getFragmentManager().popBackStack();
+
+            if (mNavigationDrawerFragment.isDrawerOpen()) return super.onKeyDown(keyCode, event);
+
+            if (getFragmentManager().getBackStackEntryCount() > 0)
+                getFragmentManager().popBackStack();
+            else return super.onKeyDown(keyCode, event);
+
             return true;
         }
         return super.onKeyDown(keyCode, event);
