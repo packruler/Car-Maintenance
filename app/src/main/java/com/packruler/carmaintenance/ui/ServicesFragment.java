@@ -33,7 +33,7 @@ import java.util.Calendar;
  * interface.
  */
 public class ServicesFragment extends Fragment {
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
 
 //    // TODO: Rename parameter arguments, choose names that match
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -98,14 +98,8 @@ public class ServicesFragment extends Fragment {
 
         mAdapter.setOnItemClickListener(new ServiceRecyclerAdapter.OnClickListener() {
             @Override
-            public void onItemClick(long rowId) {
-                long start = Calendar.getInstance().getTimeInMillis();
-                ServiceTask task = new ServiceTask(carSQL, rowId);
-                Log.v(TAG, "Type: " + task.getType() + " Date: " + DateFormat.getMediumDateFormat(activity).format(task.getDate()));
-                Log.v(TAG, "Loading task took " + (Calendar.getInstance().getTimeInMillis() - start));
-                activity.getFragmentManager().beginTransaction()
-                        .replace(R.id.container, new EditService(task))
-                        .addToBackStack("EditService-" + rowId).commit();
+            public void onItemClick(long itemId) {
+
             }
 
             @Override
@@ -115,7 +109,13 @@ public class ServicesFragment extends Fragment {
 
             @Override
             public void onEditClick(long itemId) {
-
+                long start = Calendar.getInstance().getTimeInMillis();
+                ServiceTask task = new ServiceTask(carSQL, itemId);
+                Log.v(TAG, "Type: " + task.getType() + " Date: " + DateFormat.getMediumDateFormat(activity).format(task.getDate()));
+                Log.v(TAG, "Loading task took " + (Calendar.getInstance().getTimeInMillis() - start));
+                activity.getFragmentManager().beginTransaction()
+                        .replace(R.id.container, new EditService(task))
+                        .addToBackStack("EditService-" + itemId).commit();
             }
         });
 

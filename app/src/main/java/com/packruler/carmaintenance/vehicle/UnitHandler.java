@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
  * Created by Packruler on 5/2/15.
  */
 public class UnitHandler {
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
 
     public static final String MILE = "MILE";
     public static final String FEET = "FEET";

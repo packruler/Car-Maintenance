@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
         android.app.FragmentManager.OnBackStackChangedListener {
 
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
     private static final String CAR_NAME_SET = "CAR_NAME_SET";
     private GoogleApiClient googleApiClient;
 

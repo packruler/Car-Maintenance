@@ -19,7 +19,7 @@ import java.util.List;
  * Created by Packruler on 4/27/2015.
  */
 public class Vehicle extends DataSetObservable {
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
 
     public static final String TABLE_NAME = "vehicles";
     public static final String VEHICLE_NAME = "vehicle_name";

@@ -19,7 +19,7 @@ import java.text.DecimalFormat;
  * Created by Packruler on 6/4/15.
  */
 public class ExpandablePartRecyclerAdapter extends CursorRecyclerViewAdapter<ExpandablePartRecyclerAdapter.ViewHolder> {
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
 
     public ExpandablePartRecyclerAdapter(Cursor cursor) {
         super(cursor);

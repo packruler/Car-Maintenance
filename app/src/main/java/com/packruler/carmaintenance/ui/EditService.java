@@ -27,7 +27,7 @@ import java.util.Date;
  * A simple {@link Fragment} subclass.
  */
 public class EditService extends Fragment {
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
 
     private MainActivity activity;
     private View rootView;

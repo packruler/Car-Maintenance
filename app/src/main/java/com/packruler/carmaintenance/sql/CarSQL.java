@@ -17,7 +17,7 @@ import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
  * Created by Packruler on 5/4/15.
  */
 public class CarSQL {
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
 
     private SQLHelper sqlHelper;
 //    private Activity activity;

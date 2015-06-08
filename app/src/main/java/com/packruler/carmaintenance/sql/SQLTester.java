@@ -26,7 +26,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class SQLTester extends ActionBarActivity {
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
 
     private Button fillSQL;
     private Button loadSQL;

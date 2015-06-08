@@ -21,7 +21,7 @@ import java.util.TreeSet;
  * Created by Packruler on 5/8/15.
  */
 public class AvailableCarsSQL {
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
 
     public static final String TABLE_NAME = "full_data";
     public static final String MAKE = "make";

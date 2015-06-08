@@ -20,7 +20,7 @@ import java.util.TreeMap;
  * Created by Packruler on 6/8/15.
  */
 public class VehicleMap extends DataSetObserver implements Map<CharSequence, Vehicle> {
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
     private Map<CharSequence, Vehicle> map = new TreeMap<>();
 
     @Override

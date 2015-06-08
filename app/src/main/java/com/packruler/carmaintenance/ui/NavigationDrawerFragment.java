@@ -41,7 +41,7 @@ import java.util.List;
  */
 public class NavigationDrawerFragment extends Fragment {
 
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
 
     /**
      * Remember the position of the selected item.

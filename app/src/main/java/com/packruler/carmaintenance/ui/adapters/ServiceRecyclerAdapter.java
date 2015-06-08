@@ -47,7 +47,7 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
         private TextView mileageDisplay;
         private TextView costDisplay;
         private TextView dateDisplay;
-        private LinearLayout expandableLayout;
+        private LinearLayout layout;
         private RelativeLayout expandedMenu;
         private LinearLayout detailLayout;
         private boolean expanded = false;
@@ -55,29 +55,29 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
 
         public ViewHolder(View v) {
             super(v);
-            expandableLayout = (LinearLayout) v.findViewById(R.id.expandable_layout);
+            layout = (LinearLayout) v.findViewById(R.id.expandable_layout);
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (!expanded)
-                        expandableLayout.addView(expandedMenu);
+                        layout.addView(expandedMenu);
                     else
-                        expandableLayout.removeView(expandedMenu);
+                        layout.removeView(expandedMenu);
 
                     expanded = !expanded;
                     onItemClick(ViewHolder.this.getItemId());
                 }
             });
 
-            expandableLayout.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
+            layout.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onEditClick(ViewHolder.this.getItemId());
                 }
             });
 
-            expandableLayout.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+            layout.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onDeleteClick(ViewHolder.this.getItemId());
@@ -89,8 +89,9 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
             dateDisplay = (TextView) v.findViewById(R.id.dateDisplay);
 
             expandedMenu = (RelativeLayout) v.findViewById(R.id.expanded_menu);
+            layout.removeView(expandedMenu);
 
-            detailLayout = (LinearLayout) expandableLayout.findViewById(R.id.extra_details);
+            detailLayout = (LinearLayout) layout.findViewById(R.id.extra_details);
         }
 
         public void setDisplay(Cursor cursor) {

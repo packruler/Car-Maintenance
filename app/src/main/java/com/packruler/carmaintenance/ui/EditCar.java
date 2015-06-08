@@ -70,7 +70,7 @@ import java.util.List;
 @SuppressWarnings("ResourceType")
 public class EditCar extends Fragment {
 
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
 
     private CarSQL carSQL;
     private AvailableCarsSQL availableCarsSQL;
@@ -665,7 +665,7 @@ public class EditCar extends Fragment {
         vin.setInputType(InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE);
         vin.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
         vin.setFilters(new InputFilter[]{new InputFilter() {
-            private final String TAG = getClass().getName();
+            private final String TAG = getClass().getSimpleName();
 
             @Override
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {

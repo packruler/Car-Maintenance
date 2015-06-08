@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Packruler on 5/26/15.
  */
 public class PaletteAdapter extends RecyclerView.Adapter<PaletteAdapter.ViewHolder> {
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
     private List<Palette.Swatch> swatches;
 
     public PaletteAdapter(List<Palette.Swatch> swatches) {

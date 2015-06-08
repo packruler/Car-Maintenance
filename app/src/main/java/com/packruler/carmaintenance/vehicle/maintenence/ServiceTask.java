@@ -23,7 +23,7 @@ import java.util.List;
  * Created by Packruler on 4/27/2015.
  */
 public class ServiceTask extends DataSetObservable{
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
     public static final String TABLE_NAME = "service";
     public static final String ID = "_id";
     public static final String GENERAL_TYPE = "GENERAL";

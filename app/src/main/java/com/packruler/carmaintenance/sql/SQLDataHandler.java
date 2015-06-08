@@ -8,7 +8,7 @@ import android.database.DataSetObservable;
  * Created by Packruler on 5/7/15.
  */
 public class SQLDataHandler {
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
     private CarSQL carSQL;
     private String tableName;
     private String selection;

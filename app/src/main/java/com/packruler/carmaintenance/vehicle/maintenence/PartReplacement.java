@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Packruler on 5/7/15.
  */
 public class PartReplacement extends ServiceTask {
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
 
     public static final String TABLE_NAME = "parts";
 
