@@ -2,11 +2,11 @@ package com.packruler.carmaintenance.ui;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.database.DataSetObserver;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity
         carsSQL = new CarSQL(this);
 
         vehicleMap = carsSQL.getCars();
+        vehicleMap.registerObserver(navObserserver);
 
         getFragmentManager().addOnBackStackChangedListener(this);
         getFragmentManager().beginTransaction().replace(R.id.container, new MainFragment()).commit();
@@ -149,13 +150,24 @@ public class MainActivity extends AppCompatActivity
         if (vehicleMap.containsKey(name))
             editCar.loadVehicle(vehicleMap.get(name));
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        fragmentManager.beginTransaction()
+        getFragmentManager().beginTransaction()
                 .replace(R.id.container, editCar)
                 .addToBackStack(name)
                 .commit();
     }
+
+    private DataSetObserver navObserserver = new DataSetObserver() {
+        @Override
+        public void onChanged() {
+            super.onChanged();
+            mNavigationDrawerFragment.updateDrawer();
+        }
+
+        @Override
+        public void onInvalidated() {
+            super.onInvalidated();
+        }
+    };
 
     public void onSectionAttached(int number) {
         if (number < vehicleMap.size()) {
@@ -242,7 +254,7 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     Log.v(TAG, "Edit Car Click");
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new EditCar(MainActivity.this, carsSQL)).addToBackStack("EditCar").commit();
+                    getFragmentManager().beginTransaction().replace(R.id.container, new EditCar(MainActivity.this, carsSQL)).addToBackStack("EditCar").commit();
                 }
             });
             return rootView;

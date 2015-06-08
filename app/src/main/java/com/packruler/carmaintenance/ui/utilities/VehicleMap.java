@@ -1,5 +1,6 @@
 package com.packruler.carmaintenance.ui.utilities;
 
+import android.database.DataSetObservable;
 import android.database.DataSetObserver;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -19,7 +20,7 @@ import java.util.TreeMap;
 /**
  * Created by Packruler on 6/8/15.
  */
-public class VehicleMap extends DataSetObserver implements Map<CharSequence, Vehicle> {
+public class VehicleMap extends DataSetObservable implements Map<CharSequence, Vehicle> {
     private final String TAG = getClass().getSimpleName();
     private Map<CharSequence, Vehicle> map = new TreeMap<>();
 
@@ -73,19 +74,24 @@ public class VehicleMap extends DataSetObserver implements Map<CharSequence, Veh
 
     @Override
     public Vehicle put(CharSequence key, Vehicle value) {
-        value.registerObserver(this);
-        return map.put(key, value);
+        value.registerObserver(vehicleObserver);
+        map.put(key, value);
+        notifyChanged();
+        return value;
     }
 
     @Override
     public void putAll(Map<? extends CharSequence, ? extends Vehicle> map) {
-        this.map.putAll(map);
+        for (Entry<? extends CharSequence, ? extends Vehicle> entry:map.entrySet()){
+            put(entry.getValue());
+        }
     }
 
     @Override
     public Vehicle remove(Object key) {
         Vehicle vehicle = map.remove(key);
-        vehicle.unregisterObserver(this);
+        vehicle.unregisterObserver(vehicleObserver);
+        notifyChanged();
         return vehicle;
     }
 
@@ -98,12 +104,6 @@ public class VehicleMap extends DataSetObserver implements Map<CharSequence, Veh
     @Override
     public Collection<Vehicle> values() {
         return map.values();
-    }
-
-    @Override
-    public void onChanged() {
-        super.onChanged();
-        updateKeys();
     }
 
     public boolean updateKeys() {
@@ -138,6 +138,13 @@ public class VehicleMap extends DataSetObserver implements Map<CharSequence, Veh
         return getVehiclesByName(false);
     }
 
+    private DataSetObserver vehicleObserver = new DataSetObserver() {
+        @Override
+        public void onChanged() {
+            super.onChanged();
+            updateKeys();
+        }
+    };
 
     private static Comparator<Vehicle> nameComparator = new Comparator<Vehicle>() {
         @Override

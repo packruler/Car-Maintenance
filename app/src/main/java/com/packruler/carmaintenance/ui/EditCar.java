@@ -68,7 +68,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 @SuppressWarnings("ResourceType")
-public class EditCar extends Fragment {
+public class EditCar extends android.app.Fragment {
 
     private final String TAG = getClass().getSimpleName();
 
