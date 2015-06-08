@@ -67,9 +67,11 @@ public class Vehicle {
 
     private SQLDataHandler sqlDataHandler;
 
-    public Vehicle(CarSQL carSQL, String name) {
+    private Vehicle(CarSQL carSQL){
         this.carSQL = carSQL;
+    }
 
+    public Vehicle(CarSQL carSQL, String name) {
         SQLiteDatabase database = carSQL.getWritableDatabase();
         Cursor cursor = database.query(TABLE_NAME, null, VEHICLE_NAME + "= \"" + name + "\"",
                 null, null, null, null);
@@ -78,11 +80,20 @@ public class Vehicle {
             Log.i(TAG, "New Vehicle Name: " + name);
             ContentValues contentValues = new ContentValues();
             contentValues.put(VEHICLE_NAME, name);
-            row = database.insert(TABLE_NAME, null, contentValues);
+            init(database.insert(TABLE_NAME, null, contentValues));
         } else
-            row = cursor.getLong(0);
+            init(cursor.getLong(0));
 
         cursor.close();
+    }
+
+    public Vehicle(CarSQL carSQL, long rowId){
+        this(carSQL);
+        init(rowId);
+    }
+
+    private void init(long rowId){
+        row = rowId;
         sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
                 ROW_ID + "= " + row);
     }

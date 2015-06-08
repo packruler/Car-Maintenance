@@ -96,7 +96,7 @@ public class ServicesFragment extends Fragment {
         setSortOrder(ServiceTask.DATE, true);
         Log.v(TAG, "Took " + (sort - start) + "ms to set view and " + (Calendar.getInstance().getTimeInMillis() - sort) + "ms to get sorted version");
 
-        mAdapter.setOnItemClickListener(new ServiceRecyclerAdapter.onRecyclerItemClickListener() {
+        mAdapter.setOnItemClickListener(new ServiceRecyclerAdapter.OnClickListener() {
             @Override
             public void onItemClick(long rowId) {
                 long start = Calendar.getInstance().getTimeInMillis();
@@ -106,6 +106,16 @@ public class ServicesFragment extends Fragment {
                 activity.getFragmentManager().beginTransaction()
                         .replace(R.id.container, new EditService(task))
                         .addToBackStack("EditService-" + rowId).commit();
+            }
+
+            @Override
+            public void onDeleteClick(long itemId) {
+
+            }
+
+            @Override
+            public void onEditClick(long itemId) {
+
             }
         });
 

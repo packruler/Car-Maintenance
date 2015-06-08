@@ -39,45 +39,49 @@ public class ExpandablePartRecyclerAdapter extends CursorRecyclerViewAdapter<Exp
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView part;
         private TextView brand;
-        public TextView cost;
+        private TextView cost;
+        private LinearLayout expandableLayout;
         private LinearLayout detailLayout;
         private RelativeLayout expandedMenu;
         private boolean expanded = false;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            final LinearLayout layout = (LinearLayout) itemView;
+            expandableLayout = (LinearLayout) itemView;
 
-            layout.setOnClickListener(new View.OnClickListener() {
+            expandableLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (!expanded)
-                        layout.addView(expandedMenu);
-                    else layout.removeView(expandedMenu);
+                        expandableLayout.addView(expandedMenu);
+                    else
+                        expandableLayout.removeView(expandedMenu);
+
+                    expanded = !expanded;
                     onItemClick(ViewHolder.this.getItemId());
                 }
             });
 
-            layout.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
+            expandableLayout.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onEditClick(ViewHolder.this.getItemId());
                 }
             });
 
-            layout.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+            expandableLayout.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onDeleteClick(ViewHolder.this.getItemId());
                 }
             });
 
-            expandedMenu = (RelativeLayout) layout.findViewById(R.id.expanded_menu);
-            part = (TextView) layout.findViewById(R.id.part);
-            brand = (TextView) layout.findViewById(R.id.brand_display);
-            cost = (TextView) layout.findViewById(R.id.cost_display);
-            detailLayout = (LinearLayout) layout.findViewById(R.id.extra_details);
-            layout.removeView(expandedMenu);
+            expandedMenu = (RelativeLayout) expandableLayout.findViewById(R.id.expanded_menu);
+            part = (TextView) expandableLayout.findViewById(R.id.part);
+            brand = (TextView) expandableLayout.findViewById(R.id.brand_display);
+            cost = (TextView) expandableLayout.findViewById(R.id.cost_display);
+            detailLayout = (LinearLayout) expandableLayout.findViewById(R.id.extra_details);
+            expandableLayout.removeView(expandedMenu);
         }
 
         public void setValues(Cursor cursor) {
@@ -87,7 +91,6 @@ public class ExpandablePartRecyclerAdapter extends CursorRecyclerViewAdapter<Exp
             loadDetails(cursor, detailLayout);
         }
     }
-
 
     private String getPart(Cursor cursor) {
         String out = cursor.getString(cursor.getColumnIndex(PartReplacement.PART_NAME));

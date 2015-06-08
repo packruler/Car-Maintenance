@@ -1,12 +1,9 @@
 package com.packruler.carmaintenance.vehicle.maintenence;
 
-import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.packruler.carmaintenance.sql.CarSQL;
-import com.packruler.carmaintenance.sql.SQLDataHandler;
 
 import java.sql.SQLDataException;
 import java.util.ArrayList;
@@ -49,28 +46,13 @@ public class FuelStop extends ServiceTask {
                     DISTANCE_PER_VOLUME_UNIT + " STRING" + ")";
 
 
-    public FuelStop(CarSQL carSQL, long row, boolean carRow) {
-        this.carSQL = carSQL;
-        if (!carRow) {
-            sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                    ID + "= " + row);
-            this.row = row;
-        } else {
-            SQLiteDatabase database = carSQL.getWritableDatabase();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(VEHICLE_ROW, row);
-            this.row = database.insert(TABLE_NAME, null, contentValues);
-//        Log.v(TAG, "Row: " + row);
-
-            sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                    ID + "= " + this.row);
-        }
+    public FuelStop(CarSQL carSQL, long rowId, boolean carRow) {
+        super(carSQL, rowId, carRow);
+        sqlDataHandler.setTableName(TABLE_NAME);
     }
 
     public FuelStop(CarSQL carSQL, long row) {
-        this.row = row;
-        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                ID + "= " + row);
+        this(carSQL, row, false);
     }
 
     public float getVolume() {

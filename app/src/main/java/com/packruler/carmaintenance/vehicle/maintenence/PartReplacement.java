@@ -40,16 +40,17 @@ public class PartReplacement extends ServiceTask {
                     EXPECTED_LIFE_DISTANCE + " LONG," + EXPECTED_LIFE_TIME + " LONG," +
                     WARRANTY_LIFE_DISTANCE + " LONG," + WARRANTY_LIFE_TIME + " LONG" + ")";
 
-    public PartReplacement(CarSQL carSQL, long row, boolean carRow) {
-        this.carSQL = carSQL;
-        if (!carRow) {
+    public PartReplacement(CarSQL carSQL, long row, boolean taskRow) {
+        super(carSQL);
+        if (!taskRow) {
             sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
                     ID + "= " + row);
             this.row = row;
         } else {
             SQLiteDatabase database = carSQL.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
-            contentValues.put(VEHICLE_ROW, row);
+            contentValues.put(VEHICLE_ROW, new ServiceTask(carSQL, row).getVehicleRow());
+            contentValues.put(SERVICE_TASK_ROW, row);
             this.row = database.insert(TABLE_NAME, null, contentValues);
 //        Log.v(TAG, "Row: " + row);
 
@@ -59,13 +60,12 @@ public class PartReplacement extends ServiceTask {
     }
 
     public PartReplacement(CarSQL carSQL, ServiceTask task) {
-        this.carSQL = carSQL;
+        this(carSQL, task.getRow());
         sqlDataHandler.putLong(SERVICE_TASK_ROW, task.getRow());
     }
 
     public PartReplacement(CarSQL carSQL, long row) {
-        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                ID + "= " + row);
+        this(carSQL, row, false);
     }
 
     public String getPartName() {

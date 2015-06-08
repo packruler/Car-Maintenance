@@ -18,6 +18,10 @@ public class SQLDataHandler {
         this.selection = selection;
     }
 
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
     public void setSelection(String selection) {
         this.selection = selection;
     }

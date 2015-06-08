@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
-import com.packruler.carmaintenance.sql.ServiceTypeCursorHandler;
+import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,43 +50,38 @@ public class ServiceTask {
     protected CarSQL carSQL;
     protected SQLDataHandler sqlDataHandler;
 
-    protected ServiceTask() {
-
+    protected ServiceTask(CarSQL carSQL) {
+        this.carSQL = carSQL;
     }
 
     public ServiceTask(CarSQL carSQL, long row, boolean carRow) {
-        this.carSQL = carSQL;
+        this(carSQL);
         if (!carRow) {
-            sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                    ID + "= " + row);
             this.row = row;
         } else {
             SQLiteDatabase database = carSQL.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
             contentValues.put(VEHICLE_ROW, row);
             this.row = database.insert(TABLE_NAME, null, contentValues);
-
-            sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                    ID + "= " + this.row);
         }
+        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
+                ID + "= " + this.row);
     }
 
     public ServiceTask(CarSQL carSQL, long row) {
-        this.row = row;
-        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                ID + "= " + row);
+        this(carSQL, row, false);
     }
 
     public long getRow() {
         return row;
     }
 
-    public String getCarName() {
-        return sqlDataHandler.getString(VEHICLE_ROW);
+    public long getVehicleRow() {
+        return sqlDataHandler.getLong(VEHICLE_ROW);
     }
 
-    public void setCarName(String carName) {
-        sqlDataHandler.putString(VEHICLE_ROW, carName);
+    public Vehicle getVehicle() {
+        return new Vehicle(carSQL, getVehicleRow());
     }
 
     public void setType(String type) {
@@ -138,7 +133,7 @@ public class ServiceTask {
         return sqlDataHandler.getFloat(COST);
     }
 
-    public void setCostUnits(String units){
+    public void setCostUnits(String units) {
         sqlDataHandler.putString(COST_UNITS, units);
     }
 
@@ -183,11 +178,11 @@ public class ServiceTask {
     }
 
     public void delete() {
-        String type = getType();
+//        String type = getType();
         boolean success = carSQL.getWritableDatabase().delete(TABLE_NAME, ID + "= " + row, null) == 1;
         Log.v(TAG, "Delete row " + row + ": " + (success ? "SUCCESS" : "FAILED"));
-        if (success && type != null)
-            ServiceTypeCursorHandler.removeType(carSQL, type);
+//        if (success && type != null)
+//            ServiceTypeCursorHandler.removeType(carSQL, type);
     }
 
     @Override
@@ -198,6 +193,7 @@ public class ServiceTask {
     }
 
     public static Cursor getServiceTaskCursorForCar(CarSQL carSQL, long vehicleRow) {
+        Log.v("getServiceTaskCursorForCar", "" + (carSQL != null));
         return carSQL.getReadableDatabase().query(false, TABLE_NAME, null,
                 VEHICLE_ROW + "= " + vehicleRow, null, null, null, null, null);
     }

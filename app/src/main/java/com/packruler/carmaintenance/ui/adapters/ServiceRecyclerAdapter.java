@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.packruler.carmaintenance.R;
@@ -22,13 +24,14 @@ import java.util.Date;
  */
 public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRecyclerAdapter.ViewHolder> {
     private Context context;
+    private String TAG = getClass().getName();
 
     public ServiceRecyclerAdapter(Context context, Cursor cursor) {
         super(cursor);
         this.context = context;
     }
 
-    private onRecyclerItemClickListener onRecyclerItemClickListener;
+    private OnClickListener onClickListener;
 
     @Override
     public void onBindViewHolderCursor(ViewHolder holder, Cursor cursor) {
@@ -44,22 +47,53 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
         private TextView mileageDisplay;
         private TextView costDisplay;
         private TextView dateDisplay;
+        private LinearLayout expandableLayout;
+        private RelativeLayout expandedMenu;
+        private LinearLayout detailLayout;
+        private boolean expanded = false;
+
 
         public ViewHolder(View v) {
             super(v);
+            expandableLayout = (LinearLayout) v.findViewById(R.id.expandable_layout);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!expanded)
+                        expandableLayout.addView(expandedMenu);
+                    else
+                        expandableLayout.removeView(expandedMenu);
+
+                    expanded = !expanded;
+                    onItemClick(ViewHolder.this.getItemId());
+                }
+            });
+
+            expandableLayout.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onEditClick(ViewHolder.this.getItemId());
+                }
+            });
+
+            expandableLayout.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onDeleteClick(ViewHolder.this.getItemId());
+                }
+            });
             typeDisplay = (TextView) v.findViewById(R.id.type_display);
             mileageDisplay = (TextView) v.findViewById(R.id.mileageDisplay);
             costDisplay = (TextView) v.findViewById(R.id.costDisplay);
             dateDisplay = (TextView) v.findViewById(R.id.dateDisplay);
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClick(ViewHolder.this.getItemId());
-                }
-            });
+
+            expandedMenu = (RelativeLayout) v.findViewById(R.id.expanded_menu);
+
+            detailLayout = (LinearLayout) expandableLayout.findViewById(R.id.extra_details);
         }
 
-        public void setDisplay(Cursor cursor){
+        public void setDisplay(Cursor cursor) {
             typeDisplay.setText(getType(cursor));
             costDisplay.setText(getCost(cursor));
             mileageDisplay.setText(getMileage(cursor));
@@ -84,7 +118,7 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
     }
 
     public String getMileage(Cursor cursor) {
-            return context.getString(R.string.mileage) + ": " + NumberFormat.getInstance().format(cursor.getLong(cursor.getColumnIndex(ServiceTask.MILEAGE)));
+        return context.getString(R.string.mileage) + ": " + NumberFormat.getInstance().format(cursor.getLong(cursor.getColumnIndex(ServiceTask.MILEAGE)));
     }
 
     public String getDate(Cursor cursor) {
@@ -93,14 +127,30 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
 
     private void onItemClick(long position) {
         Log.v("onItemClick", "Position: " + position);
-        onRecyclerItemClickListener.onItemClick(position);
+        onClickListener.onItemClick(position);
     }
 
-    public void setOnItemClickListener(onRecyclerItemClickListener listener) {
-        onRecyclerItemClickListener = listener;
+    private void onEditClick(long itemId) {
+        Log.v(TAG, "Edit item: " + itemId);
+        if (onClickListener != null)
+            onClickListener.onEditClick(itemId);
     }
 
-    public interface onRecyclerItemClickListener {
-        void onItemClick(long rowId);
+    private void onDeleteClick(long itemId) {
+        Log.v(TAG, "Delete item: " + itemId);
+        if (onClickListener != null)
+            onClickListener.onDeleteClick(itemId);
+    }
+
+    public void setOnItemClickListener(OnClickListener listener) {
+        onClickListener = listener;
+    }
+
+    public interface OnClickListener {
+        void onItemClick(long itemId);
+
+        void onDeleteClick(long itemId);
+
+        void onEditClick(long itemId);
     }
 }
