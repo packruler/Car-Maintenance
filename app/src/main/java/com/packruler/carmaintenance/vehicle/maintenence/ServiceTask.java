@@ -2,6 +2,7 @@ package com.packruler.carmaintenance.vehicle.maintenence;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DataSetObservable;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * Created by Packruler on 4/27/2015.
  */
-public class ServiceTask {
+public class ServiceTask extends DataSetObservable{
     private final String TAG = getClass().getName();
     public static final String TABLE_NAME = "service";
     public static final String ID = "_id";
@@ -65,7 +66,7 @@ public class ServiceTask {
             this.row = database.insert(TABLE_NAME, null, contentValues);
         }
         sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                ID + "= " + this.row);
+                ID + "= " + this.row, this);
     }
 
     public ServiceTask(CarSQL carSQL, long row) {
@@ -193,7 +194,7 @@ public class ServiceTask {
     }
 
     public static Cursor getServiceTaskCursorForCar(CarSQL carSQL, long vehicleRow) {
-        Log.v("getServiceTaskCursorForCar", "" + (carSQL != null));
+        Log.v("ServiceTaskCursorForCar", "" + (carSQL != null));
         return carSQL.getReadableDatabase().query(false, TABLE_NAME, null,
                 VEHICLE_ROW + "= " + vehicleRow, null, null, null, null, null);
     }

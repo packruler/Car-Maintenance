@@ -13,14 +13,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.packruler.carmaintenance.R;
+import com.packruler.carmaintenance.ui.utilities.VehicleMap;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -31,7 +31,7 @@ public class SQLTester extends ActionBarActivity {
     private Button fillSQL;
     private Button loadSQL;
     private CarSQL carSQL;
-    private Map<String, Vehicle> vehicleMap = new TreeMap<>();
+    private VehicleMap vehicleMap = new VehicleMap();
 
     private LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
     private int numProcessors = Runtime.getRuntime().availableProcessors();
@@ -176,14 +176,20 @@ public class SQLTester extends ActionBarActivity {
         new Handler(thread.getLooper()).post(new Runnable() {
             @Override
             public void run() {
-                for (String name : carSQL.getCarNames()) {
-                    vehicleMap.put(name, new Vehicle(carSQL, name));
-                }
-                Set<String> names = vehicleMap.keySet();
-                Log.i(TAG, "Car names: " + names.toString());
-                Vehicle vehicle = vehicleMap.get(names.iterator().next());
+                vehicleMap = carSQL.getCars();
 
+                Vehicle vehicle = vehicleMap.get(vehicleMap.keySet().iterator().next());
                 vehicle.setName("THIS CHANGED");
+
+                ArrayList<String> names = new ArrayList<>(vehicleMap.size());
+                ArrayList<CharSequence> keys = new ArrayList<>(vehicleMap.size());
+                for (Map.Entry<CharSequence, Vehicle> entry : vehicleMap.entrySet()) {
+                    names.add(entry.getValue().getName());
+                    keys.add(entry.getKey());
+                }
+                Log.d(TAG, "Car names: " + names.toString());
+                Log.d(TAG, "Keys: " + keys.toString());
+
 
                 Log.d(TAG, "Name Changed");
                 Log.d(TAG, "SQL updated");

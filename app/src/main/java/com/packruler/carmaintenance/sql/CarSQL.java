@@ -7,13 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.packruler.carmaintenance.ui.utilities.VehicleMap;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.packruler.carmaintenance.vehicle.maintenence.PartReplacement;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by Packruler on 5/4/15.
@@ -57,19 +55,30 @@ public class CarSQL {
         }
     }
 
-    public List<String> getCarNames() {
-        LinkedList<String> list = new LinkedList<>();
+    public VehicleMap getCars() {
+        VehicleMap map = new VehicleMap();
         SQLiteDatabase database = getReadableDatabase();
-        Cursor cursor = database.query(Vehicle.TABLE_NAME, new String[]{Vehicle.VEHICLE_NAME}, null, null, null, null, null);
-        if (!cursor.moveToFirst())
-            return list;
+        Cursor cursor = database.query(Vehicle.TABLE_NAME, new String[]{Vehicle.ROW_ID}, null, null, null, null, null);
+
+        if (!cursor.moveToFirst()) {
+            cursor.close();
+            return map;
+        }
 
         while (!cursor.isAfterLast()) {
-            list.add(cursor.getString(cursor.getColumnIndex(Vehicle.VEHICLE_NAME)));
+            map.put(new Vehicle(this, cursor.getLong(0)));
             cursor.moveToNext();
         }
         cursor.close();
-        return list;
+        return map;
+    }
+
+    public int getCarCount() {
+        SQLiteDatabase database = getReadableDatabase();
+        Cursor cursor = database.query(Vehicle.TABLE_NAME, new String[]{Vehicle.ROW_ID}, null, null, null, null, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
     }
 
     private SQLiteDatabase database;

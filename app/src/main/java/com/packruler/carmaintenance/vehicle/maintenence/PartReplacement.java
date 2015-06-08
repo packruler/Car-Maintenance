@@ -44,7 +44,7 @@ public class PartReplacement extends ServiceTask {
         super(carSQL);
         if (!taskRow) {
             sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                    ID + "= " + row);
+                    ID + "= " + row, this);
             this.row = row;
         } else {
             SQLiteDatabase database = carSQL.getWritableDatabase();
@@ -55,7 +55,7 @@ public class PartReplacement extends ServiceTask {
 //        Log.v(TAG, "Row: " + row);
 
             sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                    ID + "= " + this.row);
+                    ID + "= " + this.row, this);
         }
     }
 

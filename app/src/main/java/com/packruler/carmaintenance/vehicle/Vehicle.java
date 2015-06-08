@@ -2,6 +2,7 @@ package com.packruler.carmaintenance.vehicle;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DataSetObservable;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -11,14 +12,13 @@ import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.packruler.carmaintenance.vehicle.maintenence.PartReplacement;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Packruler on 4/27/2015.
  */
-public class Vehicle {
+public class Vehicle extends DataSetObservable {
     private final String TAG = getClass().getName();
 
     public static final String TABLE_NAME = "vehicles";
@@ -67,11 +67,13 @@ public class Vehicle {
 
     private SQLDataHandler sqlDataHandler;
 
-    private Vehicle(CarSQL carSQL){
+    private Vehicle(CarSQL carSQL) {
         this.carSQL = carSQL;
     }
 
     public Vehicle(CarSQL carSQL, String name) {
+        this(carSQL);
+
         SQLiteDatabase database = carSQL.getWritableDatabase();
         Cursor cursor = database.query(TABLE_NAME, null, VEHICLE_NAME + "= \"" + name + "\"",
                 null, null, null, null);
@@ -87,15 +89,26 @@ public class Vehicle {
         cursor.close();
     }
 
-    public Vehicle(CarSQL carSQL, long rowId){
+    public Vehicle(CarSQL carSQL, long rowId) {
         this(carSQL);
         init(rowId);
     }
 
-    private void init(long rowId){
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Vehicle))
+            return false;
+        return row == ((Vehicle) o).getRow();
+    }
+
+    private void init(long rowId) {
         row = rowId;
         sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                ROW_ID + "= " + row);
+                ROW_ID + "= " + row, this);
+    }
+
+    public long getRow() {
+        return row;
     }
 
     public boolean setName(String name) {
@@ -375,18 +388,4 @@ public class Vehicle {
     public void putContentValues(ContentValues contentValues) {
         sqlDataHandler.setContentValues(contentValues);
     }
-
-    private static Comparator<ServiceTask> mileageComparator = new Comparator<ServiceTask>() {
-        @Override
-        public int compare(ServiceTask lhs, ServiceTask rhs) {
-            return (int) (lhs.getMileage() - rhs.getMileage());
-        }
-    };
-
-    private static Comparator<ServiceTask> costComparator = new Comparator<ServiceTask>() {
-        @Override
-        public int compare(ServiceTask lhs, ServiceTask rhs) {
-            return (int) (lhs.getCost() - rhs.getCost());
-        }
-    };
 }

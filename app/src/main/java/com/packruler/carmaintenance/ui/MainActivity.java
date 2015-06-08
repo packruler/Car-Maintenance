@@ -31,13 +31,12 @@ import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.ui.utilities.ToolbarColorizeHelper;
+import com.packruler.carmaintenance.ui.utilities.VehicleMap;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity
      */
     private CharSequence mTitle;
 
-    private Map<String, Vehicle> vehicleMap = new TreeMap<>();
+    private VehicleMap vehicleMap = new VehicleMap();
 
     private SharedPreferences sharedPreferences;
     private CarSQL carsSQL;
@@ -124,9 +123,9 @@ public class MainActivity extends AppCompatActivity
 
 
         carsSQL = new CarSQL(this);
-        for (String name : carsSQL.getCarNames()) {
-            vehicleMap.put(name, new Vehicle(carsSQL, name));
-        }
+
+        vehicleMap = carsSQL.getCars();
+
         getFragmentManager().addOnBackStackChangedListener(this);
         getFragmentManager().beginTransaction().replace(R.id.container, new MainFragment()).commit();
 
@@ -233,7 +232,9 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     Log.v(TAG, "onClick");
-                    ServicesFragment servicesFragment = new ServicesFragment(MainActivity.this, vehicleMap.get("THIS CHANGED"), carsSQL);
+                    Vehicle vehicle = vehicleMap.get(vehicleMap.keySet().iterator().next());
+                    Log.v(TAG, String.valueOf(vehicle != null));
+                    ServicesFragment servicesFragment = new ServicesFragment(MainActivity.this, vehicle, carsSQL);
                     getFragmentManager().beginTransaction().replace(R.id.container, servicesFragment).addToBackStack("Services").commit();
                 }
             });
@@ -253,13 +254,15 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public Map<String, Vehicle> getVehicleMap() {
+    public VehicleMap getVehicleMap() {
         return vehicleMap;
     }
 
     public List<String> getVehicleNames() {
-        List<String> names = carsSQL.getCarNames();
-        Collections.sort(names);
+        List<String> names = new LinkedList<>();
+        for (Vehicle vehicle : vehicleMap.getVehiclesByName()) {
+            names.add(vehicle.getName());
+        }
         return names;
     }
 
