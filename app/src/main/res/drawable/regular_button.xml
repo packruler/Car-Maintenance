@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true" >
+        <shape>
+            <gradient
+                android:startColor="@color/material_grey_500"
+                android:endColor="@color/material_grey_500"
+                android:angle="270" />
+            <stroke
+                android:width="3dp"
+                android:color="@color/material_grey_300" />
+            <corners
+                android:radius="3dp" />
+            <padding
+                android:left="@dimen/abc_button_padding_vertical_material"
+                android:top="@dimen/abc_button_padding_horizontal_material"
+                android:right="@dimen/abc_button_padding_horizontal_material"
+                android:bottom="@dimen/abc_button_padding_horizontal_material" />
+        </shape>
+    </item>
+
+    <item android:state_focused="true" >
+        <shape>
+            <gradient
+                android:endColor="@color/material_grey_500"
+                android:startColor="@color/material_grey_500"
+                android:angle="270" />
+            <corners
+                android:radius="3dp" />
+            <padding
+                android:left="@dimen/abc_button_padding_vertical_material"
+                android:top="@dimen/abc_button_padding_horizontal_material"
+                android:right="@dimen/abc_button_padding_horizontal_material"
+                android:bottom="@dimen/abc_button_padding_horizontal_material" />
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <gradient
+                android:endColor="@color/material_grey_500"
+                android:startColor="@color/material_grey_500"
+                android:angle="270" />
+            <corners
+                android:radius="3dp" />
+        </shape>
+    </item>
+</selector>

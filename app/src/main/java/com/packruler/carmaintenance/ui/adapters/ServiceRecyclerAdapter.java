@@ -60,16 +60,16 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!expanded)
+                    if (!expanded) {
                         layout.addView(expandedMenu);
-                    else
+                    } else {
                         layout.removeView(expandedMenu);
+                    }
 
                     expanded = !expanded;
                     onItemClick(ViewHolder.this.getItemId());
                 }
             });
-
             layout.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

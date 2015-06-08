@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/expandable_layout"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:animateLayoutChanges="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -68,18 +69,16 @@
                 android:orientation="vertical"
                 android:dividerPadding="@dimen/margin_tiny"
                 android:divider="@android:color/transparent"
-                android:showDividers="middle"/>
+                android:showDividers="middle"
+                android:layout_marginBottom="@dimen/margin_tiny"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/delete"
                 android:id="@+id/delete"
+                android:background="@drawable/delete_button"
                 android:layout_below="@id/extra_details"
-                android:paddingTop="@dimen/abc_button_padding_vertical_material"
-                android:paddingBottom="@dimen/abc_button_padding_vertical_material"
-                android:paddingLeft="@dimen/abc_button_padding_horizontal_material"
-                android:paddingRight="@dimen/abc_button_padding_horizontal_material"
                 android:textColor="@android:color/white"
                 android:clickable="true"/>
 
@@ -88,12 +87,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/edit"
                 android:id="@+id/edit"
+                android:background="@drawable/regular_button"
                 android:layout_below="@id/extra_details"
-                android:layout_alignParentRight="true"
-                android:paddingTop="@dimen/abc_button_padding_vertical_material"
-                android:paddingBottom="@dimen/abc_button_padding_vertical_material"
-                android:paddingLeft="@dimen/abc_button_padding_horizontal_material"
-                android:paddingRight="@dimen/abc_button_padding_horizontal_material"/>
+                android:layout_alignParentRight="true"/>
         </RelativeLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>
