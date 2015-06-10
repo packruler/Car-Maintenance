@@ -986,9 +986,9 @@ public class EditCar extends android.app.Fragment {
                         vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
                                 bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
                         loadingImageSpinner.setVisibility(View.GONE);
+                        bitmap.recycle();
                     }
                 });
-
                 setLoadedColor(Palette.from(bitmap).maximumColorCount(30).generate());
                 mainHandler.post(new Runnable() {
                     @Override
