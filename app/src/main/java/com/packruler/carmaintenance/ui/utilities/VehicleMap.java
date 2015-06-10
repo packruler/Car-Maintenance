@@ -82,7 +82,11 @@ public class VehicleMap extends DataSetObservable implements Map<CharSequence, V
 
     @Override
     public Vehicle put(CharSequence key, Vehicle value) {
-        value.registerObserver(vehicleObserver);
+        try {
+            value.registerObserver(vehicleObserver);
+        } catch (IllegalStateException e) {
+            //Already registered
+        }
         map.put(key, value);
         notifyChanged();
         return value;

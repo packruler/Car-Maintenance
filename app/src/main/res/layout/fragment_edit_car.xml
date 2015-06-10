@@ -324,31 +324,58 @@
                         android:inputType="textCapWords"
                         app:met_floatingLabel="highlight"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/abc_dropdownitem_icon_width"
-                        android:layout_margin="@dimen/margin_tiny"
-                        android:id="@+id/display_color_title"
-                        android:layout_below="@id/vehicle_color"
-                        android:text="@string/display_color"
-                        android:layout_marginRight="@dimen/margin_small"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/material_grey_900"/>
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="wrap_content"
+                    <GridLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/display_color_title"
                         android:layout_below="@id/vehicle_color"
-                        card_view:contentPadding="@dimen/margin_tiny"
-                        card_view:cardElevation="2dp">
+                        android:columnCount="2">
 
-                        <RelativeLayout
-                            android:layout_width="@dimen/abc_dropdownitem_icon_width"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="@dimen/abc_dropdownitem_icon_width"
-                            android:background="@color/material_grey_300"
-                            android:id="@+id/display_color_display"/>
-                    </android.support.v7.widget.CardView>
+                            android:layout_margin="@dimen/margin_tiny"
+                            android:id="@+id/display_color_title"
+                            android:text="@string/display_color"
+                            android:layout_marginRight="@dimen/margin_small"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/material_grey_900"/>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            card_view:contentPadding="@dimen/margin_tiny"
+                            card_view:cardElevation="2dp"
+                            android:layout_marginBottom="@dimen/margin_tiny">
+                            <RelativeLayout
+                                android:layout_width="@dimen/abc_dropdownitem_icon_width"
+                                android:layout_height="@dimen/abc_dropdownitem_icon_width"
+                                android:background="@color/material_grey_300"
+                                android:id="@+id/display_color_display"/>
+                        </android.support.v7.widget.CardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/abc_dropdownitem_icon_width"
+                            android:layout_margin="@dimen/margin_tiny"
+                            android:id="@+id/text_color_title"
+                            android:text="@string/text_color"
+                            android:layout_marginRight="@dimen/margin_small"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/material_grey_900"/>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            card_view:contentPadding="@dimen/margin_tiny"
+                            card_view:cardElevation="2dp">
+
+                            <RelativeLayout
+                                android:layout_width="@dimen/abc_dropdownitem_icon_width"
+                                android:layout_height="@dimen/abc_dropdownitem_icon_width"
+                                android:background="@color/material_grey_300"
+                                android:id="@+id/text_color_display"/>
+                        </android.support.v7.widget.CardView>
+                    </GridLayout>
                 </RelativeLayout>
             </RelativeLayout>
         </android.support.v7.widget.CardView>

@@ -181,6 +181,7 @@ public class MainActivity extends AppCompatActivity
         } else
             getSupportActionBar().setTitle(getString(R.string.app_name));
 
+        setUIColor(color);
         mainFragment.loadVehicleDetails();
     }
 

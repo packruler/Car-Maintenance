@@ -53,7 +53,6 @@ import com.rengwuxian.materialedittext.validation.METValidator;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -793,7 +792,7 @@ public class EditCar extends android.app.Fragment {
 
     private void saveDisplayColor(ContentValues values) {
         if (currentColor != getResources().getColor(R.color.default_ui_color)) {
-            values.put(Vehicle.DISPLAY_COLOR, currentColor);
+            values.put(Vehicle.PRIMARY_COLOR, currentColor);
         }
     }
 
@@ -955,11 +954,18 @@ public class EditCar extends android.app.Fragment {
 
                 final Bitmap bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-                bitmap.recycle();
-                if (crop)
+                if (crop) {
                     doCrop(getTempUri());
-                else
-                    loadImage(getTempFile());
+                    recycle(bitmap);
+                } else {
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadingImageSpinner.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    loadImage(bitmap);
+                }
             }
             Log.d(TAG, "Image Loaded");
         } catch (IOException e) {
@@ -986,17 +992,39 @@ public class EditCar extends android.app.Fragment {
                         vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
                                 bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
                         loadingImageSpinner.setVisibility(View.GONE);
-                        bitmap.recycle();
                     }
                 });
                 setLoadedColor(Palette.from(bitmap).maximumColorCount(30).generate());
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        bitmap.recycle();
+                        recycle(bitmap);
                     }
                 });
                 Log.d(TAG, "Image Loaded");
+            }
+        });
+    }
+
+    private void loadImage(final Bitmap bitmap) {
+        activity.execute(new Runnable() {
+            @Override
+            public void run() {
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+                                bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
+                        loadingImageSpinner.setVisibility(View.GONE);
+                    }
+                });
+                setLoadedColor(Palette.from(bitmap).maximumColorCount(30).generate());
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        recycle(bitmap);
+                    }
+                });
             }
         });
     }
@@ -1022,7 +1050,7 @@ public class EditCar extends android.app.Fragment {
                     mainHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            bitmap.recycle();
+                            recycle(bitmap);
                         }
                     });
                     Log.d(TAG, "Image Loaded");
@@ -1105,7 +1133,6 @@ public class EditCar extends android.app.Fragment {
                 @Override
                 public void run() {
                     FileOutputStream out = null;
-                    FileInputStream in = null;
                     try {
                         File outFile = vehicle.getImage();
 
@@ -1137,9 +1164,6 @@ public class EditCar extends android.app.Fragment {
                             if (out != null) {
                                 out.flush();
                                 out.close();
-                            }
-                            if (in != null) {
-                                in.close();
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -1298,5 +1322,10 @@ public class EditCar extends android.app.Fragment {
                 Toast.makeText(activity, message, length).show();
             }
         });
+    }
+
+    private void recycle(Bitmap bitmap) {
+        bitmap.recycle();
+        System.gc();
     }
 }

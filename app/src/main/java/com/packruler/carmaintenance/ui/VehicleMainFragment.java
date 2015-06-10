@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,6 +70,8 @@ public class VehicleMainFragment extends Fragment {
                             .addToBackStack("EditCar").commit();
             }
         });
+
+        fuelStopsButton = (CardView) rootView.findViewById(R.id.fuel_stop_button);
         viewInitialized = true;
 
         loadVehicleDetails();
@@ -94,6 +95,10 @@ public class VehicleMainFragment extends Fragment {
         servicesButton.setCardBackgroundColor(color);
         ((TextView) servicesButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(swatch.getBodyTextColor());
         ((ImageView) servicesButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(swatch.getBodyTextColor(), PorterDuff.Mode.SRC_IN);
+
+        fuelStopsButton.setCardBackgroundColor(color);
+        ((TextView) fuelStopsButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(swatch.getBodyTextColor());
+        ((ImageView) fuelStopsButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(swatch.getBodyTextColor(), PorterDuff.Mode.SRC_IN);
     }
 
     public void loadVehicleDetails() {
@@ -115,21 +120,23 @@ public class VehicleMainFragment extends Fragment {
                                 public void run() {
                                     Log.v(TAG, "Load to UI");
                                     vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
-                                            bitmap.getScaledWidth(DisplayMetrics.DENSITY_HIGH), bitmap.getScaledHeight(DisplayMetrics.DENSITY_HIGH), false));
+                                            bitmap.getScaledWidth(activity.getResources().getDisplayMetrics().densityDpi),
+                                            bitmap.getScaledHeight(activity.getResources().getDisplayMetrics().densityDpi),
+                                            false));
                                     Log.v(TAG, "Initial bitmap recycled");
-                                    bitmap.recycle();
+//                                    bitmap.recycle();
                                 }
                             });
                         }
                     });
                 else
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.v(TAG, "Load null to UI");
-                        vehicleImage.setImageBitmap(null);
-                    }
-                });
+                        @Override
+                        public void run() {
+                            Log.v(TAG, "Load null to UI");
+                            vehicleImage.setImageBitmap(null);
+                        }
+                    });
             }
         }
     }

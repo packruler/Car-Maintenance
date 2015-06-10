@@ -47,7 +47,8 @@ public class Vehicle extends DataSetObservable {
     public static final String POWER_UNITS = "power_units";
     public static final String TORQUE = "torque";
     public static final String TORQUE_UNITS = "torque_units";
-    public static final String DISPLAY_COLOR = "display_color";
+    public static final String PRIMARY_COLOR = "display_color";
+    public static final String TEXT_COLOR = "display_text_color";
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + ROW_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -61,7 +62,7 @@ public class Vehicle extends DataSetObservable {
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " STRING," +
                     PURCHASE_COST + " FLOAT," + PURCHASE_COST_UNITS + " STRING," +
                     PURCHASE_MILEAGE + " LONG," + PURCHASE_MILEAGE_UNITS + " STRING," +
-                    DISPLAY_COLOR + " INTEGER" + ")";
+                    PRIMARY_COLOR + " INTEGER," + TEXT_COLOR + " INTEGER" + ")";
 
     protected CarSQL carSQL;
     private long row;
@@ -377,13 +378,21 @@ public class Vehicle extends DataSetObservable {
 
     public void setDisplayColor(int color) {
         Log.v(TAG, "Store: " + color);
-        sqlDataHandler.putInt(DISPLAY_COLOR, color);
+        sqlDataHandler.putInt(PRIMARY_COLOR, color);
     }
 
     public int getDisplayColor() {
-        int out = sqlDataHandler.getInt(DISPLAY_COLOR);
+        int out = sqlDataHandler.getInt(PRIMARY_COLOR);
         Log.v(TAG, "Current palette: " + out);
         return out;
+    }
+
+    public void setTextColor(int color) {
+        sqlDataHandler.putInt(TEXT_COLOR, color);
+    }
+
+    public int getTextColor() {
+        return sqlDataHandler.getInt(TEXT_COLOR);
     }
 
     public File getImage() {
