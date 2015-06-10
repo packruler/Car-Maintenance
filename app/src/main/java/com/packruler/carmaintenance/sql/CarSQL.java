@@ -18,13 +18,14 @@ import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
  */
 public class CarSQL {
     private final String TAG = getClass().getSimpleName();
-
+    private String mainFilePath;
     private SQLHelper sqlHelper;
 //    private Activity activity;
 
     public CarSQL(Activity activity) {
 //        this.activity = activity;
         sqlHelper = new SQLHelper(activity);
+        mainFilePath = activity.getFilesDir().getPath();
     }
 
     private class SQLHelper extends SQLiteOpenHelper {
@@ -128,5 +129,9 @@ public class CarSQL {
         boolean canUse = cursor.getCount() == 0;
         cursor.close();
         return canUse;
+    }
+
+    public String getMainFilePath() {
+        return mainFilePath;
     }
 }

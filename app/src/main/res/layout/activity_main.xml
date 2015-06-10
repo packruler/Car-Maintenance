@@ -27,8 +27,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"/>
-        <!--android:name="com.packruler.carmaintenance.ui.MainFragment"-->
-        <!--tools:layout="@layout/fragment_main"-->
 
     </RelativeLayout>
     <!-- android:layout_gravity="start" tells DrawerLayout to treat

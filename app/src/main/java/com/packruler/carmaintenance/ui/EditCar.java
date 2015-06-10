@@ -1,7 +1,6 @@
 package com.packruler.carmaintenance.ui;
 
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.content.ContentValues;
@@ -107,11 +106,16 @@ public class EditCar extends android.app.Fragment {
     public EditCar() {
     }
 
-    public EditCar(MainActivity activity, CarSQL carSQL) {
+    public EditCar(MainActivity activity) {
         this();
-        this.carSQL = carSQL;
         this.activity = activity;
+        carSQL = activity.getCarsSQL();
         availableCarsSQL = activity.getAvailableCarsSQL();
+    }
+
+    public EditCar(MainActivity activity, Vehicle vehicle) {
+        this(activity);
+        this.vehicle = vehicle;
     }
 
     @Override
@@ -127,7 +131,6 @@ public class EditCar extends android.app.Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_edit_car, container, false);
         rootView.isInEditMode();
-        activity.getToolbar().setTitle("New Car");
         initializeView();
 
         return rootView;
@@ -215,8 +218,6 @@ public class EditCar extends android.app.Fragment {
                 @Override
                 public void run() {
                     if (vehicle.getName() != null) {
-                        activity.getToolbar().setTitle(vehicle.getName());
-
                         vehicleName.setText(vehicle.getName());
                     }
 
@@ -409,7 +410,8 @@ public class EditCar extends android.app.Fragment {
             saveDisplayColor(values);
             savePurchaseDate(values);
             vehicle.putContentValues(values);
-            storeImage();
+            if (!storeImage())
+                sendToast("Save Successful");
         }
     }
 
@@ -906,6 +908,25 @@ public class EditCar extends android.app.Fragment {
 //        startActivityForResult(intent, PIC_CROP);
     }
 
+    private File getTempFile(boolean make) {
+        File temp = new File(activity.getCacheDir() + "/temp.jpg");
+        if (make) {
+            try {
+                if (!activity.getCacheDir().exists())
+                    Log.v(TAG, "Create cache folder: " + activity.getCacheDir());
+
+                if (!temp.exists())
+                    Log.v(TAG, "Create temp file: " + temp.createNewFile());
+
+                return temp;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return temp;
+    }
+
     private File getTempFile() {
         File temp = new File(activity.getCacheDir() + "/temp.jpg");
         try {
@@ -1017,7 +1038,7 @@ public class EditCar extends android.app.Fragment {
         Log.v(TAG, "Load cached image");
         if (vehicle != null) {
 
-            final File file = new File(getActivity().getFilesDir().getPath() + "/Images/" + vehicle.getName() + "/" + "/vehicle.jpg");
+            final File file = vehicle.getImage();
 
             if (file.exists()) {
                 Log.v(TAG, "Cached file exists");
@@ -1053,23 +1074,6 @@ public class EditCar extends android.app.Fragment {
 
     private void loadSwatches(Palette palette) {
         swatches = palette.getSwatches();
-//        swatches = new LinkedList<>();
-//        for (Palette.Swatch swatch : palette.getSwatches()) {
-//            if (swatches.isEmpty())
-//                swatches.add(swatch);
-//            else {
-//                boolean added = false;
-//                for (int x = 0; x < swatches.size(); x++) {
-//                    if (swatch.getPopulation() > swatches.get(x).getPopulation()) {
-//                        swatches.add(x, swatch);
-//                        added = true;
-//                        break;
-//                    }
-//                }
-//                if (!added)
-//                    swatches.add(swatch);
-//            }
-//        }
     }
 
     private void setLoadedColor(Palette palette) {
@@ -1094,8 +1098,8 @@ public class EditCar extends android.app.Fragment {
         });
     }
 
-    private void storeImage() {
-        final File temp = getTempFile();
+    private boolean storeImage() {
+        final File temp = getTempFile(false);
         if (temp != null && temp.exists()) {
             activity.execute(new Runnable() {
                 @Override
@@ -1103,7 +1107,7 @@ public class EditCar extends android.app.Fragment {
                     FileOutputStream out = null;
                     FileInputStream in = null;
                     try {
-                        File outFile = new File(getActivity().getFilesDir().getPath() + "/Images/" + vehicle.getName() + "/" + "/vehicle.jpg");
+                        File outFile = vehicle.getImage();
 
                         if (!outFile.getParentFile().exists())
                             Log.v(TAG, "Make dirs success: " + outFile.getParentFile().mkdirs());
@@ -1120,16 +1124,9 @@ public class EditCar extends android.app.Fragment {
                         else if (!fileExisted)
                             Log.v(TAG, "Delete outFile: " + outFile.delete());
 
-//                        in = new FileInputStream(temp);
-//                        Log.v(TAG, "Begin move");
-//                        byte[] buffer = new byte[1024];
-//                        int read;
-//                        while ((read = in.read(buffer)) != -1) {
-//                            out.write(buffer, 0, read);
-//                        }
 
                         Log.v(TAG, "Delete temp: " + getTempFile().delete());
-                        sendToast("Vehicle Data Stored Successfully");
+                        sendToast("Save Successful");
 
 //                        vehicle.setImagePath(outFile.getPath());
                     } catch (IOException e) {
@@ -1150,7 +1147,9 @@ public class EditCar extends android.app.Fragment {
                     }
                 }
             });
+            return true;
         }
+        return false;
     }
 
 
@@ -1275,17 +1274,13 @@ public class EditCar extends android.app.Fragment {
         switch (requestCode) {
             case SELECT_PICTURE_REQUEST_CODE:
                 Log.v(TAG, "Select image");
-                if (resultCode != Activity.RESULT_OK)
-                    Log.e(TAG, "Error in photo crop. Delete temp file " + (getTempFile().delete() ? "SUCCESS" : "FAILED"));
-                else if (selected != null) {
+                if (selected != null) {
                     loadImage(selected, false);
 //                    doCrop(selected);
                 }
                 break;
             case PIC_CROP:
-                if (resultCode != Activity.RESULT_OK)
-                    Log.e(TAG, "Error in photo crop. Delete temp file " + (getTempFile().delete() ? "SUCCESS" : "FAILED"));
-                else if (selected != null)
+                if (selected != null)
                     loadImage(selected);
                 break;
         }

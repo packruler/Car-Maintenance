@@ -62,7 +62,10 @@ public class MainActivity extends AppCompatActivity
      */
     private CharSequence mTitle;
 
-    private VehicleMap vehicleMap = new VehicleMap();
+    private VehicleMap vehicleMap;
+    private Vehicle currentVehicle;
+
+    private VehicleMainFragment mainFragment = new VehicleMainFragment(this);
 
     private SharedPreferences sharedPreferences;
     private CarSQL carsSQL;
@@ -110,8 +113,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         sharedPreferences = getSharedPreferences(getApplication().getPackageName(), MODE_MULTI_PROCESS);
 
-        Log.i(TAG, "Car map size: " + vehicleMap.size());
-
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -128,8 +129,9 @@ public class MainActivity extends AppCompatActivity
         vehicleMap.registerObserver(navObserserver);
 
         getFragmentManager().addOnBackStackChangedListener(this);
-        getFragmentManager().beginTransaction().replace(R.id.container, new MainFragment()).commit();
+        getFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
 
+        setUIColor(getResources().getColor(R.color.default_ui_color));
         mNavigationDrawerFragment.updateDrawer();
     }
 
@@ -145,15 +147,45 @@ public class MainActivity extends AppCompatActivity
         // update the main content by replacing fragments
         Log.v(TAG, "Selected car name: " + name);
 
-        EditCar editCar = new EditCar(this, carsSQL);
+        if (name.equals(getString(R.string.add_car))) {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container, new EditCar())
+                    .addToBackStack(null)
+                    .commit();
+        } else
+            changeVehicle(name);
+    }
 
-        if (vehicleMap.containsKey(name))
-            editCar.loadVehicle(vehicleMap.get(name));
+    private void changeVehicle(Vehicle vehicle) {
+        currentVehicle = vehicle;
+        changeVehicle();
+    }
 
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, editCar)
-                .addToBackStack(name)
-                .commit();
+    public void changeVehicle(long vehicleRow) {
+        currentVehicle = vehicleMap.get(vehicleRow);
+        changeVehicle();
+    }
+
+    public void changeVehicle(String vehicleName) {
+        currentVehicle = vehicleMap.get(vehicleName);
+        changeVehicle(vehicleMap.get(vehicleName));
+    }
+
+    private void changeVehicle() {
+        int color = getResources().getColor(R.color.default_ui_color);
+        if (currentVehicle != null) {
+            if (currentVehicle.getDisplayColor() != 0)
+                color = currentVehicle.getDisplayColor();
+
+            getSupportActionBar().setTitle(currentVehicle.getName());
+        } else
+            getSupportActionBar().setTitle(getString(R.string.app_name));
+
+        mainFragment.loadVehicleDetails();
+    }
+
+    public Vehicle getCurrentVehicle() {
+        return currentVehicle;
     }
 
     private DataSetObserver navObserserver = new DataSetObserver() {
@@ -169,16 +201,8 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
-    public void onSectionAttached(int number) {
-        if (number < vehicleMap.size()) {
-            mTitle = vehicleMap.get(number).getName();
-        } else if (mTitle != null && !mTitle.equals("New Car")) {
-            mTitle = "New Car";
-        }
-        toolbar.setTitle(mTitle);
-    }
-
     public void restoreActionBar() {
+        Log.v(TAG, "restoreActionBar");
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayShowHomeEnabled(true);
@@ -194,7 +218,7 @@ public class MainActivity extends AppCompatActivity
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
+//            restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
@@ -220,8 +244,10 @@ public class MainActivity extends AppCompatActivity
         int count = getFragmentManager().getBackStackEntryCount();
         Log.v("onBackStackChanged", "Count: " + count);
         if (count == 0) {
-            setUIColor(getResources().getColor(R.color.default_ui_color));
-            toolbar.setTitle(mTitle);
+            if (currentVehicle == null) {
+                setUIColor(getResources().getColor(R.color.default_ui_color));
+                getSupportActionBar().setTitle(getString(R.string.app_name));
+            }
             getSupportActionBar().setDisplayShowHomeEnabled(false);
         }
     }
@@ -244,9 +270,8 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     Log.v(TAG, "onClick");
-                    Vehicle vehicle = vehicleMap.get(vehicleMap.keySet().iterator().next());
-                    Log.v(TAG, String.valueOf(vehicle != null));
-                    ServicesFragment servicesFragment = new ServicesFragment(MainActivity.this, vehicle, carsSQL);
+                    Log.v(TAG, String.valueOf(currentVehicle != null));
+                    ServicesFragment servicesFragment = new ServicesFragment(MainActivity.this, currentVehicle);
                     getFragmentManager().beginTransaction().replace(R.id.container, servicesFragment).addToBackStack("Services").commit();
                 }
             });
@@ -254,7 +279,12 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     Log.v(TAG, "Edit Car Click");
-                    getFragmentManager().beginTransaction().replace(R.id.container, new EditCar(MainActivity.this, carsSQL)).addToBackStack("EditCar").commit();
+                    EditCar editCar;
+                    if (currentVehicle != null)
+                        getFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.container, new EditCar(MainActivity.this, currentVehicle))
+                                .addToBackStack("EditCar").commit();
                 }
             });
             return rootView;
@@ -282,6 +312,10 @@ public class MainActivity extends AppCompatActivity
         return availableCarsSQL;
     }
 
+    public CarSQL getCarsSQL() {
+        return carsSQL;
+    }
+
     public ThreadPoolExecutor getPoolExecutor() {
         return poolExecutor;
     }
@@ -301,7 +335,7 @@ public class MainActivity extends AppCompatActivity
                 Palette.Swatch swatch = new Palette.Swatch(color, 100);
                 toolbar.setBackgroundColor(color);
                 ToolbarColorizeHelper.colorizeToolbar(toolbar, swatch.getTitleTextColor(), MainActivity.this);
-
+                mainFragment.setUIColor(color);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     Window window = getWindow();
                     window.setStatusBarColor(color);

@@ -12,6 +12,7 @@ import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.packruler.carmaintenance.vehicle.maintenence.PartReplacement;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -383,6 +384,10 @@ public class Vehicle extends DataSetObservable {
         int out = sqlDataHandler.getInt(DISPLAY_COLOR);
         Log.v(TAG, "Current palette: " + out);
         return out;
+    }
+
+    public File getImage() {
+        return new File(carSQL.getMainFilePath() + "/" + row + "/" + "/vehicle.jpg");
     }
 
     public void putContentValues(ContentValues contentValues) {

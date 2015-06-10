@@ -9,26 +9,31 @@
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context="com.packruler.carmaintenance.ui.MainActivity.MainFragment">
 
-    <GridLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:padding="@dimen/abc_action_bar_default_padding_material"
-        >
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/vehicle_details_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_tiny"/>
+
 
         <android.support.v7.widget.CardView
-            android:layout_width="@dimen/main_button_width"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/main_button_height"
-            android:layout_row="0"
-            android:layout_column="0"
             android:id="@+id/edit_car_button"
             card_view:cardBackgroundColor="@color/cardview_dark_background"
             card_view:contentPadding="@dimen/abc_action_bar_default_padding_material"
             card_view:cardCornerRadius="@dimen/cardview_default_radius"
             card_view:cardElevation="@dimen/cardview_default_elevation"
-            android:layout_margin="@dimen/abc_action_bar_default_padding_material">
+            android:layout_margin="@dimen/margin_tiny">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -40,7 +45,8 @@
                     android:layout_height="@android:dimen/notification_large_icon_height"
                     android:id="@+id/imageView"
                     android:src="@android:drawable/ic_dialog_info"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:tag="@string/image_tag"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -50,25 +56,25 @@
                     android:layout_below="@+id/imageView"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/abc_primary_text_material_dark"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:tag="@string/title_tag"/>
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:layout_width="@dimen/main_button_width"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/main_button_height"
-            android:layout_row="0"
-            android:layout_column="1"
             android:id="@+id/services_button"
             card_view:cardBackgroundColor="@color/cardview_dark_background"
             card_view:contentPadding="@dimen/abc_action_bar_default_padding_material"
             card_view:cardCornerRadius="@dimen/cardview_default_radius"
             card_view:cardElevation="@dimen/cardview_default_elevation"
-            android:layout_margin="@dimen/abc_action_bar_default_padding_material">
+            android:layout_margin="@dimen/margin_tiny">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 >
 
                 <ImageView
@@ -76,7 +82,8 @@
                     android:layout_height="@android:dimen/notification_large_icon_height"
                     android:id="@+id/imageView2"
                     android:src="@android:drawable/ic_dialog_alert"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:tag="@string/image_tag"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -86,26 +93,25 @@
                     android:id="@+id/services_textView"
                     android:textColor="@color/abc_primary_text_material_dark"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/imageView2"/>
+                    android:layout_below="@+id/imageView2"
+                    android:tag="@string/title_tag"/>
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:layout_width="@dimen/main_button_width"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/main_button_height"
-            android:layout_row="0"
-            android:layout_column="2"
             android:id="@+id/fuel_stop_button"
             card_view:cardBackgroundColor="@color/cardview_dark_background"
             card_view:contentPadding="@dimen/abc_action_bar_default_padding_material"
             card_view:cardCornerRadius="@dimen/cardview_default_radius"
             card_view:cardElevation="@dimen/cardview_default_elevation"
-            android:layout_margin="@dimen/abc_action_bar_default_padding_material">
+            android:layout_margin="@dimen/margin_tiny">
 
             <RelativeLayout
-                android:layout_width="@dimen/main_button_width"
-                android:layout_height="@dimen/main_button_height"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center">
 
                 <ImageView
@@ -113,7 +119,8 @@
                     android:layout_height="@android:dimen/notification_large_icon_height"
                     android:id="@+id/fuel_stop_imageView"
                     android:src="@android:drawable/ic_dialog_info"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:tag="@string/image_tag"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -123,45 +130,9 @@
                     android:layout_below="@+id/fuel_stop_imageView"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/abc_primary_text_material_dark"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:tag="@string/title_tag"/>
             </RelativeLayout>
         </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="@dimen/main_button_width"
-            android:layout_height="@dimen/main_button_height"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:id="@+id/parts_button"
-            card_view:cardBackgroundColor="@color/cardview_dark_background"
-            card_view:contentPadding="@dimen/abc_action_bar_default_padding_material"
-            card_view:cardCornerRadius="@dimen/cardview_default_radius"
-            card_view:cardElevation="@dimen/cardview_default_elevation"
-            android:layout_margin="@dimen/abc_action_bar_default_padding_material">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="@android:dimen/notification_large_icon_width"
-                    android:layout_height="@android:dimen/notification_large_icon_height"
-                    android:id="@+id/parts_imageView"
-                    android:src="@android:drawable/ic_dialog_info"
-                    android:layout_centerHorizontal="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fuel_stops"
-                    android:id="@+id/parts_textView"
-                    android:gravity="center"
-                    android:layout_below="@+id/parts_imageView"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@color/abc_primary_text_material_dark"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-    </GridLayout>
+    </LinearLayout>
 </RelativeLayout>

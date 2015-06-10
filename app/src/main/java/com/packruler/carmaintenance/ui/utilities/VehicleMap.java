@@ -57,6 +57,14 @@ public class VehicleMap extends DataSetObservable implements Map<CharSequence, V
         return map.get(key);
     }
 
+    public Vehicle get(long rowId) {
+        for (Vehicle vehicle : map.values()) {
+            if (vehicle.getRow() == rowId)
+                return vehicle;
+        }
+        return null;
+    }
+
     @Override
     public boolean isEmpty() {
         return map.isEmpty();
@@ -82,7 +90,7 @@ public class VehicleMap extends DataSetObservable implements Map<CharSequence, V
 
     @Override
     public void putAll(Map<? extends CharSequence, ? extends Vehicle> map) {
-        for (Entry<? extends CharSequence, ? extends Vehicle> entry:map.entrySet()){
+        for (Entry<? extends CharSequence, ? extends Vehicle> entry : map.entrySet()) {
             put(entry.getValue());
         }
     }

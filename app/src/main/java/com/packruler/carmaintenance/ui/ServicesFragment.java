@@ -67,10 +67,10 @@ public class ServicesFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ServicesFragment(final MainActivity activity, final Vehicle vehicle, CarSQL carSQL) {
+    public ServicesFragment(final MainActivity activity, Vehicle vehicle) {
         this.activity = activity;
         this.vehicle = vehicle;
-        this.carSQL = carSQL;
+        carSQL = activity.getCarsSQL();
         mAdapter = new ServiceRecyclerAdapter(activity, vehicle.getServiceTaskCursor());
         mAdapter.setHasStableIds(true);
     }

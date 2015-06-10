@@ -47,8 +47,7 @@ public class FuelStop extends ServiceTask {
 
 
     public FuelStop(CarSQL carSQL, long rowId, boolean carRow) {
-        super(carSQL, rowId, carRow);
-        sqlDataHandler.setTableName(TABLE_NAME);
+        super(carSQL, rowId, carRow, TABLE_NAME);
     }
 
     public FuelStop(CarSQL carSQL, long row) {

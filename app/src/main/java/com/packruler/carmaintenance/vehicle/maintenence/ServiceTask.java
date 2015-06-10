@@ -55,6 +55,20 @@ public class ServiceTask extends DataSetObservable{
         this.carSQL = carSQL;
     }
 
+    protected ServiceTask(CarSQL carSQL, long row, boolean carRow, String TABLE_NAME) {
+        this(carSQL);
+        if (!carRow) {
+            this.row = row;
+        } else {
+            SQLiteDatabase database = carSQL.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(VEHICLE_ROW, row);
+            this.row = database.insert(TABLE_NAME, null, contentValues);
+        }
+        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
+                ID + "= " + this.row, this);
+    }
+
     public ServiceTask(CarSQL carSQL, long row, boolean carRow) {
         this(carSQL);
         if (!carRow) {

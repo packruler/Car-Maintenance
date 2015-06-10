@@ -306,7 +306,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     public void updateDrawer() {
         List<String> vehicleNames = ((MainActivity) getActivity()).getVehicleNames();
-        vehicleNames.add(getString(R.string.new_car));
+        vehicleNames.add(getString(R.string.add_car));
         nameArray = new String[vehicleNames.size()];
         vehicleNames.toArray(nameArray);
 
