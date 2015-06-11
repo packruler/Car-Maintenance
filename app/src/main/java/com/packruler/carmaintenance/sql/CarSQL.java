@@ -2,18 +2,29 @@ package com.packruler.carmaintenance.sql;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.util.LruCache;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.packruler.carmaintenance.ui.utilities.VehicleMap;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.packruler.carmaintenance.vehicle.maintenence.PartReplacement;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
+
+import java.io.FileNotFoundException;
+import java.lang.ref.WeakReference;
 
 /**
  * Created by Packruler on 5/4/15.
@@ -49,10 +60,10 @@ public class CarSQL {
 
     private SQLHelper sqlHelper;
     private LruCache<Long, Bitmap> mMemoryCache;
-//    private Activity activity;
+    private Activity activity;
 
     public CarSQL(Activity activity) {
-//        this.activity = activity;
+        this.activity = activity;
         sqlHelper = new SQLHelper(activity);
         mainFilePath = activity.getFilesDir().getPath();
         initializeBitmapCache();
@@ -192,22 +203,7 @@ public class CarSQL {
     }
 
     private void initializeBitmapCache() {
-        // Get max available VM memory, exceeding this amount will throw an
-        // OutOfMemory exception. Stored in kilobytes as LruCache takes an
-        // int in its constructor.
-        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-
-        // Use 1/8th of the available memory for this memory cache.
-        final int cacheSize = maxMemory / 8;
-
-        mMemoryCache = new LruCache<Long, Bitmap>(cacheSize) {
-            @Override
-            protected int sizeOf(Long key, Bitmap value) {
-                // The cache size will be measured in kilobytes rather than
-                // number of items.
-                return value.getByteCount() / 1024;
-            }
-        };
+        mMemoryCache = new LruCache<>(10);
     }
 
     public void addBitmapToMemoryCache(long key, Bitmap bitmap) {
@@ -219,95 +215,143 @@ public class CarSQL {
         return mMemoryCache.get(key);
     }
 
-//    public void loadBitmap(long vehicleRow, ImageView imageView) {
-//        final Bitmap bitmap = getBitmapFromMemCache(vehicleRow);
-//        AsyncDrawable drawable = new AsyncDrawable(Resources.getSystem(), bitmap, new BitmapWorkerTask(imageView));
-//        if (bitmap != null) {
-//            imageView.setImageDrawable(drawable);
-//        } else {
-//            imageView.setImageResource(android.R.drawable.ic_menu_camera);
-//            BitmapWorkerTask task = new BitmapWorkerTask(mImageView);
-//            task.execute(resId);
-//        }
-//    }
+    public Bitmap getTempFromCache() {
+        return mMemoryCache.get(-1l);
+    }
 
-//    public void loadBitmapDrawable(int resId, ImageView imageView) {
-//        if (cancelPotentialWork(resId, imageView)) {
-//            final BitmapWorkerTask task = new BitmapWorkerTask(imageView);
-//            final AsyncDrawable asyncDrawable =
-//                    new AsyncDrawable(getResources(), mPlaceHolderBitmap, task);
-//            imageView.setImageDrawable(asyncDrawable);
-//            task.execute(resId);
-//        }
-//    }
+    public void loadBitmap(Uri uri, ImageView imageView) {
+        new BitmapWorkerTask(imageView)
+                .execute(BitmapWorkerTask.temp, uri.toString());
+    }
 
-//    public static boolean cancelPotentialWork(int data, ImageView imageView) {
-//        final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
-//
-//        if (bitmapWorkerTask != null) {
-//            final int bitmapData = bitmapWorkerTask.data;
-//            // If bitmapData is not yet set or it differs from the new data
-//            if (bitmapData == 0 || bitmapData != data) {
-//                // Cancel previous task
-//                bitmapWorkerTask.cancel(true);
-//            } else {
-//                // The same work is already in progress
-//                return false;
-//            }
-//        }
-//        // No task associated with the ImageView, or an existing task was cancelled
-//        return true;
-//    }
+    public void loadBitmap(Uri uri, ImageView imageView, View loadingView) {
+        new BitmapWorkerTask(imageView, loadingView)
+                .execute(BitmapWorkerTask.temp, uri.toString());
+    }
 
-//    class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap> {
-//        private final WeakReference<ImageView> imageViewReference;
-//        private int data = 0;
-//
-//        public BitmapWorkerTask(ImageView imageView) {
-//            // Use a WeakReference to ensure the ImageView can be garbage collected
-//            imageViewReference = new WeakReference<ImageView>(imageView);
-//        }
-//
-////        // Decode image in background.
-////        @Override
-////        protected Bitmap doInBackground(Integer... params) {
-////            data = params[0];
-////            return decodeSampledBitmapFromResource(getResources(), data, 100, 100));
-////        }
-////
-////        // Decode image in background.
-////        @Override
-////        protected Bitmap doInBackground(Integer... params) {
-////            final Bitmap bitmap = decodeSampledBitmapFromResource(
-////                    getResources(), params[0], 100, 100));
-////            addBitmapToMemoryCache(String.valueOf(params[0]), bitmap);
-////            return bitmap;
-////        }
-//
-//        // Once complete, see if ImageView is still around and set bitmap.
-//        @Override
-//        protected void onPostExecute(Bitmap bitmap) {
-//            if (imageViewReference != null && bitmap != null) {
-//                final ImageView imageView = imageViewReference.get();
-//                if (imageView != null) {
-//                    imageView.setImageBitmap(bitmap);
-//                }
-//            }
-//        }
-//    }
+    public void loadBitmap(Vehicle vehicle, ImageView imageView) {
+        final Bitmap bitmap = getBitmapFromMemCache(vehicle.getRow());
+        if (bitmap != null)
+            imageView.setImageBitmap(bitmap);
+        else
+            new BitmapWorkerTask(imageView)
+                    .execute(vehicle.getRow() + "", vehicle.getImage().toURI().toString());
+    }
 
-//    static class AsyncDrawable extends BitmapDrawable {
-//        private final WeakReference<BitmapWorkerTask> bitmapWorkerTaskReference;
-//
-//        public AsyncDrawable(Resources res, Bitmap bitmap,
-//                             BitmapWorkerTask bitmapWorkerTask) {
-//            super(res, bitmap);
-//            bitmapWorkerTaskReference =
-//                    new WeakReference<BitmapWorkerTask>(bitmapWorkerTask);
-//        }
-//
-//        public BitmapWorkerTask getBitmapWorkerTask() {
-//            return bitmapWorkerTaskReference.get();
-//        }
-//    }
+    public void loadBitmap(Vehicle vehicle, ImageView imageView, View loadingView) {
+        final Bitmap bitmap = getBitmapFromMemCache(vehicle.getRow());
+        if (bitmap != null) {
+            imageView.setImageBitmap(bitmap);
+            loadingView.setVisibility(View.GONE);
+        } else
+            new BitmapWorkerTask(imageView, loadingView)
+                    .execute(vehicle.getRow() + "", vehicle.getImage().toURI().toString());
+    }
+
+
+    public static boolean cancelPotentialWork(String[] data, ImageView imageView) {
+        final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
+
+        if (bitmapWorkerTask != null) {
+            final String[] bitmapData = bitmapWorkerTask.data;
+            // If bitmapData is not yet set or it differs from the new data
+            if (bitmapData != data) {
+                // Cancel previous task
+                bitmapWorkerTask.cancel(true);
+            } else {
+                // The same work is already in progress
+                return false;
+            }
+        }
+        // No task associated with the ImageView, or an existing task was cancelled
+        return true;
+    }
+
+    private class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
+        private String TAG = getClass().getName();
+        public static final String temp = "temp";
+        private final WeakReference<ImageView> imageViewReference;
+        private final WeakReference<View> loadingReference;
+        private String[] data;
+
+        public BitmapWorkerTask(ImageView imageView, View loadingDisplay) {
+            // Use a WeakReference to ensure the ImageView can be garbage collected
+            imageViewReference = new WeakReference<>(imageView);
+            loadingReference = new WeakReference<>(loadingDisplay);
+        }
+
+        public BitmapWorkerTask(ImageView imageView) {
+            // Use a WeakReference to ensure the ImageView can be garbage collected
+            imageViewReference = new WeakReference<>(imageView);
+            loadingReference = new WeakReference<>(null);
+        }
+
+        // Decode image in background.
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            data = params;
+            Bitmap tempBitmap = null;
+            try {
+                Log.v(TAG, "Path: " + params[1]);
+                tempBitmap = BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(Uri.parse(params[1])));
+            } catch (FileNotFoundException e) {
+                Log.e(TAG, e.getMessage());
+            }
+
+            Bitmap bitmap = null;
+            if (tempBitmap != null) {
+                bitmap = Bitmap.createScaledBitmap(tempBitmap,
+                        tempBitmap.getScaledWidth(activity.getResources().getDisplayMetrics()),
+                        tempBitmap.getScaledHeight(activity.getResources().getDisplayMetrics()),
+                        false);
+                if (params[0].equals(temp))
+                    mMemoryCache.put(-1l, bitmap);
+                else
+                    mMemoryCache.put(Long.valueOf(params[0]), bitmap);
+
+                if (!tempBitmap.sameAs(bitmap))
+                    tempBitmap.recycle();
+                else Log.v(TAG, "Scaled Bitmaps the same");
+            }
+            return bitmap;
+        }
+
+        // Once complete, see if ImageView is still around and set bitmap.
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            final ImageView imageView = imageViewReference.get();
+            if (imageView != null && bitmap != null) {
+                imageView.setImageBitmap(bitmap);
+            }
+
+            final View loading = loadingReference.get();
+            if (loading != null)
+                loading.setVisibility(View.GONE);
+        }
+    }
+
+    private static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) {
+        if (imageView != null) {
+            final Drawable drawable = imageView.getDrawable();
+            if (drawable instanceof AsyncDrawable) {
+                final AsyncDrawable asyncDrawable = (AsyncDrawable) drawable;
+                return asyncDrawable.getBitmapWorkerTask();
+            }
+        }
+        return null;
+    }
+
+    static class AsyncDrawable extends BitmapDrawable {
+        private final WeakReference<BitmapWorkerTask> bitmapWorkerTaskReference;
+
+        public AsyncDrawable(Bitmap bitmap,
+                             BitmapWorkerTask bitmapWorkerTask) {
+            super(Resources.getSystem(), bitmap);
+            bitmapWorkerTaskReference = new WeakReference<>(bitmapWorkerTask);
+        }
+
+        public BitmapWorkerTask getBitmapWorkerTask() {
+            return bitmapWorkerTaskReference.get();
+        }
+    }
 }

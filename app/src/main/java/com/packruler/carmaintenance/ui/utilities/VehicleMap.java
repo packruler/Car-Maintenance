@@ -53,12 +53,15 @@ public class VehicleMap implements Map<Long, Vehicle> {
 
     @Override
     public Vehicle get(Object key) {
-        return map.get(key);
+        if (key instanceof Long)
+            return map.get(key);
+
+        return null;
     }
 
-    public Vehicle get(long rowId) {
+    public Vehicle get(CharSequence name) {
         for (Vehicle vehicle : map.values()) {
-            if (vehicle.getRow() == rowId)
+            if (vehicle.getName().equals(name))
                 return vehicle;
         }
         return null;

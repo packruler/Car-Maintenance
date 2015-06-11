@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -871,12 +870,17 @@ public class EditCar extends android.app.Fragment {
 
     private void openImageSelection() {
         Log.v(TAG, "openImageSelection");
-        Intent photoPickerIntent = new Intent();
+        final Intent photoPickerIntent = new Intent();
         photoPickerIntent.setAction(Intent.ACTION_GET_CONTENT);
         photoPickerIntent.setType("image/*");
         photoPickerIntent.putExtra("crop", "true");
         photoPickerIntent.putExtra("return-data", true);
-        startActivityForResult(photoPickerIntent, SELECT_PICTURE_REQUEST_CODE);
+        activity.execute(new Runnable() {
+            @Override
+            public void run() {
+                startActivityForResult(photoPickerIntent, SELECT_PICTURE_REQUEST_CODE);
+            }
+        });
     }
 
     private static final int PIC_CROP = 2;
@@ -945,66 +949,69 @@ public class EditCar extends android.app.Fragment {
     private Uri getTempUri() {
         return FileProvider.getUriForFile(activity, "com.packruler.carmaintenance", getTempFile());
     }
-private Bitmap bitmap;
+
     private void loadImage(final Uri uri, boolean crop) {
-        try {
-            File file = getTempFile();
-            if (file != null) {
-                FileOutputStream outputStream = new FileOutputStream(file);
-
-                /*final Bitmap */bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
-//                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-                if (crop) {
-                    doCrop(getTempUri());
-                    recycle(bitmap);
-                } else {
-                    mainHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            loadingImageSpinner.setVisibility(View.VISIBLE);
-                        }
-                    });
-                    loadImage(bitmap);
-                }
-            }
-            Log.d(TAG, "Image Loaded");
-        } catch (IOException e) {
-            e.printStackTrace();
-            mainHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    sendToast("Error loading image");
-                }
-            });
-        }
-    }
-
-    private void loadImage(final File image) {
         loadingImageSpinner.setVisibility(View.VISIBLE);
-
-        activity.execute(new Runnable() {
-            @Override
-            public void run() {
-                /*final Bitmap */bitmap = BitmapFactory.decodeFile(image.getPath());
-                mainHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
-                                bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
-                        loadingImageSpinner.setVisibility(View.GONE);
-                    }
-                });
-                setLoadedColor(Palette.from(bitmap).maximumColorCount(30).generate());
-                mainHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        recycle(bitmap);
-                    }
-                });
-                Log.d(TAG, "Image Loaded");
-            }
-        });
+        carSQL.loadBitmap(uri, vehicleImage, loadingImageSpinner);
+//        try {
+//            File file = getTempFile();
+//            if (file != null) {
+//                FileOutputStream outputStream = new FileOutputStream(file);
+//
+//                /*final Bitmap */bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+//                if (crop) {
+//                    doCrop(getTempUri());
+//                    recycle(bitmap);
+//                } else {
+//                    mainHandler.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            loadingImageSpinner.setVisibility(View.VISIBLE);
+//                        }
+//                    });
+//                    loadImage(uri);
+//                }
+//            }
+//            Log.d(TAG, "Image Loaded");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            mainHandler.post(new Runnable() {
+//                @Override
+//                public void run() {
+//                    sendToast("Error loading image");
+//                }
+//            });
+//        }
     }
+
+//    private void loadImage(final File image) {
+//        loadingImageSpinner.setVisibility(View.VISIBLE);
+//
+//        activity.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                /*final Bitmap */
+//                bitmap = BitmapFactory.decodeFile(image.getPath());
+//                mainHandler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+//                                bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
+//                        loadingImageSpinner.setVisibility(View.GONE);
+//                    }
+//                });
+//                setLoadedColor(Palette.from(bitmap).maximumColorCount(30).generate());
+//                mainHandler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        recycle(bitmap);
+//                    }
+//                });
+//                Log.d(TAG, "Image Loaded");
+//            }
+//        });
+//    }
 
     private void loadImage(final Bitmap bitmap) {
         activity.execute(new Runnable() {
@@ -1029,38 +1036,39 @@ private Bitmap bitmap;
         });
     }
 
-    private void loadImage(final Uri uri) {
-        loadingImageSpinner.setVisibility(View.VISIBLE);
-
-        activity.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    /*final Bitmap */bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
-                    mainHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
-                                    bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
-                            loadingImageSpinner.setVisibility(View.GONE);
-                        }
-                    });
-
-                    setLoadedColor(Palette.from(bitmap).maximumColorCount(30).generate());
-                    mainHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            recycle(bitmap);
-                        }
-                    });
-                    Log.d(TAG, "Image Loaded");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    sendToast("Error loading image");
-                }
-            }
-        });
-    }
+//    private void loadImage(final Uri uri) {
+//        loadingImageSpinner.setVisibility(View.VISIBLE);
+//
+//        activity.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    /*final Bitmap */
+//                    bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
+//                    mainHandler.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+//                                    bitmap.getScaledWidth(DisplayMetrics.DENSITY_LOW), bitmap.getScaledHeight(DisplayMetrics.DENSITY_LOW), false));
+//                            loadingImageSpinner.setVisibility(View.GONE);
+//                        }
+//                    });
+//
+//                    setLoadedColor(Palette.from(bitmap).maximumColorCount(30).generate());
+//                    mainHandler.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            recycle(bitmap);
+//                        }
+//                    });
+//                    Log.d(TAG, "Image Loaded");
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                    sendToast("Error loading image");
+//                }
+//            }
+//        });
+//    }
 
     private void loadImage() {
         Log.v(TAG, "Load cached image");
@@ -1068,37 +1076,38 @@ private Bitmap bitmap;
 
             final File file = vehicle.getImage();
 
-            if (file.exists()) {
-                Log.v(TAG, "Cached file exists");
-                loadingImageSpinner.setVisibility(View.VISIBLE);
+            if (file.exists())
+                carSQL.loadBitmap(vehicle, vehicleImage, loadingImageSpinner);
+//                Log.v(TAG, "Cached file exists");
+//                loadingImageSpinner.setVisibility(View.VISIBLE);
+//
+//                activity.execute(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            final Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
+//                            mainHandler.post(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+//                                            bitmap.getScaledWidth(activity.getResources().getDisplayMetrics().densityDpi),
+//                                            bitmap.getScaledHeight(activity.getResources().getDisplayMetrics().densityDpi),
+//                                            false));
+//                                    loadingImageSpinner.setVisibility(View.GONE);
+//                                    recycle(bitmap);
+//                                }
+//                            });
+//                            Log.d(TAG, "Image Loaded");
+//                            loadSwatches(Palette.from(bitmap).maximumColorCount(30).generate());
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                });
 
-                activity.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            final Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
-                            mainHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
-                                            bitmap.getScaledWidth(activity.getResources().getDisplayMetrics().densityDpi),
-                                            bitmap.getScaledHeight(activity.getResources().getDisplayMetrics().densityDpi),
-                                            false));
-                                    loadingImageSpinner.setVisibility(View.GONE);
-                                    recycle(bitmap);
-                                }
-                            });
-                            Log.d(TAG, "Image Loaded");
-                            loadSwatches(Palette.from(bitmap).maximumColorCount(30).generate());
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            } else
-                loadingImageSpinner.setVisibility(View.GONE);
-        } else
-            loadingImageSpinner.setVisibility(View.GONE);
+        }
+//        else
+//            loadingImageSpinner.setVisibility(View.GONE);
     }
 
     List<Palette.Swatch> swatches;
@@ -1130,8 +1139,9 @@ private Bitmap bitmap;
     }
 
     private boolean storeImage() {
-        final File temp = getTempFile(false);
-        if (temp != null && temp.exists()) {
+//        final File temp = getTempFile(false);
+//        if (temp != null && temp.exists()) {
+            if (carSQL.getTempFromCache() != null) {
             activity.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -1147,10 +1157,10 @@ private Bitmap bitmap;
                             Log.v(TAG, "Create new file success: " + outFile.createNewFile());
 
                         out = new FileOutputStream(outFile);
-                        Bitmap bitmap = BitmapFactory.decodeFile(getTempFile().getPath());
+//                        Bitmap bitmap = BitmapFactory.decodeFile(getTempFile().getPath());
+                        Bitmap bitmap = carSQL.getTempFromCache();
                         if (bitmap != null)
-                            Bitmap.createScaledBitmap(bitmap, bitmap.getScaledWidth(DisplayMetrics.DENSITY_MEDIUM), bitmap.getScaledHeight(DisplayMetrics.DENSITY_MEDIUM), false)
-                                    .compress(Bitmap.CompressFormat.JPEG, 90, out);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
                         else if (!fileExisted)
                             Log.v(TAG, "Delete outFile: " + outFile.delete());
 
@@ -1178,7 +1188,6 @@ private Bitmap bitmap;
         }
         return false;
     }
-
 
     private void initializePurchaseCost() {
         purchaseCost = (MaterialEditText) rootView.findViewById(R.id.purchase_cost);
@@ -1308,8 +1317,8 @@ private Bitmap bitmap;
                 break;
             case PIC_CROP:
                 if (selected != null)
-                    loadImage(selected);
-                break;
+//                    loadImage(selected);
+                    break;
         }
 
     }

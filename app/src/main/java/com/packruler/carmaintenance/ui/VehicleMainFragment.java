@@ -2,8 +2,6 @@ package com.packruler.carmaintenance.ui;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
@@ -107,30 +105,10 @@ public class VehicleMainFragment extends Fragment {
             if (vehicle != null) {
                 setUIColor(vehicle.getDisplayColor());
 
-                if (vehicle.getImage().exists())
-                    activity.execute(new Runnable() {
-                        private final String TAG = "loadImage";
-
-                        @Override
-                        public void run() {
-                            Log.v(TAG, "Load from file");
-                            final Bitmap bitmap = BitmapFactory.decodeFile(vehicle.getImage().getPath());
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Log.v(TAG, "Load to UI");
-                                    vehicleImage.setVisibility(View.VISIBLE);
-                                    vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
-                                            bitmap.getScaledWidth(activity.getResources().getDisplayMetrics().densityDpi),
-                                            bitmap.getScaledHeight(activity.getResources().getDisplayMetrics().densityDpi),
-                                            false));
-                                    Log.v(TAG, "Initial bitmap recycled");
-//                                    bitmap.recycle();
-                                }
-                            });
-                        }
-                    });
-                else
+                if (vehicle.getImage().exists()) {
+                    vehicleImage.setVisibility(View.VISIBLE);
+                    activity.getCarsSQL().loadBitmap(vehicle, vehicleImage);
+                } else
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
