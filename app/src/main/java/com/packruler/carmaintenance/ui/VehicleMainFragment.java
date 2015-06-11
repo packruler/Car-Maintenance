@@ -119,6 +119,7 @@ public class VehicleMainFragment extends Fragment {
                                 @Override
                                 public void run() {
                                     Log.v(TAG, "Load to UI");
+                                    vehicleImage.setVisibility(View.VISIBLE);
                                     vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
                                             bitmap.getScaledWidth(activity.getResources().getDisplayMetrics().densityDpi),
                                             bitmap.getScaledHeight(activity.getResources().getDisplayMetrics().densityDpi),
@@ -135,8 +136,11 @@ public class VehicleMainFragment extends Fragment {
                         public void run() {
                             Log.v(TAG, "Load null to UI");
                             vehicleImage.setImageBitmap(null);
+                            vehicleImage.setVisibility(View.GONE);
                         }
                     });
+            } else {
+                vehicleImage.setVisibility(View.GONE);
             }
         }
     }

@@ -2,7 +2,6 @@ package com.packruler.carmaintenance.sql;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.DataSetObservable;
 
 /**
  * Created by Packruler on 5/7/15.
@@ -11,22 +10,25 @@ public class SQLDataHandler {
     private final String TAG = getClass().getSimpleName();
     private CarSQL carSQL;
     private String tableName;
+    private long row;
+    private SQLDataOberservable observable;
     private String selection;
-    private DataSetObservable observable;
 
-    public SQLDataHandler(CarSQL carSQL, String tableName, String selection, DataSetObservable observable) {
+    public SQLDataHandler(CarSQL carSQL, String tableName, long row, SQLDataOberservable observable) {
         this.carSQL = carSQL;
         this.tableName = tableName;
-        this.selection = selection;
+        this.row = row;
         this.observable = observable;
+        loadSelection();
     }
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
 
-    public void setSelection(String selection) {
-        this.selection = selection;
+    public void setRow(long row) {
+        this.row = row;
+        loadSelection();
     }
 
     public String getString(String column) {
@@ -122,10 +124,14 @@ public class SQLDataHandler {
     public void setContentValues(ContentValues contentValues) {
 //        Log.v(TAG, "Content Values: " + contentValues.toString());
         carSQL.getWritableDatabase().update(tableName, contentValues, selection, null);
-        observable.notifyChanged();
+        observable.notifiyChanged();
     }
 
     public void removeRow() {
         carSQL.getWritableDatabase().delete(tableName, selection, null);
+    }
+
+    public void loadSelection() {
+        selection = "_id= " + row;
     }
 }

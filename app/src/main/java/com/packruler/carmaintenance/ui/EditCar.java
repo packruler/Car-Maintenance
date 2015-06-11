@@ -945,15 +945,15 @@ public class EditCar extends android.app.Fragment {
     private Uri getTempUri() {
         return FileProvider.getUriForFile(activity, "com.packruler.carmaintenance", getTempFile());
     }
-
+private Bitmap bitmap;
     private void loadImage(final Uri uri, boolean crop) {
         try {
             File file = getTempFile();
             if (file != null) {
                 FileOutputStream outputStream = new FileOutputStream(file);
 
-                final Bitmap bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+                /*final Bitmap */bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
                 if (crop) {
                     doCrop(getTempUri());
                     recycle(bitmap);
@@ -985,7 +985,7 @@ public class EditCar extends android.app.Fragment {
         activity.execute(new Runnable() {
             @Override
             public void run() {
-                final Bitmap bitmap = BitmapFactory.decodeFile(image.getPath());
+                /*final Bitmap */bitmap = BitmapFactory.decodeFile(image.getPath());
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -1036,7 +1036,7 @@ public class EditCar extends android.app.Fragment {
             @Override
             public void run() {
                 try {
-                    final Bitmap bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
+                    /*final Bitmap */bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
                     mainHandler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -1080,9 +1080,12 @@ public class EditCar extends android.app.Fragment {
                             mainHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    vehicleImage.setImageBitmap(bitmap);
+                                    vehicleImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap,
+                                            bitmap.getScaledWidth(activity.getResources().getDisplayMetrics().densityDpi),
+                                            bitmap.getScaledHeight(activity.getResources().getDisplayMetrics().densityDpi),
+                                            false));
                                     loadingImageSpinner.setVisibility(View.GONE);
-
+                                    recycle(bitmap);
                                 }
                             });
                             Log.d(TAG, "Image Loaded");

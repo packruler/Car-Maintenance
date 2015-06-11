@@ -1,8 +1,6 @@
 package com.packruler.carmaintenance.ui;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
-import android.database.DataSetObserver;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,11 +12,8 @@ import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -30,6 +25,7 @@ import com.google.android.gms.location.places.Places;
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
+import com.packruler.carmaintenance.sql.SQLDataObserver;
 import com.packruler.carmaintenance.ui.utilities.ToolbarColorizeHelper;
 import com.packruler.carmaintenance.ui.utilities.VehicleMap;
 import com.packruler.carmaintenance.vehicle.Vehicle;
@@ -125,8 +121,8 @@ public class MainActivity extends AppCompatActivity
 
         carsSQL = new CarSQL(this);
 
-        vehicleMap = carsSQL.getCars();
-        vehicleMap.registerObserver(navObserserver);
+        vehicleMap = carsSQL.loadVehicles();
+        vehicleMap.registerVehicleObserver(navObserserver);
 
         getFragmentManager().addOnBackStackChangedListener(this);
         getFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
@@ -189,16 +185,11 @@ public class MainActivity extends AppCompatActivity
         return currentVehicle;
     }
 
-    private DataSetObserver navObserserver = new DataSetObserver() {
+    private SQLDataObserver navObserserver = new SQLDataObserver() {
         @Override
-        public void onChanged() {
-            super.onChanged();
+        public void onChanged(String table, long row) {
+            super.onChanged(table, row);
             mNavigationDrawerFragment.updateDrawer();
-        }
-
-        @Override
-        public void onInvalidated() {
-            super.onInvalidated();
         }
     };
 
@@ -250,50 +241,6 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setTitle(getString(R.string.app_name));
             }
             getSupportActionBar().setDisplayShowHomeEnabled(false);
-        }
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public class MainFragment extends android.app.Fragment {
-
-        public MainFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            rootView.findViewById(R.id.services_button).setOnClickListener(new View.OnClickListener() {
-                private final String TAG = "Services Button";
-
-                @Override
-                public void onClick(View v) {
-                    Log.v(TAG, "onClick");
-                    Log.v(TAG, String.valueOf(currentVehicle != null));
-                    ServicesFragment servicesFragment = new ServicesFragment(MainActivity.this, currentVehicle);
-                    getFragmentManager().beginTransaction().replace(R.id.container, servicesFragment).addToBackStack("Services").commit();
-                }
-            });
-            rootView.findViewById(R.id.edit_car_button).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.v(TAG, "Edit Car Click");
-                    EditCar editCar;
-                    if (currentVehicle != null)
-                        getFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.container, new EditCar(MainActivity.this, currentVehicle))
-                                .addToBackStack("EditCar").commit();
-                }
-            });
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
         }
     }
 

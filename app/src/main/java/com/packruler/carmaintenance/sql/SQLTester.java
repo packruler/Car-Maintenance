@@ -176,16 +176,16 @@ public class SQLTester extends ActionBarActivity {
         new Handler(thread.getLooper()).post(new Runnable() {
             @Override
             public void run() {
-                vehicleMap = carSQL.getCars();
+                vehicleMap = carSQL.loadVehicles();
 
                 Vehicle vehicle = vehicleMap.get(vehicleMap.keySet().iterator().next());
                 vehicle.setName("THIS CHANGED");
 
                 ArrayList<String> names = new ArrayList<>(vehicleMap.size());
                 ArrayList<CharSequence> keys = new ArrayList<>(vehicleMap.size());
-                for (Map.Entry<CharSequence, Vehicle> entry : vehicleMap.entrySet()) {
+                for (Map.Entry<Long, Vehicle> entry : vehicleMap.entrySet()) {
                     names.add(entry.getValue().getName());
-                    keys.add(entry.getKey());
+                    keys.add(entry.getKey() + "");
                 }
                 Log.d(TAG, "Car names: " + names.toString());
                 Log.d(TAG, "Keys: " + keys.toString());

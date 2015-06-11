@@ -29,27 +29,10 @@
             android:layout_below="@id/vehicle_image"
             android:textAppearance="@android:style/TextAppearance.Large"/>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@android:style/TextAppearance.Small"
-                android:text="@string/current_mileage"
-                android:id="@id/current_mileage"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@android:style/TextAppearance.Small"
-                android:text="@string/purchase_cost"
-                android:layout_alignParentRight="true"
-                android:gravity="right"
-                android:layout_toRightOf="@id/current_mileage"
-                android:id="@+id/cost_display"/>
-        </RelativeLayout>
+            android:id="@+id/extra_details"
+            android:orientation="vertical"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

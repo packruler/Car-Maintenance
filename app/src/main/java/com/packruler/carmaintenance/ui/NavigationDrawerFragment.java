@@ -320,7 +320,8 @@ public class NavigationDrawerFragment extends Fragment {
         Log.i(TAG, "Names: " + vehicleNames.toString());
     }
 
-    private void updateSelectedCar(Vehicle vehicle) {
+    public void updateSelectedCar(Vehicle vehicle) {
         selectedCarName.setText(vehicle.getName());
+//        selectedCarIcon.setImageBitmap(vehicle.getImage());
     }
 }

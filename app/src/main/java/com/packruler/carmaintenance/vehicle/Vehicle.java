@@ -2,12 +2,12 @@ package com.packruler.carmaintenance.vehicle;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.DataSetObservable;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
+import com.packruler.carmaintenance.sql.SQLDataOberservable;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.packruler.carmaintenance.vehicle.maintenence.PartReplacement;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by Packruler on 4/27/2015.
  */
-public class Vehicle extends DataSetObservable {
+public class Vehicle extends SQLDataOberservable {
     private final String TAG = getClass().getSimpleName();
 
     public static final String TABLE_NAME = "vehicles";
@@ -65,7 +65,6 @@ public class Vehicle extends DataSetObservable {
                     PRIMARY_COLOR + " INTEGER," + TEXT_COLOR + " INTEGER" + ")";
 
     protected CarSQL carSQL;
-    private long row;
 
     private SQLDataHandler sqlDataHandler;
 
@@ -104,9 +103,9 @@ public class Vehicle extends DataSetObservable {
     }
 
     private void init(long rowId) {
+        table = TABLE_NAME;
         row = rowId;
-        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                ROW_ID + "= " + row, this);
+        sqlDataHandler = new SQLDataHandler(carSQL, table, row, this);
     }
 
     public long getRow() {
@@ -123,7 +122,7 @@ public class Vehicle extends DataSetObservable {
 //            contentValues.put(VEHICLE_NAME, name);
 //            sqlDataHandler.setContentValues(contentValues);
 //
-//            sqlDataHandler.setSelection(VEHICLE_NAME + "= \"" + this.name + "\"");
+//            sqlDataHandler.setRow(VEHICLE_NAME + "= \"" + this.name + "\"");
 //
 //            long start = System.currentTimeMillis();
 //
@@ -152,16 +151,7 @@ public class Vehicle extends DataSetObservable {
     }
 
     public boolean canUseCarName(String carName) {
-        if (getName().equals(carName))
-            return true;
-
-        SQLiteDatabase database = carSQL.getReadableDatabase();
-        Cursor cursor = database.query(Vehicle.TABLE_NAME, new String[]{Vehicle.VEHICLE_NAME},
-                Vehicle.VEHICLE_NAME + "= \"" + carName + "\"",
-                null, null, null, null);
-        boolean canUse = cursor.getCount() == 0;
-        cursor.close();
-        return canUse;
+        return getName().equals(carName) || carSQL.canUseCarName(carName);
     }
 
     public String getName() {

@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.packruler.carmaintenance.sql.CarSQL;
-import com.packruler.carmaintenance.sql.SQLDataHandler;
 
 import java.sql.SQLDataException;
 import java.util.ArrayList;
@@ -43,24 +42,18 @@ public class PartReplacement extends ServiceTask {
     public PartReplacement(CarSQL carSQL, long row, boolean taskRow) {
         super(carSQL);
         if (!taskRow) {
-            sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                    ID + "= " + row, this);
-            this.row = row;
+            init(row, TABLE_NAME);
         } else {
             SQLiteDatabase database = carSQL.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
             contentValues.put(VEHICLE_ROW, new ServiceTask(carSQL, row).getVehicleRow());
             contentValues.put(SERVICE_TASK_ROW, row);
-            this.row = database.insert(TABLE_NAME, null, contentValues);
-//        Log.v(TAG, "Row: " + row);
-
-            sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                    ID + "= " + this.row, this);
+            init(database.insert(TABLE_NAME, null, contentValues), TABLE_NAME);
         }
     }
 
     public PartReplacement(CarSQL carSQL, ServiceTask task) {
-        this(carSQL, task.getRow());
+        this(carSQL, task.getRow(), false);
         sqlDataHandler.putLong(SERVICE_TASK_ROW, task.getRow());
     }
 

@@ -2,12 +2,12 @@ package com.packruler.carmaintenance.vehicle.maintenence;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.DataSetObservable;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.sql.SQLDataHandler;
+import com.packruler.carmaintenance.sql.SQLDataOberservable;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import org.json.JSONArray;
@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by Packruler on 4/27/2015.
  */
-public class ServiceTask extends DataSetObservable{
+public class ServiceTask extends SQLDataOberservable {
     private final String TAG = getClass().getSimpleName();
     public static final String TABLE_NAME = "service";
     public static final String ID = "_id";
@@ -47,7 +47,6 @@ public class ServiceTask extends DataSetObservable{
                     DETAILS + " STRING," + LOCATION_ID + " STRING," + LOCATION_NAME + " STRING," +
                     COST_UNITS + " STRING," + PARTS_REPLACED + " STRING" + ")";
 
-    protected long row;
     protected CarSQL carSQL;
     protected SQLDataHandler sqlDataHandler;
 
@@ -58,33 +57,27 @@ public class ServiceTask extends DataSetObservable{
     protected ServiceTask(CarSQL carSQL, long row, boolean carRow, String TABLE_NAME) {
         this(carSQL);
         if (!carRow) {
-            this.row = row;
+            init(row, TABLE_NAME);
         } else {
             SQLiteDatabase database = carSQL.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
             contentValues.put(VEHICLE_ROW, row);
-            this.row = database.insert(TABLE_NAME, null, contentValues);
+            init(database.insert(TABLE_NAME, null, contentValues), TABLE_NAME);
         }
-        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                ID + "= " + this.row, this);
     }
 
     public ServiceTask(CarSQL carSQL, long row, boolean carRow) {
-        this(carSQL);
-        if (!carRow) {
-            this.row = row;
-        } else {
-            SQLiteDatabase database = carSQL.getWritableDatabase();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(VEHICLE_ROW, row);
-            this.row = database.insert(TABLE_NAME, null, contentValues);
-        }
-        sqlDataHandler = new SQLDataHandler(carSQL, TABLE_NAME,
-                ID + "= " + this.row, this);
+        this(carSQL, row, carRow, TABLE_NAME);
     }
 
     public ServiceTask(CarSQL carSQL, long row) {
         this(carSQL, row, false);
+    }
+
+    protected void init(long rowId, String TABLE_NAME) {
+        table = TABLE_NAME;
+        row = rowId;
+        sqlDataHandler = new SQLDataHandler(carSQL, table, row, this);
     }
 
     public long getRow() {
