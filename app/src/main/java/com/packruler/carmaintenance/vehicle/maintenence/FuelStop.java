@@ -36,14 +36,14 @@ public class FuelStop extends ServiceTask {
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    VEHICLE_ROW + " STRING," + DATE + " LONG," + TYPE + " STRING," +
-                    COST_UNITS + " STRING," + COST + " FLOAT," + MILEAGE + " LONG," +
-                    MILEAGE_UNITS + " STRING," + DETAILS + " STRING," + LOCATION_ID + " STRING," +
-                    LOCATION_NAME + " STRING," + COST_PER_VOLUME + " FLOAT," +
-                    VOLUME + " FLOAT," + VOLUME_UNITS + " STRING," +
-                    OCTANE + " INT," + OCTANE_UNITS + " STRING," + MISSED_FILL_UP + " INTEGER," +
+                    VEHICLE_ROW + " TEXT," + DATE + " LONG," + TYPE + " TEXT," +
+                    COST_UNITS + " TEXT," + COST + " FLOAT," + MILEAGE + " LONG," +
+                    MILEAGE_UNITS + " TEXT," + DETAILS + " TEXT," + LOCATION_ID + " TEXT," +
+                    LOCATION_NAME + " TEXT," + COST_PER_VOLUME + " FLOAT," +
+                    VOLUME + " FLOAT," + VOLUME_UNITS + " TEXT," +
+                    OCTANE + " INT," + OCTANE_UNITS + " TEXT," + MISSED_FILL_UP + " INTEGER," +
                     COMPLETE_FILL_UP + " INTEGER," + DISTANCE_PER_VOLUME + " FLOAT," +
-                    DISTANCE_PER_VOLUME_UNIT + " STRING" + ")";
+                    DISTANCE_PER_VOLUME_UNIT + " TEXT" + ")";
 
 
     public FuelStop(CarSQL carSQL, long rowId, boolean carRow) {

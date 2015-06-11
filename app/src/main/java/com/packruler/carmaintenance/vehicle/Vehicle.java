@@ -52,16 +52,16 @@ public class Vehicle extends SQLDataOberservable {
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + ROW_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    VEHICLE_NAME + " STRING," + MAKE + " STRING," + MODEL + " STRING," +
-                    SUBMODEL + " STRING," + YEAR + " INTEGER," +
-                    VIN + " STRING," + WEIGHT + " LONG," + WEIGHT_UNITS + " STRING," +
-                    DISPLACEMENT + " FLOAT," + DISPLACEMENT_UNITS + " STRING," +
-                    POWER + " FLOAT," + POWER_UNITS + " STRING," +
-                    TORQUE + " FLOAT," + TORQUE_UNITS + " STRING," +
-                    CURRENT_MILEAGE + " LONG," + CURRENT_MILEAGE_UNITS + " STRING," + COLOR + " STRING," +
-                    PURCHASE_DATE + " LONG," + BOUGHT_FROM + " STRING," +
-                    PURCHASE_COST + " FLOAT," + PURCHASE_COST_UNITS + " STRING," +
-                    PURCHASE_MILEAGE + " LONG," + PURCHASE_MILEAGE_UNITS + " STRING," +
+                    VEHICLE_NAME + " TEXT," + MAKE + " TEXT," + MODEL + " TEXT," +
+                    SUBMODEL + " TEXT," + YEAR + " INTEGER," +
+                    VIN + " TEXT," + WEIGHT + " LONG," + WEIGHT_UNITS + " TEXT," +
+                    DISPLACEMENT + " FLOAT," + DISPLACEMENT_UNITS + " TEXT," +
+                    POWER + " FLOAT," + POWER_UNITS + " TEXT," +
+                    TORQUE + " FLOAT," + TORQUE_UNITS + " TEXT," +
+                    CURRENT_MILEAGE + " LONG," + CURRENT_MILEAGE_UNITS + " TEXT," + COLOR + " TEXT," +
+                    PURCHASE_DATE + " LONG," + BOUGHT_FROM + " TEXT," +
+                    PURCHASE_COST + " FLOAT," + PURCHASE_COST_UNITS + " TEXT," +
+                    PURCHASE_MILEAGE + " LONG," + PURCHASE_MILEAGE_UNITS + " TEXT," +
                     PRIMARY_COLOR + " INTEGER," + TEXT_COLOR + " INTEGER" + ")";
 
     protected CarSQL carSQL;
