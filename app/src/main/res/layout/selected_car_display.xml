@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/selected_car_view">
 
-    <ImageView
-        android:layout_width="@android:dimen/notification_large_icon_width"
-        android:layout_height="@android:dimen/notification_large_icon_height"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:id="@+id/selected_car_icon"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        app:border_width="2dp"
+        app:border_color="#FF000000"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selected Car"
+        android:text="No car selected"
         android:id="@+id/selected_car_name"
         android:layout_below="@+id/selected_car_icon"
         android:layout_alignParentLeft="true"
-        style="@style/TextAppearance.AppCompat.Medium"/>
+        android:layout_marginLeft="@dimen/abc_list_item_padding_horizontal_material"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginBottom="@dimen/margin_tiny"
+        tools:ignore="RtlHardcoded"/>
 </RelativeLayout>

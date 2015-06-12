@@ -116,10 +116,12 @@ public class MainActivity extends AppCompatActivity
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+                (DrawerLayout) findViewById(R.id.drawer_layout),
+                this);
 
 
         carsSQL = new CarSQL(this);
+        mNavigationDrawerFragment.setCarSql(carsSQL);
 
         vehicleMap = carsSQL.loadVehicles();
         vehicleMap.registerVehicleObserver(navObserserver);
@@ -177,6 +179,7 @@ public class MainActivity extends AppCompatActivity
         } else
             getSupportActionBar().setTitle(getString(R.string.app_name));
 
+        mNavigationDrawerFragment.updateSelectedCar(currentVehicle);
         setUIColor(color);
         mainFragment.loadVehicleDetails();
     }
@@ -241,6 +244,9 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setTitle(getString(R.string.app_name));
             }
             getSupportActionBar().setDisplayShowHomeEnabled(false);
+            mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        } else {
+            mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
     }
 

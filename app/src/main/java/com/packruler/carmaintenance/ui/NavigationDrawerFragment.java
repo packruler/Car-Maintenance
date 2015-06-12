@@ -3,9 +3,7 @@ package com.packruler.carmaintenance.ui;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -24,15 +22,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.packruler.carmaintenance.R;
+import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -72,8 +72,9 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
     private TextView selectedCarName;
-    private ImageView selectedCarIcon;
+    private CircleImageView selectedCarIcon;
     private RelativeLayout selectedCarView;
+    private CarSQL carSQL;
 
     public NavigationDrawerFragment() {
     }
@@ -105,13 +106,10 @@ public class NavigationDrawerFragment extends Fragment {
         setHasOptionsMenu(true);
 
         mDrawerListView.addHeaderView(View.inflate(getActivity(), R.layout.selected_car_display, null));
-        selectedCarIcon = (ImageView) getActivity().findViewById(R.id.selected_car_icon);
+        selectedCarIcon = (CircleImageView) getActivity().findViewById(R.id.selected_car_icon);
         selectedCarName = (TextView) getActivity().findViewById(R.id.selected_car_name);
         selectedCarView = (RelativeLayout) getActivity().findViewById(R.id.selected_car_view);
-        selectedCarName.setText("TEST");
-        Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.ic_launcher);
-        selectedCarIcon.setImageBitmap(icon);
-        selectedCarView.setBackgroundColor(Palette.from(icon).generate().getLightVibrantColor(Color.WHITE));
+        updateSelectedCar(null);
     }
 
     @Override
@@ -143,7 +141,7 @@ public class NavigationDrawerFragment extends Fragment {
      * @param drawerLayout
      *         The DrawerLayout containing this fragment's UI.
      */
-    public void setUp(int fragmentId, DrawerLayout drawerLayout) {
+    public void setUp(int fragmentId, DrawerLayout drawerLayout, MainActivity activity) {
         mFragmentContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
 
@@ -160,7 +158,7 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
                 mDrawerLayout,                    /* DrawerLayout object */
-                /*R.drawable.ic_drawer,             *//* nav drawer image to replace 'Up' caret */
+                activity.getToolbar(),             /* nav drawer image to replace 'Up' caret */
                 R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
                 R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
         ) {
@@ -222,7 +220,7 @@ public class NavigationDrawerFragment extends Fragment {
         }
         if (mCallbacks != null) {
             if (nameArray.length > position)
-                mCallbacks.onNavigationDrawerItemSelected(nameArray[position-1]);
+                mCallbacks.onNavigationDrawerItemSelected(nameArray[position - 1]);
             else
                 mCallbacks.onNavigationDrawerItemSelected("");
         }
@@ -302,6 +300,10 @@ public class NavigationDrawerFragment extends Fragment {
         void onNavigationDrawerItemSelected(String name);
     }
 
+    public void setCarSql(CarSQL carSql) {
+        this.carSQL = carSql;
+    }
+
     private String[] nameArray = new String[0];
 
     public void updateDrawer() {
@@ -321,7 +323,27 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     public void updateSelectedCar(Vehicle vehicle) {
-        selectedCarName.setText(vehicle.getName());
-//        selectedCarIcon.setImageBitmap(vehicle.getImage());
+        int color = 0;
+        if (vehicle != null && vehicle.getImage().exists()) {
+            selectedCarName.setText(vehicle.getName());
+            carSQL.loadBitmap(vehicle, selectedCarIcon, null, null);
+
+            color = vehicle.getDisplayColor();
+        } else {
+            selectedCarName.setText("None Selected");
+            selectedCarIcon.setImageDrawable(new ColorDrawable(getResources().getColor(R.color.material_grey_500)));
+        }
+
+        if (color == 0)
+            color = getResources().getColor(R.color.default_ui_color);
+
+        int textColor = new Palette.Swatch(color, 1).getBodyTextColor();
+        selectedCarView.setBackgroundColor(color);
+        selectedCarIcon.setBorderColor(textColor);
+        selectedCarName.setTextColor(textColor);
+    }
+
+    public void setDrawerLockMode(int lockMode) {
+        mDrawerLayout.setDrawerLockMode(lockMode);
     }
 }
