@@ -14,15 +14,6 @@
         android:minHeight="?attr/actionBarSize"
         title="?attr/title"
         android:background="?attr/colorPrimary"/>
-
-    <!-- As the main content view, the view below consumes the entire
-         space available using match_parent in both dimensions. -->
-    <RelativeLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"/>
-
     <android.support.v4.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,6 +26,14 @@
          android:layout_gravity="left" instead. -->
         <!-- The drawer is given a fixed width in dp and extends the full height of
              the container. -->
+
+        <!-- As the main content view, the view below consumes the entire
+             space available using match_parent in both dimensions. -->
+        <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
         <fragment
             android:id="@+id/navigation_drawer"
             android:layout_width="@dimen/navigation_drawer_width"

@@ -23,6 +23,7 @@ import android.support.v7.internal.view.menu.ActionMenuItemView;
 import android.support.v7.internal.widget.TintImageView;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
  * Created by chomi3 on 2015-01-19.
  */
 public class ToolbarColorizeHelper {
+    private static final String TAG = "ToolbarColorizeHelper";
 
     /**
      * Use this method to colorize toolbar icons to the desired target color
@@ -49,7 +51,7 @@ public class ToolbarColorizeHelper {
      *         reference to activity needed to register observers
      */
     public static void colorizeToolbar(Toolbar toolbarView, int toolbarIconsColor, Activity activity) {
-        final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(toolbarIconsColor, PorterDuff.Mode.MULTIPLY);
+        final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(toolbarIconsColor, PorterDuff.Mode.SRC_ATOP);
 
         for (int i = 0; i < toolbarView.getChildCount(); i++) {
             final View v = toolbarView.getChildAt(i);
@@ -57,6 +59,7 @@ public class ToolbarColorizeHelper {
             //Step 1 : Changing the color of back button (or open drawer button).
             if (v instanceof ImageButton) {
                 //Action Bar back button
+                Log.v(TAG, "Change imagebutton");
                 ((ImageButton) v).getDrawable().setColorFilter(colorFilter);
             }
 
