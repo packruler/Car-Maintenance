@@ -205,12 +205,32 @@ public class CarSQL {
     }
 
     private void initializeBitmapCache() {
-        mMemoryCache = new LruCache<>(10);
+        // Get max available VM memory, exceeding this amount will throw an
+        // OutOfMemory exception. Stored in kilobytes as LruCache takes an
+        // int in its constructor.
+        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+
+        // Use 1/8th of the available memory for this memory cache.
+        final int cacheSize = maxMemory / 8;
+
+        mMemoryCache = new LruCache<Long, Bitmap>(cacheSize) {
+            @Override
+            protected int sizeOf(Long key, Bitmap bitmap) {
+                // The cache size will be measured in kilobytes rather than
+                // number of items.
+                return bitmap.getByteCount() / 1024;
+            }
+        };
     }
 
     public void addBitmapToMemoryCache(long key, Bitmap bitmap) {
-        if (getBitmapFromMemCache(key) == null || !getBitmapFromMemCache(key).sameAs(bitmap))
+        if (getBitmapFromMemCache(key) == null || !getBitmapFromMemCache(key).sameAs(bitmap)) {
+            Bitmap temp = getBitmapFromMemCache(key);
+            if (temp != null)
+                temp.recycle();
+
             mMemoryCache.put(key, bitmap);
+        }
     }
 
     public Bitmap getBitmapFromMemCache(long key) {
@@ -222,14 +242,14 @@ public class CarSQL {
     }
 
     public void loadBitmap(Uri uri, @Nullable ImageView imageView, @Nullable View loadingView,
-                           @Nullable Runnable runnable) {
-        new BitmapWorkerTask(imageView, loadingView,runnable)
+                           @Nullable LoadedBitmapRunnable runnable) {
+        new BitmapWorkerTask(imageView, loadingView, runnable)
                 .execute(BitmapWorkerTask.temp, uri.toString());
     }
 
     public void loadBitmap(Vehicle vehicle, @Nullable ImageView imageView, @Nullable View loadingView,
                            @Nullable LoadedBitmapRunnable runnable) {
-        new BitmapWorkerTask(imageView, loadingView,  runnable)
+        new BitmapWorkerTask(imageView, loadingView, runnable)
                 .execute(vehicle.getRow() + "", vehicle.getImage().toURI().toString());
     }
 
@@ -257,16 +277,17 @@ public class CarSQL {
         public static final String temp = "-1";
         private final WeakReference<ImageView> imageViewReference;
         private final WeakReference<View> loadingReference;
-        private final Runnable runnable;
+        private final LoadedBitmapRunnable runnable;
         private String[] data;
         private BitmapFactory.Options options = new BitmapFactory.Options();
 
         public BitmapWorkerTask(@Nullable ImageView imageView, @Nullable View loadingDisplay,
-                                @Nullable Runnable runnable) {
+                                @Nullable LoadedBitmapRunnable runnable) {
             // Use a WeakReference to ensure the ImageView can be garbage collected
             imageViewReference = new WeakReference<>(imageView);
             loadingReference = new WeakReference<>(loadingDisplay);
             this.runnable = runnable;
+            options.inMutable = true;
         }
 
         // Decode image in background.
@@ -280,46 +301,54 @@ public class CarSQL {
                 Log.w(TAG, e.getMessage());
                 key = -1;
             }
-            if (key != -1 || getBitmapFromMemCache(key) == null) {
-                Bitmap bitmap = null;
+            Bitmap bitmap = getBitmapFromMemCache(key);
+            if (key == -1 || bitmap == null) {
                 try {
-                    Log.v(TAG, "Load Bitmap from: " + params[1]);
-                    bitmap = BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(Uri.parse(params[1])));
-                    options.inBitmap = bitmap;
-                    options.inDensity = bitmap.getDensity();
+//                    Log.v(TAG, "Load Bitmap from: " + params[1]);
+                    Bitmap tempBitmap = BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(Uri.parse(params[1])), null, options);
+
+                    options.inBitmap = null;
+                    options.inDensity = tempBitmap.getDensity();
                     options.inScaled = true;
                     options.inTargetDensity = DisplayMetrics.DENSITY_HIGH;
+
                     bitmap = BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(Uri.parse(params[1])), null, options);
+
+                    tempBitmap.recycle();
+                    System.gc();
                 } catch (FileNotFoundException e) {
                     Log.e(TAG, e.getMessage());
                 }
 
                 if (bitmap != null) {
-                    if (params[0].equals(temp))
-                        mMemoryCache.put(-1l, bitmap);
-                    else
-                        mMemoryCache.put(Long.valueOf(params[0]), bitmap);
+                    mMemoryCache.put(key, bitmap);
+                    Log.v(TAG, "New Bitmap size: " + (bitmap.getByteCount() / 1024) + "KB");
+                    Log.v(TAG, "Cache usage: " + mMemoryCache.size() + "/" + mMemoryCache.maxSize() + "KB");
                 }
                 return bitmap;
             }
             Log.v(TAG, "Load bitmap from cache");
-            return mMemoryCache.get(Long.valueOf(params[1]));
+            return bitmap;
         }
 
         // Once complete, see if ImageView is still around and set bitmap.
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            final ImageView imageView = imageViewReference.get();
-            if (imageView != null && bitmap != null) {
-                imageView.setImageBitmap(bitmap);
+            if (bitmap != null) {
+                final ImageView imageView = imageViewReference.get();
+                if (imageView != null && bitmap != null) {
+                    imageView.setImageBitmap(bitmap);
+                }
+
+                final View loading = loadingReference.get();
+                if (loading != null)
+                    loading.setVisibility(View.GONE);
+
+                if (runnable != null) {
+                    runnable.setBitmap(bitmap);
+                    runnable.run();
+                }
             }
-
-            final View loading = loadingReference.get();
-            if (loading != null)
-                loading.setVisibility(View.GONE);
-
-            if (runnable != null)
-                runnable.run();
         }
     }
 

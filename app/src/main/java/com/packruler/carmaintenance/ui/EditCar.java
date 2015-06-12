@@ -1101,9 +1101,8 @@ public class EditCar extends android.app.Fragment {
                                 activity.execute(new Runnable() {
                                     @Override
                                     public void run() {
-                                        if (bitmap != null) {
+                                        if (bitmap != null)
                                             loadSwatches(new Palette.Builder(bitmap).maximumColorCount(30).generate());
-                                        }
                                     }
                                 });
                             }
@@ -1191,9 +1190,9 @@ public class EditCar extends android.app.Fragment {
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
                         else if (!fileExisted)
                             Log.v(TAG, "Delete outFile: " + outFile.delete());
-
-
-                        Log.v(TAG, "Delete temp: " + getTempFile().delete());
+                        carSQL.addBitmapToMemoryCache(vehicle.getRow(), bitmap);
+//
+//                        Log.v(TAG, "Delete temp: " + getTempFile().delete());
                         sendToast("Save Successful");
 
 //                        vehicle.setImagePath(outFile.getPath());
