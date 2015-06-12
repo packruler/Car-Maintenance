@@ -12,7 +12,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.graphics.Palette;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,6 +27,7 @@ import android.widget.TextView;
 
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.CarSQL;
+import com.packruler.carmaintenance.ui.utilities.Swatch;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.util.List;
@@ -337,7 +337,7 @@ public class NavigationDrawerFragment extends Fragment {
         if (color == 0)
             color = getResources().getColor(R.color.default_ui_color);
 
-        int textColor = new Palette.Swatch(color, 1).getBodyTextColor();
+        int textColor = new Swatch(color).getBodyTextColor();
         selectedCarView.setBackgroundColor(color);
         selectedCarIcon.setBorderColor(textColor);
         selectedCarName.setTextColor(textColor);

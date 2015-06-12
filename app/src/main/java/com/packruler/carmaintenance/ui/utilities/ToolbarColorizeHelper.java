@@ -51,7 +51,7 @@ public class ToolbarColorizeHelper {
      *         reference to activity needed to register observers
      */
     public static void colorizeToolbar(Toolbar toolbarView, int toolbarIconsColor, Activity activity) {
-        final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(toolbarIconsColor, PorterDuff.Mode.SRC_ATOP);
+        final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(toolbarIconsColor, PorterDuff.Mode.SRC_IN);
 
         for (int i = 0; i < toolbarView.getChildCount(); i++) {
             final View v = toolbarView.getChildAt(i);

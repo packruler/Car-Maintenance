@@ -8,7 +8,6 @@ import android.os.Looper;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -17,8 +16,6 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.freshdesk.mobihelp.Mobihelp;
-import com.freshdesk.mobihelp.MobihelpConfig;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.Places;
@@ -26,6 +23,7 @@ import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.sql.SQLDataObserver;
+import com.packruler.carmaintenance.ui.utilities.Swatch;
 import com.packruler.carmaintenance.ui.utilities.ToolbarColorizeHelper;
 import com.packruler.carmaintenance.ui.utilities.VehicleMap;
 import com.packruler.carmaintenance.vehicle.Vehicle;
@@ -80,7 +78,7 @@ public class MainActivity extends AppCompatActivity
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         }
-        Mobihelp.init(this, new MobihelpConfig("https://packruler.freshdesk.com", "carmaintenance-1-6a1ff09c57e9c2df0374ba007bcc9be7", "684a7217edaf7a384db1a10d98b76164430821db"));
+//        Mobihelp.init(this, new MobihelpConfig("https://packruler.freshdesk.com", "carmaintenance-1-6a1ff09c57e9c2df0374ba007bcc9be7", "684a7217edaf7a384db1a10d98b76164430821db"));
         poolExecutor.execute(new Runnable() {
             @Override
             public void run() {
@@ -128,8 +126,8 @@ public class MainActivity extends AppCompatActivity
         getFragmentManager().addOnBackStackChangedListener(this);
         getFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
 
-        setUIColor(getResources().getColor(R.color.default_ui_color));
         mNavigationDrawerFragment.updateDrawer();
+        setUIColor(getResources().getColor(R.color.default_ui_color));
     }
 
     @Override
@@ -285,9 +283,9 @@ public class MainActivity extends AppCompatActivity
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
-                Palette.Swatch swatch = new Palette.Swatch(color, 100);
+                Swatch swatch = new Swatch(color);
                 toolbar.setBackgroundColor(color);
-                ToolbarColorizeHelper.colorizeToolbar(toolbar, swatch.getTitleTextColor(), MainActivity.this);
+                ToolbarColorizeHelper.colorizeToolbar(toolbar, swatch.getBodyTextColor(), MainActivity.this);
                 mainFragment.setUIColor(color);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     Window window = getWindow();

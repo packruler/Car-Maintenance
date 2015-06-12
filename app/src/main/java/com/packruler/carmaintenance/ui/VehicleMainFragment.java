@@ -6,7 +6,6 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.packruler.carmaintenance.R;
+import com.packruler.carmaintenance.ui.utilities.Swatch;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 /**
@@ -86,17 +86,17 @@ public class VehicleMainFragment extends Fragment {
             color = activity.getResources().getColor(R.color.default_ui_color);
 
         editCarButton.setCardBackgroundColor(color);
-        Palette.Swatch swatch = new Palette.Swatch(color, 100);
-        ((TextView) editCarButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(swatch.getBodyTextColor());
-        ((ImageView) editCarButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(swatch.getBodyTextColor(), PorterDuff.Mode.SRC_IN);
+        int textColor = new Swatch(color).getBodyTextColor();
+        ((TextView) editCarButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
+        ((ImageView) editCarButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
 
         servicesButton.setCardBackgroundColor(color);
-        ((TextView) servicesButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(swatch.getBodyTextColor());
-        ((ImageView) servicesButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(swatch.getBodyTextColor(), PorterDuff.Mode.SRC_IN);
+        ((TextView) servicesButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
+        ((ImageView) servicesButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
 
         fuelStopsButton.setCardBackgroundColor(color);
-        ((TextView) fuelStopsButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(swatch.getBodyTextColor());
-        ((ImageView) fuelStopsButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(swatch.getBodyTextColor(), PorterDuff.Mode.SRC_IN);
+        ((TextView) fuelStopsButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
+        ((ImageView) fuelStopsButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
     }
 
     public void loadVehicleDetails() {
