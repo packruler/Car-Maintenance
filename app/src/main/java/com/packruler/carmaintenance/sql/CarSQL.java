@@ -15,10 +15,10 @@ import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.LruCache;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.packruler.carmaintenance.sql.utilities.LruCacheSmartRemove;
 import com.packruler.carmaintenance.ui.utilities.VehicleMap;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
@@ -61,7 +61,7 @@ public class CarSQL {
     };
 
     private SQLHelper sqlHelper;
-    private LruCache<Long, Bitmap> mMemoryCache;
+    private LruCacheSmartRemove<Long, Bitmap> mMemoryCache;
     private Activity activity;
 
     public CarSQL(Activity activity) {
@@ -213,14 +213,7 @@ public class CarSQL {
         // Use 1/8th of the available memory for this memory cache.
         final int cacheSize = maxMemory / 8;
 
-        mMemoryCache = new LruCache<Long, Bitmap>(cacheSize) {
-            @Override
-            protected int sizeOf(Long key, Bitmap bitmap) {
-                // The cache size will be measured in kilobytes rather than
-                // number of items.
-                return bitmap.getByteCount() / 1024;
-            }
-        };
+        mMemoryCache = new LruCacheSmartRemove<Long, Bitmap>(cacheSize);
     }
 
     public void addBitmapToMemoryCache(long key, Bitmap bitmap) {
@@ -234,11 +227,11 @@ public class CarSQL {
     }
 
     public Bitmap getBitmapFromMemCache(long key) {
-        return mMemoryCache.get(key);
+        return mMemoryCache.get(key, true);
     }
 
     public Bitmap getTempFromCache() {
-        return mMemoryCache.get(-1l);
+        return mMemoryCache.get(-1l, true);
     }
 
     public void loadBitmap(Uri uri, @Nullable ImageView imageView, @Nullable View loadingView,
@@ -321,7 +314,7 @@ public class CarSQL {
                 }
 
                 if (bitmap != null) {
-                    mMemoryCache.put(key, bitmap);
+                    mMemoryCache.put(key, bitmap, true);
                     Log.v(TAG, "New Bitmap size: " + (bitmap.getByteCount() / 1024) + "KB");
                     Log.v(TAG, "Cache usage: " + mMemoryCache.size() + "/" + mMemoryCache.maxSize() + "KB");
                 }
@@ -336,9 +329,10 @@ public class CarSQL {
         protected void onPostExecute(Bitmap bitmap) {
             if (bitmap != null) {
                 final ImageView imageView = imageViewReference.get();
-                if (imageView != null && bitmap != null) {
+
+                if (imageView != null)
                     imageView.setImageBitmap(bitmap);
-                }
+
 
                 final View loading = loadingReference.get();
                 if (loading != null)
