@@ -367,14 +367,11 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setDisplayColor(int color) {
-        Log.v(TAG, "Store: " + color);
         sqlDataHandler.putInt(PRIMARY_COLOR, color);
     }
 
     public int getDisplayColor() {
-        int out = sqlDataHandler.getInt(PRIMARY_COLOR);
-        Log.v(TAG, "Current palette: " + out);
-        return out;
+        return sqlDataHandler.getInt(PRIMARY_COLOR);
     }
 
     public void setTextColor(int color) {
