@@ -952,7 +952,22 @@ public class EditCar extends android.app.Fragment {
 
     private void loadImage(final Uri uri, boolean crop) {
         loadingImageSpinner.setVisibility(View.VISIBLE);
-        carSQL.loadBitmap(uri, vehicleImage, loadingImageSpinner);
+        carSQL.loadBitmap(uri, vehicleImage, loadingImageSpinner,
+                new CarSQL.LoadedBitmapRunnable() {
+                    private String TAG = getClass().getName();
+
+                    @Override
+                    public void run() {
+                        activity.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (bitmap != null) {
+                                    setLoadedColor(new Palette.Builder(bitmap).maximumColorCount(30).generate());
+                                }
+                            }
+                        });
+                    }
+                });
 //        try {
 //            File file = getTempFile();
 //            if (file != null) {
@@ -1077,7 +1092,22 @@ public class EditCar extends android.app.Fragment {
             final File file = vehicle.getImage();
 
             if (file.exists())
-                carSQL.loadBitmap(vehicle, vehicleImage, loadingImageSpinner);
+                carSQL.loadBitmap(vehicle, vehicleImage, loadingImageSpinner,
+                        new CarSQL.LoadedBitmapRunnable() {
+                            private String TAG = getClass().getName();
+
+                            @Override
+                            public void run() {
+                                activity.execute(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (bitmap != null) {
+                                            loadSwatches(new Palette.Builder(bitmap).maximumColorCount(30).generate());
+                                        }
+                                    }
+                                });
+                            }
+                        });
 //                Log.v(TAG, "Cached file exists");
 //                loadingImageSpinner.setVisibility(View.VISIBLE);
 //
@@ -1106,8 +1136,6 @@ public class EditCar extends android.app.Fragment {
 //                });
 
         }
-//        else
-//            loadingImageSpinner.setVisibility(View.GONE);
     }
 
     List<Palette.Swatch> swatches;
@@ -1141,7 +1169,7 @@ public class EditCar extends android.app.Fragment {
     private boolean storeImage() {
 //        final File temp = getTempFile(false);
 //        if (temp != null && temp.exists()) {
-            if (carSQL.getTempFromCache() != null) {
+        if (carSQL.getTempFromCache() != null) {
             activity.execute(new Runnable() {
                 @Override
                 public void run() {

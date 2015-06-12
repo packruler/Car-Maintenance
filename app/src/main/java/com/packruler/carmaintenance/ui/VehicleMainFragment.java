@@ -107,7 +107,7 @@ public class VehicleMainFragment extends Fragment {
 
                 if (vehicle.getImage().exists()) {
                     vehicleImage.setVisibility(View.VISIBLE);
-                    activity.getCarsSQL().loadBitmap(vehicle, vehicleImage);
+                    activity.getCarsSQL().loadBitmap(vehicle, vehicleImage, null, null);
                 } else
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
