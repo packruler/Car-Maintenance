@@ -3,6 +3,7 @@ package com.packruler.carmaintenance.ui;
 import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.PorterDuff;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.packruler.carmaintenance.R;
+import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.ui.utilities.Swatch;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
@@ -28,6 +30,7 @@ public class VehicleMainFragment extends Fragment {
     private CardView servicesButton;
     private CardView fuelStopsButton;
     private ImageView vehicleImage;
+    private TextView vehicleName;
     private boolean viewInitialized = false;
 
     public VehicleMainFragment() {
@@ -70,6 +73,7 @@ public class VehicleMainFragment extends Fragment {
         });
 
         fuelStopsButton = (CardView) rootView.findViewById(R.id.fuel_stop_button);
+        vehicleName = (TextView) rootView.findViewById(R.id.vehicle_name);
         viewInitialized = true;
 
         loadVehicleDetails();
@@ -105,16 +109,26 @@ public class VehicleMainFragment extends Fragment {
             if (vehicle != null) {
                 setUIColor(vehicle.getDisplayColor());
 
+                vehicleName.setText(vehicle.getName());
                 if (vehicle.getImage().exists()) {
                     vehicleImage.setVisibility(View.VISIBLE);
-                    activity.getCarsSQL().loadBitmap(vehicle, vehicleImage, null, null);
+                    activity.getCarsSQL().loadBitmap(vehicle, vehicleImage, null, new CarSQL.LoadedBitmapRunnable() {
+                        @Override
+                        public void run() {
+                            vehicleImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                        }
+                    });
                 } else
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
                             Log.v(TAG, "Load null to UI");
-                            vehicleImage.setImageBitmap(null);
-                            vehicleImage.setVisibility(View.GONE);
+                            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                                vehicleImage.setImageDrawable(getResources().getDrawable(R.drawable.missing_photo_icon, null));
+                            else
+                                vehicleImage.setImageDrawable(getResources().getDrawable(R.drawable.missing_photo_icon));
+
+                            vehicleImage.setScaleType(ImageView.ScaleType.CENTER);
                         }
                     });
             } else {

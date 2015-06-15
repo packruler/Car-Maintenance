@@ -337,11 +337,11 @@ public class CarSQL {
                 final View loading = loadingReference.get();
                 if (loading != null)
                     loading.setVisibility(View.GONE);
+            }
 
-                if (runnable != null) {
-                    runnable.setBitmap(bitmap);
-                    runnable.run();
-                }
+            if (runnable != null) {
+                runnable.setBitmap(bitmap);
+                runnable.run();
             }
         }
     }

@@ -14,8 +14,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -255,16 +253,16 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // If the drawer is open, show the global app actions in the action bar. See also
-        // showGlobalContextActionBar, which controls the top-left area of the action bar.
-        if (mDrawerLayout != null && isDrawerOpen()) {
-            inflater.inflate(R.menu.global, menu);
-            showGlobalContextActionBar();
-        }
-        super.onCreateOptionsMenu(menu, inflater);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        // If the drawer is open, show the global app actions in the action bar. See also
+//        // showGlobalContextActionBar, which controls the top-left area of the action bar.
+//        if (mDrawerLayout != null && isDrawerOpen()) {
+//            inflater.inflate(R.menu.global, menu);
+//            showGlobalContextActionBar();
+//        }
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -324,9 +322,11 @@ public class NavigationDrawerFragment extends Fragment {
 
     public void updateSelectedCar(Vehicle vehicle) {
         int color = 0;
-        if (vehicle != null && vehicle.getImage().exists()) {
+        if (vehicle != null) {
             selectedCarName.setText(vehicle.getName());
-            carSQL.loadBitmap(vehicle, selectedCarIcon, null, null);
+
+            if (vehicle.getImage().exists())
+                carSQL.loadBitmap(vehicle, selectedCarIcon, null, null);
 
             color = vehicle.getDisplayColor();
         } else {
