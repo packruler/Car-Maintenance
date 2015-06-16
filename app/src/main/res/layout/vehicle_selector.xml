@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        card_view:contentPadding="@dimen/abc_action_bar_default_padding_material"
+        card_view:cardCornerRadius="@dimen/cardview_default_radius"
+        card_view:cardElevation="@dimen/cardview_default_elevation"
+        android:layout_margin="@dimen/abc_action_bar_default_padding_material">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.packruler.carmaintenance.ui.utilities.AspectRatioImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/material_grey_500"
+                android:id="@id/vehicle_image"
+                android:scaleType="center"
+                android:src="@drawable/missing_photo_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_tiny"
+                android:id="@+id/vehicle_name"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:layout_below="@id/vehicle_image"
+                android:text="Vehicle-Name"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_below="@id/vehicle_name"
+                android:text="@string/current_mileage"
+                android:textAppearance="@android:style/TextAppearance.Medium"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
