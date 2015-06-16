@@ -273,6 +273,10 @@ public class Vehicle extends SQLDataOberservable {
         return FuelStop.getFuelStopCountForCar(carSQL, row);
     }
 
+    public Cursor getFuelStopCursor() {
+        return FuelStop.getFuelStopCursorForCar(carSQL, row, FuelStop.DATE + " DSC");
+    }
+
     public int getPartCount() {
         return PartReplacement.getPartReplacementCountForCar(carSQL, row);
     }

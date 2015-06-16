@@ -115,6 +115,11 @@ public class FuelStop extends ServiceTask {
                 VEHICLE_ROW + "= " + vehicleRow, null, null, null, null);
     }
 
+    public static Cursor getFuelStopCursorForCar(CarSQL carSQL, long vehicleRow, String orderBy) {
+        return carSQL.getReadableDatabase().query(TABLE_NAME, null,
+                VEHICLE_ROW + "= " + vehicleRow, null, null, null, orderBy);
+    }
+
     public static List<FuelStop> getFuelStopsForCar(CarSQL carSQL, long vehicleRow) {
         long start = Calendar.getInstance().getTimeInMillis();
 
