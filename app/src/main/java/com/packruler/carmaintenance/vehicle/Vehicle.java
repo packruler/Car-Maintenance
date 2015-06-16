@@ -33,14 +33,13 @@ public class Vehicle extends SQLDataOberservable {
     public static final String WEIGHT = "weight";
     public static final String WEIGHT_UNITS = "weight_units";
     public static final String CURRENT_MILEAGE = "current_mileage";
-    public static final String CURRENT_MILEAGE_UNITS = "current_mileage_units";
+    public static final String DISTANCE_UNITS = "distance_units";
     public static final String COLOR = "color";
     public static final String PURCHASE_MILEAGE = "purchase_mileage";
-    public static final String PURCHASE_MILEAGE_UNITS = "purchase_mileage_units";
     public static final String PURCHASE_DATE = "purchase_date";
     public static final String BOUGHT_FROM = "bought_from";
     public static final String PURCHASE_COST = "purchase_cost";
-    public static final String PURCHASE_COST_UNITS = "purchase_cost_units";
+    public static final String COST_UNITS = "cost_units";
     public static final String DISPLACEMENT = "displacement";
     public static final String DISPLACEMENT_UNITS = "displacement_units";
     public static final String POWER = "power";
@@ -58,11 +57,10 @@ public class Vehicle extends SQLDataOberservable {
                     DISPLACEMENT + " FLOAT," + DISPLACEMENT_UNITS + " TEXT," +
                     POWER + " FLOAT," + POWER_UNITS + " TEXT," +
                     TORQUE + " FLOAT," + TORQUE_UNITS + " TEXT," +
-                    CURRENT_MILEAGE + " LONG," + CURRENT_MILEAGE_UNITS + " TEXT," + COLOR + " TEXT," +
+                    CURRENT_MILEAGE + " LONG," + DISTANCE_UNITS + " TEXT," + COLOR + " TEXT," +
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " TEXT," +
-                    PURCHASE_COST + " FLOAT," + PURCHASE_COST_UNITS + " TEXT," +
-                    PURCHASE_MILEAGE + " LONG," + PURCHASE_MILEAGE_UNITS + " TEXT," +
-                    PRIMARY_COLOR + " INTEGER," + TEXT_COLOR + " INTEGER" + ")";
+                    PURCHASE_COST + " FLOAT," + COST_UNITS + " TEXT," +
+                    PURCHASE_MILEAGE + " LONG," + PRIMARY_COLOR + " INTEGER," + ")";
 
     protected CarSQL carSQL;
 
@@ -202,11 +200,11 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setCurrentMileageUnits(String units) {
-        sqlDataHandler.putString(CURRENT_MILEAGE_UNITS, units);
+        sqlDataHandler.putString(DISTANCE_UNITS, units);
     }
 
     public String getCurrentMileageUnits() {
-        return sqlDataHandler.getString(CURRENT_MILEAGE_UNITS);
+        return sqlDataHandler.getString(DISTANCE_UNITS);
     }
 
     public void setPurchaseMileage(long mileage) {
@@ -215,14 +213,6 @@ public class Vehicle extends SQLDataOberservable {
 
     public long getPurchaseMileage() {
         return sqlDataHandler.getLong(PURCHASE_MILEAGE);
-    }
-
-    public void setPurchaseMileageUnits(String units) {
-        sqlDataHandler.putString(PURCHASE_MILEAGE_UNITS, units);
-    }
-
-    public String getPurchaseMileageUnits() {
-        return sqlDataHandler.getString(PURCHASE_MILEAGE_UNITS);
     }
 
     public void setPurchaseDate(Date purchaseDate) {
@@ -289,12 +279,12 @@ public class Vehicle extends SQLDataOberservable {
         sqlDataHandler.putFloat(PURCHASE_COST, purchaseCost);
     }
 
-    public String getPurchaseCostUnits() {
-        return sqlDataHandler.getString(PURCHASE_COST_UNITS);
+    public String getCostUnits() {
+        return sqlDataHandler.getString(COST_UNITS);
     }
 
     public void setPurchaseCostUnits(String costUnits) {
-        sqlDataHandler.putString(PURCHASE_COST_UNITS, costUnits);
+        sqlDataHandler.putString(COST_UNITS, costUnits);
     }
 
     public String getVin() {

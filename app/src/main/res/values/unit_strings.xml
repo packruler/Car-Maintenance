@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
+    <string name="power_unit">Engine Power Unit</string>
     <string name="horsepower">Horsepower</string>
     <string name="horsepower_short">hp</string>
     <string name="kilowatt">Kilowatts</string>
@@ -11,6 +11,8 @@
         <item name="horsepower">Horsepower</item>
         <item name="kw">Kilowatts</item>
     </string-array>
+
+    <string name="distance_unit">Distance Unit</string>
 
     <string name="miles">Miles</string>
     <string name="miles_short">Mi</string>
@@ -42,11 +44,14 @@
         <item>@string/centimeters</item>
     </string-array>
 
+
+    <string name="torque_unit">Engine Torque Unit</string>
     <string-array name="torque_units">
         <item name="lb_ft">lb·ft</item>
         <item name="n_m">N·m</item>
     </string-array>
 
+    <string name="weight_unit">Weight Unit</string>
     <string name="pounds">Pounds</string>
     <string name="pounds_short">lb</string>
 
@@ -57,6 +62,7 @@
         <item>@string/kilogram</item>
     </string-array>
 
+    <string name="cost_unit">Monitary Unit</string>
     <string name="dollar">Dollars</string>
     <string name="dollar_short">$</string>
 

@@ -83,7 +83,7 @@ public class EditCar extends android.app.Fragment {
     private MaterialEditText subModel;
     private MaterialEditText vin;
     private MaterialEditText currentMileage;
-    private MaterialBetterSpinner currentMileageUnit;
+    private MaterialBetterSpinner mileageUnit;
     private MaterialEditText power;
     private MaterialBetterSpinner powerUnit;
     private MaterialEditText torque;
@@ -96,9 +96,8 @@ public class EditCar extends android.app.Fragment {
     private MaterialBetterSpinner weightUnits;
     private MaterialEditText purchaseDate;
     private MaterialEditText purchaseCost;
-    private MaterialBetterSpinner purchaseCostUnit;
+    private MaterialBetterSpinner costUnit;
     private MaterialEditText purchaseMileage;
-    private MaterialBetterSpinner purchaseMilageUnits;
     private MaterialEditText purchaseLocation;
 
     public EditCar() {
@@ -238,7 +237,7 @@ public class EditCar extends android.app.Fragment {
                         currentMileage.setText(vehicle.getCurrentMileage() + "");
 
                         if (vehicle.getCurrentMileageUnits() != null)
-                            currentMileageUnit.setText(vehicle.getCurrentMileageUnits());
+                            mileageUnit.setText(vehicle.getCurrentMileageUnits());
                     }
 
                     if (vehicle.getWeight() != 0) {
@@ -265,16 +264,13 @@ public class EditCar extends android.app.Fragment {
                     if (vehicle.getPurchaseCost() != 0) {
                         purchaseCost.setText(new DecimalFormat("0.00").format(vehicle.getPurchaseCost()));
 
-                        if (vehicle.getPurchaseCostUnits() != null)
-                            purchaseCostUnit.setText(vehicle.getPurchaseCostUnits());
+                        if (vehicle.getCostUnits() != null)
+                            costUnit.setText(vehicle.getCostUnits());
                     }
 
-                    if (vehicle.getPurchaseMileage() != 0) {
+                    if (vehicle.getPurchaseMileage() != 0)
                         purchaseMileage.setText(vehicle.getPurchaseMileage() + "");
 
-                        if (vehicle.getPurchaseMileageUnits() != null)
-                            purchaseMilageUnits.setText(vehicle.getPurchaseMileageUnits());
-                    }
 
                     if (vehicle.getColor() != null)
                         vehicleColor.setText(vehicle.getColor());
@@ -315,7 +311,7 @@ public class EditCar extends android.app.Fragment {
                     vin.setPrimaryColor(currentColor);
                     subModel.setPrimaryColor(currentColor);
                     currentMileage.setPrimaryColor(currentColor);
-                    currentMileageUnit.setPrimaryColor(currentColor);
+                    mileageUnit.setPrimaryColor(currentColor);
                     weight.setPrimaryColor(currentColor);
                     weightUnits.setPrimaryColor(currentColor);
                     power.setPrimaryColor(currentColor);
@@ -324,7 +320,7 @@ public class EditCar extends android.app.Fragment {
                     torqueUnit.setPrimaryColor(currentColor);
                     vehicleColor.setPrimaryColor(currentColor);
                     purchaseCost.setPrimaryColor(currentColor);
-                    purchaseCostUnit.setPrimaryColor(currentColor);
+                    costUnit.setPrimaryColor(currentColor);
                     purchaseDate.setPrimaryColor(currentColor);
                 }
             });
@@ -358,44 +354,42 @@ public class EditCar extends android.app.Fragment {
             saveSubModel(values);
             saveVIN(values);
             StringBuilder alert = null;
-            if (!saveCurrentMileage(values)) {
-                Log.v(TAG, "No units selected");
-                alert = new StringBuilder("Please select units for " + getString(R.string.current_mileage) + " value");
-            }
+
+            boolean distanceSet = saveCurrentMileage(values);
+
+            if (!distanceSet)
+                distanceSet = savePurchaseMileage(values);
+            else savePurchaseMileage(values);
+
+            if (distanceSet && !saveDistanceUnit(values))
+                alert = new StringBuilder("Please select " + getString(R.string.distance_unit));
 
             if (!saveWeight(values)) {
                 if (alert == null)
-                    alert = new StringBuilder("Please select units for " + getString(R.string.weight) + " value");
+                    alert = new StringBuilder("Please select " + getString(R.string.weight_unit));
                 else
-                    alert.append("\nPlease select units for ").append(getString(R.string.weight)).append(" value");
+                    alert.append("\nPlease select ").append(getString(R.string.weight_unit));
             }
 
             if (!savePower(values)) {
                 if (alert == null)
-                    alert = new StringBuilder("Please select units for " + getString(R.string.power) + " value");
+                    alert = new StringBuilder("Please select " + getString(R.string.power_unit));
                 else
-                    alert.append("\nPlease select units for ").append(getString(R.string.power)).append(" value");
+                    alert.append("\nPlease select ").append(getString(R.string.power_unit));
             }
 
             if (!saveTorque(values)) {
                 if (alert == null)
-                    alert = new StringBuilder("Please select units for " + getString(R.string.torque) + " value");
+                    alert = new StringBuilder("Please select " + getString(R.string.torque_unit));
                 else
-                    alert.append("\nPlease select units for ").append(getString(R.string.torque)).append(" value");
+                    alert.append("\nPlease select ").append(getString(R.string.torque_unit));
             }
 
             if (!savePurchaseCost(values)) {
                 if (alert == null)
-                    alert = new StringBuilder("Please select units for " + getString(R.string.purchase_cost) + " value");
+                    alert = new StringBuilder("Please select units for " + getString(R.string.cost_unit));
                 else
-                    alert.append("\nPlease select units for ").append(getString(R.string.purchase_cost)).append(" value");
-            }
-
-            if (!savePurchaseMileage(values)) {
-                if (alert == null)
-                    alert = new StringBuilder("Please select units for " + getString(R.string.purchase_mileage) + " value");
-                else
-                    alert.append("\nPlease select units for ").append(getString(R.string.purchase_mileage)).append(" value");
+                    alert.append("\nPlease select units for ").append(getString(R.string.purchase_cost));
             }
 
             if (alert != null) {
@@ -687,24 +681,22 @@ public class EditCar extends android.app.Fragment {
     private void initializeCurrentMileage() {
         currentMileage = (MaterialEditText) rootView.findViewById(R.id.current_mileage);
 
-        currentMileageUnit = (MaterialBetterSpinner) rootView.findViewById(R.id.current_mileage_units);
-        currentMileageUnit.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getStringArray(R.array.large_distance_units)));
-        currentMileageUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mileageUnit = (MaterialBetterSpinner) rootView.findViewById(R.id.distance_units);
+        mileageUnit.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getStringArray(R.array.large_distance_units)));
+        mileageUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (parent.getAdapter().getItem(position).equals(getString(R.string.miles)))
-                    currentMileageUnit.setText(getString(R.string.miles_short));
+                    mileageUnit.setText(getString(R.string.miles_short));
                 else
-                    currentMileageUnit.setText(getString(R.string.kilometers_short));
+                    mileageUnit.setText(getString(R.string.kilometers_short));
             }
         });
     }
 
     private boolean saveCurrentMileage(ContentValues values) {
-        if (currentMileage.getText().toString().length() > 0) {
-            if (currentMileageUnit.getText().toString().length() == 0)
-                return false;
+        if (currentMileage.getText().toString().length() > 0 &&
+                vehicle.getCurrentMileage() != Long.valueOf(currentMileage.getText().toString())) {
             values.put(Vehicle.CURRENT_MILEAGE, Long.valueOf(currentMileage.getText().toString()));
-            values.put(Vehicle.CURRENT_MILEAGE_UNITS, currentMileageUnit.getText().toString());
         }
         return true;
     }
@@ -725,7 +717,8 @@ public class EditCar extends android.app.Fragment {
     }
 
     private boolean saveWeight(ContentValues values) {
-        if (weight.getText().toString().length() > 0) {
+        if (weight.getText().toString().length() > 0 &&
+                vehicle.getWeight() != Long.valueOf(weight.getText().toString())) {
             if (weightUnits.getText().toString().length() == 0)
                 return false;
             values.put(Vehicle.WEIGHT, Integer.valueOf(weight.getText().toString()));
@@ -862,6 +855,7 @@ public class EditCar extends android.app.Fragment {
             }
         });
         loadingImageSpinner = (RelativeLayout) rootView.findViewById(R.id.loading_image_display);
+        loadingImageSpinner.setVisibility(View.INVISIBLE);
 
         loadImage();
     }
@@ -1218,28 +1212,28 @@ public class EditCar extends android.app.Fragment {
 
     private void initializePurchaseCost() {
         purchaseCost = (MaterialEditText) rootView.findViewById(R.id.purchase_cost);
-        purchaseCostUnit = (MaterialBetterSpinner) rootView.findViewById(R.id.purchase_cost_unit);
+        costUnit = (MaterialBetterSpinner) rootView.findViewById(R.id.cost_unit);
 
-        purchaseCostUnit.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getTextArray(R.array.cost_units)));
-        purchaseCostUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        costUnit.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getTextArray(R.array.cost_units)));
+        costUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (parent.getItemAtPosition(position).equals(getString(R.string.dollar)))
-                    purchaseCostUnit.setText(getString(R.string.dollar_short));
+                    costUnit.setText(getString(R.string.dollar_short));
                 else if (parent.getItemAtPosition(position).equals(getString(R.string.euro)))
-                    purchaseCostUnit.setText(getString(R.string.euro_short));
+                    costUnit.setText(getString(R.string.euro_short));
                 else
-                    purchaseCostUnit.setText(getString(R.string.english_pound_short));
+                    costUnit.setText(getString(R.string.english_pound_short));
             }
         });
     }
 
     private boolean savePurchaseCost(ContentValues values) {
         if (purchaseCost.getText().toString().length() > 0) {
-            if (purchaseCostUnit.getText().toString().length() == 0)
+            if (costUnit.getText().toString().length() == 0)
                 return false;
             values.put(Vehicle.PURCHASE_COST, purchaseCost.getText().toString());
-            values.put(Vehicle.PURCHASE_COST_UNITS, purchaseCostUnit.getText().toString());
+            values.put(Vehicle.COST_UNITS, costUnit.getText().toString());
         }
         return true;
     }
@@ -1300,31 +1294,24 @@ public class EditCar extends android.app.Fragment {
 
     private void initializePurchaseMileage() {
         purchaseMileage = (MaterialEditText) rootView.findViewById(R.id.purchase_mileage);
-        purchaseMilageUnits = (MaterialBetterSpinner) rootView.findViewById(R.id.purchase_mileage_units);
-
-        purchaseMilageUnits.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getTextArray(R.array.cost_units)));
-        purchaseMilageUnits.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getAdapter().getItem(position).equals(getString(R.string.miles)))
-                    purchaseMilageUnits.setText(getString(R.string.miles_short));
-                else
-                    purchaseMilageUnits.setText(getString(R.string.kilometers_short));
-            }
-        });
     }
 
     private boolean savePurchaseMileage(ContentValues values) {
         if (purchaseMileage.getText().toString().length() == 0) {
-            if (currentMileage.getText().toString().length() > 0 &&
-                    currentMileageUnit.getText().toString().length() > 0) {
+            if (currentMileage.getText().toString().length() > 0)
                 values.put(Vehicle.PURCHASE_MILEAGE, Long.valueOf(currentMileage.getText().toString()));
-                values.put(Vehicle.PURCHASE_MILEAGE_UNITS, currentMileageUnit.getText().toString());
-            }
-        } else if (purchaseMilageUnits.getText().toString().length() != 0) {
-            values.put(Vehicle.PURCHASE_MILEAGE, Long.valueOf(purchaseMileage.getText().toString()));
-            values.put(Vehicle.PURCHASE_MILEAGE_UNITS, purchaseMilageUnits.getText().toString());
-        } else return false;
 
+        } else if (vehicle.getPurchaseMileage() != Long.valueOf(purchaseMileage.getText().toString()))
+            values.put(Vehicle.PURCHASE_MILEAGE, Long.valueOf(purchaseMileage.getText().toString()));
+
+        return true;
+    }
+
+    private boolean saveDistanceUnit(ContentValues values) {
+        if (mileageUnit.getText().toString().length() == 0)
+            return false;
+
+        values.put(Vehicle.DISTANCE_UNITS, mileageUnit.getText().toString());
         return true;
     }
 
