@@ -33,7 +33,7 @@ public class PartReplacement extends ServiceTask {
             "CREATE TABLE " + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     VEHICLE_ROW + " LONG," + DATE + " LONG," + TYPE + " TEXT," +
                     COST + " FLOAT," + COST_UNITS + " TEXT," + MILEAGE + " LONG," +
-                    MILEAGE_UNITS + " TEXT," + DETAILS + " TEXT," + LOCATION_ID + " TEXT," +
+                    DETAILS + " TEXT," + LOCATION_ID + " TEXT," +
                     LOCATION_NAME + " TEXT," + SERVICE_TASK_ROW + " LONG," +
                     BRAND + " TEXT," + PRODUCT_NUMBER + " TEXT," +
                     EXPECTED_LIFE_DISTANCE + " LONG," + EXPECTED_LIFE_TIME + " LONG," +

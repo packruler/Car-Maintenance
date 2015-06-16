@@ -38,12 +38,11 @@ public class FuelStop extends ServiceTask {
             "CREATE TABLE " + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     VEHICLE_ROW + " TEXT," + DATE + " LONG," + TYPE + " TEXT," +
                     COST_UNITS + " TEXT," + COST + " FLOAT," + MILEAGE + " LONG," +
-                    MILEAGE_UNITS + " TEXT," + DETAILS + " TEXT," + LOCATION_ID + " TEXT," +
+                    DETAILS + " TEXT," + LOCATION_ID + " TEXT," +
                     LOCATION_NAME + " TEXT," + COST_PER_VOLUME + " FLOAT," +
                     VOLUME + " FLOAT," + VOLUME_UNITS + " TEXT," +
-                    OCTANE + " INT," + OCTANE_UNITS + " TEXT," + MISSED_FILL_UP + " INTEGER," +
-                    COMPLETE_FILL_UP + " INTEGER," + DISTANCE_PER_VOLUME + " FLOAT," +
-                    DISTANCE_PER_VOLUME_UNIT + " TEXT" + ")";
+                    OCTANE + " INT," + MISSED_FILL_UP + " INTEGER," +
+                    COMPLETE_FILL_UP + " INTEGER," + DISTANCE_PER_VOLUME + " FLOAT" + ")";
 
 
     public FuelStop(CarSQL carSQL, long rowId, boolean carRow) {

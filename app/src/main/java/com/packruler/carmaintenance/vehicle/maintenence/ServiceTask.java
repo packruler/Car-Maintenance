@@ -43,9 +43,9 @@ public class ServiceTask extends SQLDataOberservable {
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     VEHICLE_ROW + " LONG," + DATE + " LONG," + TYPE + " TEXT," +
-                    COST + " FLOAT," + MILEAGE + " LONG," + MILEAGE_UNITS + " TEXT," +
-                    DETAILS + " TEXT," + LOCATION_ID + " TEXT," + LOCATION_NAME + " TEXT," +
-                    COST_UNITS + " TEXT," + PARTS_REPLACED + " TEXT" + ")";
+                    COST + " FLOAT," + MILEAGE + " LONG," + DETAILS + " TEXT," +
+                    LOCATION_ID + " TEXT," + LOCATION_NAME + " TEXT," +
+                    PARTS_REPLACED + " TEXT" + ")";
 
     protected CarSQL carSQL;
     protected SQLDataHandler sqlDataHandler;
