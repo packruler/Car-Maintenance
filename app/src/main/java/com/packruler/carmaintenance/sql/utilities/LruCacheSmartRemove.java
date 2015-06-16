@@ -11,7 +11,7 @@ import java.util.concurrent.ArrayBlockingQueue;
  */
 public class LruCacheSmartRemove<K, V extends Bitmap> extends LruCache<K, V> {
     private final String TAG = getClass().getSimpleName();
-    ArrayBlockingQueue<K> queue = new ArrayBlockingQueue<K>(5, true);
+    ArrayBlockingQueue<K> queue = new ArrayBlockingQueue<>(10, true);
 
     /**
      * @param maxSize
