@@ -23,7 +23,6 @@ import com.google.android.gms.location.places.Places;
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
-import com.packruler.carmaintenance.sql.SQLDataObserver;
 import com.packruler.carmaintenance.ui.utilities.Swatch;
 import com.packruler.carmaintenance.ui.utilities.ToolbarColorizeHelper;
 import com.packruler.carmaintenance.ui.utilities.VehicleMap;
@@ -122,15 +121,13 @@ public class MainActivity extends AppCompatActivity
         mNavigationDrawerFragment.setCarSql(carsSQL);
 
         vehicleMap = carsSQL.loadVehicles();
-        vehicleMap.registerVehicleObserver(navObserserver);
 
         getFragmentManager().addOnBackStackChangedListener(this);
         if (vehicleMap.size() > 0) {
             changeVehicle(vehicleMap.entrySet().iterator().next().getValue());
             getFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
-        } else {
-            getFragmentManager().beginTransaction().replace(R.id.container, new VehicleSelectFragment(carsSQL));
-        }
+        } else
+            displaySelectVehicle();
 
 //        mNavigationDrawerFragment.updateDrawer();
         setUIColor(getResources().getColor(R.color.default_ui_color));
@@ -144,17 +141,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(String name) {
+    public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        Log.v(TAG, "Selected car name: " + name);
+        switch (position) {
+            case 1:
+                displaySelectVehicle();
+                break;
+        }
+    }
 
-        if (name.equals(getString(R.string.add_car))) {
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.container, new EditCar())
-                    .addToBackStack(null)
-                    .commit();
-        } else
-            changeVehicle(name);
+    private void displaySelectVehicle() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, new VehicleSelectFragment(carsSQL))
+                .addToBackStack(null)
+                .commit();
+        getSupportActionBar().setTitle(getString(R.string.select_vehicle));
     }
 
     private void changeVehicle(Vehicle vehicle) {
@@ -194,14 +195,6 @@ public class MainActivity extends AppCompatActivity
     public Vehicle getCurrentVehicle() {
         return currentVehicle;
     }
-
-    private SQLDataObserver navObserserver = new SQLDataObserver() {
-        @Override
-        public void onChanged(String table, long row) {
-            super.onChanged(table, row);
-//            mNavigationDrawerFragment.updateDrawer();
-        }
-    };
 
     public void restoreActionBar() {
         Log.v(TAG, "restoreActionBar");

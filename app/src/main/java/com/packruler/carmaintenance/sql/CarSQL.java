@@ -124,6 +124,11 @@ public class CarSQL {
         }
     }
 
+    public Cursor loadVehicleCursor() {
+        SQLiteDatabase database = getReadableDatabase();
+        return database.query(Vehicle.TABLE_NAME, null, null, null, null, null, null);
+    }
+
     public VehicleMap loadVehicles() {
         VehicleMap map = new VehicleMap();
         map.registerVehicleObserver(vehicleDataObserver);

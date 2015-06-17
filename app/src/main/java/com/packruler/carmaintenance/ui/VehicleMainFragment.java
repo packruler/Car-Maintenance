@@ -104,7 +104,7 @@ public class VehicleMainFragment extends Fragment {
     }
 
     public void loadVehicleDetails() {
-        if (viewInitialized) {
+        if (viewInitialized && activity != null) {
             final Vehicle vehicle = activity.getCurrentVehicle();
             if (vehicle != null) {
                 setUIColor(vehicle.getDisplayColor());

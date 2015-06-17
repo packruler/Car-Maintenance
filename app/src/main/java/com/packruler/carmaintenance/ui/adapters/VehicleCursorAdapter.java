@@ -1,5 +1,6 @@
 package com.packruler.carmaintenance.ui.adapters;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Build;
@@ -24,10 +25,12 @@ public class VehicleCursorAdapter extends CursorRecyclerViewAdapter<VehicleCurso
 
     private CarSQL carSQL;
     private OnClickListener onClickListener;
+    private Context context;
 
-    public VehicleCursorAdapter(Cursor cursor, CarSQL carSQL) {
+    public VehicleCursorAdapter(Context context, Cursor cursor, CarSQL carSQL) {
         super(cursor);
         this.carSQL = carSQL;
+        this.context = context;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -51,7 +54,7 @@ public class VehicleCursorAdapter extends CursorRecyclerViewAdapter<VehicleCurso
 
         private void setup(Cursor cursor) {
             name.setText(cursor.getString(cursor.getColumnIndex(Vehicle.VEHICLE_NAME)));
-            mileage.setText(Resources.getSystem().getString(R.string.current_mileage) + ": " +
+            mileage.setText(context.getString(R.string.current_mileage) + ": " +
                     NumberFormat.getInstance().format(cursor.getLong(cursor.getColumnIndex(Vehicle.CURRENT_MILEAGE))));
             Vehicle vehicle = new Vehicle(carSQL, cursor.getLong(0));
             if (vehicle.getImage().exists())

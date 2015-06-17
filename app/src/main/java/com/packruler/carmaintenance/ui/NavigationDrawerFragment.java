@@ -1,9 +1,12 @@
 package com.packruler.carmaintenance.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -19,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,7 +32,7 @@ import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.ui.utilities.Swatch;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -73,6 +77,10 @@ public class NavigationDrawerFragment extends Fragment {
     private CircleImageView selectedCarIcon;
     private RelativeLayout selectedCarView;
     private CarSQL carSQL;
+    private boolean setupDone = false;
+
+    private int color = 0;
+    private ArrayList<DrawerRow> rows = new ArrayList<>();
 
     public NavigationDrawerFragment() {
     }
@@ -107,7 +115,13 @@ public class NavigationDrawerFragment extends Fragment {
         selectedCarIcon = (CircleImageView) getActivity().findViewById(R.id.selected_car_icon);
         selectedCarName = (TextView) getActivity().findViewById(R.id.selected_car_name);
         selectedCarView = (RelativeLayout) getActivity().findViewById(R.id.selected_car_view);
-        updateSelectedCar(null);
+
+        setupDone = true;
+        if (((MainActivity) getActivity()).getCurrentVehicle() != null)
+            updateSelectedCar(((MainActivity) getActivity()).getCurrentVehicle());
+        else
+            updateSelectedCar(null);
+        color = getResources().getColor(R.color.default_ui_color);
     }
 
     @Override
@@ -116,6 +130,10 @@ public class NavigationDrawerFragment extends Fragment {
         Log.i(TAG, "onCreateView");
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
+
+        rows.add(new DrawerRow("Select Car", getResources().getDrawable(R.drawable.ic_car_icon)));
+        CustomAdapter adapter = new CustomAdapter(getActivity());
+        mDrawerListView.setAdapter(adapter);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -210,19 +228,34 @@ public class NavigationDrawerFragment extends Fragment {
     private void selectItem(int position) {
         Log.v(TAG, "selectItem: " + position);
         mCurrentSelectedPosition = position;
-        if (mDrawerListView != null) {
-            mDrawerListView.setItemChecked(position, true);
-        }
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
-        if (mCallbacks != null) {
-            if (nameArray.length > position)
-                mCallbacks.onNavigationDrawerItemSelected(nameArray[position - 1]);
-            else
-                mCallbacks.onNavigationDrawerItemSelected("");
-        }
+
+        if (mCallbacks != null)
+            mCallbacks.onNavigationDrawerItemSelected(position);
     }
+
+//    private void displaySelected(int position) {
+//        ImageView icon;
+//        TextView title;
+//        int unselectedColor = getResources().getColor(R.color.material_grey_500);
+//        for (int x = 0; x < icons.size(); x++) {
+//            icon = icons.get(position - 1);
+//            if (icon != null)
+//                if (position - 1 == x)
+//                    icon.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+//                else
+//                    icon.setColorFilter(unselectedColor, PorterDuff.Mode.SRC_IN);
+//
+//            title = titles.get(position - 1);
+//            if (icon != null)
+//                if (position - 1 == x)
+//                    title.setTextColor(color);
+//                else
+//                    title.setTextColor(unselectedColor);
+//        }
+//    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -295,7 +328,7 @@ public class NavigationDrawerFragment extends Fragment {
         /**
          * Called when an item in the navigation drawer is selected.
          */
-        void onNavigationDrawerItemSelected(String name);
+        void onNavigationDrawerItemSelected(int position);
     }
 
     public void setCarSql(CarSQL carSql) {
@@ -304,46 +337,91 @@ public class NavigationDrawerFragment extends Fragment {
 
     private String[] nameArray = new String[0];
 
-    public void updateDrawer() {
-        List<String> vehicleNames = ((MainActivity) getActivity()).getVehicleNames();
-        vehicleNames.add(getString(R.string.add_car));
-        nameArray = new String[vehicleNames.size()];
-        vehicleNames.toArray(nameArray);
-
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                nameArray));
-        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-
-        Log.i(TAG, "Names: " + vehicleNames.toString());
-    }
+//    public void updateDrawer() {
+//        List<String> vehicleNames = ((MainActivity) getActivity()).getVehicleNames();
+//        vehicleNames.add(getString(R.string.add_car));
+//        nameArray = new String[vehicleNames.size()];
+//        vehicleNames.toArray(nameArray);
+//
+//        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+//                getActionBar().getThemedContext(),
+//                android.R.layout.simple_list_item_activated_1,
+//                android.R.id.text1,
+//                nameArray));
+//        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+//
+//        Log.i(TAG, "Names: " + vehicleNames.toString());
+//    }
 
     public void updateSelectedCar(Vehicle vehicle) {
-        int color = 0;
-        if (vehicle != null) {
-            selectedCarName.setText(vehicle.getName());
+        if (setupDone) {
+            color = 0;
+            if (vehicle != null) {
+                selectedCarName.setText(vehicle.getName());
 
-            if (vehicle.getImage().exists())
-                carSQL.loadBitmap(vehicle, selectedCarIcon, null, null);
+                if (vehicle.getImage().exists())
+                    carSQL.loadBitmap(vehicle, selectedCarIcon, null, null);
+                else
+                    selectedCarIcon.setImageDrawable(new ColorDrawable(getResources().getColor(R.color.material_grey_500)));
 
-            color = vehicle.getDisplayColor();
-        } else {
-            selectedCarName.setText("None Selected");
-            selectedCarIcon.setImageDrawable(new ColorDrawable(getResources().getColor(R.color.material_grey_500)));
+                color = vehicle.getDisplayColor();
+            } else {
+                selectedCarName.setText("None Selected");
+                selectedCarIcon.setImageDrawable(new ColorDrawable(getResources().getColor(R.color.material_grey_500)));
+            }
+
+            if (color == 0)
+                color = getResources().getColor(R.color.default_ui_color);
+
+            int textColor = new Swatch(color).getBodyTextColor();
+            selectedCarView.setBackgroundColor(color);
+            selectedCarIcon.setBorderColor(textColor);
+            selectedCarName.setTextColor(textColor);
         }
-
-        if (color == 0)
-            color = getResources().getColor(R.color.default_ui_color);
-
-        int textColor = new Swatch(color).getBodyTextColor();
-        selectedCarView.setBackgroundColor(color);
-        selectedCarIcon.setBorderColor(textColor);
-        selectedCarName.setTextColor(textColor);
     }
 
     public void setDrawerLockMode(int lockMode) {
         mDrawerLayout.setDrawerLockMode(lockMode);
+    }
+
+    public boolean closeDrawers() {
+        mDrawerLayout.closeDrawers();
+        return true;
+    }
+
+    private class DrawerRow {
+        private Drawable icon;
+        private CharSequence title;
+
+        public DrawerRow(CharSequence title, Drawable icon) {
+            this.icon = icon;
+            this.title = title;
+        }
+
+        public CharSequence getTitle() {
+            return title;
+        }
+
+        public Drawable getIcon() {
+            return icon;
+        }
+    }
+
+    private class CustomAdapter extends ArrayAdapter<DrawerRow> {
+
+        public CustomAdapter(Context context) {
+            super(context, R.layout.drawer_item_layout, rows);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.drawer_item_layout, parent, false);
+
+            ((TextView) view.findViewById(android.R.id.title)).setText(super.getItem(position).getTitle());
+            ((TextView) view.findViewById(android.R.id.title)).setTextColor(getResources().getColor(R.color.material_grey_500));
+            ((ImageView) view.findViewById(android.R.id.icon)).setImageDrawable(super.getItem(position).getIcon());
+            ((ImageView) view.findViewById(android.R.id.icon)).setColorFilter(getResources().getColor(R.color.material_grey_500), PorterDuff.Mode.SRC_IN);
+            return view;
+        }
     }
 }

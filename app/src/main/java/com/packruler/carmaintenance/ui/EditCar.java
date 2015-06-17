@@ -206,6 +206,8 @@ public class EditCar extends android.app.Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getTitle().equals(getString(R.string.save)))
             saveVehicle();
+
+        getFragmentManager().popBackStack();
         return super.onOptionsItemSelected(item);
     }
 
@@ -278,11 +280,12 @@ public class EditCar extends android.app.Fragment {
                     datePurchased = vehicle.getPurchaseDate();
                     if (datePurchased != 0)
                         setDisplayPurchaseDate();
+
+                    if (vehicle.getDisplayColor() != 0)
+                        setLoadedColor(vehicle.getDisplayColor());
+
                 }
             });
-
-            if (vehicle.getDisplayColor() != 0)
-                setLoadedColor((int) vehicle.getDisplayColor());
         }
     }
 
