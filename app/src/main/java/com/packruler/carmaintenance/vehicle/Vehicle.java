@@ -60,7 +60,7 @@ public class Vehicle extends SQLDataOberservable {
                     CURRENT_MILEAGE + " LONG," + DISTANCE_UNITS + " TEXT," + COLOR + " TEXT," +
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " TEXT," +
                     PURCHASE_COST + " FLOAT," + COST_UNITS + " TEXT," +
-                    PURCHASE_MILEAGE + " LONG," + PRIMARY_COLOR + " INTEGER," + ")";
+                    PURCHASE_MILEAGE + " LONG," + PRIMARY_COLOR + " INTEGER" + ")";
 
     protected CarSQL carSQL;
 
