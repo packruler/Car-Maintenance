@@ -109,8 +109,7 @@ public class ExpandablePartRecyclerAdapter extends CursorRecyclerViewAdapter<Exp
     private String getCost(Cursor cursor) {
         if (cursor.getFloat(cursor.getColumnIndex(PartReplacement.COST)) == 0)
             return "";
-        return cursor.getString(cursor.getColumnIndex(PartReplacement.COST_UNITS)) +
-                new DecimalFormat("0.00").format(cursor.getFloat(cursor.getColumnIndex(PartReplacement.COST)));
+        return new DecimalFormat("0.00").format(cursor.getFloat(cursor.getColumnIndex(PartReplacement.COST)));
     }
 
     private void loadDetails(Cursor cursor, LinearLayout layout) {

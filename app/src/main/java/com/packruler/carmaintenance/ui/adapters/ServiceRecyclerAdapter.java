@@ -114,8 +114,7 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
     }
 
     public String getCost(Cursor cursor) {
-        return cursor.getString(cursor.getColumnIndex(ServiceTask.COST_UNITS)) +
-                new DecimalFormat("0.00").format(cursor.getFloat(cursor.getColumnIndex(ServiceTask.COST)));
+        return new DecimalFormat("0.00").format(cursor.getFloat(cursor.getColumnIndex(ServiceTask.COST)));
     }
 
     public String getMileage(Cursor cursor) {

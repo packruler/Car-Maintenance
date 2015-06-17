@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/margin_small"
+                android:paddingBottom="@dimen/margin_small"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/abc_list_item_padding_horizontal_material">
+
+    <ImageView
+        android:layout_width="@dimen/abc_text_size_headline_material"
+        android:layout_height="@dimen/abc_text_size_headline_material"
+        android:src="@drawable/ic_car_icon"
+        android:id="@android:id/icon"
+        android:layout_marginRight="@dimen/abc_text_size_headline_material"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="Title"
+        android:id="@android:id/title"
+        android:layout_toRightOf="@android:id/icon"
+        android:layout_alignTop="@android:id/icon"
+        android:layout_alignBottom="@android:id/icon"
+        android:gravity="center_vertical"/>
+</RelativeLayout>

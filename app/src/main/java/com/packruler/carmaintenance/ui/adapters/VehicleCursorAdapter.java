@@ -20,7 +20,10 @@ import java.text.NumberFormat;
  * Created by Packruler on 6/16/15.
  */
 public class VehicleCursorAdapter extends CursorRecyclerViewAdapter<VehicleCursorAdapter.ViewHolder> {
+    private final String TAG = getClass().getSimpleName();
+
     private CarSQL carSQL;
+    private OnClickListener onClickListener;
 
     public VehicleCursorAdapter(Cursor cursor, CarSQL carSQL) {
         super(cursor);
@@ -37,6 +40,13 @@ public class VehicleCursorAdapter extends CursorRecyclerViewAdapter<VehicleCurso
             name = (TextView) itemView.findViewById(R.id.vehicle_name);
             mileage = (TextView) itemView.findViewById(R.id.current_mileage);
             image = (ImageView) itemView.findViewById(R.id.vehicle_image);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onClickListener != null)
+                        onClickListener.onClick(getItemId());
+                }
+            });
         }
 
         private void setup(Cursor cursor) {
@@ -70,6 +80,14 @@ public class VehicleCursorAdapter extends CursorRecyclerViewAdapter<VehicleCurso
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.vehicle_selector, null));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.vehicle_selector, parent, false));
+    }
+
+    public interface OnClickListener {
+        void onClick(long itemId);
+    }
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 }

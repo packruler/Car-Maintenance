@@ -31,9 +31,7 @@ public class ServiceTask extends SQLDataOberservable {
     public static final String TYPE = "type";
     public static final String DETAILS = "details";
     public static final String COST = "cost";
-    public static final String COST_UNITS = "cost_units";
     public static final String MILEAGE = "mileage";
-    public static final String MILEAGE_UNITS = "mileage_units";
     public static final String DATE = "date";
     public static final String LOCATION_ID = "location_id";
     public static final String LOCATION_NAME = "location_name";
@@ -139,14 +137,6 @@ public class ServiceTask extends SQLDataOberservable {
 
     public float getCost() {
         return sqlDataHandler.getFloat(COST);
-    }
-
-    public void setCostUnits(String units) {
-        sqlDataHandler.putString(COST_UNITS, units);
-    }
-
-    public String getCostUnits() {
-        return sqlDataHandler.getString(COST_UNITS);
     }
 
     public void setMileage(long mileage) {

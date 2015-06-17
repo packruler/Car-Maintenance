@@ -150,7 +150,6 @@ public class SQLTester extends ActionBarActivity {
                         serviceTask.setDate(calendar.getTimeInMillis());
                         serviceTask.setMileage((long) (Math.random() * 10000));
                         serviceTask.setCost((float) (Math.random() * 100));
-                        serviceTask.setCostUnits("$");
 
                         if (y % 1000 == 0)
                             Log.v(TAG, "Added task: " + y + " to " + vehicle.getName());

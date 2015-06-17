@@ -37,7 +37,7 @@ public class FuelStop extends ServiceTask {
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     VEHICLE_ROW + " TEXT," + DATE + " LONG," + TYPE + " TEXT," +
-                    COST_UNITS + " TEXT," + COST + " FLOAT," + MILEAGE + " LONG," +
+                    COST + " FLOAT," + MILEAGE + " LONG," +
                     DETAILS + " TEXT," + LOCATION_ID + " TEXT," +
                     LOCATION_NAME + " TEXT," + COST_PER_VOLUME + " FLOAT," +
                     VOLUME + " FLOAT," + VOLUME_UNITS + " TEXT," +

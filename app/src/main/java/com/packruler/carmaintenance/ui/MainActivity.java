@@ -1,5 +1,6 @@
 package com.packruler.carmaintenance.ui;
 
+import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -124,9 +125,14 @@ public class MainActivity extends AppCompatActivity
         vehicleMap.registerVehicleObserver(navObserserver);
 
         getFragmentManager().addOnBackStackChangedListener(this);
-        getFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
+        if (vehicleMap.size() > 0) {
+            changeVehicle(vehicleMap.entrySet().iterator().next().getValue());
+            getFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
+        } else {
+            getFragmentManager().beginTransaction().replace(R.id.container, new VehicleSelectFragment(carsSQL));
+        }
 
-        mNavigationDrawerFragment.updateDrawer();
+//        mNavigationDrawerFragment.updateDrawer();
         setUIColor(getResources().getColor(R.color.default_ui_color));
     }
 
@@ -179,6 +185,10 @@ public class MainActivity extends AppCompatActivity
         mNavigationDrawerFragment.updateSelectedCar(currentVehicle);
         setUIColor(color);
         mainFragment.loadVehicleDetails();
+
+        FragmentManager fragmentManager = getFragmentManager();
+        while (fragmentManager.getBackStackEntryCount() > 0)
+            fragmentManager.popBackStack();
     }
 
     public Vehicle getCurrentVehicle() {
@@ -189,7 +199,7 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void onChanged(String table, long row) {
             super.onChanged(table, row);
-            mNavigationDrawerFragment.updateDrawer();
+//            mNavigationDrawerFragment.updateDrawer();
         }
     };
 
@@ -267,10 +277,6 @@ public class MainActivity extends AppCompatActivity
         return carsSQL;
     }
 
-    public ThreadPoolExecutor getPoolExecutor() {
-        return poolExecutor;
-    }
-
     public void execute(Runnable runnable) {
         poolExecutor.execute(runnable);
     }
@@ -305,7 +311,8 @@ public class MainActivity extends AppCompatActivity
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             Log.v(TAG, "Back button press");
 
-            if (mNavigationDrawerFragment.isDrawerOpen()) return super.onKeyDown(keyCode, event);
+            if (mNavigationDrawerFragment.isDrawerOpen())
+                return mNavigationDrawerFragment.closeDrawers();
 
             if (getFragmentManager().getBackStackEntryCount() > 0)
                 getFragmentManager().popBackStack();
