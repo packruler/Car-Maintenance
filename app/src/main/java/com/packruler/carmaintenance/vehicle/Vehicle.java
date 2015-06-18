@@ -13,6 +13,7 @@ import com.packruler.carmaintenance.vehicle.maintenence.PartReplacement;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -104,6 +105,24 @@ public class Vehicle extends SQLDataOberservable {
         table = TABLE_NAME;
         row = rowId;
         sqlDataHandler = new SQLDataHandler(carSQL, table, row, this);
+    }
+
+    public void delete() {
+        if (getImage().exists())
+            getImage().delete();
+        SQLiteDatabase database = carSQL.getWritableDatabase();
+        try {
+            carSQL.beginTransaction();
+            long start = Calendar.getInstance().getTimeInMillis();
+            database.delete(TABLE_NAME, ROW_ID + "= " + row, null);
+            database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_ROW + "= " + row, null);
+            database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_ROW + "= " + row, null);
+            database.delete(PartReplacement.TABLE_NAME, PartReplacement.VEHICLE_ROW + "= " + row, null);
+            carSQL.setTransactionSuccessful();
+            Log.v(TAG, "Delete took: " + (Calendar.getInstance().getTimeInMillis() - start));
+        } finally {
+            carSQL.endTransaction();
+        }
     }
 
     public long getRow() {

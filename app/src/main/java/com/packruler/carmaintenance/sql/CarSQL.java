@@ -225,11 +225,11 @@ public class CarSQL {
     public void addBitmapToMemoryCache(long key, Bitmap bitmap) {
         Bitmap cache = getBitmapFromMemCache(key);
         if (cache != null) {
-            if (!cache.sameAs(bitmap)) {
+//            if (!cache.sameAs(bitmap)) {
                 cache.recycle();
                 mMemoryCache.put(key, bitmap, true);
-            } else
-                Log.w(TAG, "Tried to store the same bitmap");
+//            } else
+//                Log.w(TAG, "Tried to store the same bitmap");
         } else
             mMemoryCache.put(key, bitmap, true);
     }
@@ -283,7 +283,7 @@ public class CarSQL {
     }
 
     public class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
-        private String TAG = getClass().getName();
+        private String TAG = getClass().getSimpleName();
         public static final String temp = "-1";
         private final WeakReference<ImageView> imageViewReference;
         private final WeakReference<View> loadingReference;
@@ -335,13 +335,13 @@ public class CarSQL {
                 }
 
                 if (bitmap != null) {
-                    mMemoryCache.put(key, bitmap, true);
+                    addBitmapToMemoryCache(key, bitmap);
                     Log.v(TAG, "New Bitmap size: " + (bitmap.getByteCount() / 1024) + "KB");
                     Log.v(TAG, "Cache usage: " + mMemoryCache.size() + "/" + mMemoryCache.maxSize() + "KB");
                 }
                 return bitmap;
             }
-            Log.v(TAG, "Load bitmap from cache");
+            Log.v(TAG, "Load bitmap row " + key + " from cache");
             return bitmap;
         }
 

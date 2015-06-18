@@ -38,6 +38,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -121,13 +122,13 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         setHasOptionsMenu(true);
     }
 
-    private View rootView;
+    private ScrollView rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.v(TAG, "onCreateView");
-        rootView = inflater.inflate(R.layout.fragment_edit_car, container, false);
+        rootView = (ScrollView) inflater.inflate(R.layout.fragment_edit_car, container, false);
         rootView.isInEditMode();
         initializeView();
 
@@ -174,6 +175,13 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
 
                 if (vehicle != null)
                     loadVehicle();
+                else
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            activity.getToolbar().setTitle(getString(R.string.add_car));
+                        }
+                    });
             }
         });
     }
@@ -183,6 +191,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         menu.clear();
         menu.add(getString(R.string.save));
         menu.add(getString(R.string.discard));
+        menu.add(getString(R.string.delete));
 //        activity.getToolbar().setOnMenuItemClickListener(this);
         Log.v(TAG, "onCreateOptionsMenu");
         Log.v(TAG, "Menu size: " + menu.size());
@@ -190,12 +199,33 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         Log.v(TAG, "Item: " + item.getTitle());
         if (item.getTitle().equals(getString(R.string.save)))
             saveVehicle();
-        else
+        else if (item.getTitle().equals(getString(R.string.discard)))
             Log.v(TAG, "Pop EditCar " + (getFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE) ? "Success" : "FAIL"));
+        else if (item.getTitle().equals(getString(R.string.delete))) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setTitle(getString(R.string.confirm));
+            builder.setNegativeButton(getString(R.string.cancel), null);
+            builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (vehicle != null) {
+                        Log.v(TAG, "Deleting vehicle");
+                        activity.getVehicleMap().remove(vehicle.getRow()).delete();
+                        activity.getToolbar().setTitle(getString(R.string.select_vehicle));
+                        getFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.container, new VehicleSelectFragment(carSQL))
+                                .commit();
+                    } else
+                        Log.v(TAG, "Pop EditCar " + (getFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE) ? "Success" : "FAIL"));
+                }
+            });
+            builder.show();
+        }
         return true;
     }
 
@@ -207,6 +237,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                 public void run() {
                     if (vehicle.getName() != null) {
                         vehicleName.setText(vehicle.getName());
+                        activity.getToolbar().setTitle(vehicle.getName());
                     }
 
                     if (vehicle.getYear() != 0)
@@ -324,18 +355,23 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
-                ((TextView) rootView.findViewById(R.id.general_info_title)).setTextColor(currentColor);
-                ((TextView) rootView.findViewById(R.id.performance_details_title)).setTextColor(currentColor);
-                ((TextView) rootView.findViewById(R.id.visual_details_title)).setTextColor(currentColor);
-                ((TextView) rootView.findViewById(R.id.purchase_details_title)).setTextColor(currentColor);
+                RelativeLayout layout = (RelativeLayout) rootView.getChildAt(0);
+                for (int x = 0; x < layout.getChildCount(); x++) {
+                    TextView title = (TextView) layout.getChildAt(x).findViewWithTag(getString(R.string.card_title_tag));
+                    if (title != null)
+                        title.setTextColor(currentColor);
+                }
             }
         });
     }
 
     private void saveVehicle() {
-        if (vehicle == null) {
-            if (vehicleName.getText().length() > 0)
+        boolean newVehicle = vehicle == null;
+        if (newVehicle) {
+            if (vehicleName.getText().length() > 0) {
                 vehicle = new Vehicle(carSQL, vehicleName.getText().toString());
+                activity.getVehicleMap().put(vehicle);
+            }
         } else if (!vehicle.getName().equals(vehicleName.getText().toString()))
             vehicle.setName(vehicleName.getText().toString());
 
@@ -396,9 +432,12 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
             saveDisplayColor(values);
             savePurchaseDate(values);
             vehicle.putContentValues(values);
-            if (!storeImage()) {
+            if (!storeImage(newVehicle)) {
                 sendToast("Save Successful");
-                getFragmentManager().popBackStackImmediate(TAG, android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                if (newVehicle)
+                    activity.changeVehicle(vehicle.getRow());
+                else
+                    getFragmentManager().popBackStackImmediate(TAG, android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         }
     }
@@ -1163,7 +1202,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         });
     }
 
-    private boolean storeImage() {
+    private boolean storeImage(final boolean newVehicle) {
 //        final File temp = getTempFile(false);
 //        if (temp != null && temp.exists()) {
         final Bitmap bitmap = carSQL.getTempFromCache();
@@ -1195,7 +1234,10 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                         mainHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                Log.v(TAG, "Pop EditCar " + (getFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE) ? "Success" : "FAIL"));
+                                if (newVehicle)
+                                    activity.changeVehicle(vehicle.getRow());
+                                else
+                                    Log.v(TAG, "Pop EditCar " + (getFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE) ? "Success" : "FAIL"));
                             }
                         });
 

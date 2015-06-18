@@ -1,6 +1,7 @@
 package com.packruler.carmaintenance.ui;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -73,6 +76,19 @@ public class VehicleSelectFragment extends android.support.v4.app.Fragment {
         super.onDestroy();
         if (cursor != null && !cursor.isClosed())
             cursor.close();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        if (activity instanceof MainActivity)
+            ((MainActivity) activity).setUIColor(getResources().getColor(R.color.default_ui_color));
+        super.onAttach(activity);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     public void setupAdapter() {
