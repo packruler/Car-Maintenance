@@ -190,8 +190,11 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         menu.add(getString(R.string.save));
+        menu.getItem(0).setIcon(android.R.drawable.ic_menu_save).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         menu.add(getString(R.string.discard));
+        menu.getItem(1).setIcon(android.R.drawable.ic_menu_close_clear_cancel).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menu.add(getString(R.string.delete));
+        menu.getItem(2).setIcon(android.R.drawable.ic_menu_delete);
 //        activity.getToolbar().setOnMenuItemClickListener(this);
         Log.v(TAG, "onCreateOptionsMenu");
         Log.v(TAG, "Menu size: " + menu.size());
@@ -237,8 +240,8 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                 public void run() {
                     if (vehicle.getName() != null) {
                         vehicleName.setText(vehicle.getName());
-                        activity.getToolbar().setTitle(vehicle.getName());
                     }
+                    activity.getToolbar().setTitle(getString(R.string.edit_car));
 
                     if (vehicle.getYear() != 0)
                         year.setText(vehicle.getYear() + "");

@@ -466,7 +466,7 @@
                     android:layout_marginRight="@dimen/margin_small"
                     app:met_floatingLabel="highlight"/>
 
-                <com.rengwuxian.materialedittext.MaterialEditText
+                <!--<com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/purchase_location"
@@ -477,7 +477,7 @@
                     android:inputType="textShortMessage"
                     android:layout_below="@id/purchase_mileage"
                     android:layout_marginRight="@dimen/margin_small"
-                    app:met_floatingLabel="highlight"/>
+                    app:met_floatingLabel="highlight"/>-->
             </RelativeLayout>
         </android.support.v7.widget.CardView>
     </RelativeLayout>

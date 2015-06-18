@@ -73,9 +73,9 @@ public class Swatch {
 //        Log.v(TAG, "Luminance: " + ColorUtils.calculateLuminance(mRgb));
         float[] hsl = getHsl();
         if (ColorUtils.calculateLuminance(mRgb) < 0.2f)
-            hsl[2] = 0.85f;
+            hsl[2] = 0.9f;
         else
-            hsl[2] = 0.06f;
+            hsl[2] = 0.07f;
         return ColorUtils.HSLToColor(hsl);
 //        ensureTextColorsGenerated();
 //        return mBodyTextColor;
