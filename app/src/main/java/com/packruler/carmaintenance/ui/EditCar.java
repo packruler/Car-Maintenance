@@ -226,6 +226,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
 
                     if (vehicle.getCurrentMileage() != 0) {
                         currentMileage.setText(vehicle.getCurrentMileage() + "");
+                        currentMileage.setEnabled(false);
 
                         if (vehicle.getCurrentMileageUnits() != null)
                             mileageUnit.setText(vehicle.getCurrentMileageUnits());
@@ -478,7 +479,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     }
 
     private void saveYear(ContentValues values) {
-        if (year.getText().toString().length() > 0)
+        if (year.getText().toString().length() > 0 || !year.getText().toString().equals(String.valueOf(vehicle.getYear())))
             values.put(Vehicle.YEAR, year.getText().toString());
     }
 
@@ -554,7 +555,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     }
 
     private void saveMake(ContentValues values) {
-        if (make.getText().toString().length() > 0)
+        if (make.getText().toString().length() > 0 || !make.getText().toString().equals(vehicle.getMake()))
             values.put(Vehicle.MAKE, make.getText().toString());
     }
 
@@ -627,7 +628,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     }
 
     private void saveModel(ContentValues values) {
-        if (model.getText().toString().length() > 0)
+        if (model.getText().toString().length() > 0 || !model.getText().toString().equals(vehicle.getModel()))
             values.put(Vehicle.MODEL, model.getText().toString());
     }
 
@@ -636,7 +637,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     }
 
     private void saveSubModel(ContentValues values) {
-        if (subModel.getText().toString().length() > 0)
+        if (subModel.getText().toString().length() > 0 || !subModel.getText().toString().equals(vehicle.getSubmodel()))
             values.put(Vehicle.SUBMODEL, subModel.getText().toString());
     }
 
@@ -743,8 +744,11 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         if (power.getText().toString().length() > 0) {
             if (powerUnit.getText().toString().length() == 0)
                 return false;
-            values.put(Vehicle.POWER, Integer.valueOf(power.getText().toString()));
-            values.put(Vehicle.POWER_UNITS, powerUnit.getText().toString());
+            if (!power.getText().toString().equals(String.valueOf(vehicle.getPower())))
+                values.put(Vehicle.POWER, Integer.valueOf(power.getText().toString()));
+
+            if (!powerUnit.getText().toString().equals(vehicle.getPowerUnits()))
+                values.put(Vehicle.POWER_UNITS, powerUnit.getText().toString());
         }
         return true;
     }
@@ -767,14 +771,18 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         if (torque.getText().toString().length() > 0) {
             if (torqueUnit.getText().toString().length() == 0)
                 return false;
-            values.put(Vehicle.TORQUE, Integer.valueOf(torque.getText().toString()));
-            values.put(Vehicle.TORQUE_UNITS, torqueUnit.getText().toString());
+
+            if (!torque.getText().toString().equals(String.valueOf(vehicle.getTorque())))
+                values.put(Vehicle.TORQUE, Integer.valueOf(torque.getText().toString()));
+
+            if (!torqueUnit.getText().toString().equals(vehicle.getTorqueUnits()))
+                values.put(Vehicle.TORQUE_UNITS, torqueUnit.getText().toString());
         }
         return true;
     }
 
     private void saveVehicleColor(ContentValues values) {
-        if (vehicleColor.getText().toString().length() > 0)
+        if (vehicleColor.getText().toString().length() > 0 || !vehicleColor.getText().toString().equals(vehicle.getColor()))
             values.put(Vehicle.COLOR, vehicleColor.getText().toString());
     }
 
@@ -1234,8 +1242,10 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         if (purchaseCost.getText().toString().length() > 0) {
             if (costUnit.getText().toString().length() == 0)
                 return false;
-            values.put(Vehicle.PURCHASE_COST, purchaseCost.getText().toString());
-            values.put(Vehicle.COST_UNITS, costUnit.getText().toString());
+            if (!purchaseCost.getText().toString().equals(String.valueOf(vehicle.getPurchaseCost())))
+                values.put(Vehicle.PURCHASE_COST, Double.valueOf(purchaseCost.getText().toString()));
+            if (!costUnit.getText().toString().equals(vehicle.getCostUnits()))
+                values.put(Vehicle.COST_UNITS, costUnit.getText().toString());
         }
         return true;
     }
