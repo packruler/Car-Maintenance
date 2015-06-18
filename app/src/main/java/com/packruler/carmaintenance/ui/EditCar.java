@@ -348,40 +348,42 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
             StringBuilder alert = null;
 
             boolean distanceSet = saveCurrentMileage(values);
+            Log.v(TAG, "DistanceSet: " + distanceSet);
             if (!distanceSet)
                 distanceSet = savePurchaseMileage(values);
             else savePurchaseMileage(values);
+            Log.v(TAG, "DistanceSet: " + distanceSet);
 
             if (distanceSet && !saveDistanceUnit(values))
                 alert = new StringBuilder("Please select " + getString(R.string.distance_unit));
 
-            if (!saveWeight(values)) {
+            if (!saveWeight(values))
                 if (alert == null)
                     alert = new StringBuilder("Please select " + getString(R.string.weight_unit));
                 else
                     alert.append("\nPlease select ").append(getString(R.string.weight_unit));
-            }
 
-            if (!savePower(values)) {
+
+            if (!savePower(values))
                 if (alert == null)
                     alert = new StringBuilder("Please select " + getString(R.string.power_unit));
                 else
                     alert.append("\nPlease select ").append(getString(R.string.power_unit));
-            }
 
-            if (!saveTorque(values)) {
+
+            if (!saveTorque(values))
                 if (alert == null)
                     alert = new StringBuilder("Please select " + getString(R.string.torque_unit));
                 else
                     alert.append("\nPlease select ").append(getString(R.string.torque_unit));
-            }
 
-            if (!savePurchaseCost(values)) {
+
+            if (!savePurchaseCost(values))
                 if (alert == null)
                     alert = new StringBuilder("Please select units for " + getString(R.string.cost_unit));
                 else
                     alert.append("\nPlease select units for ").append(getString(R.string.purchase_cost));
-            }
+
 
             if (alert != null) {
                 sendToast(alert.toString());
@@ -1182,7 +1184,12 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
 //
 //                        Log.v(TAG, "Delete temp: " + getTempFile().delete());
                         sendToast("Save Successful");
-                        Log.v(TAG, "Pop EditCar " + (getFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE) ? "Success" : "FAIL"));
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.v(TAG, "Pop EditCar " + (getFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE) ? "Success" : "FAIL"));
+                            }
+                        });
 
 //                        vehicle.setImagePath(outFile.getPath());
                     } catch (IOException e) {
@@ -1293,10 +1300,10 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
 
     private boolean savePurchaseMileage(ContentValues values) {
         if (purchaseMileage.getText().toString().length() == 0) {
-            if (currentMileage.getText().toString().length() > 0)
+            if (currentMileage.getText().toString().length() > 0) {
                 values.put(Vehicle.PURCHASE_MILEAGE, Long.valueOf(currentMileage.getText().toString()));
-            return true;
-
+                return true;
+            }
         } else if (vehicle.getPurchaseMileage() != Long.valueOf(purchaseMileage.getText().toString())) {
             values.put(Vehicle.PURCHASE_MILEAGE, Long.valueOf(purchaseMileage.getText().toString()));
             return true;

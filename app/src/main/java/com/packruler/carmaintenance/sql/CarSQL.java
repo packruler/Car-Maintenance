@@ -185,9 +185,10 @@ public class CarSQL {
 
     public SQLiteDatabase getWritableDatabase() {
         if (database == null) {
-            Log.v(TAG, "Database in transation");
             database = sqlHelper.getWritableDatabase();
-        }
+        } else if (database.inTransaction())
+            Log.v(TAG, "Database in transation");
+
         return database;
     }
 
@@ -222,15 +223,15 @@ public class CarSQL {
     }
 
     public void addBitmapToMemoryCache(long key, Bitmap bitmap) {
-        if (!getBitmapFromMemCache(key).sameAs(bitmap)) {
-            if (getBitmapFromMemCache(key) != null) {
-                Bitmap temp = getBitmapFromMemCache(key);
-                if (temp != null)
-                    temp.recycle();
-            }
-
+        Bitmap cache = getBitmapFromMemCache(key);
+        if (cache != null) {
+            if (!cache.sameAs(bitmap)) {
+                cache.recycle();
+                mMemoryCache.put(key, bitmap, true);
+            } else
+                Log.w(TAG, "Tried to store the same bitmap");
+        } else
             mMemoryCache.put(key, bitmap, true);
-        }
     }
 
     public boolean storeCacheToMemory(long key) {
