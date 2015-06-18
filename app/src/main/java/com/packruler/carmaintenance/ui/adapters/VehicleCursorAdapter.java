@@ -1,7 +1,6 @@
 package com.packruler.carmaintenance.ui.adapters;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +30,7 @@ public class VehicleCursorAdapter extends CursorRecyclerViewAdapter<VehicleCurso
         super(cursor);
         this.carSQL = carSQL;
         this.context = context;
+        this.setHasStableIds(true);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -47,7 +47,7 @@ public class VehicleCursorAdapter extends CursorRecyclerViewAdapter<VehicleCurso
                 @Override
                 public void onClick(View v) {
                     if (onClickListener != null)
-                        onClickListener.onClick(getItemId());
+                        onClickListener.onClick(ViewHolder.this.getItemId());
                 }
             });
         }
@@ -66,9 +66,9 @@ public class VehicleCursorAdapter extends CursorRecyclerViewAdapter<VehicleCurso
                 });
             else {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                    image.setImageDrawable(Resources.getSystem().getDrawable(R.drawable.missing_photo_icon, null));
+                    image.setImageDrawable(context.getDrawable(R.drawable.missing_photo_icon));
                 else
-                    image.setImageDrawable(Resources.getSystem().getDrawable(R.drawable.missing_photo_icon));
+                    image.setImageDrawable(context.getResources().getDrawable(R.drawable.missing_photo_icon));
 
                 image.setScaleType(ImageView.ScaleType.CENTER);
             }

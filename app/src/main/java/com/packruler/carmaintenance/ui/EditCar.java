@@ -2,6 +2,7 @@ package com.packruler.carmaintenance.ui;
 
 
 import android.app.DatePickerDialog;
+import android.app.FragmentManager;
 import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -20,7 +21,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.Spanned;
@@ -65,9 +65,9 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 @SuppressWarnings("ResourceType")
-public class EditCar extends android.app.Fragment {
+public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListener*/ {
 
-    private final String TAG = getClass().getSimpleName();
+    final static String TAG = "EditCar";
 
     private CarSQL carSQL;
     private AvailableCarsSQL availableCarsSQL;
@@ -126,6 +126,7 @@ public class EditCar extends android.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.v(TAG, "onCreateView");
         rootView = inflater.inflate(R.layout.fragment_edit_car, container, false);
         rootView.isInEditMode();
         initializeView();
@@ -137,11 +138,8 @@ public class EditCar extends android.app.Fragment {
     public void onDestroy() {
         Log.v(TAG, "onDestroy");
         super.onDestroy();
-        try {
-            Log.v(TAG, "Delete Temp: " + getTempFile().delete());
-        } catch (NullPointerException e) {
-            Log.v(TAG, "Temp NullPointerException");
-        }
+        if (getTempFile(false).exists())
+            Log.v(TAG, "Delete Temp: " + getTempFile(false).delete());
     }
 
     boolean viewInitialized = false;
@@ -185,18 +183,7 @@ public class EditCar extends android.app.Fragment {
         menu.clear();
         menu.add(getString(R.string.save));
         menu.add(getString(R.string.discard));
-        activity.getToolbar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            private final String TAG = "MenuItem";
-
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Log.v(TAG, item.getTitle().toString());
-                if (item.getTitle().equals(getString(R.string.save)))
-                    saveVehicle();
-                else loadVehicle(null);
-                return false;
-            }
-        });
+//        activity.getToolbar().setOnMenuItemClickListener(this);
         Log.v(TAG, "onCreateOptionsMenu");
         Log.v(TAG, "Menu size: " + menu.size());
         super.onCreateOptionsMenu(menu, inflater);
@@ -204,14 +191,16 @@ public class EditCar extends android.app.Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.v(TAG, "Item: " + item.getTitle());
         if (item.getTitle().equals(getString(R.string.save)))
             saveVehicle();
-
-        getFragmentManager().popBackStack();
-        return super.onOptionsItemSelected(item);
+        else
+            Log.v(TAG, "Pop EditCar " + (getFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE) ? "Success" : "FAIL"));
+        return true;
     }
 
     private void loadVehicle() {
+        Log.v(TAG, "LoadVehicle");
         if (viewInitialized) {
             mainHandler.post(new Runnable() {
                 @Override
@@ -359,7 +348,6 @@ public class EditCar extends android.app.Fragment {
             StringBuilder alert = null;
 
             boolean distanceSet = saveCurrentMileage(values);
-
             if (!distanceSet)
                 distanceSet = savePurchaseMileage(values);
             else savePurchaseMileage(values);
@@ -405,8 +393,10 @@ public class EditCar extends android.app.Fragment {
             saveDisplayColor(values);
             savePurchaseDate(values);
             vehicle.putContentValues(values);
-            if (!storeImage())
+            if (!storeImage()) {
                 sendToast("Save Successful");
+                getFragmentManager().popBackStackImmediate(TAG, android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            }
         }
     }
 
@@ -700,8 +690,9 @@ public class EditCar extends android.app.Fragment {
         if (currentMileage.getText().toString().length() > 0 &&
                 vehicle.getCurrentMileage() != Long.valueOf(currentMileage.getText().toString())) {
             values.put(Vehicle.CURRENT_MILEAGE, Long.valueOf(currentMileage.getText().toString()));
+            return true;
         }
-        return true;
+        return false;
     }
 
     private void initializeWeight() {
@@ -1165,7 +1156,8 @@ public class EditCar extends android.app.Fragment {
     private boolean storeImage() {
 //        final File temp = getTempFile(false);
 //        if (temp != null && temp.exists()) {
-        if (carSQL.getTempFromCache() != null) {
+        final Bitmap bitmap = carSQL.getTempFromCache();
+        if (bitmap != null) {
             activity.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -1182,15 +1174,15 @@ public class EditCar extends android.app.Fragment {
 
                         out = new FileOutputStream(outFile);
 //                        Bitmap bitmap = BitmapFactory.decodeFile(getTempFile().getPath());
-                        Bitmap bitmap = carSQL.getTempFromCache();
-                        if (bitmap != null)
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-                        else if (!fileExisted)
-                            Log.v(TAG, "Delete outFile: " + outFile.delete());
-                        carSQL.addBitmapToMemoryCache(vehicle.getRow(), bitmap);
+//                        if (bitmap != null)
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+//                        else if (!fileExisted)
+//                            Log.v(TAG, "Delete outFile: " + outFile.delete());
+                        carSQL.storeCacheToMemory(vehicle.getRow());
 //
 //                        Log.v(TAG, "Delete temp: " + getTempFile().delete());
                         sendToast("Save Successful");
+                        Log.v(TAG, "Pop EditCar " + (getFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE) ? "Success" : "FAIL"));
 
 //                        vehicle.setImagePath(outFile.getPath());
                     } catch (IOException e) {
@@ -1303,11 +1295,13 @@ public class EditCar extends android.app.Fragment {
         if (purchaseMileage.getText().toString().length() == 0) {
             if (currentMileage.getText().toString().length() > 0)
                 values.put(Vehicle.PURCHASE_MILEAGE, Long.valueOf(currentMileage.getText().toString()));
+            return true;
 
-        } else if (vehicle.getPurchaseMileage() != Long.valueOf(purchaseMileage.getText().toString()))
+        } else if (vehicle.getPurchaseMileage() != Long.valueOf(purchaseMileage.getText().toString())) {
             values.put(Vehicle.PURCHASE_MILEAGE, Long.valueOf(purchaseMileage.getText().toString()));
-
-        return true;
+            return true;
+        }
+        return false;
     }
 
     private boolean saveDistanceUnit(ContentValues values) {

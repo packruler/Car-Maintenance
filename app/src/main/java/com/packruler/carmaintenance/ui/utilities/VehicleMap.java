@@ -53,8 +53,9 @@ public class VehicleMap implements Map<Long, Vehicle> {
 
     @Override
     public Vehicle get(Object key) {
-        if (key instanceof Long)
+        if (key instanceof Long) {
             return map.get(key);
+        }
 
         return null;
     }
@@ -65,6 +66,11 @@ public class VehicleMap implements Map<Long, Vehicle> {
                 return vehicle;
         }
         return null;
+    }
+
+    public Vehicle get(long row) {
+        Log.v(TAG, "Row: " + row);
+        return map.get(row);
     }
 
     @Override

@@ -85,16 +85,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b150856a-4955-4538-bbe1-94377f603e98" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleSelectFragment.java" />
-      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleSelect.java" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/BitmapWorkerTask.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditService.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditService.java" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/utilities/LruCacheSmartRemove.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/utilities/LruCacheSmartRemove.java" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/NavigationDrawerFragment.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/NavigationDrawerFragment.java" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/ServicesFragment.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/ServicesFragment.java" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/Swatch.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/Swatch.java" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/adapters/VehicleCursorAdapter.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/adapters/VehicleCursorAdapter.java" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/gradle.xml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/values/strings.xml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/VehicleMap.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/VehicleMap.java" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleSelectFragment.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleSelectFragment.java" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/vehicle_selector.xml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/vehicle_selector.xml" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/workspace.xml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/workspace.xml" />
     </list>
     <ignored path="Material Car Maintenance.iws" />
@@ -205,218 +208,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="EditCar.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="EditCar.java" pinned="false" current-in-tab="true">
         <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="213" column="20" selection-start-line="213" selection-start-column="20" selection-end-line="213" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.33333334">
+              <caret line="901" column="17" selection-start-line="901" selection-start-column="17" selection-end-line="901" selection-end-column="17" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="docComment;class#EditCar#0" expanded="false" />
-                <element signature="method#EditCar#0;class#EditCar#0" expanded="false" />
-                <element signature="method#EditCar#1;class#EditCar#0" expanded="false" />
-                <element signature="method#EditCar#2;class#EditCar#0" expanded="false" />
-                <element signature="method#onCreate#0;class#EditCar#0" expanded="false" />
-                <element signature="method#onCreateView#0;class#EditCar#0" expanded="false" />
-                <element signature="method#onDestroy#0;class#EditCar#0" expanded="false" />
-                <element signature="class#4795:5887" expanded="false" />
-                <element signature="method#run#0;class#4795:5887" expanded="false" />
-                <element signature="method#onCreateOptionsMenu#0;class#EditCar#0" expanded="false" />
-                <element signature="class#6157:6581" expanded="false" />
-                <element signature="method#onMenuItemClick#0;class#6157:6581" expanded="false" />
-                <element signature="class#7095:9878" expanded="false" />
-                <element signature="method#run#0;class#7095:9878" expanded="false" />
-                <element signature="method#setHighlightColors#0;class#EditCar#0" expanded="false" />
-                <element signature="class#10259:11453" expanded="false" />
-                <element signature="method#run#0;class#10259:11453" expanded="false" />
-                <element signature="method#setCardTitleColors#0;class#EditCar#0" expanded="false" />
-                <element signature="class#11542:12061" expanded="false" />
-                <element signature="method#run#0;class#11542:12061" expanded="false" />
-                <element signature="method#saveVehicle#0;class#EditCar#0" expanded="false" />
-                <element signature="method#initializeNameText#0;class#EditCar#0" expanded="false" />
-                <element signature="method#initializeYearSpinner#0;class#EditCar#0" expanded="false" />
-                <element signature="class#15491:18423" expanded="false" />
-                <element signature="method#onItemClick#0;class#15491:18423" expanded="false" />
-                <element signature="class#16498:18214" expanded="false" />
-                <element signature="method#onShow#0;class#16498:18214" expanded="false" />
-                <element signature="class#16792:18164" expanded="false" />
-                <element signature="method#onClick#0;class#16792:18164" expanded="false" />
-                <element signature="method#saveYear#0;class#EditCar#0" expanded="false" />
-                <element signature="method#initializeMakeSpinner#0;class#EditCar#0" expanded="false" />
-                <element signature="class#18975:21001" expanded="false" />
-                <element signature="method#onItemClick#0;class#18975:21001" expanded="false" />
-                <element signature="class#19996:20796" expanded="false" />
-                <element signature="method#onShow#0;class#19996:20796" expanded="false" />
-                <element signature="class#20285:20746" expanded="false" />
-                <element signature="method#onClick#0;class#20285:20746" expanded="false" />
-                <element signature="e#21048#21049#0" expanded="false" />
-                <element signature="e#21087#21088#0" expanded="false" />
-                <element signature="method#updateMakeSpinner#1;class#EditCar#0" expanded="false" />
-                <element signature="method#saveMake#0;class#EditCar#0" expanded="false" />
-                <element signature="method#initializeModelSpinner#0;class#EditCar#0" expanded="false" />
-                <element signature="class#22186:24167" expanded="false" />
-                <element signature="method#onItemClick#0;class#22186:24167" expanded="false" />
-                <element signature="class#23278:24021" expanded="false" />
-                <element signature="method#onShow#0;class#23278:24021" expanded="false" />
-                <element signature="class#23567:23971" expanded="false" />
-                <element signature="method#onClick#0;class#23567:23971" expanded="false" />
-                <element signature="e#24215#24216#0" expanded="false" />
-                <element signature="e#24255#24256#0" expanded="false" />
-                <element signature="method#updateModelSpinner#1;class#EditCar#0" expanded="false" />
-                <element signature="method#saveModel#0;class#EditCar#0" expanded="false" />
-                <element signature="method#initializeSubModel#0;class#EditCar#0" expanded="false" />
-                <element signature="method#saveSubModel#0;class#EditCar#0" expanded="false" />
-                <element signature="method#initializeVIN#0;class#EditCar#0" expanded="false" />
-                <element signature="class#25351:25650" expanded="false" />
-                <element signature="method#isValid#0;class#25351:25650" expanded="false" />
-                <element signature="class#25871:26383" expanded="false" />
-                <element signature="method#filter#0;class#25871:26383" expanded="false" />
-                <element signature="method#saveVIN#0;class#EditCar#0" expanded="false" />
-                <element signature="method#initializeCurrentMileage#0;class#EditCar#0" expanded="false" />
-                <element signature="class#26999:27420" expanded="false" />
-                <element signature="method#onItemClick#0;class#26999:27420" expanded="false" />
-                <element signature="method#saveCurrentMileage#0;class#EditCar#0" expanded="false" />
-                <element signature="method#initializeWeight#0;class#EditCar#0" expanded="false" />
-                <element signature="class#28182:28603" expanded="false" />
-                <element signature="method#onItemClick#0;class#28182:28603" expanded="false" />
-                <element signature="method#saveWeight#0;class#EditCar#0" expanded="false" />
-                <element signature="method#initializePower#0;class#EditCar#0" expanded="false" />
-                <element signature="class#29482:29929" expanded="false" />
-                <element signature="method#onItemClick#0;class#29482:29929" expanded="false" />
-                <element signature="method#savePower#0;class#EditCar#0" expanded="false" />
-                <element signature="method#initializeTorque#0;class#EditCar#0" expanded="false" />
-                <element signature="class#30723:30987" expanded="false" />
-                <element signature="method#onItemClick#0;class#30723:30987" expanded="false" />
-                <element signature="method#saveTorque#0;class#EditCar#0" expanded="false" />
-                <element signature="method#saveVehicleColor#0;class#EditCar#0" expanded="false" />
-                <element signature="method#saveDisplayColor#0;class#EditCar#0" expanded="false" />
-                <element signature="method#initializeVehicleImage#0;class#EditCar#0" expanded="false" />
-                <element signature="class#32071:32282" expanded="false" />
-                <element signature="e#32219#32220#0" expanded="false" />
-                <element signature="e#32271#32272#0" expanded="false" />
-                <element signature="class#32428:35392" expanded="false" />
-                <element signature="method#onClick#0;class#32428:35392" expanded="false" />
-                <element signature="class#32762:35267" expanded="false" />
-                <element signature="method#onClick#0;class#32762:35267" expanded="false" />
-                <element signature="class#33589:34050" expanded="false" />
-                <element signature="method#onItemClick#0;class#33589:34050" expanded="false" />
-                <element signature="class#34854:35145" expanded="false" />
-                <element signature="e#35013#35014#0" expanded="false" />
-                <element signature="e#35110#35111#0" expanded="false" />
-                <element signature="method#openImageSelection#0;class#EditCar#0" expanded="false" />
-                <element signature="class#36029:36207" expanded="false" />
-                <element signature="method#run#0;class#36029:36207" expanded="false" />
-                <element signature="method#doCrop#0;class#EditCar#0" expanded="false" />
-                <element signature="method#getTempFile#0;class#EditCar#0" expanded="false" />
-                <element signature="method#getTempFile#1;class#EditCar#0" expanded="false" />
-                <element signature="method#getTempUri#0;class#EditCar#0" expanded="false" />
-                <element signature="method#loadImage#0;class#EditCar#0" expanded="false" />
-                <element signature="class#38701:39310" expanded="false" />
-                <element signature="method#run#0;class#38701:39310" expanded="false" />
-                <element signature="class#38912:39268" expanded="false" />
-                <element signature="method#run#0;class#38912:39268" expanded="false" />
-                <element signature="e#40506#40554#0" expanded="false" />
-                <element signature="method#loadImage#1;class#EditCar#0" expanded="false" />
-                <element signature="class#41771:42613" expanded="false" />
-                <element signature="method#run#0;class#41771:42613" expanded="false" />
-                <element signature="class#41875:42297" expanded="false" />
-                <element signature="method#run#0;class#41875:42297" expanded="false" />
-                <element signature="class#42424:42587" expanded="false" />
-                <element signature="e#42505#42506#0" expanded="false" />
-                <element signature="e#42568#42569#0" expanded="false" />
-                <element signature="e#42623#42668#0" expanded="false" />
-                <element signature="method#loadImage#2;class#EditCar#0" expanded="false" />
-                <element signature="class#44388:45055" expanded="false" />
-                <element signature="method#run#0;class#44388:45055" expanded="false" />
-                <element signature="class#44631:44997" expanded="false" />
-                <element signature="method#run#0;class#44631:44997" expanded="false" />
-                <element signature="e#46642#46643#0" expanded="false" />
-                <element signature="e#46690#46691#0" expanded="false" />
-                <element signature="method#setLoadedColor#0;class#EditCar#0" expanded="false" />
-                <element signature="method#setLoadedColor#1;class#EditCar#0" expanded="false" />
-                <element signature="class#47278:47471" expanded="false" />
-                <element signature="method#run#0;class#47278:47471" expanded="false" />
-                <element signature="method#storeImage#0;class#EditCar#0" expanded="false" />
-                <element signature="class#47693:49582" expanded="false" />
-                <element signature="method#run#0;class#47693:49582" expanded="false" />
-                <element signature="method#initializePurchaseCost#0;class#EditCar#0" expanded="false" />
-                <element signature="class#50041:50644" expanded="false" />
-                <element signature="method#onItemClick#0;class#50041:50644" expanded="false" />
-                <element signature="method#savePurchaseCost#0;class#EditCar#0" expanded="false" />
-                <element signature="class#51398:51546" expanded="false" />
-                <element signature="e#51485#51486#0" expanded="false" />
-                <element signature="e#51535#51536#0" expanded="false" />
-                <element signature="method#loadPurchaseDate#0;class#EditCar#0" expanded="false" />
-                <element signature="class#52112:52595" expanded="false" />
-                <element signature="method#onDateSet#0;class#52112:52595" expanded="false" />
-                <element signature="method#setDisplayPurchaseDate#0;class#EditCar#0" expanded="false" />
-                <element signature="method#savePurchaseDate#0;class#EditCar#0" expanded="false" />
-                <element signature="method#initializePurchaseMileage#0;class#EditCar#0" expanded="false" />
-                <element signature="method#savePurchaseMileage#0;class#EditCar#0" expanded="false" />
-                <element signature="method#saveDistanceUnit#0;class#EditCar#0" expanded="false" />
-                <element signature="method#onActivityResult#0;class#EditCar#0" expanded="false" />
-                <element signature="e#54874#54875#0" expanded="false" />
-                <element signature="e#54927#54928#0" expanded="false" />
-                <element signature="method#sendToast#1;class#EditCar#0" expanded="false" />
-                <element signature="class#55034:55190" expanded="false" />
-                <element signature="e#55099#55100#0" expanded="false" />
-                <element signature="e#55179#55180#0" expanded="false" />
-                <element signature="method#recycle#0;class#EditCar#0" expanded="false" />
+                <element signature="imports" expanded="true" />
+                <element signature="method#onCreateView#0;class#EditCar#0" expanded="true" />
+                <element signature="e#4250#4264#0" expanded="true" />
+                <element signature="method#onDestroy#0;class#EditCar#0" expanded="true" />
+                <element signature="method#initializeView#0;class#EditCar#0" expanded="true" />
+                <element signature="method#onCreateOptionsMenu#0;class#EditCar#0" expanded="true" />
+                <element signature="method#onOptionsItemSelected#0;class#EditCar#0" expanded="true" />
+                <element signature="method#loadVehicle#0;class#EditCar#0" expanded="true" />
+                <element signature="e#6742#6755#0" expanded="true" />
+                <element signature="method#loadVehicle#1;class#EditCar#0" expanded="true" />
+                <element signature="method#saveVehicle#0;class#EditCar#0" expanded="true" />
+                <element signature="method#saveVehicleColor#0;class#EditCar#0" expanded="true" />
+                <element signature="method#getTempFile#0;class#EditCar#0" expanded="true" />
+                <element signature="method#loadImage#0;class#EditCar#0" expanded="true" />
+                <element signature="class#38599:39208" expanded="true" />
+                <element signature="method#run#0;class#38599:39208" expanded="true" />
+                <element signature="e#39211#39226#0" expanded="false" />
+                <element signature="method#storeImage#0;class#EditCar#0" expanded="true" />
+                <element signature="e#48471#48473#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VehicleCursorAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/adapters/VehicleCursorAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
-              <folding>
-                <element signature="method#VehicleCursorAdapter#0;class#VehicleCursorAdapter#0" expanded="true" />
-                <element signature="method#setup#0;class#ViewHolder#0;class#VehicleCursorAdapter#0" expanded="true" />
-                <element signature="e#3080#3081#0" expanded="true" />
-                <element signature="e#3116#3117#0" expanded="true" />
-                <element signature="method#setOnClickListener#0;class#VehicleCursorAdapter#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="edit_car_strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/values/edit_car_strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="155" column="36" selection-start-line="155" selection-start-column="36" selection-end-line="155" selection-end-column="36" />
-              <folding>
-                <element signature="method#onCreate#0;class#MainActivity#0" expanded="true" />
-                <element signature="method#onDestroy#0;class#MainActivity#0" expanded="true" />
-                <element signature="method#onNavigationDrawerItemSelected#0;class#MainActivity#0" expanded="true" />
-                <element signature="method#changeVehicle#0;class#MainActivity#0" expanded="true" />
-                <element signature="method#changeVehicle#1;class#MainActivity#0" expanded="true" />
-                <element signature="method#changeVehicle#3;class#MainActivity#0" expanded="true" />
-                <element signature="method#onKeyDown#0;class#MainActivity#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="48" selection-start-line="36" selection-start-column="48" selection-end-line="36" selection-end-column="48" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -425,39 +242,27 @@
         <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="106" column="47" selection-start-line="106" selection-start-column="47" selection-end-line="106" selection-end-column="47" />
+              <caret line="56" column="26" selection-start-line="56" selection-start-column="26" selection-end-line="56" selection-end-column="26" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="docComment;class#VehicleMainFragment#0" expanded="false" />
-                <element signature="method#VehicleMainFragment#0;class#VehicleMainFragment#0" expanded="false" />
-                <element signature="e#1172#1173#0" expanded="false" />
-                <element signature="e#1212#1213#0" expanded="false" />
-                <element signature="method#onCreateView#0;class#VehicleMainFragment#0" expanded="false" />
-                <element signature="class#1653:2185" expanded="false" />
-                <element signature="method#onClick#0;class#1653:2185" expanded="false" />
-                <element signature="class#2313:2789" expanded="false" />
-                <element signature="method#onClick#0;class#2313:2789" expanded="false" />
-                <element signature="e#3104#3105#0" expanded="false" />
-                <element signature="e#3144#3145#0" expanded="false" />
-                <element signature="class#4756:5001" expanded="false" />
-                <element signature="method#run#0;class#4756:5001" expanded="false" />
-                <element signature="class#5092:5742" expanded="false" />
-                <element signature="method#run#0;class#5092:5742" expanded="false" />
+                <element signature="method#loadVehicleDetails#0;class#VehicleMainFragment#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VehicleSelectFragment.java" pinned="false" current-in-tab="true">
-        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleSelectFragment.java">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7986348">
-              <caret line="78" column="78" selection-start-line="78" selection-start-column="78" selection-end-line="78" selection-end-column="78" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="313" column="41" selection-start-line="313" selection-start-column="41" selection-end-line="313" selection-end-column="41" />
               <folding>
-                <element signature="method#onCreateView#0;class#VehicleSelectFragment#0" expanded="true" />
-                <element signature="class#1369:1817" expanded="true" />
-                <element signature="method#onClick#0;class#1369:1817" expanded="true" />
-                <element signature="method#onDestroy#0;class#VehicleSelectFragment#0" expanded="true" />
+                <element signature="method#onCreate#0;class#MainActivity#0" expanded="true" />
+                <element signature="method#displaySelectVehicle#0;class#MainActivity#0" expanded="true" />
+                <element signature="method#changeVehicle#0;class#MainActivity#0" expanded="true" />
+                <element signature="method#changeVehicle#1;class#MainActivity#0" expanded="true" />
+                <element signature="method#changeVehicle#3;class#MainActivity#0" expanded="true" />
+                <element signature="method#onOptionsItemSelected#0;class#MainActivity#0" expanded="true" />
+                <element signature="method#onBackStackChanged#0;class#MainActivity#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -467,86 +272,41 @@
         <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="128" column="54" selection-start-line="128" selection-start-column="54" selection-end-line="128" selection-end-column="54" />
+              <caret line="248" column="18" selection-start-line="248" selection-start-column="18" selection-end-line="248" selection-end-column="18" />
               <folding>
-                <element signature="class#1453:2208" expanded="true" />
-                <element signature="method#onChanged#0;class#1453:2208" expanded="true" />
-                <element signature="method#loadVehicles#0;class#CarSQL#0" expanded="true" />
+                <element signature="method#loadVehicleCursor#0;class#CarSQL#0" expanded="true" />
+                <element signature="e#4264#4268#0" expanded="true" />
+                <element signature="e#4270#4274#0" expanded="true" />
+                <element signature="e#4276#4280#0" expanded="true" />
+                <element signature="e#4282#4286#0" expanded="true" />
+                <element signature="e#4288#4292#0" expanded="true" />
+                <element signature="e#4294#4298#0" expanded="true" />
+                <element signature="method#addBitmapToMemoryCache#0;class#CarSQL#0" expanded="true" />
+                <element signature="e#7545#7549#0" expanded="true" />
+                <element signature="method#storeCacheToMemory#0;class#CarSQL#0" expanded="true" />
+                <element signature="e#7666#7670#0" expanded="true" />
+                <element signature="e#7862#7863#0" expanded="true" />
+                <element signature="e#7912#7913#0" expanded="true" />
+                <element signature="e#7952#7953#0" expanded="true" />
+                <element signature="e#8002#8003#0" expanded="true" />
+                <element signature="method#loadBitmap#0;class#CarSQL#0" expanded="true" />
+                <element signature="class#BitmapWorkerTask#0;class#CarSQL#0" expanded="true" />
+                <element signature="method#doInBackground#0;class#BitmapWorkerTask#0;class#CarSQL#0" expanded="true" />
+                <element signature="method#getBitmapWorkerTask#0;class#CarSQL#0" expanded="true" />
+                <element signature="class#AsyncDrawable#0;class#CarSQL#0" expanded="true" />
+                <element signature="method#AsyncDrawable#0;class#AsyncDrawable#0;class#CarSQL#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SQLDataHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java">
+      <file leaf-file-name="LruCacheSmartRemove.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/utilities/LruCacheSmartRemove.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+              <caret line="76" column="27" selection-start-line="76" selection-start-column="27" selection-end-line="76" selection-end-column="27" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="docComment;class#SQLDataHandler#0" expanded="false" />
-                <element signature="method#SQLDataHandler#0;class#SQLDataHandler#0" expanded="false" />
-                <element signature="e#710#711#0" expanded="false" />
-                <element signature="e#752#753#0" expanded="false" />
-                <element signature="method#setRow#0;class#SQLDataHandler#0" expanded="false" />
-                <element signature="method#getString#0;class#SQLDataHandler#0" expanded="false" />
-                <element signature="method#getFloat#0;class#SQLDataHandler#0" expanded="false" />
-                <element signature="method#putFloat#0;class#SQLDataHandler#0" expanded="false" />
-                <element signature="method#getInt#0;class#SQLDataHandler#0" expanded="false" />
-                <element signature="method#putInt#0;class#SQLDataHandler#0" expanded="false" />
-                <element signature="method#getDouble#0;class#SQLDataHandler#0" expanded="false" />
-                <element signature="method#putDouble#0;class#SQLDataHandler#0" expanded="false" />
-                <element signature="method#getLong#0;class#SQLDataHandler#0" expanded="false" />
-                <element signature="method#putLong#0;class#SQLDataHandler#0" expanded="false" />
-                <element signature="method#getBoolean#0;class#SQLDataHandler#0" expanded="false" />
-                <element signature="method#putBoolean#0;class#SQLDataHandler#0" expanded="false" />
-                <element signature="e#4422#4423#0" expanded="false" />
-                <element signature="e#4501#4502#0" expanded="false" />
-                <element signature="e#4536#4537#0" expanded="false" />
-                <element signature="e#4577#4578#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NavigationDrawerFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/NavigationDrawerFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="235" column="64" selection-start-line="235" selection-start-column="64" selection-end-line="235" selection-end-column="64" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="docComment;class#NavigationDrawerFragment#0" expanded="false" />
-                <element signature="docComment;field#STATE_SELECTED_POSITION#0;class#NavigationDrawerFragment#0" expanded="false" />
-                <element signature="docComment;field#PREF_USER_LEARNED_DRAWER#0;class#NavigationDrawerFragment#0" expanded="false" />
-                <element signature="docComment;field#mCallbacks#0;class#NavigationDrawerFragment#0" expanded="false" />
-                <element signature="docComment;field#mDrawerToggle#0;class#NavigationDrawerFragment#0" expanded="false" />
-                <element signature="method#NavigationDrawerFragment#0;class#NavigationDrawerFragment#0" expanded="false" />
-                <element signature="method#onCreate#0;class#NavigationDrawerFragment#0" expanded="false" />
-                <element signature="class#5263:5477" expanded="false" />
-                <element signature="method#onItemClick#0;class#5263:5477" expanded="false" />
-                <element signature="method#isDrawerOpen#0;class#NavigationDrawerFragment#0" expanded="false" />
-                <element signature="docComment;method#setUp#0;class#NavigationDrawerFragment#0" expanded="false" />
-                <element signature="class#6751:8376" expanded="false" />
-                <element signature="method#onDrawerClosed#0;class#6751:8376" expanded="false" />
-                <element signature="method#onDrawerOpened#0;class#6751:8376" expanded="false" />
-                <element signature="class#8776:8909" expanded="false" />
-                <element signature="e#8841#8842#0" expanded="false" />
-                <element signature="e#8898#8899#0" expanded="false" />
-                <element signature="method#showGlobalContextActionBar#0;class#NavigationDrawerFragment#0" expanded="false" />
-                <element signature="method#getActionBar#0;class#NavigationDrawerFragment#0" expanded="false" />
-                <element signature="docComment;class#NavigationDrawerCallbacks#0;class#NavigationDrawerFragment#0" expanded="false" />
-                <element signature="docComment;method#onNavigationDrawerItemSelected#0;class#NavigationDrawerCallbacks#0;class#NavigationDrawerFragment#0" expanded="false" />
-                <element signature="e#12681#12682#0" expanded="false" />
-                <element signature="e#12717#12718#0" expanded="false" />
-                <element signature="e#14579#14580#0" expanded="false" />
-                <element signature="e#14636#14637#0" expanded="false" />
-                <element signature="e#15013#15014#0" expanded="false" />
-                <element signature="e#15049#15050#0" expanded="false" />
-                <element signature="e#15086#15087#0" expanded="false" />
-                <element signature="e#15121#15122#0" expanded="false" />
-                <element signature="e#15243#15244#0" expanded="false" />
-                <element signature="e#15316#15317#0" expanded="false" />
+                <element signature="method#get#0;class#LruCacheSmartRemove#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -560,8 +320,8 @@
         <option value="valueResourceFile" />
         <option value="resourceFile" />
         <option value="layoutResourceFile_vertical" />
-        <option value="Class" />
         <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -3273,10 +3033,12 @@
       </map>
     </option>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/service_selector.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainFragment.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/values/dimens.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/te.java" />
@@ -3289,26 +3051,20 @@
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataObserver.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataOberservable.java" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/VehicleMap.java" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/BitmapWorkerTask.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/build.gradle" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/selected_car_display.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/values/styles.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/activity_main.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/ForeColorHandler.java" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/Swatch.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/ToolbarColorizeHelper.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/drawable/grey_gradient.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/fragment_main.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/utilities/UpdateAverageEfficiency.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/fragment_vehicle_select.xml" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/ServicesFragment.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/values/unit_strings.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/fragment_edit_car.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/values/edit_car_strings.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/vehicle_details_header.xml" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/vehicle_selector.xml" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/utilities/LruCacheSmartRemove.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleSelect.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/fragment_navigation_drawer.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" />
@@ -3319,14 +3075,21 @@
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/PartReplacement.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/drawer_item_layout.xml" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/NavigationDrawerFragment.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/values/strings.xml" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/vehicle_selector.xml" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/VehicleMap.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/adapters/VehicleCursorAdapter.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/Swatch.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleSelectFragment.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/ServicesFragment.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditService.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/BitmapWorkerTask.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/utilities/LruCacheSmartRemove.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java" />
       </list>
     </option>
   </component>
@@ -3397,18 +3160,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Tests">
           <PATH>
@@ -3601,6 +3352,156 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="carmaintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="carmaintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="carmaintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utilities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="carmaintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adapters" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="carmaintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sql" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3623,7 +3524,7 @@
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
-    <property name="settings.editor.selected.configurable" value="diff.external" />
+    <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
@@ -3924,12 +3825,6 @@
       <option name="number" value="Default" />
       <updated>1417384725146</updated>
     </task>
-    <task id="LOCAL-00035" summary="Few minor tweaks">
-      <created>1432751954651</created>
-      <option name="number" value="00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1432751954651</updated>
-    </task>
     <task id="LOCAL-00036" summary="Cleaned up some stuff and began expanding EditCar datafields">
       <created>1432763217206</created>
       <option name="number" value="00036" />
@@ -4218,7 +4113,13 @@
       <option name="project" value="LOCAL" />
       <updated>1434561876340</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="Vehicle Selection work">
+      <created>1434573155419</created>
+      <option name="number" value="00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1434573155420</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TodoView">
@@ -4232,7 +4133,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="27" width="1922" height="1054" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263506" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -4242,28 +4143,28 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263506" sideWeight="0.4914803" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3472988" sideWeight="0.4914803" order="14" side_tool="false" content_ui="tabs" x="1920" y="1" width="1920" height="1079" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3472988" sideWeight="0.4914803" order="14" side_tool="false" content_ui="tabs" x="1920" y="1" width="1920" height="1079" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23855165" sideWeight="0.4239865" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23855165" sideWeight="0.4239865" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32745314" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.45723686" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39911798" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39911798" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3995657" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263506" sideWeight="0.4914803" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32745314" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -4284,7 +4185,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Modified Log TAG" />
     <MESSAGE value="Service Fragment UI tweaks" />
     <MESSAGE value="Changing vehicle name updates nav drawer automatically" />
     <MESSAGE value="Began rework of initial display" />
@@ -4309,53 +4209,19 @@
     <MESSAGE value="Made capable size queue 10" />
     <MESSAGE value="Initial vehicle selector setup" />
     <MESSAGE value="Fix SQL create string" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix SQL create string" />
+    <MESSAGE value="Vehicle Selection work" />
+    <option name="LAST_COMMIT_MESSAGE" value="Vehicle Selection work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="27" />
+      <option name="time" value="28" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../Sdk/sources/android-22/android/view/Window.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4893617">
-          <caret line="1852" column="25" selection-start-line="1852" selection-start-column="25" selection-end-line="1852" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../../Sdk/extras/android/m2repository/com/android/support/support-v4/22.2.0/support-v4-22.2.0-sources.jar!/android/support/v4/graphics/ColorUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="25" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/Swatch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="123" column="5" selection-start-line="123" selection-start-column="5" selection-end-line="123" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../../Sdk/extras/android/m2repository/com/android/support/appcompat-v7/22.2.0/appcompat-v7-22.2.0-sources.jar!/android/support/v7/app/AppCompatDelegate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.031914894">
-          <caret line="66" column="22" selection-start-line="66" selection-start-column="22" selection-end-line="66" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../../Sdk/extras/android/m2repository/com/android/support/appcompat-v7/22.2.0/appcompat-v7-22.2.0-sources.jar!/android/support/v7/app/AppCompatActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22340426">
-          <caret line="52" column="21" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../../Sdk/extras/android/m2repository/com/android/support/appcompat-v7/22.2.0/appcompat-v7-22.2.0-sources.jar!/android/support/v7/app/ActionBarDrawerToggle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4367,9 +4233,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33271027">
           <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-          <folding>
-            <element signature="e#1849#1881#0" expanded="true" />
-          </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4451,16 +4314,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/fragment_edit_car.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43364486">
-          <caret line="140" column="48" selection-start-line="140" selection-start-column="48" selection-end-line="140" selection-end-column="48" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/fragment_edit_service.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5719626">
@@ -4488,53 +4341,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/utilities/LruCacheSmartRemove.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10638298">
-          <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/vehicle_selector.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22616823">
-          <caret line="28" column="41" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/adapters/CursorRecyclerViewAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/fragment_vehicle_select.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7308411">
           <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/ServicesFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="73" column="56" selection-start-line="73" selection-start-column="56" selection-end-line="73" selection-end-column="56" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4547,9 +4367,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17115" column="22" selection-start-line="17115" selection-start-column="22" selection-end-line="17115" selection-end-column="22" />
-          <folding>
-            <element signature="method#findViewWithTag#0;class#View#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4564,7 +4381,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.6296296">
           <caret line="175" column="17" selection-start-line="175" selection-start-column="17" selection-end-line="175" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4579,7 +4395,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.586207">
           <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4590,10 +4405,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44680852">
           <caret line="62" column="75" selection-start-line="62" selection-start-column="75" selection-end-line="62" selection-end-column="75" />
-          <folding>
-            <element signature="e#7710#7711#0" expanded="false" />
-            <element signature="e#7773#7774#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4601,29 +4412,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="docComment;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#SQLDataHandler#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="e#710#711#0" expanded="false" />
-            <element signature="e#752#753#0" expanded="false" />
-            <element signature="method#setRow#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#getString#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#getFloat#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#putFloat#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#getInt#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#putInt#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#getDouble#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#putDouble#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#getLong#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#putLong#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#getBoolean#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#putBoolean#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="e#4422#4423#0" expanded="false" />
-            <element signature="e#4501#4502#0" expanded="false" />
-            <element signature="e#4536#4537#0" expanded="false" />
-            <element signature="e#4577#4578#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4631,13 +4419,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="111" column="15" selection-start-line="111" selection-start-column="15" selection-end-line="111" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/adapters/ServiceRecyclerAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3327616">
-          <caret line="116" column="14" selection-start-line="116" selection-start-column="14" selection-end-line="116" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -4652,14 +4433,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.0689656">
           <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
-          <folding>
-            <element signature="e#254#275#0" expanded="false" />
-            <element signature="e#314#335#0" expanded="false" />
-            <element signature="e#422#472#0" expanded="false" />
-            <element signature="e#519#559#0" expanded="false" />
-            <element signature="e#590#630#0" expanded="false" />
-            <element signature="e#748#788#0" expanded="false" />
-          </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4691,261 +4464,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="235" column="64" selection-start-line="235" selection-start-column="64" selection-end-line="235" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="docComment;class#NavigationDrawerFragment#0" expanded="false" />
-            <element signature="docComment;field#STATE_SELECTED_POSITION#0;class#NavigationDrawerFragment#0" expanded="false" />
-            <element signature="docComment;field#PREF_USER_LEARNED_DRAWER#0;class#NavigationDrawerFragment#0" expanded="false" />
-            <element signature="docComment;field#mCallbacks#0;class#NavigationDrawerFragment#0" expanded="false" />
-            <element signature="docComment;field#mDrawerToggle#0;class#NavigationDrawerFragment#0" expanded="false" />
-            <element signature="method#NavigationDrawerFragment#0;class#NavigationDrawerFragment#0" expanded="false" />
-            <element signature="method#onCreate#0;class#NavigationDrawerFragment#0" expanded="false" />
-            <element signature="class#5263:5477" expanded="false" />
-            <element signature="method#onItemClick#0;class#5263:5477" expanded="false" />
-            <element signature="method#isDrawerOpen#0;class#NavigationDrawerFragment#0" expanded="false" />
-            <element signature="docComment;method#setUp#0;class#NavigationDrawerFragment#0" expanded="false" />
-            <element signature="class#6751:8376" expanded="false" />
-            <element signature="method#onDrawerClosed#0;class#6751:8376" expanded="false" />
-            <element signature="method#onDrawerOpened#0;class#6751:8376" expanded="false" />
-            <element signature="class#8776:8909" expanded="false" />
-            <element signature="e#8841#8842#0" expanded="false" />
-            <element signature="e#8898#8899#0" expanded="false" />
-            <element signature="method#showGlobalContextActionBar#0;class#NavigationDrawerFragment#0" expanded="false" />
-            <element signature="method#getActionBar#0;class#NavigationDrawerFragment#0" expanded="false" />
-            <element signature="docComment;class#NavigationDrawerCallbacks#0;class#NavigationDrawerFragment#0" expanded="false" />
-            <element signature="docComment;method#onNavigationDrawerItemSelected#0;class#NavigationDrawerCallbacks#0;class#NavigationDrawerFragment#0" expanded="false" />
-            <element signature="e#12681#12682#0" expanded="false" />
-            <element signature="e#12717#12718#0" expanded="false" />
-            <element signature="e#14579#14580#0" expanded="false" />
-            <element signature="e#14636#14637#0" expanded="false" />
-            <element signature="e#15013#15014#0" expanded="false" />
-            <element signature="e#15049#15050#0" expanded="false" />
-            <element signature="e#15086#15087#0" expanded="false" />
-            <element signature="e#15121#15122#0" expanded="false" />
-            <element signature="e#15243#15244#0" expanded="false" />
-            <element signature="e#15316#15317#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="48" selection-start-line="36" selection-start-column="48" selection-end-line="36" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="213" column="20" selection-start-line="213" selection-start-column="20" selection-end-line="213" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="docComment;class#EditCar#0" expanded="false" />
-            <element signature="method#EditCar#0;class#EditCar#0" expanded="false" />
-            <element signature="method#EditCar#1;class#EditCar#0" expanded="false" />
-            <element signature="method#EditCar#2;class#EditCar#0" expanded="false" />
-            <element signature="method#onCreate#0;class#EditCar#0" expanded="false" />
-            <element signature="method#onCreateView#0;class#EditCar#0" expanded="false" />
-            <element signature="method#onDestroy#0;class#EditCar#0" expanded="false" />
-            <element signature="class#4795:5887" expanded="false" />
-            <element signature="method#run#0;class#4795:5887" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#EditCar#0" expanded="false" />
-            <element signature="class#6157:6581" expanded="false" />
-            <element signature="method#onMenuItemClick#0;class#6157:6581" expanded="false" />
-            <element signature="class#7095:9878" expanded="false" />
-            <element signature="method#run#0;class#7095:9878" expanded="false" />
-            <element signature="method#setHighlightColors#0;class#EditCar#0" expanded="false" />
-            <element signature="class#10259:11453" expanded="false" />
-            <element signature="method#run#0;class#10259:11453" expanded="false" />
-            <element signature="method#setCardTitleColors#0;class#EditCar#0" expanded="false" />
-            <element signature="class#11542:12061" expanded="false" />
-            <element signature="method#run#0;class#11542:12061" expanded="false" />
-            <element signature="method#saveVehicle#0;class#EditCar#0" expanded="false" />
-            <element signature="method#initializeNameText#0;class#EditCar#0" expanded="false" />
-            <element signature="method#initializeYearSpinner#0;class#EditCar#0" expanded="false" />
-            <element signature="class#15491:18423" expanded="false" />
-            <element signature="method#onItemClick#0;class#15491:18423" expanded="false" />
-            <element signature="class#16498:18214" expanded="false" />
-            <element signature="method#onShow#0;class#16498:18214" expanded="false" />
-            <element signature="class#16792:18164" expanded="false" />
-            <element signature="method#onClick#0;class#16792:18164" expanded="false" />
-            <element signature="method#saveYear#0;class#EditCar#0" expanded="false" />
-            <element signature="method#initializeMakeSpinner#0;class#EditCar#0" expanded="false" />
-            <element signature="class#18975:21001" expanded="false" />
-            <element signature="method#onItemClick#0;class#18975:21001" expanded="false" />
-            <element signature="class#19996:20796" expanded="false" />
-            <element signature="method#onShow#0;class#19996:20796" expanded="false" />
-            <element signature="class#20285:20746" expanded="false" />
-            <element signature="method#onClick#0;class#20285:20746" expanded="false" />
-            <element signature="e#21048#21049#0" expanded="false" />
-            <element signature="e#21087#21088#0" expanded="false" />
-            <element signature="method#updateMakeSpinner#1;class#EditCar#0" expanded="false" />
-            <element signature="method#saveMake#0;class#EditCar#0" expanded="false" />
-            <element signature="method#initializeModelSpinner#0;class#EditCar#0" expanded="false" />
-            <element signature="class#22186:24167" expanded="false" />
-            <element signature="method#onItemClick#0;class#22186:24167" expanded="false" />
-            <element signature="class#23278:24021" expanded="false" />
-            <element signature="method#onShow#0;class#23278:24021" expanded="false" />
-            <element signature="class#23567:23971" expanded="false" />
-            <element signature="method#onClick#0;class#23567:23971" expanded="false" />
-            <element signature="e#24215#24216#0" expanded="false" />
-            <element signature="e#24255#24256#0" expanded="false" />
-            <element signature="method#updateModelSpinner#1;class#EditCar#0" expanded="false" />
-            <element signature="method#saveModel#0;class#EditCar#0" expanded="false" />
-            <element signature="method#initializeSubModel#0;class#EditCar#0" expanded="false" />
-            <element signature="method#saveSubModel#0;class#EditCar#0" expanded="false" />
-            <element signature="method#initializeVIN#0;class#EditCar#0" expanded="false" />
-            <element signature="class#25351:25650" expanded="false" />
-            <element signature="method#isValid#0;class#25351:25650" expanded="false" />
-            <element signature="class#25871:26383" expanded="false" />
-            <element signature="method#filter#0;class#25871:26383" expanded="false" />
-            <element signature="method#saveVIN#0;class#EditCar#0" expanded="false" />
-            <element signature="method#initializeCurrentMileage#0;class#EditCar#0" expanded="false" />
-            <element signature="class#26999:27420" expanded="false" />
-            <element signature="method#onItemClick#0;class#26999:27420" expanded="false" />
-            <element signature="method#saveCurrentMileage#0;class#EditCar#0" expanded="false" />
-            <element signature="method#initializeWeight#0;class#EditCar#0" expanded="false" />
-            <element signature="class#28182:28603" expanded="false" />
-            <element signature="method#onItemClick#0;class#28182:28603" expanded="false" />
-            <element signature="method#saveWeight#0;class#EditCar#0" expanded="false" />
-            <element signature="method#initializePower#0;class#EditCar#0" expanded="false" />
-            <element signature="class#29482:29929" expanded="false" />
-            <element signature="method#onItemClick#0;class#29482:29929" expanded="false" />
-            <element signature="method#savePower#0;class#EditCar#0" expanded="false" />
-            <element signature="method#initializeTorque#0;class#EditCar#0" expanded="false" />
-            <element signature="class#30723:30987" expanded="false" />
-            <element signature="method#onItemClick#0;class#30723:30987" expanded="false" />
-            <element signature="method#saveTorque#0;class#EditCar#0" expanded="false" />
-            <element signature="method#saveVehicleColor#0;class#EditCar#0" expanded="false" />
-            <element signature="method#saveDisplayColor#0;class#EditCar#0" expanded="false" />
-            <element signature="method#initializeVehicleImage#0;class#EditCar#0" expanded="false" />
-            <element signature="class#32071:32282" expanded="false" />
-            <element signature="e#32219#32220#0" expanded="false" />
-            <element signature="e#32271#32272#0" expanded="false" />
-            <element signature="class#32428:35392" expanded="false" />
-            <element signature="method#onClick#0;class#32428:35392" expanded="false" />
-            <element signature="class#32762:35267" expanded="false" />
-            <element signature="method#onClick#0;class#32762:35267" expanded="false" />
-            <element signature="class#33589:34050" expanded="false" />
-            <element signature="method#onItemClick#0;class#33589:34050" expanded="false" />
-            <element signature="class#34854:35145" expanded="false" />
-            <element signature="e#35013#35014#0" expanded="false" />
-            <element signature="e#35110#35111#0" expanded="false" />
-            <element signature="method#openImageSelection#0;class#EditCar#0" expanded="false" />
-            <element signature="class#36029:36207" expanded="false" />
-            <element signature="method#run#0;class#36029:36207" expanded="false" />
-            <element signature="method#doCrop#0;class#EditCar#0" expanded="false" />
-            <element signature="method#getTempFile#0;class#EditCar#0" expanded="false" />
-            <element signature="method#getTempFile#1;class#EditCar#0" expanded="false" />
-            <element signature="method#getTempUri#0;class#EditCar#0" expanded="false" />
-            <element signature="method#loadImage#0;class#EditCar#0" expanded="false" />
-            <element signature="class#38701:39310" expanded="false" />
-            <element signature="method#run#0;class#38701:39310" expanded="false" />
-            <element signature="class#38912:39268" expanded="false" />
-            <element signature="method#run#0;class#38912:39268" expanded="false" />
-            <element signature="e#40506#40554#0" expanded="false" />
-            <element signature="method#loadImage#1;class#EditCar#0" expanded="false" />
-            <element signature="class#41771:42613" expanded="false" />
-            <element signature="method#run#0;class#41771:42613" expanded="false" />
-            <element signature="class#41875:42297" expanded="false" />
-            <element signature="method#run#0;class#41875:42297" expanded="false" />
-            <element signature="class#42424:42587" expanded="false" />
-            <element signature="e#42505#42506#0" expanded="false" />
-            <element signature="e#42568#42569#0" expanded="false" />
-            <element signature="e#42623#42668#0" expanded="false" />
-            <element signature="method#loadImage#2;class#EditCar#0" expanded="false" />
-            <element signature="class#44388:45055" expanded="false" />
-            <element signature="method#run#0;class#44388:45055" expanded="false" />
-            <element signature="class#44631:44997" expanded="false" />
-            <element signature="method#run#0;class#44631:44997" expanded="false" />
-            <element signature="e#46642#46643#0" expanded="false" />
-            <element signature="e#46690#46691#0" expanded="false" />
-            <element signature="method#setLoadedColor#0;class#EditCar#0" expanded="false" />
-            <element signature="method#setLoadedColor#1;class#EditCar#0" expanded="false" />
-            <element signature="class#47278:47471" expanded="false" />
-            <element signature="method#run#0;class#47278:47471" expanded="false" />
-            <element signature="method#storeImage#0;class#EditCar#0" expanded="false" />
-            <element signature="class#47693:49582" expanded="false" />
-            <element signature="method#run#0;class#47693:49582" expanded="false" />
-            <element signature="method#initializePurchaseCost#0;class#EditCar#0" expanded="false" />
-            <element signature="class#50041:50644" expanded="false" />
-            <element signature="method#onItemClick#0;class#50041:50644" expanded="false" />
-            <element signature="method#savePurchaseCost#0;class#EditCar#0" expanded="false" />
-            <element signature="class#51398:51546" expanded="false" />
-            <element signature="e#51485#51486#0" expanded="false" />
-            <element signature="e#51535#51536#0" expanded="false" />
-            <element signature="method#loadPurchaseDate#0;class#EditCar#0" expanded="false" />
-            <element signature="class#52112:52595" expanded="false" />
-            <element signature="method#onDateSet#0;class#52112:52595" expanded="false" />
-            <element signature="method#setDisplayPurchaseDate#0;class#EditCar#0" expanded="false" />
-            <element signature="method#savePurchaseDate#0;class#EditCar#0" expanded="false" />
-            <element signature="method#initializePurchaseMileage#0;class#EditCar#0" expanded="false" />
-            <element signature="method#savePurchaseMileage#0;class#EditCar#0" expanded="false" />
-            <element signature="method#saveDistanceUnit#0;class#EditCar#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#EditCar#0" expanded="false" />
-            <element signature="e#54874#54875#0" expanded="false" />
-            <element signature="e#54927#54928#0" expanded="false" />
-            <element signature="method#sendToast#1;class#EditCar#0" expanded="false" />
-            <element signature="class#55034:55190" expanded="false" />
-            <element signature="e#55099#55100#0" expanded="false" />
-            <element signature="e#55179#55180#0" expanded="false" />
-            <element signature="method#recycle#0;class#EditCar#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="155" column="36" selection-start-line="155" selection-start-column="36" selection-end-line="155" selection-end-column="36" />
-          <folding>
-            <element signature="method#onCreate#0;class#MainActivity#0" expanded="true" />
-            <element signature="method#onDestroy#0;class#MainActivity#0" expanded="true" />
-            <element signature="method#onNavigationDrawerItemSelected#0;class#MainActivity#0" expanded="true" />
-            <element signature="method#changeVehicle#0;class#MainActivity#0" expanded="true" />
-            <element signature="method#changeVehicle#1;class#MainActivity#0" expanded="true" />
-            <element signature="method#changeVehicle#3;class#MainActivity#0" expanded="true" />
-            <element signature="method#onKeyDown#0;class#MainActivity#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="128" column="54" selection-start-line="128" selection-start-column="54" selection-end-line="128" selection-end-column="54" />
-          <folding>
-            <element signature="class#1453:2208" expanded="true" />
-            <element signature="method#onChanged#0;class#1453:2208" expanded="true" />
-            <element signature="method#loadVehicles#0;class#CarSQL#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="106" column="47" selection-start-line="106" selection-start-column="47" selection-end-line="106" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="docComment;class#VehicleMainFragment#0" expanded="false" />
-            <element signature="method#VehicleMainFragment#0;class#VehicleMainFragment#0" expanded="false" />
-            <element signature="e#1172#1173#0" expanded="false" />
-            <element signature="e#1212#1213#0" expanded="false" />
-            <element signature="method#onCreateView#0;class#VehicleMainFragment#0" expanded="false" />
-            <element signature="class#1653:2185" expanded="false" />
-            <element signature="method#onClick#0;class#1653:2185" expanded="false" />
-            <element signature="class#2313:2789" expanded="false" />
-            <element signature="method#onClick#0;class#2313:2789" expanded="false" />
-            <element signature="e#3104#3105#0" expanded="false" />
-            <element signature="e#3144#3145#0" expanded="false" />
-            <element signature="class#4756:5001" expanded="false" />
-            <element signature="method#run#0;class#4756:5001" expanded="false" />
-            <element signature="class#5092:5742" expanded="false" />
-            <element signature="method#run#0;class#5092:5742" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4957,29 +4475,227 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/fragment_edit_car.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33271027">
+          <caret line="236" column="32" selection-start-line="236" selection-start-column="32" selection-end-line="236" selection-end-column="32" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/vehicle_selector.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="48" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="48" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/adapters/CursorRecyclerViewAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Sdk/sources/android-22/java/util/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="143" column="13" selection-start-line="143" selection-start-column="13" selection-end-line="143" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/VehicleMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28723404">
+          <caret line="72" column="20" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+          <folding>
+            <element signature="method#get#0;class#VehicleMap#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/adapters/ServiceRecyclerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="127" column="17" selection-start-line="127" selection-start-column="17" selection-end-line="127" selection-end-column="17" />
+          <folding>
+            <element signature="class#ViewHolder#0;class#ServiceRecyclerAdapter#0" expanded="false" />
+            <element signature="method#ViewHolder#0;class#ViewHolder#0;class#ServiceRecyclerAdapter#0" expanded="false" />
+            <element signature="method#getCost#0;class#ServiceRecyclerAdapter#0" expanded="false" />
+            <element signature="method#onItemClick#0;class#ServiceRecyclerAdapter#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.73134327">
+          <caret line="36" column="48" selection-start-line="36" selection-start-column="48" selection-end-line="36" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/Swatch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="31" selection-start-line="73" selection-start-column="31" selection-end-line="73" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/adapters/VehicleCursorAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+          <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
           <folding>
-            <element signature="method#VehicleCursorAdapter#0;class#VehicleCursorAdapter#0" expanded="true" />
-            <element signature="method#setup#0;class#ViewHolder#0;class#VehicleCursorAdapter#0" expanded="true" />
-            <element signature="e#3080#3081#0" expanded="true" />
-            <element signature="e#3116#3117#0" expanded="true" />
-            <element signature="method#setOnClickListener#0;class#VehicleCursorAdapter#0" expanded="true" />
+            <element signature="class#ViewHolder#0;class#VehicleCursorAdapter#0" expanded="false" />
+            <element signature="method#ViewHolder#0;class#ViewHolder#0;class#VehicleCursorAdapter#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="11" selection-start-line="42" selection-start-column="11" selection-end-line="42" selection-end-column="11" />
+          <folding>
+            <element signature="e#1266#1267#0" expanded="false" />
+            <element signature="e#1300#1301#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/ServicesFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="105" column="56" selection-start-line="105" selection-start-column="56" selection-end-line="105" selection-end-column="56" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleSelectFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7986348">
-          <caret line="78" column="78" selection-start-line="78" selection-start-column="78" selection-end-line="78" selection-end-column="78" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
           <folding>
-            <element signature="method#onCreateView#0;class#VehicleSelectFragment#0" expanded="true" />
-            <element signature="class#1369:1817" expanded="true" />
-            <element signature="method#onClick#0;class#1369:1817" expanded="true" />
-            <element signature="method#onDestroy#0;class#VehicleSelectFragment#0" expanded="true" />
+            <element signature="e#996#997#0" expanded="false" />
+            <element signature="e#1032#1033#0" expanded="false" />
+            <element signature="method#onCreateView#0;class#VehicleSelectFragment#0" expanded="false" />
+            <element signature="class#1392:1847" expanded="false" />
+            <element signature="method#onClick#0;class#1392:1847" expanded="false" />
+            <element signature="method#onDestroy#0;class#VehicleSelectFragment#0" expanded="false" />
+            <element signature="method#setupAdapter#0;class#VehicleSelectFragment#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Sdk/sources/android-22/android/util/LruCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="239" column="19" selection-start-line="239" selection-start-column="19" selection-end-line="239" selection-end-column="19" />
+          <folding>
+            <element signature="method#put#0;class#LruCache#0" expanded="false" />
+            <element signature="method#remove#0;class#LruCache#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/utilities/LruCacheSmartRemove.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="27" selection-start-line="76" selection-start-column="27" selection-end-line="76" selection-end-column="27" />
+          <folding>
+            <element signature="method#get#0;class#LruCacheSmartRemove#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="313" column="41" selection-start-line="313" selection-start-column="41" selection-end-line="313" selection-end-column="41" />
+          <folding>
+            <element signature="method#onCreate#0;class#MainActivity#0" expanded="true" />
+            <element signature="method#displaySelectVehicle#0;class#MainActivity#0" expanded="true" />
+            <element signature="method#changeVehicle#0;class#MainActivity#0" expanded="true" />
+            <element signature="method#changeVehicle#1;class#MainActivity#0" expanded="true" />
+            <element signature="method#changeVehicle#3;class#MainActivity#0" expanded="true" />
+            <element signature="method#onOptionsItemSelected#0;class#MainActivity#0" expanded="true" />
+            <element signature="method#onBackStackChanged#0;class#MainActivity#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="26" selection-start-line="56" selection-start-column="26" selection-end-line="56" selection-end-column="26" />
+          <folding>
+            <element signature="method#loadVehicleDetails#0;class#VehicleMainFragment#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="248" column="18" selection-start-line="248" selection-start-column="18" selection-end-line="248" selection-end-column="18" />
+          <folding>
+            <element signature="method#loadVehicleCursor#0;class#CarSQL#0" expanded="true" />
+            <element signature="e#4264#4268#0" expanded="true" />
+            <element signature="e#4270#4274#0" expanded="true" />
+            <element signature="e#4276#4280#0" expanded="true" />
+            <element signature="e#4282#4286#0" expanded="true" />
+            <element signature="e#4288#4292#0" expanded="true" />
+            <element signature="e#4294#4298#0" expanded="true" />
+            <element signature="method#addBitmapToMemoryCache#0;class#CarSQL#0" expanded="true" />
+            <element signature="e#7545#7549#0" expanded="true" />
+            <element signature="method#storeCacheToMemory#0;class#CarSQL#0" expanded="true" />
+            <element signature="e#7666#7670#0" expanded="true" />
+            <element signature="e#7862#7863#0" expanded="true" />
+            <element signature="e#7912#7913#0" expanded="true" />
+            <element signature="e#7952#7953#0" expanded="true" />
+            <element signature="e#8002#8003#0" expanded="true" />
+            <element signature="method#loadBitmap#0;class#CarSQL#0" expanded="true" />
+            <element signature="class#BitmapWorkerTask#0;class#CarSQL#0" expanded="true" />
+            <element signature="method#doInBackground#0;class#BitmapWorkerTask#0;class#CarSQL#0" expanded="true" />
+            <element signature="method#getBitmapWorkerTask#0;class#CarSQL#0" expanded="true" />
+            <element signature="class#AsyncDrawable#0;class#CarSQL#0" expanded="true" />
+            <element signature="method#AsyncDrawable#0;class#AsyncDrawable#0;class#CarSQL#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="901" column="17" selection-start-line="901" selection-start-column="17" selection-end-line="901" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#onCreateView#0;class#EditCar#0" expanded="true" />
+            <element signature="e#4250#4264#0" expanded="true" />
+            <element signature="method#onDestroy#0;class#EditCar#0" expanded="true" />
+            <element signature="method#initializeView#0;class#EditCar#0" expanded="true" />
+            <element signature="method#onCreateOptionsMenu#0;class#EditCar#0" expanded="true" />
+            <element signature="method#onOptionsItemSelected#0;class#EditCar#0" expanded="true" />
+            <element signature="method#loadVehicle#0;class#EditCar#0" expanded="true" />
+            <element signature="e#6742#6755#0" expanded="true" />
+            <element signature="method#loadVehicle#1;class#EditCar#0" expanded="true" />
+            <element signature="method#saveVehicle#0;class#EditCar#0" expanded="true" />
+            <element signature="method#saveVehicleColor#0;class#EditCar#0" expanded="true" />
+            <element signature="method#getTempFile#0;class#EditCar#0" expanded="true" />
+            <element signature="method#loadImage#0;class#EditCar#0" expanded="true" />
+            <element signature="class#38599:39208" expanded="true" />
+            <element signature="method#run#0;class#38599:39208" expanded="true" />
+            <element signature="e#39211#39226#0" expanded="false" />
+            <element signature="method#storeImage#0;class#EditCar#0" expanded="true" />
+            <element signature="e#48471#48473#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -2,7 +2,6 @@ package com.packruler.carmaintenance.ui.utilities;
 
 import android.graphics.Color;
 import android.support.v4.graphics.ColorUtils;
-import android.util.Log;
 
 /**
  * Created by Packruler on 6/12/15.
@@ -71,7 +70,7 @@ public class Swatch {
      * {@link Swatch}'s color. This color is guaranteed to have sufficient contrast.
      */
     public int getBodyTextColor() {
-        Log.v(TAG, "Luminance: " + ColorUtils.calculateLuminance(mRgb));
+//        Log.v(TAG, "Luminance: " + ColorUtils.calculateLuminance(mRgb));
         float[] hsl = getHsl();
         if (ColorUtils.calculateLuminance(mRgb) < 0.2f)
             hsl[2] = 0.85f;

@@ -222,13 +222,24 @@ public class CarSQL {
     }
 
     public void addBitmapToMemoryCache(long key, Bitmap bitmap) {
-        if (getBitmapFromMemCache(key) == null || !getBitmapFromMemCache(key).sameAs(bitmap)) {
-            Bitmap temp = getBitmapFromMemCache(key);
-            if (temp != null)
-                temp.recycle();
+        if (!getBitmapFromMemCache(key).sameAs(bitmap)) {
+            if (getBitmapFromMemCache(key) != null) {
+                Bitmap temp = getBitmapFromMemCache(key);
+                if (temp != null)
+                    temp.recycle();
+            }
 
-            mMemoryCache.put(key, bitmap);
+            mMemoryCache.put(key, bitmap, true);
         }
+    }
+
+    public boolean storeCacheToMemory(long key) {
+        Bitmap temp = mMemoryCache.remove(-1l, true);
+        if (temp != null) {
+            addBitmapToMemoryCache(key, temp);
+            return true;
+        }
+        return false;
     }
 
     public Bitmap getBitmapFromMemCache(long key) {
@@ -299,7 +310,11 @@ public class CarSQL {
                 Log.w(TAG, e.getMessage());
                 key = -1;
             }
-            Bitmap bitmap = getBitmapFromMemCache(key);
+
+            Bitmap bitmap = null;
+            if (key != -1)
+                bitmap = getBitmapFromMemCache(key);
+
             if (key == -1 || bitmap == null) {
                 try {
 //                    Log.v(TAG, "Load Bitmap from: " + params[1]);

@@ -1,7 +1,6 @@
 package com.packruler.carmaintenance.ui;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,7 +22,7 @@ import com.packruler.carmaintenance.vehicle.Vehicle;
 /**
  * Created by Packruler on 6/10/15.
  */
-public class VehicleMainFragment extends Fragment {
+public class VehicleMainFragment extends android.support.v4.app.Fragment {
     private final String TAG = getClass().getName();
     private MainActivity activity;
     private CardView editCarButton;
@@ -68,7 +67,8 @@ public class VehicleMainFragment extends Fragment {
                     getFragmentManager()
                             .beginTransaction()
                             .replace(R.id.container, new EditCar(activity, activity.getCurrentVehicle()))
-                            .addToBackStack("EditCar").commit();
+                            .addToBackStack(EditCar.TAG)
+                            .commit();
             }
         });
 
@@ -104,7 +104,7 @@ public class VehicleMainFragment extends Fragment {
     }
 
     public void loadVehicleDetails() {
-        if (viewInitialized && activity != null) {
+        if (viewInitialized) {
             final Vehicle vehicle = activity.getCurrentVehicle();
             if (vehicle != null) {
                 setUIColor(vehicle.getDisplayColor());

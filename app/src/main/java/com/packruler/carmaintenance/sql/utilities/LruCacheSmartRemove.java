@@ -70,4 +70,10 @@ public class LruCacheSmartRemove<K, V extends Bitmap> extends LruCache<K, V> {
         }
         return get(key);
     }
+
+    public V remove(K key, boolean removeUsage) {
+        if (removeUsage)
+            queue.remove(key);
+        return remove(key);
+    }
 }

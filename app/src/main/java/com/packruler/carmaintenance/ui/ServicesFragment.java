@@ -32,7 +32,7 @@ import java.util.Calendar;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class ServicesFragment extends Fragment {
+public class ServicesFragment extends android.support.v4.app.Fragment {
     private final String TAG = getClass().getSimpleName();
 
     /**
@@ -102,7 +102,7 @@ public class ServicesFragment extends Fragment {
                 ServiceTask task = new ServiceTask(carSQL, itemId);
                 Log.v(TAG, "Type: " + task.getType() + " Date: " + DateFormat.getMediumDateFormat(activity).format(task.getDate()));
                 Log.v(TAG, "Loading task took " + (Calendar.getInstance().getTimeInMillis() - start));
-                activity.getFragmentManager().beginTransaction()
+                activity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, new EditService(task))
                         .addToBackStack("EditService-" + itemId).commit();
             }

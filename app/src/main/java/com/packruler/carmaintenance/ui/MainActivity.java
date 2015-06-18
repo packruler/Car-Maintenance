@@ -1,6 +1,5 @@
 package com.packruler.carmaintenance.ui;
 
-import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,7 +37,7 @@ import java.util.concurrent.TimeUnit;
 @SuppressWarnings("ConstantConditions")
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
-        android.app.FragmentManager.OnBackStackChangedListener {
+        android.support.v4.app.FragmentManager.OnBackStackChangedListener {
 
     private final String TAG = getClass().getSimpleName();
     private static final String CAR_NAME_SET = "CAR_NAME_SET";
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity
     private VehicleMap vehicleMap;
     private Vehicle currentVehicle;
 
-    private VehicleMainFragment mainFragment = new VehicleMainFragment(this);
+    private VehicleMainFragment mainFragment;
 
     private SharedPreferences sharedPreferences;
     private CarSQL carsSQL;
@@ -78,6 +77,8 @@ public class MainActivity extends AppCompatActivity
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         }
+
+        mainFragment = new VehicleMainFragment(this);
 //        Mobihelp.init(this, new MobihelpConfig("https://packruler.freshdesk.com", "carmaintenance-1-6a1ff09c57e9c2df0374ba007bcc9be7", "684a7217edaf7a384db1a10d98b76164430821db"));
         poolExecutor.execute(new Runnable() {
             @Override
@@ -122,10 +123,10 @@ public class MainActivity extends AppCompatActivity
 
         vehicleMap = carsSQL.loadVehicles();
 
-        getFragmentManager().addOnBackStackChangedListener(this);
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
         if (vehicleMap.size() > 0) {
             changeVehicle(vehicleMap.entrySet().iterator().next().getValue());
-            getFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
         } else
             displaySelectVehicle();
 
@@ -151,7 +152,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void displaySelectVehicle() {
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new VehicleSelectFragment(carsSQL))
                 .addToBackStack(null)
                 .commit();
@@ -187,9 +188,11 @@ public class MainActivity extends AppCompatActivity
         setUIColor(color);
         mainFragment.loadVehicleDetails();
 
-        FragmentManager fragmentManager = getFragmentManager();
-        while (fragmentManager.getBackStackEntryCount() > 0)
-            fragmentManager.popBackStack();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        while (fragmentManager.getBackStackEntryCount() > 0) {
+            Log.v(TAG, "Back Stack count: " + fragmentManager.getBackStackEntryCount());
+            Log.v(TAG, "Pop stack " + (fragmentManager.popBackStackImmediate() ? "Success" : "FAIL"));
+        }
     }
 
     public Vehicle getCurrentVehicle() {
@@ -236,7 +239,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackStackChanged() {
-        int count = getFragmentManager().getBackStackEntryCount();
+        int count = getSupportFragmentManager().getBackStackEntryCount();
         Log.v("onBackStackChanged", "Count: " + count);
         if (count == 0) {
             if (currentVehicle == null) {
@@ -307,8 +310,8 @@ public class MainActivity extends AppCompatActivity
             if (mNavigationDrawerFragment.isDrawerOpen())
                 return mNavigationDrawerFragment.closeDrawers();
 
-            if (getFragmentManager().getBackStackEntryCount() > 0)
-                getFragmentManager().popBackStack();
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0)
+                getSupportFragmentManager().popBackStack();
             else return super.onKeyDown(keyCode, event);
 
             return true;

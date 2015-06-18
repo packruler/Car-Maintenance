@@ -20,7 +20,7 @@ import com.packruler.carmaintenance.vehicle.Vehicle;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class VehicleSelectFragment extends Fragment {
+public class VehicleSelectFragment extends android.support.v4.app.Fragment {
     private final String TAG = getClass().getSimpleName();
 
     private View rootView;
@@ -50,7 +50,7 @@ public class VehicleSelectFragment extends Fragment {
                 Log.v(TAG, "onClick");
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, new EditCar((MainActivity) getActivity()))
-                        .addToBackStack(null)
+                        .addToBackStack(EditCar.TAG)
                         .commit();
             }
         });
@@ -80,6 +80,7 @@ public class VehicleSelectFragment extends Fragment {
         adapter.setOnClickListener(new VehicleCursorAdapter.OnClickListener() {
             @Override
             public void onClick(long itemId) {
+                Log.v(TAG, "Item ID: " + itemId);
                 if (getActivity() instanceof MainActivity)
                     ((MainActivity) getActivity()).changeVehicle(itemId);
             }
