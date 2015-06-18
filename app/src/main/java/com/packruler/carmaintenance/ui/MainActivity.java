@@ -242,10 +242,7 @@ public class MainActivity extends AppCompatActivity
         int count = getSupportFragmentManager().getBackStackEntryCount();
         Log.v("onBackStackChanged", "Count: " + count);
         if (count == 0) {
-            if (currentVehicle == null) {
-                setUIColor(getResources().getColor(R.color.default_ui_color));
-                getSupportActionBar().setTitle(getString(R.string.app_name));
-            }
+            changeVehicle();
             getSupportActionBar().setDisplayShowHomeEnabled(false);
             mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         } else {

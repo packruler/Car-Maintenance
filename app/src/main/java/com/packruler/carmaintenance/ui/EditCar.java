@@ -679,14 +679,14 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
 
         mileageUnit = (MaterialBetterSpinner) rootView.findViewById(R.id.distance_units);
         mileageUnit.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getStringArray(R.array.large_distance_units)));
-        mileageUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getAdapter().getItem(position).equals(getString(R.string.miles)))
-                    mileageUnit.setText(getString(R.string.miles_short));
-                else
-                    mileageUnit.setText(getString(R.string.kilometers_short));
-            }
-        });
+//        mileageUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                if (parent.getAdapter().getItem(position).equals(getString(R.string.miles)))
+//                    mileageUnit.setText(getString(R.string.miles_short));
+//                else
+//                    mileageUnit.setText(getString(R.string.kilometers_short));
+//            }
+//        });
     }
 
     private boolean saveCurrentMileage(ContentValues values) {
@@ -703,14 +703,14 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         weightUnits = (MaterialBetterSpinner) rootView.findViewById(R.id.weight_units);
 
         weightUnits.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getTextArray(R.array.weight_units)));
-        weightUnits.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getAdapter().getItem(position).equals(getString(R.string.pounds)))
-                    weightUnits.setText(getString(R.string.pounds_short));
-                else
-                    weightUnits.setText(getString(R.string.kilogram_short));
-            }
-        });
+//        weightUnits.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                if (parent.getAdapter().getItem(position).equals(getString(R.string.pounds)))
+//                    weightUnits.setText(getString(R.string.pounds_short));
+//                else
+//                    weightUnits.setText(getString(R.string.kilogram_short));
+//            }
+//        });
     }
 
     private boolean saveWeight(ContentValues values) {
@@ -729,15 +729,15 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         powerUnit = (MaterialBetterSpinner) rootView.findViewById(R.id.power_units);
         powerUnit.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getTextArray(R.array.power_units)));
 
-        powerUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getAdapter().getItem(position).equals(getString(R.string.horsepower)))
-                    powerUnit.setText(getString(R.string.horsepower_short));
-                else
-                    powerUnit.setText(getString(R.string.kilowatt_short));
-            }
-        });
+//        powerUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                if (parent.getAdapter().getItem(position).equals(getString(R.string.horsepower)))
+//                    powerUnit.setText(getString(R.string.horsepower_short));
+//                else
+//                    powerUnit.setText(getString(R.string.kilowatt_short));
+//            }
+//        });
     }
 
     private boolean savePower(ContentValues values) {
@@ -758,13 +758,13 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         torqueUnit = (MaterialBetterSpinner) rootView.findViewById(R.id.torque_units);
 
         torqueUnit.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getTextArray(R.array.torque_units)));
-        torqueUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                torqueUnit.setText((CharSequence) parent.getItemAtPosition(position));
-            }
-        });
+//        torqueUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                torqueUnit.setText((CharSequence) parent.getItemAtPosition(position));
+//            }
+//        });
     }
 
     private boolean saveTorque(ContentValues values) {
@@ -1225,17 +1225,17 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         costUnit = (MaterialBetterSpinner) rootView.findViewById(R.id.cost_unit);
 
         costUnit.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, getResources().getTextArray(R.array.cost_units)));
-        costUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getItemAtPosition(position).equals(getString(R.string.dollar)))
-                    costUnit.setText(getString(R.string.dollar_short));
-                else if (parent.getItemAtPosition(position).equals(getString(R.string.euro)))
-                    costUnit.setText(getString(R.string.euro_short));
-                else
-                    costUnit.setText(getString(R.string.english_pound_short));
-            }
-        });
+//        costUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                if (parent.getItemAtPosition(position).equals(getString(R.string.dollar)))
+//                    costUnit.setText(getString(R.string.dollar_short));
+//                else if (parent.getItemAtPosition(position).equals(getString(R.string.euro)))
+//                    costUnit.setText(getString(R.string.euro_short));
+//                else
+//                    costUnit.setText(getString(R.string.english_pound_short));
+//            }
+//        });
     }
 
     private boolean savePurchaseCost(ContentValues values) {
