@@ -141,6 +141,10 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         super.onDestroy();
         if (getTempFile(false).exists())
             Log.v(TAG, "Delete Temp: " + getTempFile(false).delete());
+
+        carSQL.clearCache();
+
+        availableCarsSQL.close();
     }
 
     boolean viewInitialized = false;
@@ -219,10 +223,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                         Log.v(TAG, "Deleting vehicle");
                         activity.getVehicleMap().remove(vehicle.getRow()).delete();
                         activity.getToolbar().setTitle(getString(R.string.select_vehicle));
-                        getFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.container, new VehicleSelectFragment(carSQL))
-                                .commit();
+                        activity.displaySelectVehicle();
                     } else
                         Log.v(TAG, "Pop EditCar " + (getFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE) ? "Success" : "FAIL"));
                 }
@@ -370,6 +371,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
 
     private void saveVehicle() {
         boolean newVehicle = vehicle == null;
+        sendToast(getString(R.string.saving));
         if (newVehicle) {
             if (vehicleName.getText().length() > 0) {
                 vehicle = new Vehicle(carSQL, vehicleName.getText().toString());
@@ -436,7 +438,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
             savePurchaseDate(values);
             vehicle.putContentValues(values);
             if (!storeImage(newVehicle)) {
-                sendToast("Save Successful");
+                sendToast(getString(R.string.save_success));
                 if (newVehicle)
                     activity.changeVehicle(vehicle.getRow());
                 else
@@ -1208,7 +1210,9 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     private boolean storeImage(final boolean newVehicle) {
 //        final File temp = getTempFile(false);
 //        if (temp != null && temp.exists()) {
+
         final Bitmap bitmap = carSQL.getTempFromCache();
+        Log.v(TAG, "Store image " + (bitmap != null));
         if (bitmap != null) {
             activity.execute(new Runnable() {
                 @Override
@@ -1227,13 +1231,13 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                         out = new FileOutputStream(outFile);
 //                        Bitmap bitmap = BitmapFactory.decodeFile(getTempFile().getPath());
 //                        if (bitmap != null)
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                        bitmap.compress(Bitmap.CompressFormat.WEBP, 80, out);
 //                        else if (!fileExisted)
 //                            Log.v(TAG, "Delete outFile: " + outFile.delete());
                         carSQL.storeCacheToMemory(vehicle.getRow());
 //
 //                        Log.v(TAG, "Delete temp: " + getTempFile().delete());
-                        sendToast("Save Successful");
+                        sendToast(getString(R.string.save_success));
                         mainHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -1247,7 +1251,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
 //                        vehicle.setImagePath(outFile.getPath());
                     } catch (IOException e) {
                         e.printStackTrace();
-                        sendToast("Error storing image");
+                        sendToast(getString(R.string.error_saving_image));
                     } finally {
                         try {
                             if (out != null) {
@@ -1396,6 +1400,8 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
 
     }
 
+    private Toast toast;
+
     private void sendToast(CharSequence message) {
         sendToast(message, Toast.LENGTH_LONG);
     }
@@ -1404,7 +1410,10 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(activity, message, length).show();
+                if (toast != null)
+                    toast.cancel();
+                toast = Toast.makeText(activity, message, length);
+                toast.show();
             }
         });
     }

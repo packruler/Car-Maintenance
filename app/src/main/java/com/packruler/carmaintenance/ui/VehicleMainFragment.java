@@ -91,32 +91,37 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        loadVehicleDetails();
     }
 
     public void setUIColor(int color) {
-        Log.v(TAG, "Color: " + color);
-        if (color == 0)
-            color = activity.getResources().getColor(R.color.default_ui_color);
+            try {
+                Log.v(TAG, "Color: " + color);
+                if (color == 0)
+                    color = activity.getResources().getColor(R.color.default_ui_color);
 
-        editCarButton.setCardBackgroundColor(color);
-        int textColor = new Swatch(color).getBodyTextColor();
-        ((TextView) editCarButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
-        ((ImageView) editCarButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
+                editCarButton.setCardBackgroundColor(color);
+                int textColor = new Swatch(color).getBodyTextColor();
+                ((TextView) editCarButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
+                ((ImageView) editCarButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
 
-        servicesButton.setCardBackgroundColor(color);
-        ((TextView) servicesButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
-        ((ImageView) servicesButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
+                servicesButton.setCardBackgroundColor(color);
+                ((TextView) servicesButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
+                ((ImageView) servicesButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
 
-        fuelStopsButton.setCardBackgroundColor(color);
-        ((TextView) fuelStopsButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
-        ((ImageView) fuelStopsButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
+                fuelStopsButton.setCardBackgroundColor(color);
+                ((TextView) fuelStopsButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
+                ((ImageView) fuelStopsButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
+            } catch (Exception e) {
+                Log.e(TAG, e.getMessage());
+            }
     }
 
     public void loadVehicleDetails() {
         if (viewInitialized) {
             final Vehicle vehicle = activity.getCurrentVehicle();
             if (vehicle != null) {
-//                setUIColor(vehicle.getDisplayColor());
+                setUIColor(vehicle.getDisplayColor());
 
                 vehicleName.setText(vehicle.getName());
                 if (vehicle.getImage().exists()) {

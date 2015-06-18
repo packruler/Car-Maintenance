@@ -13,7 +13,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -226,8 +225,8 @@ public class CarSQL {
         Bitmap cache = getBitmapFromMemCache(key);
         if (cache != null) {
 //            if (!cache.sameAs(bitmap)) {
-                cache.recycle();
-                mMemoryCache.put(key, bitmap, true);
+            cache.recycle();
+            mMemoryCache.put(key, bitmap, true);
 //            } else
 //                Log.w(TAG, "Tried to store the same bitmap");
         } else
@@ -249,6 +248,11 @@ public class CarSQL {
 
     public Bitmap getTempFromCache() {
         return mMemoryCache.get(-1l, true);
+    }
+
+    public void clearCache() {
+        if (mMemoryCache.get(-1l) != null)
+            mMemoryCache.remove(-1l, true).recycle();
     }
 
     public void loadBitmap(Uri uri, @Nullable ImageView imageView, @Nullable View loadingView,
@@ -289,7 +293,6 @@ public class CarSQL {
         private final WeakReference<View> loadingReference;
         private final LoadedBitmapRunnable runnable;
         private String[] data;
-        private BitmapFactory.Options options = new BitmapFactory.Options();
 
         public BitmapWorkerTask(@Nullable ImageView imageView, @Nullable View loadingDisplay,
                                 @Nullable LoadedBitmapRunnable runnable) {
@@ -297,7 +300,6 @@ public class CarSQL {
             imageViewReference = new WeakReference<>(imageView);
             loadingReference = new WeakReference<>(loadingDisplay);
             this.runnable = runnable;
-            options.inMutable = true;
         }
 
         // Decode image in background.
@@ -319,17 +321,10 @@ public class CarSQL {
             if (key == -1 || bitmap == null) {
                 try {
 //                    Log.v(TAG, "Load Bitmap from: " + params[1]);
-                    Bitmap tempBitmap = BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(Uri.parse(params[1])), null, options);
+                    Bitmap tempBitmap = BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(Uri.parse(params[1])), null, null);
 
-                    options.inBitmap = null;
-                    options.inDensity = tempBitmap.getDensity();
-                    options.inScaled = true;
-                    options.inTargetDensity = DisplayMetrics.DENSITY_HIGH;
+                    bitmap = scaleKeepAspectRatio(tempBitmap);
 
-                    bitmap = BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(Uri.parse(params[1])), null, options);
-
-                    tempBitmap.recycle();
-                    System.gc();
                 } catch (FileNotFoundException e) {
                     Log.e(TAG, e.getMessage());
                 }
@@ -400,5 +395,37 @@ public class CarSQL {
         public void setBitmap(Bitmap bitmap) {
             this.bitmap = bitmap;
         }
+    }
+
+    private Bitmap scaleKeepAspectRatio(Bitmap bitmap) {
+        float max = 1980;
+        int inHeight = bitmap.getHeight();
+        int inWidth = bitmap.getWidth();
+        float scale;
+        boolean recycle = true;
+
+        if (inWidth > max &&
+                inWidth > max) {
+            if (inWidth > inHeight)
+                scale = max / inWidth;
+            else
+                scale = max / inHeight;
+        } else if (inWidth > max)
+            scale = max / inWidth;
+        else if (inHeight > max)
+            scale = max / inHeight;
+        else {
+            Log.v(TAG, "No scale needed");
+            recycle = false;
+            scale = 1;
+        }
+
+        Log.v(TAG, "Scale: " + scale);
+        Bitmap out = Bitmap.createScaledBitmap(bitmap, (int) (inWidth * scale), (int) (inHeight * scale), false);
+        if (recycle) {
+            bitmap.recycle();
+            System.gc();
+        }
+        return out;
     }
 }

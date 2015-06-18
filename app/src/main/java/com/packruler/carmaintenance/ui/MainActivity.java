@@ -124,13 +124,18 @@ public class MainActivity extends AppCompatActivity
         vehicleMap = carsSQL.loadVehicles();
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
-        if (vehicleMap.size() > 0) {
-            changeVehicle(vehicleMap.entrySet().iterator().next().getValue());
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
-        } else {
-            displaySelectVehicle();
-            setUIColor(getResources().getColor(R.color.default_ui_color));
-        }
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, mainFragment)
+                .commit();
+
+        setUIColor(getResources().getColor(R.color.default_ui_color));
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, new VehicleSelectFragment(carsSQL))
+                .commit();
+        getSupportActionBar().setTitle(getString(R.string.select_vehicle));
     }
 
     @Override
@@ -150,7 +155,8 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void displaySelectVehicle() {
+    void displaySelectVehicle() {
+        setUIColor(getResources().getColor(R.color.default_ui_color));
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new VehicleSelectFragment(carsSQL))
                 .addToBackStack(null)
@@ -169,6 +175,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void changeVehicle() {
+
         int color = getResources().getColor(R.color.default_ui_color);
         if (currentVehicle != null) {
             if (currentVehicle.getDisplayColor() != 0)
@@ -182,11 +189,17 @@ public class MainActivity extends AppCompatActivity
         setUIColor(color);
         mainFragment.loadVehicleDetails();
 
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        while (fragmentManager.getBackStackEntryCount() > 0) {
-            Log.v(TAG, "Back Stack count: " + fragmentManager.getBackStackEntryCount());
-            Log.v(TAG, "Pop stack " + (fragmentManager.popBackStackImmediate() ? "Success" : "FAIL"));
-        }
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, mainFragment)
+                .commit();
+
+        mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+//        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+//        while (fragmentManager.getBackStackEntryCount() > 0) {
+//            Log.v(TAG, "Back Stack count: " + fragmentManager.getBackStackEntryCount());
+//            Log.v(TAG, "Pop stack " + (fragmentManager.popBackStackImmediate() ? "Success" : "FAIL"));
+//        }
     }
 
     public Vehicle getCurrentVehicle() {
@@ -205,14 +218,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
-//            restoreActionBar();
-            return true;
-        }
+//        if (!mNavigationDrawerFragment.isDrawerOpen()) {
+//            // Only show items in the action bar relevant to this screen
+//            // if the drawer is not showing. Otherwise, let the drawer
+//            // decide what to show in the action bar.
+//            getMenuInflater().inflate(R.menu.main, menu);
+////            restoreActionBar();
+//            return true;
+//        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -221,12 +234,12 @@ public class MainActivity extends AppCompatActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//        int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -240,6 +253,7 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setDisplayShowHomeEnabled(false);
             mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         } else {
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
             mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
     }

@@ -61,7 +61,8 @@ public class VehicleSelectFragment extends android.support.v4.app.Fragment {
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.select_car_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
-        cursor = carSQL.getReadableDatabase().query(Vehicle.TABLE_NAME, null, null, null, null, null, null);
+        cursor = carSQL.getReadableDatabase().query(Vehicle.TABLE_NAME, null,
+                null, null, null, null, null);
         if (!cursor.moveToFirst()) {
             ((TextView) rootView.findViewById(android.R.id.empty)).setText("EMPTY");
             rootView.findViewById(android.R.id.empty).setVisibility(View.VISIBLE);

@@ -396,7 +396,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public File getImage() {
-        return new File(carSQL.getMainFilePath() + "/" + row + "/" + "/vehicle.jpg");
+        return new File(carSQL.getMainFilePath() + "/" + row + "/" + "/vehicle.webp");
     }
 
     public void putContentValues(ContentValues contentValues) {

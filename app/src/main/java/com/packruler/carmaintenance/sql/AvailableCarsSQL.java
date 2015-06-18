@@ -254,4 +254,8 @@ public class AvailableCarsSQL {
     public SQLiteDatabase getReadableDatabase() {
         return sqlHelper.getReadableDatabase();
     }
+
+    public void close() {
+        sqlHelper.close();
+    }
 }
