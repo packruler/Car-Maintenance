@@ -25,7 +25,7 @@ import com.packruler.carmaintenance.vehicle.Vehicle;
  * Created by Packruler on 6/10/15.
  */
 public class VehicleMainFragment extends android.support.v4.app.Fragment {
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
     private MainActivity activity;
     private CardView editCarButton;
     private CardView servicesButton;
@@ -94,6 +94,7 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
     }
 
     public void setUIColor(int color) {
+        Log.v(TAG, "Color: " + color);
         if (color == 0)
             color = activity.getResources().getColor(R.color.default_ui_color);
 
@@ -115,7 +116,7 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
         if (viewInitialized) {
             final Vehicle vehicle = activity.getCurrentVehicle();
             if (vehicle != null) {
-                setUIColor(vehicle.getDisplayColor());
+//                setUIColor(vehicle.getDisplayColor());
 
                 vehicleName.setText(vehicle.getName());
                 if (vehicle.getImage().exists()) {

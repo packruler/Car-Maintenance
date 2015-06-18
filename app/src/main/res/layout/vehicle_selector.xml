@@ -6,7 +6,7 @@
                 android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:contentPadding="@dimen/abc_action_bar_default_padding_material"
         card_view:cardCornerRadius="@dimen/cardview_default_radius"
@@ -17,13 +17,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.packruler.carmaintenance.ui.utilities.AspectRatioImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/material_grey_500"
-                android:id="@id/vehicle_image"
-                android:scaleType="center"
-                android:src="@drawable/missing_photo_icon"/>
+            <!--<com.packruler.carmaintenance.ui.utilities.AspectRatioImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/material_grey_500"-->
+            <!--android:id="@id/vehicle_image"-->
+            <!--android:scaleType="center"-->
+            <!--android:src="@drawable/missing_photo_icon"/>-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -31,7 +31,6 @@
                 android:layout_marginLeft="@dimen/margin_tiny"
                 android:id="@+id/vehicle_name"
                 android:textAppearance="@android:style/TextAppearance.Large"
-                android:layout_below="@id/vehicle_image"
                 android:text="Vehicle-Name"/>
 
             <TextView

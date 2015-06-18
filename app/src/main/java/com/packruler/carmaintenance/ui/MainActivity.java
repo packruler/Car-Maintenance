@@ -127,11 +127,10 @@ public class MainActivity extends AppCompatActivity
         if (vehicleMap.size() > 0) {
             changeVehicle(vehicleMap.entrySet().iterator().next().getValue());
             getSupportFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
-        } else
+        } else {
             displaySelectVehicle();
-
-//        mNavigationDrawerFragment.updateDrawer();
-        setUIColor(getResources().getColor(R.color.default_ui_color));
+            setUIColor(getResources().getColor(R.color.default_ui_color));
+        }
     }
 
     @Override
@@ -167,11 +166,6 @@ public class MainActivity extends AppCompatActivity
     public void changeVehicle(long vehicleRow) {
         currentVehicle = vehicleMap.get(vehicleRow);
         changeVehicle();
-    }
-
-    public void changeVehicle(String vehicleName) {
-        currentVehicle = vehicleMap.get(vehicleName);
-        changeVehicle(vehicleMap.get(vehicleName));
     }
 
     private void changeVehicle() {
