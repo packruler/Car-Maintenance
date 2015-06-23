@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, new VehicleSelectFragment(carsSQL))
+                .addToBackStack(getString(R.string.select_vehicle))
                 .commit();
         getSupportActionBar().setTitle(getString(R.string.select_vehicle));
     }
@@ -189,10 +190,12 @@ public class MainActivity extends AppCompatActivity
         setUIColor(color);
         mainFragment.loadVehicleDetails();
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container, mainFragment)
-                .commit();
+        while (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStackImmediate();
+        }
+//        .beginTransaction()
+//                .replace(R.id.container, mainFragment)
+//                .commit();
 
         mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 //        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
@@ -249,6 +252,8 @@ public class MainActivity extends AppCompatActivity
         int count = getSupportFragmentManager().getBackStackEntryCount();
         Log.v("onBackStackChanged", "Count: " + count);
         if (count == 0) {
+            if (currentVehicle == null)
+                finish();
             changeVehicle();
             getSupportActionBar().setDisplayShowHomeEnabled(false);
             mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);

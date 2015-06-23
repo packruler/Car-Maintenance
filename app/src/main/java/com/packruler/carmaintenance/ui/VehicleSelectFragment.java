@@ -51,7 +51,8 @@ public class VehicleSelectFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 Log.v(TAG, "onClick");
-                getFragmentManager().beginTransaction()
+                getFragmentManager()
+                        .beginTransaction()
                         .replace(R.id.container, new EditCar((MainActivity) getActivity()))
                         .addToBackStack(EditCar.TAG)
                         .commit();

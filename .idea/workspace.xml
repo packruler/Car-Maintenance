@@ -106,7 +106,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b150856a-4955-4538-bbe1-94377f603e98" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/xml/backup_content.xml" />
       <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/json/VINDecoder.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/drawable-hdpi/ic_cancel.png" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/drawable-hdpi/ic_cancel.png" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/drawable-mdpi/ic_cancel.png" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/drawable-mdpi/ic_cancel.png" />
@@ -123,14 +122,11 @@
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/drawable-xhdpi/ic_save.png" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/drawable-xhdpi/ic_save.png" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/drawable-xxhdpi/ic_save.png" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/drawable-xxhdpi/ic_save.png" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/drawable-xxxhdpi/ic_save.png" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/drawable-xxxhdpi/ic_save.png" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/AndroidManifest.xml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/ToolbarColorizeHelper.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/ToolbarColorizeHelper.java" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleSelectFragment.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleSelectFragment.java" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/app.iml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/build.gradle" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/menu/save_discard_menu.xml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/menu/save_discard_menu.xml" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/workspace.xml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/workspace.xml" />
     </list>
@@ -245,21 +241,85 @@
       <file leaf-file-name="EditCar.java" pinned="false" current-in-tab="true">
         <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.04964539">
-              <caret line="380" column="82" selection-start-line="380" selection-start-column="82" selection-end-line="380" selection-end-column="82" />
+            <state vertical-scroll-proportion="0.68085104">
+              <caret line="216" column="41" selection-start-line="216" selection-start-column="41" selection-end-line="216" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2373#2406#0" expanded="true" />
                 <element signature="method#EditCar#1;class#EditCar#0" expanded="true" />
                 <element signature="method#onCreateView#0;class#EditCar#0" expanded="true" />
+                <element signature="e#4509#4523#0" expanded="true" />
+                <element signature="e#4614#4619#0" expanded="true" />
                 <element signature="method#onDestroy#0;class#EditCar#0" expanded="true" />
+                <element signature="e#4777#4788#0" expanded="true" />
                 <element signature="method#initializeView#0;class#EditCar#0" expanded="true" />
-                <element signature="method#onCreateOptionsMenu#0;class#EditCar#0" expanded="true" />
+                <element signature="e#6386#6413#0" expanded="true" />
+                <element signature="e#6673#6697#0" expanded="true" />
+                <element signature="e#6909#6914#0" expanded="true" />
+                <element signature="e#6916#6921#0" expanded="true" />
+                <element signature="e#7043#7070#0" expanded="true" />
+                <element signature="e#7283#7288#0" expanded="true" />
+                <element signature="e#7290#7295#0" expanded="true" />
+                <element signature="e#7418#7444#0" expanded="true" />
+                <element signature="e#7657#7662#0" expanded="true" />
+                <element signature="e#7664#7669#0" expanded="true" />
+                <element signature="e#7811#7832#0" expanded="true" />
                 <element signature="method#onOptionsItemSelected#0;class#EditCar#0" expanded="true" />
+                <element signature="e#8103#8127#0" expanded="true" />
+                <element signature="e#8197#8224#0" expanded="true" />
+                <element signature="e#8422#8448#0" expanded="true" />
+                <element signature="e#8559#8586#0" expanded="true" />
+                <element signature="e#8627#8653#0" expanded="true" />
+                <element signature="e#8655#8659#0" expanded="true" />
+                <element signature="e#8700#8726#0" expanded="true" />
+                <element signature="e#8945#8963#0" expanded="true" />
+                <element signature="e#9105#9139#0" expanded="true" />
+                <element signature="e#9545#9558#0" expanded="true" />
+                <element signature="e#9890#9918#0" expanded="true" />
                 <element signature="method#loadVehicle#1;class#EditCar#0" expanded="true" />
+                <element signature="method#setHighlightColors#0;class#EditCar#0" expanded="true" />
+                <element signature="e#14542#14546#0" expanded="true" />
+                <element signature="e#14548#14552#0" expanded="true" />
                 <element signature="method#setCardTitleColors#0;class#EditCar#0" expanded="true" />
-                <element signature="method#saveVehicle#0;class#EditCar#0" expanded="true" />
+                <element signature="e#14973#15007#0" expanded="true" />
+                <element signature="e#15255#15281#0" expanded="true" />
+                <element signature="e#16367#16400#0" expanded="true" />
+                <element signature="e#16541#16572#0" expanded="true" />
+                <element signature="e#16656#16687#0" expanded="true" />
+                <element signature="e#16828#16858#0" expanded="true" />
+                <element signature="e#16942#16972#0" expanded="true" />
+                <element signature="e#17114#17145#0" expanded="true" />
+                <element signature="e#17229#17260#0" expanded="true" />
+                <element signature="e#17418#17447#0" expanded="true" />
+                <element signature="e#17541#17574#0" expanded="true" />
+                <element signature="e#17719#17745#0" expanded="true" />
+                <element signature="e#17977#18009#0" expanded="true" />
+                <element signature="e#18904#18939#0" expanded="true" />
+                <element signature="e#19279#19314#0" expanded="true" />
+                <element signature="e#19441#19454#0" expanded="true" />
+                <element signature="e#19863#19878#0" expanded="true" />
+                <element signature="e#19880#19884#0" expanded="true" />
+                <element signature="e#19933#19949#0" expanded="true" />
+                <element signature="e#19951#19955#0" expanded="true" />
                 <element signature="method#saveYear#0;class#EditCar#0" expanded="true" />
+                <element signature="e#22386#22421#0" expanded="true" />
+                <element signature="e#22899#22934#0" expanded="true" />
+                <element signature="e#23061#23074#0" expanded="true" />
+                <element signature="e#23443#23458#0" expanded="true" />
+                <element signature="e#23460#23464#0" expanded="true" />
+                <element signature="e#23513#23529#0" expanded="true" />
+                <element signature="e#23531#23535#0" expanded="true" />
+                <element signature="e#24819#24838#0" expanded="true" />
+                <element signature="e#25034#25069#0" expanded="true" />
                 <element signature="method#saveMake#0;class#EditCar#0" expanded="true" />
+                <element signature="e#25723#25758#0" expanded="true" />
+                <element signature="e#26236#26271#0" expanded="true" />
+                <element signature="e#26398#26412#0" expanded="true" />
+                <element signature="e#26781#26796#0" expanded="true" />
+                <element signature="e#26798#26802#0" expanded="true" />
+                <element signature="e#26851#26867#0" expanded="true" />
+                <element signature="e#26869#26873#0" expanded="true" />
+                <element signature="e#28192#28227#0" expanded="true" />
                 <element signature="method#saveModel#0;class#EditCar#0" expanded="true" />
                 <element signature="method#saveSubModel#0;class#EditCar#0" expanded="true" />
                 <element signature="method#initializeCurrentMileage#0;class#EditCar#0" expanded="true" />
@@ -271,19 +331,47 @@
                 <element signature="method#saveTorque#0;class#EditCar#0" expanded="true" />
                 <element signature="method#saveVehicleColor#0;class#EditCar#0" expanded="true" />
                 <element signature="method#initializeVehicleImage#0;class#EditCar#0" expanded="true" />
+                <element signature="e#38572#38573#0" expanded="true" />
+                <element signature="e#38794#38809#0" expanded="true" />
+                <element signature="e#38811#38815#0" expanded="true" />
+                <element signature="e#39664#39679#0" expanded="true" />
+                <element signature="e#39681#39685#0" expanded="true" />
+                <element signature="e#40054#40074#0" expanded="true" />
+                <element signature="e#40277#40283#0" expanded="true" />
+                <element signature="e#40285#40291#0" expanded="true" />
+                <element signature="e#40329#40342#0" expanded="true" />
+                <element signature="e#40344#40348#0" expanded="true" />
+                <element signature="e#41024#41025#0" expanded="true" />
+                <element signature="e#41186#41195#0" expanded="true" />
+                <element signature="e#41197#41198#0" expanded="true" />
+                <element signature="e#41225#41234#0" expanded="true" />
+                <element signature="e#41236#41237#0" expanded="true" />
+                <element signature="e#41264#41271#0" expanded="true" />
+                <element signature="e#41273#41277#0" expanded="true" />
+                <element signature="e#41304#41317#0" expanded="true" />
+                <element signature="e#41319#41324#0" expanded="true" />
                 <element signature="method#getTempFile#0;class#EditCar#0" expanded="true" />
+                <element signature="e#42796#42826#0" expanded="true" />
                 <element signature="method#loadImage#0;class#EditCar#0" expanded="true" />
-                <element signature="class#42879:43488" expanded="true" />
-                <element signature="method#run#0;class#42879:43488" expanded="true" />
-                <element signature="e#43491#43506#0" expanded="false" />
+                <element signature="class#43052:43661" expanded="true" />
+                <element signature="method#run#0;class#43052:43661" expanded="true" />
+                <element signature="e#43664#43679#0" expanded="false" />
+                <element signature="e#46530#46535#0" expanded="true" />
+                <element signature="e#48497#48516#0" expanded="true" />
                 <element signature="method#storeImage#0;class#EditCar#0" expanded="true" />
+                <element signature="e#53004#53006#0" expanded="true" />
+                <element signature="e#53330#53362#0" expanded="true" />
+                <element signature="e#54102#54140#0" expanded="true" />
                 <element signature="method#initializePurchaseCost#0;class#EditCar#0" expanded="true" />
                 <element signature="method#savePurchaseCost#0;class#EditCar#0" expanded="true" />
                 <element signature="method#initializePurchaseDate#0;class#EditCar#0" expanded="true" />
                 <element signature="method#savePurchaseDate#0;class#EditCar#0" expanded="true" />
                 <element signature="method#initializePurchaseMileage#0;class#EditCar#0" expanded="true" />
                 <element signature="method#savePurchaseMileage#0;class#EditCar#0" expanded="true" />
+                <element signature="e#59762#59776#0" expanded="true" />
+                <element signature="e#59859#59864#0" expanded="true" />
                 <element signature="method#sendToast#1;class#EditCar#0" expanded="true" />
+                <marker date="1435082553464" expanded="true" signature="14301:14431" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -3142,8 +3230,8 @@
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleSelectFragment.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/menu/save_discard_menu.xml" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/ToolbarColorizeHelper.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java" />
       </list>
     </option>
   </component>
@@ -3222,16 +3310,6 @@
               <option name="myItemId" value="Car-Maintenance" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gradle Scripts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -3241,38 +3319,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -3305,10 +3351,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="carmaintenance" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vehicle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -3330,32 +3372,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="carmaintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utilities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3466,110 +3482,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="carmaintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="carmaintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3899,12 +3811,6 @@
       <option name="number" value="Default" />
       <updated>1417384725146</updated>
     </task>
-    <task id="LOCAL-00045" summary="Add ServiceTask reference for PartReplacement">
-      <created>1433355391896</created>
-      <option name="number" value="00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1433355391896</updated>
-    </task>
     <task id="LOCAL-00046" summary="Changed method of cursor handling in RecylcerView">
       <created>1433431640776</created>
       <option name="number" value="00046" />
@@ -4193,7 +4099,13 @@
       <option name="project" value="LOCAL" />
       <updated>1434664924730</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="Initial M backup capability">
+      <created>1435082000692</created>
+      <option name="number" value="00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1435082000693</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TodoView">
@@ -4259,7 +4171,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="loading vehicle images only once to cache in CarSql" />
     <MESSAGE value="Memory usage on loading images much much better" />
     <MESSAGE value="Size of image cache is now related to VM memory" />
     <MESSAGE value="remove unneeded comment" />
@@ -4284,7 +4195,8 @@
     <MESSAGE value="Vehicle Selector remove image" />
     <MESSAGE value="Better initial fragment setup" />
     <MESSAGE value="material edit icons" />
-    <option name="LAST_COMMIT_MESSAGE" value="material edit icons" />
+    <MESSAGE value="Initial M backup capability" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial M backup capability" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -4781,21 +4693,85 @@
     </entry>
     <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.04964539">
-          <caret line="380" column="82" selection-start-line="380" selection-start-column="82" selection-end-line="380" selection-end-column="82" />
+        <state vertical-scroll-proportion="0.68085104">
+          <caret line="216" column="41" selection-start-line="216" selection-start-column="41" selection-end-line="216" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2373#2406#0" expanded="true" />
             <element signature="method#EditCar#1;class#EditCar#0" expanded="true" />
             <element signature="method#onCreateView#0;class#EditCar#0" expanded="true" />
+            <element signature="e#4509#4523#0" expanded="true" />
+            <element signature="e#4614#4619#0" expanded="true" />
             <element signature="method#onDestroy#0;class#EditCar#0" expanded="true" />
+            <element signature="e#4777#4788#0" expanded="true" />
             <element signature="method#initializeView#0;class#EditCar#0" expanded="true" />
-            <element signature="method#onCreateOptionsMenu#0;class#EditCar#0" expanded="true" />
+            <element signature="e#6386#6413#0" expanded="true" />
+            <element signature="e#6673#6697#0" expanded="true" />
+            <element signature="e#6909#6914#0" expanded="true" />
+            <element signature="e#6916#6921#0" expanded="true" />
+            <element signature="e#7043#7070#0" expanded="true" />
+            <element signature="e#7283#7288#0" expanded="true" />
+            <element signature="e#7290#7295#0" expanded="true" />
+            <element signature="e#7418#7444#0" expanded="true" />
+            <element signature="e#7657#7662#0" expanded="true" />
+            <element signature="e#7664#7669#0" expanded="true" />
+            <element signature="e#7811#7832#0" expanded="true" />
             <element signature="method#onOptionsItemSelected#0;class#EditCar#0" expanded="true" />
+            <element signature="e#8103#8127#0" expanded="true" />
+            <element signature="e#8197#8224#0" expanded="true" />
+            <element signature="e#8422#8448#0" expanded="true" />
+            <element signature="e#8559#8586#0" expanded="true" />
+            <element signature="e#8627#8653#0" expanded="true" />
+            <element signature="e#8655#8659#0" expanded="true" />
+            <element signature="e#8700#8726#0" expanded="true" />
+            <element signature="e#8945#8963#0" expanded="true" />
+            <element signature="e#9105#9139#0" expanded="true" />
+            <element signature="e#9545#9558#0" expanded="true" />
+            <element signature="e#9890#9918#0" expanded="true" />
             <element signature="method#loadVehicle#1;class#EditCar#0" expanded="true" />
+            <element signature="method#setHighlightColors#0;class#EditCar#0" expanded="true" />
+            <element signature="e#14542#14546#0" expanded="true" />
+            <element signature="e#14548#14552#0" expanded="true" />
             <element signature="method#setCardTitleColors#0;class#EditCar#0" expanded="true" />
-            <element signature="method#saveVehicle#0;class#EditCar#0" expanded="true" />
+            <element signature="e#14973#15007#0" expanded="true" />
+            <element signature="e#15255#15281#0" expanded="true" />
+            <element signature="e#16367#16400#0" expanded="true" />
+            <element signature="e#16541#16572#0" expanded="true" />
+            <element signature="e#16656#16687#0" expanded="true" />
+            <element signature="e#16828#16858#0" expanded="true" />
+            <element signature="e#16942#16972#0" expanded="true" />
+            <element signature="e#17114#17145#0" expanded="true" />
+            <element signature="e#17229#17260#0" expanded="true" />
+            <element signature="e#17418#17447#0" expanded="true" />
+            <element signature="e#17541#17574#0" expanded="true" />
+            <element signature="e#17719#17745#0" expanded="true" />
+            <element signature="e#17977#18009#0" expanded="true" />
+            <element signature="e#18904#18939#0" expanded="true" />
+            <element signature="e#19279#19314#0" expanded="true" />
+            <element signature="e#19441#19454#0" expanded="true" />
+            <element signature="e#19863#19878#0" expanded="true" />
+            <element signature="e#19880#19884#0" expanded="true" />
+            <element signature="e#19933#19949#0" expanded="true" />
+            <element signature="e#19951#19955#0" expanded="true" />
             <element signature="method#saveYear#0;class#EditCar#0" expanded="true" />
+            <element signature="e#22386#22421#0" expanded="true" />
+            <element signature="e#22899#22934#0" expanded="true" />
+            <element signature="e#23061#23074#0" expanded="true" />
+            <element signature="e#23443#23458#0" expanded="true" />
+            <element signature="e#23460#23464#0" expanded="true" />
+            <element signature="e#23513#23529#0" expanded="true" />
+            <element signature="e#23531#23535#0" expanded="true" />
+            <element signature="e#24819#24838#0" expanded="true" />
+            <element signature="e#25034#25069#0" expanded="true" />
             <element signature="method#saveMake#0;class#EditCar#0" expanded="true" />
+            <element signature="e#25723#25758#0" expanded="true" />
+            <element signature="e#26236#26271#0" expanded="true" />
+            <element signature="e#26398#26412#0" expanded="true" />
+            <element signature="e#26781#26796#0" expanded="true" />
+            <element signature="e#26798#26802#0" expanded="true" />
+            <element signature="e#26851#26867#0" expanded="true" />
+            <element signature="e#26869#26873#0" expanded="true" />
+            <element signature="e#28192#28227#0" expanded="true" />
             <element signature="method#saveModel#0;class#EditCar#0" expanded="true" />
             <element signature="method#saveSubModel#0;class#EditCar#0" expanded="true" />
             <element signature="method#initializeCurrentMileage#0;class#EditCar#0" expanded="true" />
@@ -4807,19 +4783,47 @@
             <element signature="method#saveTorque#0;class#EditCar#0" expanded="true" />
             <element signature="method#saveVehicleColor#0;class#EditCar#0" expanded="true" />
             <element signature="method#initializeVehicleImage#0;class#EditCar#0" expanded="true" />
+            <element signature="e#38572#38573#0" expanded="true" />
+            <element signature="e#38794#38809#0" expanded="true" />
+            <element signature="e#38811#38815#0" expanded="true" />
+            <element signature="e#39664#39679#0" expanded="true" />
+            <element signature="e#39681#39685#0" expanded="true" />
+            <element signature="e#40054#40074#0" expanded="true" />
+            <element signature="e#40277#40283#0" expanded="true" />
+            <element signature="e#40285#40291#0" expanded="true" />
+            <element signature="e#40329#40342#0" expanded="true" />
+            <element signature="e#40344#40348#0" expanded="true" />
+            <element signature="e#41024#41025#0" expanded="true" />
+            <element signature="e#41186#41195#0" expanded="true" />
+            <element signature="e#41197#41198#0" expanded="true" />
+            <element signature="e#41225#41234#0" expanded="true" />
+            <element signature="e#41236#41237#0" expanded="true" />
+            <element signature="e#41264#41271#0" expanded="true" />
+            <element signature="e#41273#41277#0" expanded="true" />
+            <element signature="e#41304#41317#0" expanded="true" />
+            <element signature="e#41319#41324#0" expanded="true" />
             <element signature="method#getTempFile#0;class#EditCar#0" expanded="true" />
+            <element signature="e#42796#42826#0" expanded="true" />
             <element signature="method#loadImage#0;class#EditCar#0" expanded="true" />
-            <element signature="class#42879:43488" expanded="true" />
-            <element signature="method#run#0;class#42879:43488" expanded="true" />
-            <element signature="e#43491#43506#0" expanded="false" />
+            <element signature="class#43052:43661" expanded="true" />
+            <element signature="method#run#0;class#43052:43661" expanded="true" />
+            <element signature="e#43664#43679#0" expanded="false" />
+            <element signature="e#46530#46535#0" expanded="true" />
+            <element signature="e#48497#48516#0" expanded="true" />
             <element signature="method#storeImage#0;class#EditCar#0" expanded="true" />
+            <element signature="e#53004#53006#0" expanded="true" />
+            <element signature="e#53330#53362#0" expanded="true" />
+            <element signature="e#54102#54140#0" expanded="true" />
             <element signature="method#initializePurchaseCost#0;class#EditCar#0" expanded="true" />
             <element signature="method#savePurchaseCost#0;class#EditCar#0" expanded="true" />
             <element signature="method#initializePurchaseDate#0;class#EditCar#0" expanded="true" />
             <element signature="method#savePurchaseDate#0;class#EditCar#0" expanded="true" />
             <element signature="method#initializePurchaseMileage#0;class#EditCar#0" expanded="true" />
             <element signature="method#savePurchaseMileage#0;class#EditCar#0" expanded="true" />
+            <element signature="e#59762#59776#0" expanded="true" />
+            <element signature="e#59859#59864#0" expanded="true" />
             <element signature="method#sendToast#1;class#EditCar#0" expanded="true" />
+            <marker date="1435082553464" expanded="true" signature="14301:14431" placeholder="..." />
           </folding>
         </state>
       </provider>

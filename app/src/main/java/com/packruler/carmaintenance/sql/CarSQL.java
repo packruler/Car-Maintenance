@@ -183,10 +183,11 @@ public class CarSQL {
     }
 
     public SQLiteDatabase getWritableDatabase() {
-        if (database == null) {
+        if (database == null)
             database = sqlHelper.getWritableDatabase();
-        } else if (database.inTransaction())
-            Log.v(TAG, "Database in transation");
+
+//        else if (database.inTransaction())
+//            Log.v(TAG, "Database in transation");
 
         return database;
     }
