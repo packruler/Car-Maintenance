@@ -1222,15 +1222,19 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
 
     private void setLoadedColor(Palette palette) {
         loadSwatches(palette);
-        if (palette.getVibrantSwatch() != null)
-            setLoadedColor(palette.getVibrantSwatch().getRgb());
-        else if (palette.getDarkMutedSwatch() != null)
-            setLoadedColor(palette.getDarkMutedSwatch().getRgb());
-        else if (palette.getMutedSwatch() != null)
-            setLoadedColor(palette.getMutedSwatch().getRgb());
-        else
-            setLoadedColor(swatches.get(0).getRgb());
+        if (!loadedColorSet) {
+            if (palette.getVibrantSwatch() != null)
+                setLoadedColor(palette.getVibrantSwatch().getRgb());
+            else if (palette.getDarkMutedSwatch() != null)
+                setLoadedColor(palette.getDarkMutedSwatch().getRgb());
+            else if (palette.getMutedSwatch() != null)
+                setLoadedColor(palette.getMutedSwatch().getRgb());
+            else
+                setLoadedColor(swatches.get(0).getRgb());
+        }
     }
+
+    boolean loadedColorSet = false;
 
     private void setLoadedColor(final int color) {
         mainHandler.post(new Runnable() {
@@ -1238,6 +1242,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
             public void run() {
                 setHighlightColors(color);
                 displayColorIcon.setBackgroundColor(color);
+                loadedColorSet = true;
             }
         });
     }

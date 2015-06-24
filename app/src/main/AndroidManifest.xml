@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.packruler.carmaintenance">
-    <uses-sdk android:targetSdkVersion="MNC"/>
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="MNC"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>

@@ -17,7 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.packruler.carmaintenance.sql.utilities.LruCacheSmartRemove;
+import com.packruler.carmaintenance.sql.utilities.BitmapCache;
 import com.packruler.carmaintenance.ui.utilities.VehicleMap;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
@@ -26,6 +26,7 @@ import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
 import java.io.FileNotFoundException;
 import java.lang.ref.WeakReference;
+import java.text.NumberFormat;
 
 /**
  * Created by Packruler on 5/4/15.
@@ -60,7 +61,7 @@ public class CarSQL {
     };
 
     private SQLHelper sqlHelper;
-    private LruCacheSmartRemove<Long, Bitmap> mMemoryCache;
+    private BitmapCache<Long, Bitmap> mMemoryCache;
     private Activity activity;
 
     public CarSQL(Activity activity) {
@@ -217,25 +218,26 @@ public class CarSQL {
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
 
         // Use 1/8th of the available memory for this memory cache.
-        final int cacheSize = maxMemory / 8;
+        final int cacheSize = maxMemory / 6;
 
-        mMemoryCache = new LruCacheSmartRemove<Long, Bitmap>(cacheSize);
+        mMemoryCache = new BitmapCache<>(cacheSize);
     }
 
     public void addBitmapToMemoryCache(long key, Bitmap bitmap) {
-        Bitmap cache = getBitmapFromMemCache(key);
-        if (cache != null) {
-//            if (!cache.sameAs(bitmap)) {
-            cache.recycle();
-            mMemoryCache.put(key, bitmap, true);
+//        Bitmap cache = getBitmapFromMemCache(key);
+//        if (cache != null)
+//        {
+////            if (!cache.sameAs(bitmap)) {
+//            cache.recycle();
+//            mMemoryCache.put(key, bitmap, true);
 //            } else
 //                Log.w(TAG, "Tried to store the same bitmap");
-        } else
-            mMemoryCache.put(key, bitmap, true);
+//        } else
+        mMemoryCache.put(key, bitmap);
     }
 
     public boolean storeCacheToMemory(long key) {
-        Bitmap temp = mMemoryCache.remove(-1l, true);
+        Bitmap temp = mMemoryCache.remove(-1l);
         if (temp != null) {
             addBitmapToMemoryCache(key, temp);
             return true;
@@ -244,16 +246,16 @@ public class CarSQL {
     }
 
     public Bitmap getBitmapFromMemCache(long key) {
-        return mMemoryCache.get(key, true);
+        return mMemoryCache.get(key);
     }
 
     public Bitmap getTempFromCache() {
-        return mMemoryCache.get(-1l, true);
+        return mMemoryCache.get(-1l);
     }
 
     public void clearCache() {
         if (mMemoryCache.get(-1l) != null)
-            mMemoryCache.remove(-1l, true).recycle();
+            mMemoryCache.remove(-1l).recycle();
     }
 
     public void loadBitmap(Uri uri, @Nullable ImageView imageView, @Nullable View loadingView,
@@ -306,6 +308,7 @@ public class CarSQL {
         // Decode image in background.
         @Override
         protected Bitmap doInBackground(String... params) {
+            Log.v(TAG, "Load bitmap");
             data = params;
             long key;
             try {
@@ -321,11 +324,10 @@ public class CarSQL {
 
             if (key == -1 || bitmap == null) {
                 try {
-//                    Log.v(TAG, "Load Bitmap from: " + params[1]);
+                    Log.v(TAG, "Load Bitmap from: " + params[1]);
                     Bitmap tempBitmap = BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(Uri.parse(params[1])), null, null);
 
                     bitmap = scaleKeepAspectRatio(tempBitmap);
-
                 } catch (FileNotFoundException e) {
                     Log.e(TAG, e.getMessage());
                 }
@@ -333,7 +335,9 @@ public class CarSQL {
                 if (bitmap != null) {
                     addBitmapToMemoryCache(key, bitmap);
                     Log.v(TAG, "New Bitmap size: " + (bitmap.getByteCount() / 1024) + "KB");
-                    Log.v(TAG, "Cache usage: " + mMemoryCache.size() + "/" + mMemoryCache.maxSize() + "KB");
+                    Log.v(TAG, "Cache usage: " +
+                            NumberFormat.getInstance().format(mMemoryCache.size()) + "/" +
+                            NumberFormat.getInstance().format(mMemoryCache.maxSize()) + "KB");
                 }
                 return bitmap;
             }
