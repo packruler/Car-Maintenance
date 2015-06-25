@@ -17,7 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.packruler.carmaintenance.sql.utilities.BitmapCache;
+import com.packruler.bitmapcache.BitmapCache;
 import com.packruler.carmaintenance.ui.utilities.VehicleMap;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
@@ -325,9 +325,7 @@ public class CarSQL {
             if (key == -1 || bitmap == null) {
                 try {
                     Log.v(TAG, "Load Bitmap from: " + params[1]);
-                    Bitmap tempBitmap = BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(Uri.parse(params[1])), null, null);
-
-                    bitmap = scaleKeepAspectRatio(tempBitmap);
+                    bitmap = scaleKeepAspectRatio(BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(Uri.parse(params[1])), null, null));
                 } catch (FileNotFoundException e) {
                     Log.e(TAG, e.getMessage());
                 }
