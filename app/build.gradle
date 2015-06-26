@@ -45,7 +45,6 @@ dependencies {
         exclude group: 'com.rengwuxian.materialedittext', module: 'library'
     }
     compile 'de.hdodenhof:circleimageview:1.3.0'
-    compile project(':mobihelp_sdk_android_v1.4')
 //    compile project(':BitmapCache')
 
     compile 'com.packruler:BitmapCache:1.0'

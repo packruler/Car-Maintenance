@@ -104,14 +104,135 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.packruler.carmaintenance" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b150856a-4955-4538-bbe1-94377f603e98" name="Default" comment="Redo bitmap cache handling">
-      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/bitmapcache/src/main/java/com/packruler/bitmapcache/BitmapCache.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java" />
+    <list default="true" id="b150856a-4955-4538-bbe1-94377f603e98" name="Default" comment="">
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/libraries/appcompat_v7_19_1_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/libraries/mobihelp.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/libraries/support_v4_19_1_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/.classpath" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/.project" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/README.txt" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/build.gradle" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/build.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/libs/mobihelp.jar" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/mobihelp_sdk_android_v1.4.iml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/proguard-project.txt" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/project.properties" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/anim/mobihelp_progress.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_chat_bubble_agent.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_chat_bubble_user.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_action_attach_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_action_attach_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_action_contact_us_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_action_contact_us_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_action_remove.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_action_search_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_action_search_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_action_send_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_action_send_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_action_submit_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_action_submit_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_conversation_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_conversation_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_playstore.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-hdpi/mobihelp_ic_unread_count.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_action_attach_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_action_attach_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_action_contact_us_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_action_contact_us_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_action_remove.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_action_search_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_action_search_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_action_send_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_action_send_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_action_submit_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_action_submit_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_conversation_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_conversation_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_playstore.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-mdpi/mobihelp_ic_unread_count.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_action_attach_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_action_attach_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_action_contact_us_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_action_contact_us_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_action_remove.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_action_search_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_action_search_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_action_send_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_action_send_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_action_submit_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_action_submit_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_conversation_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_conversation_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_playstore.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xhdpi/mobihelp_ic_unread_count.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xxhdpi/mobihelp_ic_action_attach_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xxhdpi/mobihelp_ic_action_attach_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xxhdpi/mobihelp_ic_action_remove.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xxhdpi/mobihelp_ic_action_search_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xxhdpi/mobihelp_ic_action_search_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xxhdpi/mobihelp_ic_action_send_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xxhdpi/mobihelp_ic_action_send_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xxhdpi/mobihelp_ic_action_submit_dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable-xxhdpi/mobihelp_ic_action_submit_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable/mobihelp_chat_bubble_review_bg.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable/mobihelp_circular_selectable_item_background.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable/mobihelp_close_button_background.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable/mobihelp_progress_spinner.png" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/drawable/mobihelp_unread_count_oval_bg.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_activity_attachment_handler.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_activity_conversation.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_activity_feedback.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_activity_solution_list.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_activity_ticket_list.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_close_confirmation_frame.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_contactus_footer.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_custom_webview_screen.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_listitem_article.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_listitem_category.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_listitem_conversation.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_listitem_folder.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_listitem_ticket.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_partial_reply_frame.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_progressbar.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_start_new_conversation_frame.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_toolbar.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/layout/mobihelp_video_loading.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/menu/mobihelp_feedback.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/menu/mobihelp_solutions_list.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/menu/mobihelp_ticket_list.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/raw/normalize.css" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values-da/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values-de/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values-es/dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values-es/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values-fr/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values-it/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values-nb/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values-nl/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values-pl/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values-pt/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values-ru/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values-sv/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values/attrs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values/colors.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values/config.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values/dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values/themes.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values/themes_app.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/res/values/themes_base.xml" afterPath="" />
+      <change type="DELETED" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/utilities/BitmapCache.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/Car-Maintenance.iml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/Car-Maintenance.iml" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/PartReplacement.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/PartReplacement.java" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/app.iml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/build.gradle" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/build.gradle" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/build.gradle" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/build.gradle" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/build.gradle" />
-      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/gradle/wrapper/gradle-wrapper.properties" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/gradle/wrapper/gradle-wrapper.properties" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/gradle.xml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/gradle.xml" />
+      <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/modules.xml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/settings.gradle" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/settings.gradle" />
       <change type="MODIFICATION" beforePath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/workspace.xml" afterPath="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/.idea/workspace.xml" />
     </list>
@@ -223,84 +344,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="fragment_edit_car.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/fragment_edit_car.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.5172415">
-              <caret line="418" column="56" selection-start-line="418" selection-start-column="56" selection-end-line="418" selection-end-column="56" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CarSQL.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="252" column="27" selection-start-line="252" selection-start-column="27" selection-end-line="252" selection-end-column="27" />
-              <folding>
-                <element signature="docComment;class#CarSQL#0" expanded="false" />
-                <element signature="class#1423:2178" expanded="false" />
-                <element signature="method#onChanged#0;class#1423:2178" expanded="false" />
-                <element signature="method#onAdded#0;class#1423:2178" expanded="false" />
-                <element signature="method#onRemoved#0;class#1423:2178" expanded="false" />
-                <element signature="method#CarSQL#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#registerObserver#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#unregisterAll#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#unregisterObserver#0;class#CarSQL#0" expanded="false" />
-                <element signature="class#SQLHelper#0;class#CarSQL#0" expanded="false" />
-                <element signature="e#3450#3451#0" expanded="false" />
-                <element signature="e#3527#3528#0" expanded="false" />
-                <element signature="method#onCreate#0;class#SQLHelper#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#onUpgrade#0;class#SQLHelper#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#onDowngrade#0;class#SQLHelper#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#loadVehicleCursor#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#loadVehicles#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#getVehicleCount#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#beginTransaction#0;class#CarSQL#0" expanded="false" />
-                <element signature="e#5433#5434#0" expanded="false" />
-                <element signature="e#5484#5485#0" expanded="false" />
-                <element signature="e#5520#5521#0" expanded="false" />
-                <element signature="e#5561#5562#0" expanded="false" />
-                <element signature="method#close#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#getWritableDatabase#0;class#CarSQL#0" expanded="false" />
-                <element signature="e#6142#6143#0" expanded="false" />
-                <element signature="e#6196#6197#0" expanded="false" />
-                <element signature="method#canUseCarName#0;class#CarSQL#0" expanded="false" />
-                <element signature="e#6640#6641#0" expanded="false" />
-                <element signature="e#6675#6676#0" expanded="false" />
-                <element signature="method#addBitmapToMemoryCache#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#storeCacheToMemory#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#clearCache#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#loadBitmap#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#loadBitmap#1;class#CarSQL#0" expanded="false" />
-                <element signature="method#cancelPotentialWork#0;class#CarSQL#0" expanded="false" />
-                <element signature="class#BitmapWorkerTask#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#BitmapWorkerTask#0;class#BitmapWorkerTask#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#doInBackground#0;class#BitmapWorkerTask#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#onPostExecute#0;class#BitmapWorkerTask#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#getBitmapWorkerTask#0;class#CarSQL#0" expanded="false" />
-                <element signature="class#AsyncDrawable#0;class#CarSQL#0" expanded="false" />
-                <element signature="method#AsyncDrawable#0;class#AsyncDrawable#0;class#CarSQL#0" expanded="false" />
-                <element signature="e#13356#13357#0" expanded="false" />
-                <element signature="e#13418#13419#0" expanded="false" />
-                <element signature="class#LoadedBitmapRunnable#0;class#CarSQL#0" expanded="false" />
-                <element signature="e#13619#13620#0" expanded="false" />
-                <element signature="e#13663#13664#0" expanded="false" />
-                <element signature="method#scaleKeepAspectRatio#0;class#CarSQL#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7446808">
-              <caret line="50" column="42" selection-start-line="50" selection-start-column="42" selection-end-line="50" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="46" column="48" selection-start-line="46" selection-start-column="48" selection-end-line="46" selection-end-column="48" />
               <folding>
                 <element signature="e#48#700#0" expanded="true" />
                 <element signature="e#140#305#0" expanded="true" />
@@ -312,22 +360,155 @@
       <file leaf-file-name="settings.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/settings.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="44" selection-start-line="0" selection-start-column="44" selection-end-line="0" selection-end-column="44" />
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="14" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/build.gradle">
+      <file leaf-file-name="ServiceTask.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <caret line="138" column="30" selection-start-line="138" selection-start-column="30" selection-end-line="138" selection-end-column="30" />
               <folding>
-                <element signature="e#175#517#0" expanded="true" />
-                <element signature="e#533#686#0" expanded="true" />
-                <element signature="e#552#684#0" expanded="true" />
+                <element signature="e#2417#2421#0" expanded="true" />
+                <element signature="e#3732#3733#0" expanded="true" />
+                <element signature="e#3791#3792#0" expanded="true" />
+                <element signature="e#4168#4169#0" expanded="true" />
+                <element signature="e#4220#4221#0" expanded="true" />
+                <element signature="e#4348#4349#0" expanded="true" />
+                <element signature="e#4402#4403#0" expanded="true" />
+                <element signature="method#getPartsReplaced#0;class#ServiceTask#0" expanded="true" />
+                <element signature="e#5637#5641#0" expanded="true" />
+                <element signature="e#6130#6155#0" expanded="true" />
+                <element signature="e#6231#6236#0" expanded="true" />
+                <element signature="e#6250#6254#0" expanded="true" />
+                <element signature="e#6305#6309#0" expanded="true" />
+                <element signature="e#6311#6315#0" expanded="true" />
+                <element signature="e#6317#6321#0" expanded="true" />
+                <element signature="e#6323#6327#0" expanded="true" />
+                <element signature="e#6329#6333#0" expanded="true" />
+                <element signature="e#6637#6641#0" expanded="true" />
+                <element signature="e#6643#6647#0" expanded="true" />
+                <element signature="e#6649#6653#0" expanded="true" />
+                <element signature="e#6655#6659#0" expanded="true" />
+                <element signature="e#6999#7013#0" expanded="true" />
+                <element signature="e#7067#7081#0" expanded="true" />
+                <element signature="e#7400#7404#0" expanded="true" />
+                <element signature="e#7406#7410#0" expanded="true" />
+                <element signature="e#7412#7416#0" expanded="true" />
+                <element signature="e#7418#7422#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Vehicle.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="297" column="45" selection-start-line="297" selection-start-column="45" selection-end-line="297" selection-end-column="45" />
+              <folding>
+                <element signature="e#3559#3563#0" expanded="true" />
+                <element signature="e#3618#3622#0" expanded="true" />
+                <element signature="e#3624#3628#0" expanded="true" />
+                <element signature="e#3630#3634#0" expanded="true" />
+                <element signature="e#3636#3640#0" expanded="true" />
+                <element signature="e#3893#3897#0" expanded="true" />
+                <element signature="e#4767#4771#0" expanded="true" />
+                <element signature="e#4864#4868#0" expanded="true" />
+                <element signature="e#4955#4959#0" expanded="true" />
+                <element signature="e#5060#5064#0" expanded="true" />
+                <element signature="e#6855#6874#0" expanded="true" />
+                <element signature="e#7838#7839#0" expanded="true" />
+                <element signature="e#7884#7885#0" expanded="true" />
+                <element signature="e#8013#8014#0" expanded="true" />
+                <element signature="e#8073#8074#0" expanded="true" />
+                <element signature="e#8230#8231#0" expanded="true" />
+                <element signature="e#8287#8288#0" expanded="true" />
+                <element signature="e#8448#8449#0" expanded="true" />
+                <element signature="e#8509#8510#0" expanded="true" />
+                <element signature="e#8941#8945#0" expanded="true" />
+                <element signature="e#9176#9180#0" expanded="true" />
+                <element signature="e#9440#9444#0" expanded="true" />
+                <element signature="e#9484#9488#0" expanded="true" />
+                <element signature="e#9490#9494#0" expanded="true" />
+                <element signature="e#9496#9500#0" expanded="true" />
+                <element signature="e#12376#12377#0" expanded="true" />
+                <element signature="e#12435#12436#0" expanded="true" />
+                <element signature="method#getImage#0;class#Vehicle#0" expanded="true" />
+                <element signature="method#getFuelEfficiency#0;class#Vehicle#0" expanded="true" />
+                <element signature="e#13229#13233#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SQLDataHandler.java" pinned="false" current-in-tab="true">
+        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.8041238">
+              <caret line="118" column="15" selection-start-line="118" selection-start-column="15" selection-end-line="118" selection-end-column="15" />
+              <folding>
+                <element signature="e#1142#1161#0" expanded="true" />
+                <element signature="e#1396#1632#0" expanded="true" />
+                <element signature="e#1631#1632#0" expanded="true" />
+                <element signature="method#beginTransaction#0;class#SQLDataHandler#0" expanded="true" />
+                <element signature="method#endTransaction#0;class#SQLDataHandler#0" expanded="true" />
+                <element signature="e#2149#2153#0" expanded="true" />
+                <element signature="e#2155#2159#0" expanded="true" />
+                <element signature="e#2161#2165#0" expanded="true" />
+                <element signature="e#2167#2171#0" expanded="true" />
+                <element signature="method#put#0;class#SQLDataHandler#0" expanded="true" />
+                <element signature="e#2898#2902#0" expanded="true" />
+                <element signature="e#2904#2908#0" expanded="true" />
+                <element signature="e#2910#2914#0" expanded="true" />
+                <element signature="e#2916#2920#0" expanded="true" />
+                <element signature="method#put#1;class#SQLDataHandler#0" expanded="true" />
+                <element signature="e#3640#3644#0" expanded="true" />
+                <element signature="e#3646#3650#0" expanded="true" />
+                <element signature="e#3652#3656#0" expanded="true" />
+                <element signature="e#3658#3662#0" expanded="true" />
+                <element signature="method#put#2;class#SQLDataHandler#0" expanded="true" />
+                <element signature="method#getFloat#0;class#SQLDataHandler#0" expanded="true" />
+                <element signature="e#4383#4387#0" expanded="true" />
+                <element signature="e#4389#4393#0" expanded="true" />
+                <element signature="e#4395#4399#0" expanded="true" />
+                <element signature="e#4401#4405#0" expanded="true" />
+                <element signature="method#put#3;class#SQLDataHandler#0" expanded="true" />
+                <element signature="e#5131#5135#0" expanded="true" />
+                <element signature="e#5137#5141#0" expanded="true" />
+                <element signature="e#5143#5147#0" expanded="true" />
+                <element signature="e#5149#5153#0" expanded="true" />
+                <element signature="method#put#4;class#SQLDataHandler#0" expanded="true" />
+                <element signature="method#getBoolean#0;class#SQLDataHandler#0" expanded="true" />
+                <element signature="e#5884#5888#0" expanded="true" />
+                <element signature="e#5890#5894#0" expanded="true" />
+                <element signature="e#5896#5900#0" expanded="true" />
+                <element signature="e#5902#5906#0" expanded="true" />
+                <element signature="method#putBoolean#0;class#SQLDataHandler#0" expanded="true" />
+                <element signature="method#putContentValues#0;class#SQLDataHandler#0" expanded="true" />
+                <element signature="e#6696#6700#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FuelStop.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="54" column="26" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
+              <folding>
+                <element signature="e#1859#1860#0" expanded="true" />
+                <element signature="e#1925#1926#0" expanded="true" />
+                <element signature="method#updateDistanceTraveled#0;class#FuelStop#0" expanded="true" />
+                <element signature="e#2975#2979#0" expanded="true" />
+                <element signature="e#2981#2985#0" expanded="true" />
+                <element signature="e#2987#2991#0" expanded="true" />
+                <element signature="method#getFuelStopsForCar#0;class#FuelStop#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -382,10 +563,6 @@
                 <option name="path" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
-                <option name="name" value=":mobihelp_sdk_android_v1.4" />
-                <option name="path" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4" />
-              </ExternalProjectPojo>
-              <ExternalProjectPojo>
                 <option name="name" value="Car-Maintenance" />
                 <option name="path" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
               </ExternalProjectPojo>
@@ -396,565 +573,6 @@
     </option>
     <option name="availableTasks">
       <map>
-        <entry key="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache">
-          <value>
-            <list>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the Android dependencies of the project." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="androidDependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles all variants of all applications and secondary packages." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="assemble" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles all the Test applications." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="assembleAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles all Debug builds." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="assembleDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles the android (on device) tests for the Debug build." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="assembleDebugAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles the unit tests for the Debug build." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="assembleDebugUnitTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="assembleDefault" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles all Release builds." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="assembleRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles the unit tests for the Release build." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="assembleReleaseUnitTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Publishes artifacts to bintray.com." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="bintrayUpload" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles and tests this project." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="build" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles and tests this project and all projects that depend on it." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="buildDependents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles and tests this project and all projects it depends on." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="buildNeeded" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles a bundle containing the library in Debug." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="bundleDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles a bundle containing the library in Release." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="bundleRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Runs all checks." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="check" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="checkDebugManifest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="checkReleaseManifest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Deletes the build directory." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="clean" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileDebugAidl" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileDebugAndroidTestAidl" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileDebugAndroidTestJava" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileDebugAndroidTestNdk" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileDebugAndroidTestRenderscript" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileDebugAndroidTestSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileDebugJava" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileDebugNdk" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileDebugRenderscript" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileDebugSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileDebugUnitTestJava" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileDebugUnitTestSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileLint" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileReleaseAidl" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileReleaseJava" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileReleaseNdk" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileReleaseRenderscript" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileReleaseSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileReleaseUnitTestJava" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="compileReleaseUnitTestSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by project ':BitmapCache'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="components" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Installs and runs instrumentation tests for all flavors on connected devices." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="connectedAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Installs and runs the tests for Debug build on connected devices." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="connectedAndroidTestDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Runs all device checks on currently connected devices." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="connectedCheck" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="copyDebugLint" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="copyReleaseLint" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in project ':BitmapCache'." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="dependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in project ':BitmapCache'." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="dependencyInsight" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Installs and runs instrumentation tests using all Device Providers." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="deviceAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Runs all device checks using Device Providers and Test Servers." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="deviceCheck" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="dexDebugAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateDebugAndroidTestAssets" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateDebugAndroidTestBuildConfig" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateDebugAndroidTestResValues" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateDebugAndroidTestResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateDebugAndroidTestSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateDebugAssets" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateDebugBuildConfig" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateDebugResValues" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateDebugResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateDebugSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateReleaseAssets" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateReleaseBuildConfig" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateReleaseResValues" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateReleaseResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="generateReleaseSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays a help message." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="help" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Installs the 'archives' artifacts into the local Maven repository." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="install" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Installs the android (on device) tests for the Debug build." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="installDebugAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="javadoc" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="javadocJar" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Runs lint on all variants." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="lint" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Runs lint on the Debug build." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="lintDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Runs lint on the Release build." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="lintRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="mergeDebugAndroidTestAssets" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="mergeDebugAndroidTestResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="mergeDebugAssets" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="mergeDebugProguardFiles" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="mergeReleaseAssets" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="mergeReleaseProguardFiles" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Creates a version of android.jar that's suitable for unit tests." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="mockableAndroidJar" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of project ':BitmapCache'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="model" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="packageDebugAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="packageDebugJar" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="packageDebugJniLibs" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="packageDebugLocalJar" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="packageDebugRenderscript" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="packageDebugResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="packageReleaseJar" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="packageReleaseJniLibs" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="packageReleaseLocalJar" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="packageReleaseRenderscript" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="packageReleaseResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="preBuild" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="preCompileDebugUnitTestJava" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="preCompileReleaseUnitTestJava" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="preDebugAndroidTestBuild" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="preDebugBuild" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="preDebugUnitTestBuild" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="preDexDebugAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="preReleaseBuild" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="preReleaseUnitTestBuild" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="prepareDebugAndroidTestDependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="prepareDebugDependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="prepareDebugUnitTestDependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="prepareReleaseDependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="prepareReleaseUnitTestDependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="processDebugAndroidTestJavaRes" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="processDebugAndroidTestManifest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="processDebugAndroidTestResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="processDebugJavaRes" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="processDebugManifest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="processDebugResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="processDebugUnitTestJavaRes" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="processReleaseJavaRes" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="processReleaseManifest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="processReleaseResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="processReleaseUnitTestJavaRes" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of project ':BitmapCache'." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="projects" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of project ':BitmapCache'." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="properties" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the signing info for each variant." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="signingReport" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="sourcesJar" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from project ':BitmapCache'." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="tasks" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Run unit tests for all variants." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="test" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Run unit tests for the debug build." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="testDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Run unit tests for the release build." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="testRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Uninstall all applications." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="uninstallAll" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Uninstalls the android (on device) tests for the Debug build." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="uninstallDebugAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache" />
-                <option name="name" value="validateDebugSigning" />
-              </ExternalTaskPojo>
-            </list>
-          </value>
-        </entry>
         <entry key="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance">
           <value>
             <list>
@@ -1378,11 +996,6 @@
                 <option name="name" value="preReleaseUnitTestBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare Car-Maintenance:mobihelp_sdk_android_v1.4:unspecified" />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="prepareCarMaintenanceMobihelp_sdk_android_v14UnspecifiedLibrary" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:appcompat-v7:22.2.0" />
                 <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
                 <option name="name" value="prepareComAndroidSupportAppcompatV72220Library" />
@@ -1667,81 +1280,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
                 <option name="name" value="zipalignDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="assembleDefault" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles a bundle containing the library in Debug." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="bundleDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles a bundle containing the library in Release." />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="bundleRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="copyDebugLint" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="copyReleaseLint" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="mergeDebugProguardFiles" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="mergeReleaseProguardFiles" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="packageDebugJar" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="packageDebugJniLibs" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="packageDebugLocalJar" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="packageDebugRenderscript" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="packageDebugResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="packageReleaseJar" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="packageReleaseJniLibs" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="packageReleaseLocalJar" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="packageReleaseRenderscript" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="packageReleaseResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:appcompat-v7:19.1.0" />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance" />
-                <option name="name" value="prepareComAndroidSupportAppcompatV71910Library" />
               </ExternalTaskPojo>
             </list>
           </value>
@@ -2142,11 +1680,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app" />
                 <option name="name" value="preReleaseUnitTestBuild" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare Car-Maintenance:mobihelp_sdk_android_v1.4:unspecified" />
-                <option name="linkedExternalProjectPath" value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app" />
-                <option name="name" value="prepareCarMaintenanceMobihelp_sdk_android_v14UnspecifiedLibrary" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:appcompat-v7:22.2.0" />
@@ -3006,7 +2539,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="5740991446318" />
+        <entry key="$PROJECT_DIR$" value="4305902610700" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -4012,7 +3545,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/fragment_vehicle_select.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/vehicle_details_header.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleSelect.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/fragment_navigation_drawer.xml" />
@@ -4031,7 +3563,6 @@
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/values/edit_car_strings.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/vehicle_selector.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/adapters/VehicleCursorAdapter.java" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/values/strings.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/AvailableCarsSQL.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/menu/main.xml" />
@@ -4040,8 +3571,6 @@
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/xml/backup_content.xml" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/json/VINDecoder.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/PartReplacement.java" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java" />
-        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleSelectFragment.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/menu/save_discard_menu.xml" />
@@ -4063,6 +3592,10 @@
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/BitmapCache/src/main/java/com/packruler/bitmapcache/BitmapCache.java" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/settings.gradle" />
         <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/build.gradle" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" />
+        <option value="$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java" />
       </list>
     </option>
   </component>
@@ -4133,38 +3666,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gradle Scripts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -4194,6 +3696,136 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gradle Scripts" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="carmaintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vehicle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="carmaintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vehicle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maintenence" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="carmaintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="carmaintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sql" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -4253,6 +3885,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -4277,7 +3910,7 @@
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="android.project.structure.last.selected" value="mobihelp_sdk_android_v1.4" />
+    <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///home/packruler/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="251" />
@@ -4580,12 +4213,6 @@
       <option name="number" value="Default" />
       <updated>1417384725146</updated>
     </task>
-    <task id="LOCAL-00048" summary="Changed Vehicle table to use rowId to load data rather than vehicle name">
-      <created>1433438615454</created>
-      <option name="number" value="00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1433438615454</updated>
-    </task>
     <task id="LOCAL-00049" summary="Fix service task cursor sort retrieval">
       <created>1433441400844</created>
       <option name="number" value="00049" />
@@ -4874,7 +4501,13 @@
       <option name="project" value="LOCAL" />
       <updated>1435107564697</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="Loading BitmapCache from jCenter now!">
+      <created>1435251181667</created>
+      <option name="number" value="00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1435251181746</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TodoView">
@@ -4897,15 +4530,15 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263506" sideWeight="0.5085197" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263506" sideWeight="0.4914803" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3472988" sideWeight="0.4914803" order="14" side_tool="false" content_ui="tabs" x="1920" y="1" width="1920" height="1079" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3472988" sideWeight="0.4914803" order="14" side_tool="false" content_ui="tabs" x="1920" y="1" width="1920" height="1079" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23908414" sideWeight="0.4239865" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32745314" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.45723686" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -4918,8 +4551,8 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3995657" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32745314" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -4940,7 +4573,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="remove unneeded comment" />
     <MESSAGE value="Setup LruCache that remove's based on bitmap in cache that was used last" />
     <MESSAGE value="Updated nav drawer header display updating" />
     <MESSAGE value="Menu button UI color change setup fix" />
@@ -4965,7 +4597,8 @@
     <MESSAGE value="Initial M backup capability" />
     <MESSAGE value="UI for EditCar and initial launch tweaking" />
     <MESSAGE value="Redo bitmap cache handling" />
-    <option name="LAST_COMMIT_MESSAGE" value="Redo bitmap cache handling" />
+    <MESSAGE value="Loading BitmapCache from jCenter now!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Loading BitmapCache from jCenter now!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -4977,13 +4610,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/utilities/VehicleMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28723404">
-          <caret line="72" column="20" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/adapters/ServiceRecyclerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -5056,14 +4682,14 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/vehicle_selector.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.413794">
           <caret line="32" column="76" selection-start-line="32" selection-start-column="76" selection-end-line="32" selection-end-column="76" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../Sdk/sources/android-22/android/graphics/Bitmap.java">
@@ -5078,13 +4704,6 @@
         <state vertical-scroll-proportion="-14.357142">
           <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1914893">
-          <caret line="398" column="83" selection-start-line="398" selection-start-column="83" selection-end-line="398" selection-end-column="83" />
         </state>
       </provider>
     </entry>
@@ -5147,20 +4766,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="130" column="49" selection-start-line="130" selection-start-column="49" selection-end-line="130" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="161" column="65" selection-start-line="161" selection-start-column="65" selection-end-line="161" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -5172,13 +4777,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="102" column="58" selection-start-line="102" selection-start-column="58" selection-end-line="102" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="255" column="25" selection-start-line="255" selection-start-column="25" selection-end-line="255" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -5229,7 +4827,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15437393">
           <caret line="22" column="53" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5248,14 +4845,6 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/BitmapCache/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/libraries/mobihelp_sdk_android_v1.4/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -5286,10 +4875,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="398" column="0" selection-start-line="398" selection-start-column="0" selection-end-line="398" selection-end-column="0" />
-          <folding>
-            <element signature="e#14973#15007#0" expanded="false" />
-            <element signature="e#43664#43679#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5300,72 +4885,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="252" column="27" selection-start-line="252" selection-start-column="27" selection-end-line="252" selection-end-column="27" />
-          <folding>
-            <element signature="docComment;class#CarSQL#0" expanded="false" />
-            <element signature="class#1423:2178" expanded="false" />
-            <element signature="method#onChanged#0;class#1423:2178" expanded="false" />
-            <element signature="method#onAdded#0;class#1423:2178" expanded="false" />
-            <element signature="method#onRemoved#0;class#1423:2178" expanded="false" />
-            <element signature="method#CarSQL#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#registerObserver#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#unregisterAll#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#unregisterObserver#0;class#CarSQL#0" expanded="false" />
-            <element signature="class#SQLHelper#0;class#CarSQL#0" expanded="false" />
-            <element signature="e#3450#3451#0" expanded="false" />
-            <element signature="e#3527#3528#0" expanded="false" />
-            <element signature="method#onCreate#0;class#SQLHelper#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#onUpgrade#0;class#SQLHelper#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#onDowngrade#0;class#SQLHelper#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#loadVehicleCursor#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#loadVehicles#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#getVehicleCount#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#beginTransaction#0;class#CarSQL#0" expanded="false" />
-            <element signature="e#5433#5434#0" expanded="false" />
-            <element signature="e#5484#5485#0" expanded="false" />
-            <element signature="e#5520#5521#0" expanded="false" />
-            <element signature="e#5561#5562#0" expanded="false" />
-            <element signature="method#close#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#getWritableDatabase#0;class#CarSQL#0" expanded="false" />
-            <element signature="e#6142#6143#0" expanded="false" />
-            <element signature="e#6196#6197#0" expanded="false" />
-            <element signature="method#canUseCarName#0;class#CarSQL#0" expanded="false" />
-            <element signature="e#6640#6641#0" expanded="false" />
-            <element signature="e#6675#6676#0" expanded="false" />
-            <element signature="method#addBitmapToMemoryCache#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#storeCacheToMemory#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#clearCache#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#loadBitmap#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#loadBitmap#1;class#CarSQL#0" expanded="false" />
-            <element signature="method#cancelPotentialWork#0;class#CarSQL#0" expanded="false" />
-            <element signature="class#BitmapWorkerTask#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#BitmapWorkerTask#0;class#BitmapWorkerTask#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#doInBackground#0;class#BitmapWorkerTask#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#onPostExecute#0;class#BitmapWorkerTask#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#getBitmapWorkerTask#0;class#CarSQL#0" expanded="false" />
-            <element signature="class#AsyncDrawable#0;class#CarSQL#0" expanded="false" />
-            <element signature="method#AsyncDrawable#0;class#AsyncDrawable#0;class#CarSQL#0" expanded="false" />
-            <element signature="e#13356#13357#0" expanded="false" />
-            <element signature="e#13418#13419#0" expanded="false" />
-            <element signature="class#LoadedBitmapRunnable#0;class#CarSQL#0" expanded="false" />
-            <element signature="e#13619#13620#0" expanded="false" />
-            <element signature="e#13663#13664#0" expanded="false" />
-            <element signature="method#scaleKeepAspectRatio#0;class#CarSQL#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../Sdk/sources/android-22/java/util/AbstractCollection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="125" column="19" selection-start-line="125" selection-start-column="19" selection-end-line="125" selection-end-column="19" />
-          <folding>
-            <element signature="method#contains#0;class#AbstractCollection#0" expanded="false" />
-            <element signature="method#remove#0;class#AbstractCollection#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5373,17 +4896,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="242" column="19" selection-start-line="242" selection-start-column="19" selection-end-line="242" selection-end-column="19" />
-          <folding>
-            <element signature="method#remove#0;class#PriorityQueue#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="44" selection-start-line="0" selection-start-column="44" selection-end-line="0" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5391,14 +4903,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.12765957">
           <caret line="40" column="33" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
-          <folding>
-            <element signature="method#Key#0;class#Key#0;class#UsageQueue#0" expanded="false" />
-            <element signature="method#use#0;class#Key#0;class#UsageQueue#0" expanded="false" />
-            <element signature="method#iterator#0;class#UsageQueue#0" expanded="false" />
-            <element signature="method#remove#0;class#UsageQueue#0" expanded="false" />
-            <element signature="method#add#0;class#UsageQueue#0" expanded="false" />
-            <element signature="method#use#0;class#UsageQueue#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5406,50 +4910,209 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.06382979">
           <caret line="140" column="25" selection-start-line="140" selection-start-column="25" selection-end-line="140" selection-end-column="25" />
-          <folding>
-            <element signature="docComment;method#clear#0;class#BitmapCache#0" expanded="true" />
-            <element signature="docComment;method#clear#1;class#BitmapCache#0" expanded="true" />
-            <element signature="method#clear#1;class#BitmapCache#0" expanded="true" />
-            <element signature="docComment;method#containsKey#0;class#BitmapCache#0" expanded="true" />
-            <element signature="docComment;method#containsValue#0;class#BitmapCache#0" expanded="true" />
-            <element signature="docComment;method#entrySet#0;class#BitmapCache#0" expanded="true" />
-            <element signature="method#get#0;class#BitmapCache#0" expanded="true" />
-            <element signature="docComment;method#isEmpty#0;class#BitmapCache#0" expanded="true" />
-            <element signature="docComment;method#keySet#0;class#BitmapCache#0" expanded="true" />
-            <element signature="method#remove#0;class#BitmapCache#0" expanded="true" />
-            <element signature="docComment;method#size#0;class#BitmapCache#0" expanded="true" />
-            <element signature="e#3729#3730#0" expanded="true" />
-            <element signature="e#3756#3757#0" expanded="true" />
-            <element signature="e#3793#3794#0" expanded="true" />
-            <element signature="e#3828#3829#0" expanded="true" />
-            <element signature="e#3863#3864#0" expanded="true" />
-            <element signature="e#3913#3914#0" expanded="true" />
-            <element signature="e#3941#3942#0" expanded="true" />
-            <element signature="e#3967#3968#0" expanded="true" />
-            <element signature="docComment;method#setMaxSize#0;class#BitmapCache#0" expanded="true" />
-            <element signature="method#trim#0;class#BitmapCache#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/res/layout/fragment_edit_car.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="418" column="56" selection-start-line="418" selection-start-column="56" selection-end-line="418" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.5172415">
-          <caret line="418" column="56" selection-start-line="418" selection-start-column="56" selection-end-line="418" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="252" column="27" selection-start-line="252" selection-start-column="27" selection-end-line="252" selection-end-column="27" />
+          <folding>
+            <element signature="e#7967#7968#0" expanded="true" />
+            <element signature="e#8011#8012#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="14" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7446808">
-          <caret line="50" column="42" selection-start-line="50" selection-start-column="42" selection-end-line="50" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="48" selection-start-line="46" selection-start-column="48" selection-end-line="46" selection-end-column="48" />
           <folding>
             <element signature="e#48#700#0" expanded="true" />
             <element signature="e#140#305#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="55" selection-start-line="73" selection-start-column="55" selection-end-line="73" selection-end-column="55" />
+          <folding>
+            <element signature="method#onCreate#0;class#MainActivity#0" expanded="true" />
+            <element signature="e#3855#4233#0" expanded="true" />
+            <element signature="e#4232#4233#0" expanded="true" />
+            <element signature="method#onBackStackChanged#0;class#MainActivity#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="54" column="26" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
+          <folding>
+            <element signature="e#1859#1860#0" expanded="true" />
+            <element signature="e#1925#1926#0" expanded="true" />
+            <element signature="method#updateDistanceTraveled#0;class#FuelStop#0" expanded="true" />
+            <element signature="e#2975#2979#0" expanded="true" />
+            <element signature="e#2981#2985#0" expanded="true" />
+            <element signature="e#2987#2991#0" expanded="true" />
+            <element signature="method#getFuelStopsForCar#0;class#FuelStop#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="297" column="45" selection-start-line="297" selection-start-column="45" selection-end-line="297" selection-end-column="45" />
+          <folding>
+            <element signature="e#3559#3563#0" expanded="true" />
+            <element signature="e#3618#3622#0" expanded="true" />
+            <element signature="e#3624#3628#0" expanded="true" />
+            <element signature="e#3630#3634#0" expanded="true" />
+            <element signature="e#3636#3640#0" expanded="true" />
+            <element signature="e#3893#3897#0" expanded="true" />
+            <element signature="e#4767#4771#0" expanded="true" />
+            <element signature="e#4864#4868#0" expanded="true" />
+            <element signature="e#4955#4959#0" expanded="true" />
+            <element signature="e#5060#5064#0" expanded="true" />
+            <element signature="e#6855#6874#0" expanded="true" />
+            <element signature="e#7838#7839#0" expanded="true" />
+            <element signature="e#7884#7885#0" expanded="true" />
+            <element signature="e#8013#8014#0" expanded="true" />
+            <element signature="e#8073#8074#0" expanded="true" />
+            <element signature="e#8230#8231#0" expanded="true" />
+            <element signature="e#8287#8288#0" expanded="true" />
+            <element signature="e#8448#8449#0" expanded="true" />
+            <element signature="e#8509#8510#0" expanded="true" />
+            <element signature="e#8941#8945#0" expanded="true" />
+            <element signature="e#9176#9180#0" expanded="true" />
+            <element signature="e#9440#9444#0" expanded="true" />
+            <element signature="e#9484#9488#0" expanded="true" />
+            <element signature="e#9490#9494#0" expanded="true" />
+            <element signature="e#9496#9500#0" expanded="true" />
+            <element signature="e#12376#12377#0" expanded="true" />
+            <element signature="e#12435#12436#0" expanded="true" />
+            <element signature="method#getImage#0;class#Vehicle#0" expanded="true" />
+            <element signature="method#getFuelEfficiency#0;class#Vehicle#0" expanded="true" />
+            <element signature="e#13229#13233#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="138" column="30" selection-start-line="138" selection-start-column="30" selection-end-line="138" selection-end-column="30" />
+          <folding>
+            <element signature="e#2417#2421#0" expanded="true" />
+            <element signature="e#3732#3733#0" expanded="true" />
+            <element signature="e#3791#3792#0" expanded="true" />
+            <element signature="e#4168#4169#0" expanded="true" />
+            <element signature="e#4220#4221#0" expanded="true" />
+            <element signature="e#4348#4349#0" expanded="true" />
+            <element signature="e#4402#4403#0" expanded="true" />
+            <element signature="method#getPartsReplaced#0;class#ServiceTask#0" expanded="true" />
+            <element signature="e#5637#5641#0" expanded="true" />
+            <element signature="e#6130#6155#0" expanded="true" />
+            <element signature="e#6231#6236#0" expanded="true" />
+            <element signature="e#6250#6254#0" expanded="true" />
+            <element signature="e#6305#6309#0" expanded="true" />
+            <element signature="e#6311#6315#0" expanded="true" />
+            <element signature="e#6317#6321#0" expanded="true" />
+            <element signature="e#6323#6327#0" expanded="true" />
+            <element signature="e#6329#6333#0" expanded="true" />
+            <element signature="e#6637#6641#0" expanded="true" />
+            <element signature="e#6643#6647#0" expanded="true" />
+            <element signature="e#6649#6653#0" expanded="true" />
+            <element signature="e#6655#6659#0" expanded="true" />
+            <element signature="e#6999#7013#0" expanded="true" />
+            <element signature="e#7067#7081#0" expanded="true" />
+            <element signature="e#7400#7404#0" expanded="true" />
+            <element signature="e#7406#7410#0" expanded="true" />
+            <element signature="e#7412#7416#0" expanded="true" />
+            <element signature="e#7418#7422#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Sdk/sources/android-MNC/android/content/ContentValues.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="173" column="16" selection-start-line="173" selection-start-column="16" selection-end-line="173" selection-end-column="16" />
+          <folding>
+            <element signature="e#4583#4584#0" expanded="true" />
+            <element signature="e#4622#4623#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/ZFS_Storage/Android/StudioProjects/Car-Maintenance/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.8041238">
+          <caret line="118" column="15" selection-start-line="118" selection-start-column="15" selection-end-line="118" selection-end-column="15" />
+          <folding>
+            <element signature="e#1142#1161#0" expanded="true" />
+            <element signature="e#1396#1632#0" expanded="true" />
+            <element signature="e#1631#1632#0" expanded="true" />
+            <element signature="method#beginTransaction#0;class#SQLDataHandler#0" expanded="true" />
+            <element signature="method#endTransaction#0;class#SQLDataHandler#0" expanded="true" />
+            <element signature="e#2149#2153#0" expanded="true" />
+            <element signature="e#2155#2159#0" expanded="true" />
+            <element signature="e#2161#2165#0" expanded="true" />
+            <element signature="e#2167#2171#0" expanded="true" />
+            <element signature="method#put#0;class#SQLDataHandler#0" expanded="true" />
+            <element signature="e#2898#2902#0" expanded="true" />
+            <element signature="e#2904#2908#0" expanded="true" />
+            <element signature="e#2910#2914#0" expanded="true" />
+            <element signature="e#2916#2920#0" expanded="true" />
+            <element signature="method#put#1;class#SQLDataHandler#0" expanded="true" />
+            <element signature="e#3640#3644#0" expanded="true" />
+            <element signature="e#3646#3650#0" expanded="true" />
+            <element signature="e#3652#3656#0" expanded="true" />
+            <element signature="e#3658#3662#0" expanded="true" />
+            <element signature="method#put#2;class#SQLDataHandler#0" expanded="true" />
+            <element signature="method#getFloat#0;class#SQLDataHandler#0" expanded="true" />
+            <element signature="e#4383#4387#0" expanded="true" />
+            <element signature="e#4389#4393#0" expanded="true" />
+            <element signature="e#4395#4399#0" expanded="true" />
+            <element signature="e#4401#4405#0" expanded="true" />
+            <element signature="method#put#3;class#SQLDataHandler#0" expanded="true" />
+            <element signature="e#5131#5135#0" expanded="true" />
+            <element signature="e#5137#5141#0" expanded="true" />
+            <element signature="e#5143#5147#0" expanded="true" />
+            <element signature="e#5149#5153#0" expanded="true" />
+            <element signature="method#put#4;class#SQLDataHandler#0" expanded="true" />
+            <element signature="method#getBoolean#0;class#SQLDataHandler#0" expanded="true" />
+            <element signature="e#5884#5888#0" expanded="true" />
+            <element signature="e#5890#5894#0" expanded="true" />
+            <element signature="e#5896#5900#0" expanded="true" />
+            <element signature="e#5902#5906#0" expanded="true" />
+            <element signature="method#putBoolean#0;class#SQLDataHandler#0" expanded="true" />
+            <element signature="method#putContentValues#0;class#SQLDataHandler#0" expanded="true" />
+            <element signature="e#6696#6700#0" expanded="true" />
           </folding>
         </state>
       </provider>
