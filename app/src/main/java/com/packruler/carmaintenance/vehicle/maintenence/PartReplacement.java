@@ -54,7 +54,7 @@ public class PartReplacement extends ServiceTask {
 
     public PartReplacement(CarSQL carSQL, ServiceTask task) {
         this(carSQL, task.getRow(), false);
-        sqlDataHandler.putLong(SERVICE_TASK_ROW, task.getRow());
+        sqlDataHandler.put(SERVICE_TASK_ROW, task.getRow());
     }
 
     public PartReplacement(CarSQL carSQL, long row) {
@@ -66,7 +66,7 @@ public class PartReplacement extends ServiceTask {
     }
 
     public void setPartName(String partName) throws SQLDataException {
-        sqlDataHandler.putString(PART_NAME, partName);
+        sqlDataHandler.put(PART_NAME, partName);
     }
 
     public String getManufacturer() {
@@ -74,7 +74,7 @@ public class PartReplacement extends ServiceTask {
     }
 
     public void setManufacturer(String manufacturer) {
-        sqlDataHandler.putString(BRAND, manufacturer);
+        sqlDataHandler.put(BRAND, manufacturer);
     }
 
     public String getProductNumber() {
@@ -82,7 +82,7 @@ public class PartReplacement extends ServiceTask {
     }
 
     public void setProductNumber(String productNumber) {
-        sqlDataHandler.putString(PRODUCT_NUMBER, productNumber);
+        sqlDataHandler.put(PRODUCT_NUMBER, productNumber);
     }
 
     public int getExpectedLifeDistance() {
@@ -90,7 +90,7 @@ public class PartReplacement extends ServiceTask {
     }
 
     public void setExpectedLifeDistance(int expectedLifeDistance) {
-        sqlDataHandler.putInt(EXPECTED_LIFE_DISTANCE, expectedLifeDistance);
+        sqlDataHandler.put(EXPECTED_LIFE_DISTANCE, expectedLifeDistance);
     }
 
     public long getExpectedLifeTime() {
@@ -98,7 +98,7 @@ public class PartReplacement extends ServiceTask {
     }
 
     public void setExpectedLifeTime(long expectedLifeTime) {
-        sqlDataHandler.putLong(EXPECTED_LIFE_TIME, expectedLifeTime);
+        sqlDataHandler.put(EXPECTED_LIFE_TIME, expectedLifeTime);
     }
 
     public int getWarrantyLifeDistance() {
@@ -106,7 +106,7 @@ public class PartReplacement extends ServiceTask {
     }
 
     public void setWarrantyLifeDistance(int warrantyLifeDistance) {
-        sqlDataHandler.putInt(WARRANTY_LIFE_DISTANCE, warrantyLifeDistance);
+        sqlDataHandler.put(WARRANTY_LIFE_DISTANCE, warrantyLifeDistance);
     }
 
     public long getWarrantyLifeTime() {
@@ -114,7 +114,7 @@ public class PartReplacement extends ServiceTask {
     }
 
     public void setWarrantyLifeTime(long warrantyLifeTime) {
-        sqlDataHandler.putLong(WARRANTY_LIFE_TIME, warrantyLifeTime);
+        sqlDataHandler.put(WARRANTY_LIFE_TIME, warrantyLifeTime);
     }
 
     public static Cursor getPartReplacementCursorForCar(CarSQL carSQL, long vehicleRow) {

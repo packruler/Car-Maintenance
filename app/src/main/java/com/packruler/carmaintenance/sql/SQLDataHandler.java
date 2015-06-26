@@ -2,6 +2,9 @@ package com.packruler.carmaintenance.sql;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.util.Log;
 
 /**
  * Created by Packruler on 5/7/15.
@@ -13,6 +16,8 @@ public class SQLDataHandler {
     private long row;
     private SQLDataOberservable observable;
     private String selection;
+    private ContentValues contentValues;
+    private Handler backgroundHandler;
 
     public SQLDataHandler(CarSQL carSQL, String tableName, long row, SQLDataOberservable observable) {
         this.carSQL = carSQL;
@@ -31,6 +36,38 @@ public class SQLDataHandler {
         loadSelection();
     }
 
+    public void storeValuesInBackground(final Runnable runnable) {
+        if (backgroundHandler == null) {
+            Log.v(TAG, "Initialize Thread");
+            HandlerThread thread = new HandlerThread(getClass().getSimpleName() + ".BACKGROUND");
+            thread.start();
+            backgroundHandler = new Handler(thread.getLooper());
+        }
+        backgroundHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                SQLDataHandler.this.beginTransaction();
+                runnable.run();
+                SQLDataHandler.this.endTransaction();
+            }
+        });
+
+    }
+
+    public boolean beginTransaction() {
+        if (contentValues != null)
+            return false;
+        contentValues = new ContentValues();
+        return true;
+    }
+
+    public boolean endTransaction() {
+        if (contentValues == null)
+            return false;
+        putContentValues(contentValues);
+        return true;
+    }
+
     public String getString(String column) {
         Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
@@ -40,28 +77,22 @@ public class SQLDataHandler {
         return output;
     }
 
-    public void putString(String column, String value) {
-        ContentValues contentValues = new ContentValues();
+    public void put(String column, String value) {
+        boolean inTransaction = contentValues != null;
+
+        ContentValues contentValues;
+        if (inTransaction)
+            contentValues = this.contentValues;
+        else
+            contentValues = new ContentValues();
+
         contentValues.put(column, value);
-        setContentValues(contentValues);
+
+        if (!inTransaction)
+            putContentValues(contentValues);
     }
 
-    public float getFloat(String column) {
-        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
-                selection, null, null, null, null);
-        cursor.moveToFirst();
-        float output = cursor.getFloat(cursor.getColumnIndex(column));
-        cursor.close();
-        return output;
-    }
-
-    public void putFloat(String column, float value) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(column, value);
-        setContentValues(contentValues);
-    }
-
-    public int getInt(String column) {
+    public Integer getInt(String column) {
         Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
         cursor.moveToFirst();
@@ -70,28 +101,22 @@ public class SQLDataHandler {
         return output;
     }
 
-    public void putInt(String column, int value) {
-        ContentValues contentValues = new ContentValues();
+    public void put(String column, Integer value) {
+        boolean inTransaction = contentValues != null;
+
+        ContentValues contentValues;
+        if (inTransaction)
+            contentValues = this.contentValues;
+        else
+            contentValues = new ContentValues();
+
         contentValues.put(column, value);
-        setContentValues(contentValues);
+
+        if (!inTransaction)
+            putContentValues(contentValues);
     }
 
-    public double getDouble(String column) {
-        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
-                selection, null, null, null, null);
-        cursor.moveToFirst();
-        double output = cursor.getDouble(cursor.getColumnIndex(column));
-        cursor.close();
-        return output;
-    }
-
-    public void putDouble(String column, double value) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(column, value);
-        setContentValues(contentValues);
-    }
-
-    public long getLong(String column) {
+    public Long getLong(String column) {
         Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
                 selection, null, null, null, null);
         cursor.moveToFirst();
@@ -100,10 +125,67 @@ public class SQLDataHandler {
         return output;
     }
 
-    public void putLong(String column, long value) {
-        ContentValues contentValues = new ContentValues();
+    public void put(String column, Long value) {
+        boolean inTransaction = contentValues != null;
+
+        ContentValues contentValues;
+        if (inTransaction)
+            contentValues = this.contentValues;
+        else
+            contentValues = new ContentValues();
+
         contentValues.put(column, value);
-        setContentValues(contentValues);
+
+        if (!inTransaction)
+            putContentValues(contentValues);
+    }
+
+    public Float getFloat(String column) {
+        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
+                selection, null, null, null, null);
+        cursor.moveToFirst();
+        Float output = cursor.getFloat(cursor.getColumnIndex(column));
+        cursor.close();
+        return output;
+    }
+
+    public void put(String column, Float value) {
+        boolean inTransaction = contentValues != null;
+
+        ContentValues contentValues;
+        if (inTransaction)
+            contentValues = this.contentValues;
+        else
+            contentValues = new ContentValues();
+
+        contentValues.put(column, value);
+
+        if (!inTransaction)
+            putContentValues(contentValues);
+    }
+
+    public Double getDouble(String column) {
+        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
+                selection, null, null, null, null);
+        cursor.moveToFirst();
+        double output = cursor.getDouble(cursor.getColumnIndex(column));
+        cursor.close();
+        return output;
+    }
+
+    public void put(String column, Double value) {
+        boolean inTransaction = contentValues != null;
+
+        ContentValues contentValues;
+        if (inTransaction)
+            contentValues = this.contentValues;
+        else
+            contentValues = new ContentValues();
+
+        contentValues.put(column, value);
+
+        if (!inTransaction)
+            putContentValues(contentValues);
     }
 
     public boolean getBoolean(String column) {
@@ -115,13 +197,23 @@ public class SQLDataHandler {
         return output;
     }
 
-    public void putBoolean(String column, boolean value) {
-        ContentValues contentValues = new ContentValues();
+    public void putBoolean(String column, boolean value){
+        boolean inTransaction = contentValues != null;
+
+        ContentValues contentValues;
+        if (inTransaction)
+            contentValues = this.contentValues;
+        else
+            contentValues = new ContentValues();
+
         contentValues.put(column, value);
-        setContentValues(contentValues);
+
+        if (!inTransaction)
+            putContentValues(contentValues);
+
     }
 
-    public void setContentValues(ContentValues contentValues) {
+    public void putContentValues(ContentValues contentValues) {
 //        Log.v(TAG, "Content Values: " + contentValues.toString());
         carSQL.getWritableDatabase().update(tableName, contentValues, selection, null);
         observable.notifiyChanged();

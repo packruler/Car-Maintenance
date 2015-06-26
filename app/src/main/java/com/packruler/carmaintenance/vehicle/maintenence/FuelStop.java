@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.packruler.carmaintenance.sql.CarSQL;
 
-import java.sql.SQLDataException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -17,22 +16,13 @@ public class FuelStop extends ServiceTask {
     private final String TAG = getClass().getSimpleName();
 
     public static final String TABLE_NAME = "fuel";
-    public static final String FUEL_STOP = "FUEL_STOP";
 
     public static final String COST_PER_VOLUME = "cost_per_volume";
     public static final String VOLUME = "volume";
-    public static final String VOLUME_UNITS = "volume_units";
     public static final String OCTANE = "octane";
-    public static final String OCTANE_UNITS = "octane_units";
     public static final String MISSED_FILL_UP = "missed_fill_up";
     public static final String COMPLETE_FILL_UP = "complete_fill_up";
-    public static final String DISTANCE_PER_VOLUME = "distance_per_volume";
-    public static final String DISTANCE_PER_VOLUME_UNIT = "distance_per_volume_unit";
-
-    public static final String[] RESERVED_WORDS = new String[]{TABLE_NAME, FUEL_STOP,
-            COST_PER_VOLUME, VOLUME, VOLUME_UNITS, OCTANE, OCTANE_UNITS, MISSED_FILL_UP,
-            COMPLETE_FILL_UP, DISTANCE_PER_VOLUME, DISTANCE_PER_VOLUME_UNIT
-    };
+    public static final String DISTANCE_TRAVELED = "distance_per_volume";
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -40,9 +30,8 @@ public class FuelStop extends ServiceTask {
                     COST + " FLOAT," + MILEAGE + " LONG," +
                     DETAILS + " TEXT," + LOCATION_ID + " TEXT," +
                     LOCATION_NAME + " TEXT," + COST_PER_VOLUME + " FLOAT," +
-                    VOLUME + " FLOAT," + VOLUME_UNITS + " TEXT," +
-                    OCTANE + " INT," + MISSED_FILL_UP + " INTEGER," +
-                    COMPLETE_FILL_UP + " INTEGER," + DISTANCE_PER_VOLUME + " FLOAT" + ")";
+                    VOLUME + " FLOAT," + OCTANE + " INT," + MISSED_FILL_UP + " INTEGER," +
+                    COMPLETE_FILL_UP + " INTEGER," + DISTANCE_TRAVELED + " LONG" + ")";
 
 
     public FuelStop(CarSQL carSQL, long rowId, boolean carRow) {
@@ -58,16 +47,9 @@ public class FuelStop extends ServiceTask {
     }
 
     public void setVolume(float volume) {
-        sqlDataHandler.putFloat(VOLUME, volume);
+        sqlDataHandler.put(VOLUME, volume);
     }
 
-    public String getVolumeUnit() {
-        return sqlDataHandler.getString(VOLUME_UNITS);
-    }
-
-    public void setVolumeUnits(String volumeUnits) throws SQLDataException {
-        sqlDataHandler.putString(VOLUME_UNITS, volumeUnits);
-    }
 
     public boolean isCompleteFillUp() {
         return sqlDataHandler.getBoolean(COMPLETE_FILL_UP);
@@ -77,7 +59,7 @@ public class FuelStop extends ServiceTask {
         sqlDataHandler.putBoolean(COMPLETE_FILL_UP, completeFillUp);
     }
 
-    public boolean isMissedFillup() {
+    public boolean missedFillup() {
         return sqlDataHandler.getBoolean(MISSED_FILL_UP);
     }
 
@@ -90,15 +72,7 @@ public class FuelStop extends ServiceTask {
     }
 
     public void setOctane(int octane) {
-        sqlDataHandler.putInt(OCTANE, octane);
-    }
-
-    public String getOctaneUnits() {
-        return sqlDataHandler.getString(OCTANE_UNITS);
-    }
-
-    public void setOctaneUnits(String octaneUnits) throws SQLDataException {
-        sqlDataHandler.putString(OCTANE_UNITS, octaneUnits);
+        sqlDataHandler.put(OCTANE, octane);
     }
 
     public float getCostPerVolume() {
@@ -106,7 +80,20 @@ public class FuelStop extends ServiceTask {
     }
 
     public void setCostPerVolume(float costPerVolume) {
-        sqlDataHandler.putFloat(COST_PER_VOLUME, costPerVolume);
+        sqlDataHandler.put(COST_PER_VOLUME, costPerVolume);
+    }
+
+    public void updateDistanceTraveled() {
+        long distance = -1;
+        if (isCompleteFillUp() && !missedFillup() && getDate() > 0) {
+            Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{MILEAGE},
+                    DATE + "< " + getDate(), null, null, null, DATE + " DSC", String.valueOf(1));
+            if (cursor.moveToFirst())
+                distance = getMileage() - cursor.getInt(cursor.getColumnIndex(MILEAGE));
+        }
+        if (distance < -1)
+            distance = -1;
+        sqlDataHandler.put(DISTANCE_TRAVELED, distance);
     }
 
     public static Cursor getFuelStopCursorForCar(CarSQL carSQL, long vehicleRow) {

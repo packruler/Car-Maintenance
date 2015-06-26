@@ -91,7 +91,7 @@ public class ServiceTask extends SQLDataOberservable {
     }
 
     public void setType(String type) {
-        sqlDataHandler.putString(TYPE, type);
+        sqlDataHandler.put(TYPE, type);
     }
 
     public String getType() {
@@ -99,7 +99,7 @@ public class ServiceTask extends SQLDataOberservable {
     }
 
     public void setDetails(String details) {
-        sqlDataHandler.putString(DETAILS, details);
+        sqlDataHandler.put(DETAILS, details);
     }
 
     public String getDetails() {
@@ -107,7 +107,7 @@ public class ServiceTask extends SQLDataOberservable {
     }
 
     public void setLocationName(String locationName) {
-        sqlDataHandler.putString(LOCATION_NAME, locationName);
+        sqlDataHandler.put(LOCATION_NAME, locationName);
     }
 
     public String getLocationName() {
@@ -115,7 +115,7 @@ public class ServiceTask extends SQLDataOberservable {
     }
 
     public void setLocationId(String locationId) {
-        sqlDataHandler.putString(LOCATION_ID, locationId);
+        sqlDataHandler.put(LOCATION_ID, locationId);
     }
 
     public String getLocationId() {
@@ -123,7 +123,7 @@ public class ServiceTask extends SQLDataOberservable {
     }
 
     public void setDate(long date) {
-        sqlDataHandler.putLong(DATE, date);
+        sqlDataHandler.put(DATE, date);
     }
 
     public long getDate() {
@@ -132,7 +132,7 @@ public class ServiceTask extends SQLDataOberservable {
 
 
     public void setCost(float cost) {
-        sqlDataHandler.putFloat(COST, cost);
+        sqlDataHandler.put(COST, cost);
     }
 
     public float getCost() {
@@ -140,7 +140,7 @@ public class ServiceTask extends SQLDataOberservable {
     }
 
     public void setMileage(long mileage) {
-        sqlDataHandler.putLong(MILEAGE, mileage);
+        sqlDataHandler.put(MILEAGE, mileage);
     }
 
     public long getMileage() {
@@ -152,7 +152,7 @@ public class ServiceTask extends SQLDataOberservable {
         for (PartReplacement part : partsReplaced) {
             jsonArray.put(part.getRow());
         }
-        sqlDataHandler.putString(PARTS_REPLACED, jsonArray.toString());
+        sqlDataHandler.put(PARTS_REPLACED, jsonArray.toString());
     }
 
     public List<PartReplacement> getPartsReplaced() {
@@ -172,7 +172,7 @@ public class ServiceTask extends SQLDataOberservable {
     }
 
     public void setContentValues(ContentValues contentValues) {
-        sqlDataHandler.setContentValues(contentValues);
+        sqlDataHandler.putContentValues(contentValues);
     }
 
     public void delete() {

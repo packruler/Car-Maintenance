@@ -134,10 +134,10 @@ public class Vehicle extends SQLDataOberservable {
             return true;
 
         if (canUseCarName(name)) {
-            sqlDataHandler.putString(VEHICLE_NAME, name);
+            sqlDataHandler.put(VEHICLE_NAME, name);
 //            ContentValues contentValues = new ContentValues();
 //            contentValues.put(VEHICLE_NAME, name);
-//            sqlDataHandler.setContentValues(contentValues);
+//            sqlDataHandler.putContentValues(contentValues);
 //
 //            sqlDataHandler.setRow(VEHICLE_NAME + "= \"" + this.name + "\"");
 //
@@ -177,7 +177,7 @@ public class Vehicle extends SQLDataOberservable {
 
     public void setMake(String make) {
         if (!make.equals(getMake()))
-            sqlDataHandler.putString(MAKE, make);
+            sqlDataHandler.put(MAKE, make);
     }
 
     public String getMake() {
@@ -186,7 +186,7 @@ public class Vehicle extends SQLDataOberservable {
 
     public void setModel(String model) {
         if (!model.equals(getModel()))
-            sqlDataHandler.putString(MODEL, model);
+            sqlDataHandler.put(MODEL, model);
     }
 
     public String getModel() {
@@ -195,7 +195,7 @@ public class Vehicle extends SQLDataOberservable {
 
     public void setSubmodel(String submodel) {
         if (!submodel.equals(getSubmodel()))
-            sqlDataHandler.putString(SUBMODEL, submodel);
+            sqlDataHandler.put(SUBMODEL, submodel);
     }
 
     public String getSubmodel() {
@@ -203,7 +203,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setYear(int year) {
-        sqlDataHandler.putInt(YEAR, year);
+        sqlDataHandler.put(YEAR, year);
     }
 
     public int getYear() {
@@ -211,7 +211,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setCurrentMileage(long mileage) {
-        sqlDataHandler.putLong(CURRENT_MILEAGE, mileage);
+        sqlDataHandler.put(CURRENT_MILEAGE, mileage);
     }
 
     public long getCurrentMileage() {
@@ -219,7 +219,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setCurrentMileageUnits(String units) {
-        sqlDataHandler.putString(DISTANCE_UNITS, units);
+        sqlDataHandler.put(DISTANCE_UNITS, units);
     }
 
     public String getCurrentMileageUnits() {
@@ -227,7 +227,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setPurchaseMileage(long mileage) {
-        sqlDataHandler.putLong(PURCHASE_MILEAGE, mileage);
+        sqlDataHandler.put(PURCHASE_MILEAGE, mileage);
     }
 
     public long getPurchaseMileage() {
@@ -235,7 +235,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setPurchaseDate(Date purchaseDate) {
-        sqlDataHandler.putLong(PURCHASE_DATE, purchaseDate.getTime());
+        sqlDataHandler.put(PURCHASE_DATE, purchaseDate.getTime());
     }
 
     public long getPurchaseDate() {
@@ -295,7 +295,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setPurchaseCost(float purchaseCost) {
-        sqlDataHandler.putFloat(PURCHASE_COST, purchaseCost);
+        sqlDataHandler.put(PURCHASE_COST, purchaseCost);
     }
 
     public String getCostUnits() {
@@ -303,7 +303,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setPurchaseCostUnits(String costUnits) {
-        sqlDataHandler.putString(COST_UNITS, costUnits);
+        sqlDataHandler.put(COST_UNITS, costUnits);
     }
 
     public String getVin() {
@@ -311,7 +311,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setVin(String vin) {
-        sqlDataHandler.putString(VIN, vin);
+        sqlDataHandler.put(VIN, vin);
     }
 
     public String getColor() {
@@ -319,7 +319,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setColor(String color) {
-        sqlDataHandler.putString(COLOR, color);
+        sqlDataHandler.put(COLOR, color);
     }
 
     public long getWeight() {
@@ -327,7 +327,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setWeight(long weight) {
-        sqlDataHandler.putLong(WEIGHT, weight);
+        sqlDataHandler.put(WEIGHT, weight);
     }
 
 
@@ -336,7 +336,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setWeightUnits(String weightUnits) {
-        sqlDataHandler.putString(WEIGHT_UNITS, weightUnits);
+        sqlDataHandler.put(WEIGHT_UNITS, weightUnits);
     }
 
     public long getPower() {
@@ -344,7 +344,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setPower(long power) {
-        sqlDataHandler.putLong(POWER, power);
+        sqlDataHandler.put(POWER, power);
     }
 
     public String getPowerUnits() {
@@ -352,7 +352,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setPowerUnits(String units) {
-        sqlDataHandler.putString(POWER_UNITS, units);
+        sqlDataHandler.put(POWER_UNITS, units);
     }
 
     public long getTorque() {
@@ -360,7 +360,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setTorque(long torque) {
-        sqlDataHandler.putLong(TORQUE, torque);
+        sqlDataHandler.put(TORQUE, torque);
     }
 
     public String getTorqueUnits() {
@@ -368,7 +368,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setTorqueUnits(String units) {
-        sqlDataHandler.putString(TORQUE_UNITS, units);
+        sqlDataHandler.put(TORQUE_UNITS, units);
     }
 
     public String getBoughtFrom() {
@@ -376,11 +376,11 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setBoughtFrom(String boughtFrom) {
-        sqlDataHandler.putString(BOUGHT_FROM, boughtFrom);
+        sqlDataHandler.put(BOUGHT_FROM, boughtFrom);
     }
 
     public void setDisplayColor(int color) {
-        sqlDataHandler.putInt(PRIMARY_COLOR, color);
+        sqlDataHandler.put(PRIMARY_COLOR, color);
     }
 
     public int getDisplayColor() {
@@ -388,7 +388,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setTextColor(int color) {
-        sqlDataHandler.putInt(TEXT_COLOR, color);
+        sqlDataHandler.put(TEXT_COLOR, color);
     }
 
     public int getTextColor() {
@@ -399,7 +399,19 @@ public class Vehicle extends SQLDataOberservable {
         return new File(carSQL.getMainFilePath() + "/" + row + "/" + "/vehicle.webp");
     }
 
+    public float getFuelEfficiency() {
+        Cursor volume = carSQL.getReadableDatabase()
+                .rawQuery("select sum(" + FuelStop.VOLUME + ") " +
+                        "from " + FuelStop.TABLE_NAME +
+                        " where " + FuelStop.COMPLETE_FILL_UP + "= 1", null);
+//        if (volume.moveToFirst()){
+//            Cursor distance= carSQL.getReadableDatabase()
+//                    .query(FuelStop.TABLE_NAME,new String[]{FuelStop.})
+//        }
+        return 0f;
+    }
+
     public void putContentValues(ContentValues contentValues) {
-        sqlDataHandler.setContentValues(contentValues);
+        sqlDataHandler.putContentValues(contentValues);
     }
 }
