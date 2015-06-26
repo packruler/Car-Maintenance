@@ -82,6 +82,14 @@ public class ServiceTask extends SQLDataOberservable {
         return row;
     }
 
+    public boolean beginTransaction() {
+        return sqlDataHandler.beginTransaction();
+    }
+
+    public boolean endTransaction() {
+        return sqlDataHandler.endTransaction();
+    }
+
     public long getVehicleRow() {
         return sqlDataHandler.getLong(VEHICLE_ROW);
     }

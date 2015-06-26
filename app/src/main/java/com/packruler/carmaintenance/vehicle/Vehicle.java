@@ -129,6 +129,14 @@ public class Vehicle extends SQLDataOberservable {
         return row;
     }
 
+    public boolean beginTransaction() {
+        return sqlDataHandler.beginTransaction();
+    }
+
+    public boolean endTransaction() {
+        return sqlDataHandler.endTransaction();
+    }
+
     public boolean setName(String name) {
         if (getName().equals(name))
             return true;
