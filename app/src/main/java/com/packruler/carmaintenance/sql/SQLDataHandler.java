@@ -27,15 +27,6 @@ public class SQLDataHandler {
         loadSelection();
     }
 
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
-    public void setRow(long row) {
-        this.row = row;
-        loadSelection();
-    }
-
     public void storeValuesInBackground(final Runnable runnable) {
         if (backgroundHandler == null) {
             Log.v(TAG, "Initialize Thread");
