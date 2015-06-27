@@ -75,9 +75,12 @@ public class Vehicle extends SQLDataOberservable {
         this(carSQL);
 
         SQLiteDatabase database = carSQL.getWritableDatabase();
-        Cursor cursor = database.query(TABLE_NAME, null, VEHICLE_NAME + "= \"" + name + "\"",
+        long start = Calendar.getInstance().getTimeInMillis();
+        Log.v(TAG, "Start query");
+        Cursor cursor = database.query(TABLE_NAME, new String[]{VEHICLE_NAME}, VEHICLE_NAME + "= \"" + name + "\"",
                 null, null, null, null);
 
+        Log.v(TAG, "query took " + (Calendar.getInstance().getTimeInMillis() - start));
         if (!cursor.moveToFirst()) {
             Log.i(TAG, "New Vehicle Name: " + name);
             ContentValues contentValues = new ContentValues();
@@ -104,7 +107,7 @@ public class Vehicle extends SQLDataOberservable {
     private void init(long rowId) {
         table = TABLE_NAME;
         row = rowId;
-        sqlDataHandler = new SQLDataHandler(carSQL, table, row, this);
+        sqlDataHandler = new SQLDataHandler(carSQL.getWritableDatabase(), table, row, this);
     }
 
     public void delete() {
@@ -141,7 +144,7 @@ public class Vehicle extends SQLDataOberservable {
         if (getName().equals(name))
             return true;
 
-        if (canUseCarName(name)) {
+//        if (canUseCarName(name)) {
             sqlDataHandler.put(VEHICLE_NAME, name);
 //            ContentValues contentValues = new ContentValues();
 //            contentValues.put(VEHICLE_NAME, name);
@@ -171,13 +174,9 @@ public class Vehicle extends SQLDataOberservable {
 //            Log.i(TAG, "All task: " + (done - start));
             return true;
         }
-        Log.i(TAG, "Name already used");
-        return false;
-    }
-
-    public boolean canUseCarName(String carName) {
-        return getName().equals(carName) || carSQL.canUseCarName(carName);
-    }
+//        Log.i(TAG, "Name already used");
+//        return false;
+//    }
 
     public String getName() {
         return sqlDataHandler.getString(VEHICLE_NAME);

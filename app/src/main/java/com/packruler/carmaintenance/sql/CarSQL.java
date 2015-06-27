@@ -67,6 +67,7 @@ public class CarSQL {
     public CarSQL(Activity activity) {
         this.activity = activity;
         sqlHelper = new SQLHelper(activity);
+        sqlHelper.setWriteAheadLoggingEnabled(true);
         mainFilePath = activity.getFilesDir().getPath();
         initializeBitmapCache();
         vehicleMap = loadVehicles();
@@ -156,56 +157,39 @@ public class CarSQL {
         return count;
     }
 
-    private SQLiteDatabase database;
-
     public void beginTransaction() {
-        if (database == null)
-            database = sqlHelper.getWritableDatabase();
-        database.beginTransaction();
+        sqlHelper.getWritableDatabase().beginTransaction();
     }
 
     public void setTransactionSuccessful() {
-        database.setTransactionSuccessful();
+        sqlHelper.getWritableDatabase().setTransactionSuccessful();
     }
 
     public void endTransaction() {
-        database.endTransaction();
+        sqlHelper.getWritableDatabase().endTransaction();
     }
 
-    public boolean close() {
-        if (database != null) {
-            if (!database.inTransaction()) {
-                database.close();
-                return true;
-            }
-            Log.e(TAG, "Database open");
-        }
-        return false;
+    public void close() {
+        sqlHelper.close();
     }
 
     public SQLiteDatabase getWritableDatabase() {
-        if (database == null)
-            database = sqlHelper.getWritableDatabase();
-
-//        else if (database.inTransaction())
-//            Log.v(TAG, "Database in transation");
-
-        return database;
+        return sqlHelper.getWritableDatabase();
     }
 
     public SQLiteDatabase getReadableDatabase() {
         return sqlHelper.getReadableDatabase();
     }
 
-    public boolean canUseCarName(String name) {
-        SQLiteDatabase database = getReadableDatabase();
-        Cursor cursor = database.query(Vehicle.TABLE_NAME, new String[]{Vehicle.VEHICLE_NAME},
-                Vehicle.VEHICLE_NAME + "= \"" + name + "\"",
-                null, null, null, null);
-        boolean canUse = cursor.getCount() == 0;
-        cursor.close();
-        return canUse;
-    }
+//    public boolean canUseCarName(String name) {
+//        SQLiteDatabase database = getReadableDatabase();
+//        Cursor cursor = database.query(Vehicle.TABLE_NAME, new String[]{Vehicle.VEHICLE_NAME},
+//                Vehicle.VEHICLE_NAME + "= \"" + name + "\"",
+//                null, null, null, null);
+//        boolean canUse = cursor.getCount() == 0;
+//        cursor.close();
+//        return canUse;
+//    }
 
     public String getMainFilePath() {
         return mainFilePath;

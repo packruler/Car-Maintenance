@@ -75,7 +75,7 @@ public class ServiceTask extends SQLDataOberservable {
     protected void init(long rowId, String TABLE_NAME) {
         table = TABLE_NAME;
         row = rowId;
-        sqlDataHandler = new SQLDataHandler(carSQL, table, row, this);
+        sqlDataHandler = new SQLDataHandler(carSQL.getWritableDatabase(), table, row, this);
     }
 
     public long getRow() {

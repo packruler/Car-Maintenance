@@ -2,6 +2,7 @@ package com.packruler.carmaintenance.sql;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
@@ -11,7 +12,7 @@ import android.util.Log;
  */
 public class SQLDataHandler {
     private final String TAG = getClass().getSimpleName();
-    private CarSQL carSQL;
+    private SQLiteDatabase database;
     private String tableName;
     private long row;
     private SQLDataOberservable observable;
@@ -19,8 +20,8 @@ public class SQLDataHandler {
     private ContentValues contentValues;
     private Handler backgroundHandler;
 
-    public SQLDataHandler(CarSQL carSQL, String tableName, long row, SQLDataOberservable observable) {
-        this.carSQL = carSQL;
+    public SQLDataHandler(SQLiteDatabase database, String tableName, long row, SQLDataOberservable observable) {
+        this.database = database;
         this.tableName = tableName;
         this.row = row;
         this.observable = observable;
@@ -46,6 +47,7 @@ public class SQLDataHandler {
     }
 
     public boolean beginTransaction() {
+        Log.v(TAG, "beginTransaction");
         if (contentValues != null)
             return false;
         contentValues = new ContentValues();
@@ -60,7 +62,7 @@ public class SQLDataHandler {
     }
 
     public String getString(String column) {
-        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
+        Cursor cursor = database.query(tableName, new String[]{column},
                 selection, null, null, null, null);
         cursor.moveToFirst();
         String output = cursor.getString(cursor.getColumnIndex(column));
@@ -84,7 +86,7 @@ public class SQLDataHandler {
     }
 
     public Integer getInt(String column) {
-        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
+        Cursor cursor = database.query(tableName, new String[]{column},
                 selection, null, null, null, null);
         cursor.moveToFirst();
         int output = cursor.getInt(cursor.getColumnIndex(column));
@@ -108,7 +110,7 @@ public class SQLDataHandler {
     }
 
     public Long getLong(String column) {
-        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
+        Cursor cursor = database.query(tableName, new String[]{column},
                 selection, null, null, null, null);
         cursor.moveToFirst();
         long output = cursor.getLong(cursor.getColumnIndex(column));
@@ -132,7 +134,7 @@ public class SQLDataHandler {
     }
 
     public Float getFloat(String column) {
-        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
+        Cursor cursor = database.query(tableName, new String[]{column},
                 selection, null, null, null, null);
         cursor.moveToFirst();
         Float output = cursor.getFloat(cursor.getColumnIndex(column));
@@ -156,7 +158,7 @@ public class SQLDataHandler {
     }
 
     public Double getDouble(String column) {
-        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
+        Cursor cursor = database.query(tableName, new String[]{column},
                 selection, null, null, null, null);
         cursor.moveToFirst();
         double output = cursor.getDouble(cursor.getColumnIndex(column));
@@ -180,7 +182,7 @@ public class SQLDataHandler {
     }
 
     public boolean getBoolean(String column) {
-        Cursor cursor = carSQL.getReadableDatabase().query(tableName, new String[]{column},
+        Cursor cursor = database.query(tableName, new String[]{column},
                 selection, null, null, null, null);
         cursor.moveToFirst();
         boolean output = cursor.getInt(cursor.getColumnIndex(column)) == 1;
@@ -188,7 +190,7 @@ public class SQLDataHandler {
         return output;
     }
 
-    public void putBoolean(String column, boolean value){
+    public void putBoolean(String column, boolean value) {
         boolean inTransaction = contentValues != null;
 
         ContentValues contentValues;
@@ -206,12 +208,12 @@ public class SQLDataHandler {
 
     public void putContentValues(ContentValues contentValues) {
 //        Log.v(TAG, "Content Values: " + contentValues.toString());
-        carSQL.getWritableDatabase().update(tableName, contentValues, selection, null);
+        database.update(tableName, contentValues, selection, null);
         observable.notifiyChanged();
     }
 
     public void removeRow() {
-        carSQL.getWritableDatabase().delete(tableName, selection, null);
+        database.delete(tableName, selection, null);
     }
 
     public void loadSelection() {
