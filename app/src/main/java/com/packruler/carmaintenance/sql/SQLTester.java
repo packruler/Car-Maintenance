@@ -119,7 +119,7 @@ public class SQLTester extends ActionBarActivity {
             public void run() {
                 Calendar calendar = Calendar.getInstance();
                 long begin = calendar.getTimeInMillis();
-                carSQL.beginTransaction();
+                carSQL.getWritableDatabase().beginTransaction();
                 for (int x = 0; x < 5; x++) {
                     final Vehicle vehicle = new Vehicle(carSQL, "Car " + x);
                     vehicle.setMake("Mini");
@@ -156,8 +156,8 @@ public class SQLTester extends ActionBarActivity {
                     }
                     Log.i(TAG, "3000 tasks took: " + (System.currentTimeMillis() - start));
                 }
-                carSQL.setTransactionSuccessful();
-                carSQL.endTransaction();
+                carSQL.getWritableDatabase().setTransactionSuccessful();
+                carSQL.getWritableDatabase().endTransaction();
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {

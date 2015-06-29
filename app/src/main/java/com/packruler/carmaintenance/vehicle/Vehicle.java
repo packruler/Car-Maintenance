@@ -118,16 +118,16 @@ public class Vehicle extends SQLDataOberservable {
             getImage().delete();
         SQLiteDatabase database = carSQL.getWritableDatabase();
         try {
-            carSQL.beginTransaction();
             long start = Calendar.getInstance().getTimeInMillis();
+            database.beginTransaction();
             database.delete(TABLE_NAME, ROW_ID + "= " + row, null);
             database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_ROW + "= " + row, null);
             database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_ROW + "= " + row, null);
             database.delete(PartReplacement.TABLE_NAME, PartReplacement.VEHICLE_ROW + "= " + row, null);
-            carSQL.setTransactionSuccessful();
+            database.setTransactionSuccessful();
             Log.v(TAG, "Delete took: " + (Calendar.getInstance().getTimeInMillis() - start));
         } finally {
-            carSQL.endTransaction();
+            database.endTransaction();
         }
     }
 

@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteCursor;
+import android.database.sqlite.SQLiteCursorDriver;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteQuery;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -67,7 +70,6 @@ public class CarSQL {
     public CarSQL(Activity activity) {
         this.activity = activity;
         sqlHelper = new SQLHelper(activity);
-        sqlHelper.setWriteAheadLoggingEnabled(true);
         mainFilePath = activity.getFilesDir().getPath();
         initializeBitmapCache();
         vehicleMap = loadVehicles();
@@ -155,18 +157,6 @@ public class CarSQL {
         int count = cursor.getCount();
         cursor.close();
         return count;
-    }
-
-    public void beginTransaction() {
-        sqlHelper.getWritableDatabase().beginTransaction();
-    }
-
-    public void setTransactionSuccessful() {
-        sqlHelper.getWritableDatabase().setTransactionSuccessful();
-    }
-
-    public void endTransaction() {
-        sqlHelper.getWritableDatabase().endTransaction();
     }
 
     public void close() {
@@ -414,5 +404,12 @@ public class CarSQL {
             System.gc();
         }
         return out;
+    }
+
+    private class CursorFactory implements SQLiteDatabase.CursorFactory {
+        @Override
+        public android.database.Cursor newCursor(SQLiteDatabase db, SQLiteCursorDriver masterQuery, String editTable, SQLiteQuery query) {
+            return new SQLiteCursor(masterQuery, editTable, query);
+        }
     }
 }
