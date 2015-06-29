@@ -17,7 +17,7 @@ import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.ui.adapters.FuelStopAdapter;
 import com.packruler.carmaintenance.ui.adapters.ServiceRecyclerAdapter;
 import com.packruler.carmaintenance.vehicle.Vehicle;
-import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
+import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 
 import java.util.Calendar;
 
@@ -79,12 +79,13 @@ public class FuelStopsFragment extends android.support.v4.app.Fragment {
             @Override
             public void onEditClick(long itemId) {
                 long start = Calendar.getInstance().getTimeInMillis();
-                ServiceTask task = new ServiceTask(carSQL, itemId);
+                FuelStop task = new FuelStop(carSQL, itemId);
                 Log.v(TAG, "Type: " + task.getType() + " Date: " + DateFormat.getMediumDateFormat(activity).format(task.getDate()));
                 Log.v(TAG, "Loading task took " + (Calendar.getInstance().getTimeInMillis() - start));
+
                 activity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, new EditService(task))
-                        .addToBackStack("EditService-" + itemId).commit();
+                        .replace(R.id.container, new EditFuelStop(task))
+                                .addToBackStack("EditService-" + itemId).commit();
             }
         });
 

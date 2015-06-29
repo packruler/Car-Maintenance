@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.packruler.carmaintenance.R;
@@ -40,16 +41,49 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
         private TextView distanceDisplay;
         private TextView volumeDisplay;
         private TextView costPerDisplay;
-        private LinearLayout extraDetailsDisplay;
+        private LinearLayout layout;
+        private RelativeLayout expandedMenu;
+        private LinearLayout detailLayout;
+        private boolean expanded = false;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            layout = (LinearLayout) itemView.findViewById(R.id.expandable_layout);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!expanded) {
+                        layout.addView(expandedMenu);
+                    } else {
+                        layout.removeView(expandedMenu);
+                    }
+
+                    expanded = !expanded;
+                    onItemClick(ViewHolder.this.getItemId());
+                }
+            });
+            layout.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onEditClick(ViewHolder.this.getItemId());
+                }
+            });
+
+            layout.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onDeleteClick(ViewHolder.this.getItemId());
+                }
+            });
             efficiencyDisplay = (TextView) itemView.findViewById(R.id.fuel_efficiency);
             costDisplay = (TextView) itemView.findViewById(R.id.cost_display);
             distanceDisplay = (TextView) itemView.findViewById(R.id.distance_display);
             volumeDisplay = (TextView) itemView.findViewById(R.id.volume_display);
             costPerDisplay = (TextView) itemView.findViewById(R.id.cost_per);
-            extraDetailsDisplay = (LinearLayout) itemView.findViewById(R.id.extra_details);
+            detailLayout = (LinearLayout) itemView.findViewById(R.id.extra_details);
+            expandedMenu = (RelativeLayout) itemView.findViewById(R.id.expanded_menu);
+            layout.removeView(expandedMenu);
         }
 
         public void setDisplay(Cursor cursor) {
