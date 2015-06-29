@@ -22,7 +22,7 @@ public class FuelStop extends ServiceTask {
     public static final String OCTANE = "octane";
     public static final String MISSED_FILL_UP = "missed_fill_up";
     public static final String COMPLETE_FILL_UP = "complete_fill_up";
-    public static final String DISTANCE_TRAVELED = "distance_per_volume";
+    public static final String DISTANCE_TRAVELED = "distance_traveled";
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -87,7 +87,7 @@ public class FuelStop extends ServiceTask {
         long distance = -1;
         if (isCompleteFillUp() && !missedFillup() && getDate() > 0) {
             Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{MILEAGE},
-                    DATE + "< " + getDate(), null, null, null, DATE + " DSC", String.valueOf(1));
+                    DATE + "< " + getDate(), null, null, null, DATE + " DESC", String.valueOf(1));
             if (cursor.moveToFirst())
                 distance = getMileage() - cursor.getInt(cursor.getColumnIndex(MILEAGE));
         }

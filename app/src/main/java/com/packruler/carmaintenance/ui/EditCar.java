@@ -288,8 +288,8 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                         currentMileage.setText(vehicle.getCurrentMileage() + "");
                         currentMileage.setEnabled(false);
 
-                        if (vehicle.getCurrentMileageUnits() != null)
-                            mileageUnit.setText(vehicle.getCurrentMileageUnits());
+                        if (vehicle.getMileageUnits() != null)
+                            mileageUnit.setText(vehicle.getMileageUnits());
                     }
 
                     if (vehicle.getWeight() != 0) {

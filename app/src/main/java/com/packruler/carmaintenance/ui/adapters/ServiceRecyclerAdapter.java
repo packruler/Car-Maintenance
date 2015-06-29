@@ -26,12 +26,14 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
     private Context context;
     private String TAG = getClass().getName();
 
+    private OnClickListener onClickListener;
+
     public ServiceRecyclerAdapter(Context context, Cursor cursor) {
         super(cursor);
         this.context = context;
     }
 
-    private OnClickListener onClickListener;
+//    private OnClickListener onClickListener;
 
     @Override
     public void onBindViewHolderCursor(ViewHolder holder, Cursor cursor) {
@@ -51,7 +53,6 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
         private RelativeLayout expandedMenu;
         private LinearLayout detailLayout;
         private boolean expanded = false;
-
 
         public ViewHolder(View v) {
             super(v);
@@ -142,15 +143,15 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
             onClickListener.onDeleteClick(itemId);
     }
 
-    public void setOnItemClickListener(OnClickListener listener) {
-        onClickListener = listener;
-    }
-
     public interface OnClickListener {
         void onItemClick(long itemId);
 
         void onDeleteClick(long itemId);
 
         void onEditClick(long itemId);
+    }
+
+    public void setOnItemClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 }

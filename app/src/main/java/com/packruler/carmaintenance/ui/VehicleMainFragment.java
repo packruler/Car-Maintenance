@@ -20,6 +20,7 @@ import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.ui.utilities.Swatch;
 import com.packruler.carmaintenance.vehicle.Vehicle;
+import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 
 /**
  * Created by Packruler on 6/10/15.
@@ -75,6 +76,18 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
         });
 
         fuelStopsButton = (CardView) rootView.findViewById(R.id.fuel_stop_button);
+        fuelStopsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "Fuel Stop Click");
+                if (activity.getCurrentVehicle() != null)
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.container, new FuelStopsFragment(activity, activity.getCurrentVehicle()))
+                            .addToBackStack(FuelStop.class.getSimpleName())
+                            .commit();
+            }
+        });
         vehicleName = (TextView) rootView.findViewById(R.id.vehicle_name);
         viewInitialized = true;
 
@@ -95,26 +108,26 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
     }
 
     public void setUIColor(int color) {
-            try {
-                Log.v(TAG, "Color: " + color);
-                if (color == 0)
-                    color = activity.getResources().getColor(R.color.default_ui_color);
+        try {
+            Log.v(TAG, "Color: " + color);
+            if (color == 0)
+                color = activity.getResources().getColor(R.color.default_ui_color);
 
-                editCarButton.setCardBackgroundColor(color);
-                int textColor = new Swatch(color).getBodyTextColor();
-                ((TextView) editCarButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
-                ((ImageView) editCarButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
+            editCarButton.setCardBackgroundColor(color);
+            int textColor = new Swatch(color).getBodyTextColor();
+            ((TextView) editCarButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
+            ((ImageView) editCarButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
 
-                servicesButton.setCardBackgroundColor(color);
-                ((TextView) servicesButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
-                ((ImageView) servicesButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
+            servicesButton.setCardBackgroundColor(color);
+            ((TextView) servicesButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
+            ((ImageView) servicesButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
 
-                fuelStopsButton.setCardBackgroundColor(color);
-                ((TextView) fuelStopsButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
-                ((ImageView) fuelStopsButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
-            } catch (Exception e) {
-                Log.e(TAG, e.getMessage());
-            }
+            fuelStopsButton.setCardBackgroundColor(color);
+            ((TextView) fuelStopsButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
+            ((ImageView) fuelStopsButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
     }
 
     public void loadVehicleDetails() {

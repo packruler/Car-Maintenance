@@ -47,6 +47,8 @@ public class Vehicle extends SQLDataOberservable {
     public static final String POWER_UNITS = "power_units";
     public static final String TORQUE = "torque";
     public static final String TORQUE_UNITS = "torque_units";
+    public static final String FUEL_EFFICIENCY_UNITS = "fuel_efficiency_unit";
+    public static final String VOLUME_UNITS = "volume_units";
     public static final String PRIMARY_COLOR = "display_color";
     public static final String TEXT_COLOR = "display_text_color";
 
@@ -61,7 +63,8 @@ public class Vehicle extends SQLDataOberservable {
                     CURRENT_MILEAGE + " LONG," + DISTANCE_UNITS + " TEXT," + COLOR + " TEXT," +
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " TEXT," +
                     PURCHASE_COST + " FLOAT," + COST_UNITS + " TEXT," +
-                    PURCHASE_MILEAGE + " LONG," + PRIMARY_COLOR + " INTEGER" + ")";
+                    PURCHASE_MILEAGE + " LONG," + FUEL_EFFICIENCY_UNITS + " TEXT," +
+                    VOLUME_UNITS + " TEXT," + PRIMARY_COLOR + " INTEGER" + ")";
 
     protected CarSQL carSQL;
 
@@ -145,7 +148,7 @@ public class Vehicle extends SQLDataOberservable {
             return true;
 
 //        if (canUseCarName(name)) {
-            sqlDataHandler.put(VEHICLE_NAME, name);
+        sqlDataHandler.put(VEHICLE_NAME, name);
 //            ContentValues contentValues = new ContentValues();
 //            contentValues.put(VEHICLE_NAME, name);
 //            sqlDataHandler.putContentValues(contentValues);
@@ -172,8 +175,8 @@ public class Vehicle extends SQLDataOberservable {
 //            Log.i(TAG, "Fuel task: " + (doneFuel - doneService));
 //            Log.i(TAG, "Part task: " + (done - doneFuel));
 //            Log.i(TAG, "All task: " + (done - start));
-            return true;
-        }
+        return true;
+    }
 //        Log.i(TAG, "Name already used");
 //        return false;
 //    }
@@ -229,7 +232,7 @@ public class Vehicle extends SQLDataOberservable {
         sqlDataHandler.put(DISTANCE_UNITS, units);
     }
 
-    public String getCurrentMileageUnits() {
+    public String getMileageUnits() {
         return sqlDataHandler.getString(DISTANCE_UNITS);
     }
 
@@ -290,7 +293,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public Cursor getFuelStopCursor() {
-        return FuelStop.getFuelStopCursorForCar(carSQL, row, FuelStop.DATE + " DSC");
+        return FuelStop.getFuelStopCursorForCar(carSQL, row, FuelStop.DATE + " DESC");
     }
 
     public int getPartCount() {
@@ -416,6 +419,22 @@ public class Vehicle extends SQLDataOberservable {
 //                    .query(FuelStop.TABLE_NAME,new String[]{FuelStop.})
 //        }
         return 0f;
+    }
+
+    public void setFuelEfficiencyUnits(String units) {
+        sqlDataHandler.put(FUEL_EFFICIENCY_UNITS, units);
+    }
+
+    public String getFuelEfficiencyUnits() {
+        return sqlDataHandler.getString(FUEL_EFFICIENCY_UNITS);
+    }
+
+    public void setVolumeUnits(String units) {
+        sqlDataHandler.put(VOLUME_UNITS, units);
+    }
+
+    public String getVolumeUnits() {
+        return sqlDataHandler.getString(VOLUME_UNITS);
     }
 
     public void putContentValues(ContentValues contentValues) {

@@ -56,6 +56,9 @@ public class ServicesFragment extends android.support.v4.app.Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
+    public ServicesFragment() {
+    }
+
     public ServicesFragment(final MainActivity activity, Vehicle vehicle) {
         this.activity = activity;
         this.vehicle = vehicle;
