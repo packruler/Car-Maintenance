@@ -14,7 +14,6 @@ import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
 import java.io.File;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,7 +39,7 @@ public class Vehicle extends SQLDataOberservable {
     public static final String PURCHASE_DATE = "purchase_date";
     public static final String BOUGHT_FROM = "bought_from";
     public static final String PURCHASE_COST = "purchase_cost";
-    public static final String COST_UNITS = "cost_units";
+    public static final String CURRENCY = "currency";
     public static final String DISPLACEMENT = "displacement";
     public static final String DISPLACEMENT_UNITS = "displacement_units";
     public static final String POWER = "power";
@@ -62,7 +61,7 @@ public class Vehicle extends SQLDataOberservable {
                     TORQUE + " FLOAT," + TORQUE_UNITS + " TEXT," +
                     CURRENT_MILEAGE + " LONG," + DISTANCE_UNITS + " TEXT," + COLOR + " TEXT," +
                     PURCHASE_DATE + " LONG," + BOUGHT_FROM + " TEXT," +
-                    PURCHASE_COST + " FLOAT," + COST_UNITS + " TEXT," +
+                    PURCHASE_COST + " FLOAT," + CURRENCY + " TEXT," +
                     PURCHASE_MILEAGE + " LONG," + FUEL_EFFICIENCY_UNITS + " TEXT," +
                     VOLUME_UNITS + " TEXT," + PRIMARY_COLOR + " INTEGER" + ")";
 
@@ -144,50 +143,16 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public boolean setName(String name) {
-        if (getName().equals(name))
-            return true;
-
-//        if (canUseCarName(name)) {
         sqlDataHandler.put(VEHICLE_NAME, name);
-//            ContentValues contentValues = new ContentValues();
-//            contentValues.put(VEHICLE_NAME, name);
-//            sqlDataHandler.putContentValues(contentValues);
-//
-//            sqlDataHandler.setRow(VEHICLE_NAME + "= \"" + this.name + "\"");
-//
-//            long start = System.currentTimeMillis();
-//
-//            carSQL.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
-//                    VEHICLE_NAME + "= \"" + this.name + "\"", null);
-//
-//            long doneService = System.currentTimeMillis();
-//            carSQL.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
-//                    VEHICLE_NAME + "= \"" + this.name + "\"", null);
-//
-//            long doneFuel = System.currentTimeMillis();
-//            carSQL.getWritableDatabase().update(ServiceTask.TABLE_NAME, contentValues,
-//                    VEHICLE_NAME + "= \"" + this.name + "\"", null);
-//
-//            long done = System.currentTimeMillis();
-//            this.name = name;
-//
-//            Log.i(TAG, "Service task: " + (doneService - start));
-//            Log.i(TAG, "Fuel task: " + (doneFuel - doneService));
-//            Log.i(TAG, "Part task: " + (done - doneFuel));
-//            Log.i(TAG, "All task: " + (done - start));
         return true;
     }
-//        Log.i(TAG, "Name already used");
-//        return false;
-//    }
 
     public String getName() {
         return sqlDataHandler.getString(VEHICLE_NAME);
     }
 
     public void setMake(String make) {
-        if (!make.equals(getMake()))
-            sqlDataHandler.put(MAKE, make);
+        sqlDataHandler.put(MAKE, make);
     }
 
     public String getMake() {
@@ -195,8 +160,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setModel(String model) {
-        if (!model.equals(getModel()))
-            sqlDataHandler.put(MODEL, model);
+        sqlDataHandler.put(MODEL, model);
     }
 
     public String getModel() {
@@ -204,8 +168,7 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public void setSubmodel(String submodel) {
-        if (!submodel.equals(getSubmodel()))
-            sqlDataHandler.put(SUBMODEL, submodel);
+        sqlDataHandler.put(SUBMODEL, submodel);
     }
 
     public String getSubmodel() {
@@ -228,7 +191,7 @@ public class Vehicle extends SQLDataOberservable {
         return sqlDataHandler.getLong(CURRENT_MILEAGE);
     }
 
-    public void setCurrentMileageUnits(String units) {
+    public void setMileageUnits(String units) {
         sqlDataHandler.put(DISTANCE_UNITS, units);
     }
 
@@ -244,8 +207,8 @@ public class Vehicle extends SQLDataOberservable {
         return sqlDataHandler.getLong(PURCHASE_MILEAGE);
     }
 
-    public void setPurchaseDate(Date purchaseDate) {
-        sqlDataHandler.put(PURCHASE_DATE, purchaseDate.getTime());
+    public void setPurchaseDate(long purchaseDate) {
+        sqlDataHandler.put(PURCHASE_DATE, purchaseDate);
     }
 
     public long getPurchaseDate() {
@@ -308,12 +271,12 @@ public class Vehicle extends SQLDataOberservable {
         sqlDataHandler.put(PURCHASE_COST, purchaseCost);
     }
 
-    public String getCostUnits() {
-        return sqlDataHandler.getString(COST_UNITS);
+    public String getCurrency() {
+        return sqlDataHandler.getString(CURRENCY);
     }
 
-    public void setPurchaseCostUnits(String costUnits) {
-        sqlDataHandler.put(COST_UNITS, costUnits);
+    public void setCurrency(String currency) {
+        sqlDataHandler.put(CURRENCY, currency);
     }
 
     public String getVin() {

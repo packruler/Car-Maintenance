@@ -193,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/margin_small"
                     android:ems="10"
-                    android:hint="@string/cost_unit"
+                    android:hint="@string/currency_unit"
                     android:singleLine="true"
                     android:id="@+id/cost_unit"
                     android:dropDownWidth="80dp"

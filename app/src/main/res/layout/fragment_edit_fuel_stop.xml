@@ -38,75 +38,48 @@
                     android:layout_marginBottom="@dimen/margin_small"/>
 
                 <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:id="@+id/date_display"
+                    android:hint="@string/date"
+                    android:layout_below="@id/general_info_title"
+                    app:met_floatingLabel="highlight"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/date_click"
+                    android:layout_alignTop="@id/date_display"
+                    android:layout_alignBottom="@id/date_display"
+                    android:layout_alignLeft="@id/date_display"
+                    android:layout_alignRight="@id/date_display"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:hint="@string/mileage"
                     android:ems="10"
                     android:id="@id/current_mileage"
-                    android:layout_below="@id/general_info_title"/>
+                    android:layout_below="@id/date_display"
+                    app:met_floatingLabel="highlight"/>
 
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:id="@+id/dateDisplay"
-                    android:hint="@string/date"
+                    android:id="@+id/cost_per_volume"
+                    app:met_floatingLabel="highlight"
+                    android:hint="@string/cost_per_volume"
                     android:layout_below="@id/current_mileage"/>
-
                 <View
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/dateDisplay"
-                    android:layout_alignBottom="@id/dateDisplay"
-                    android:layout_alignLeft="@id/dateDisplay"
-                    android:layout_alignRight="@id/dateDisplay"/>
+                    android:id="@+id/cost_per_volume_click"
+                    android:layout_alignTop="@id/cost_per_volume"
+                    android:layout_alignBottom="@id/cost_per_volume"
+                    android:layout_alignLeft="@id/cost_per_volume"
+                    android:layout_alignRight="@id/cost_per_volume"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cost"
-                    android:textAppearance="@android:style/TextAppearance.Small"
-                    android:id="@+id/cost_title"
-                    android:textStyle="bold"
-                    android:textColor="?attr/colorPrimary"
-                    android:layout_marginBottom="@dimen/margin_small"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:layout_below="@id/dateDisplay"/>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/cost_title">
-
-                    <NumberPicker
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/number1"/>
-
-                    <NumberPicker
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/decimal"
-                        android:layout_toRightOf="@id/number1"/>
-
-                    <NumberPicker
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/number2"
-                        android:layout_toRightOf="@id/decimal"/>
-
-                    <NumberPicker
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/number3"
-                        android:layout_toRightOf="@id/number2"/>
-
-                    <NumberPicker
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/number4"
-                        android:layout_toRightOf="@id/number3"/>
-                </RelativeLayout>
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>

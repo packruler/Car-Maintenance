@@ -1,5 +1,6 @@
 package com.packruler.carmaintenance.sql;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -97,16 +98,13 @@ public class SQLTester extends ActionBarActivity {
         Log.i(TAG, "Start Fill");
         long start = Calendar.getInstance().getTimeInMillis();
 
-//        SQLiteDatabase database = carSQL.getWritableDatabase();
-//        database.beginTransaction();
-//        database.delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_ROW + " LIKE (\'Car%\')", null);
-//        database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_ROW + " LIKE (\'Car%\')", null);
-//        database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_ROW + " LIKE (\'Car%\')", null);
-//        database.delete(Vehicle.TABLE_NAME, Vehicle.VEHICLE_ROW + " LIKE (\'THIS%\')", null);
-//        database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_ROW + " LIKE (\'THIS%\')", null);
-//        database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_ROW + " LIKE (\'THIS%\')", null);
-//        database.setTransactionSuccessful();
-//        database.endTransaction();
+        SQLiteDatabase database = carSQL.getWritableDatabase();
+        database.beginTransaction();
+        database.delete(Vehicle.TABLE_NAME, null,null);
+        database.delete(ServiceTask.TABLE_NAME, null,null);
+        database.delete(FuelStop.TABLE_NAME, null,null);
+        database.setTransactionSuccessful();
+        database.endTransaction();
 
         Log.i(TAG, "Delete Took " + (Calendar.getInstance().getTimeInMillis() - start));
         HandlerThread handlerThread = new HandlerThread("fillSQL");

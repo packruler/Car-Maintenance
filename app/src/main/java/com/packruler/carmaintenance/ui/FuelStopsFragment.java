@@ -83,9 +83,11 @@ public class FuelStopsFragment extends android.support.v4.app.Fragment {
                 Log.v(TAG, "Type: " + task.getType() + " Date: " + DateFormat.getMediumDateFormat(activity).format(task.getDate()));
                 Log.v(TAG, "Loading task took " + (Calendar.getInstance().getTimeInMillis() - start));
 
-                activity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, new EditFuelStop(task))
-                                .addToBackStack("EditService-" + itemId).commit();
+                activity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container, new EditFuelStop(activity, task))
+                        .addToBackStack(EditFuelStop.class.getSimpleName())
+                        .commit();
             }
         });
 
@@ -93,7 +95,11 @@ public class FuelStopsFragment extends android.support.v4.app.Fragment {
         buttonFloat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                activity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container, new EditFuelStop(activity, null))
+                        .addToBackStack(EditFuelStop.class.getSimpleName())
+                        .commit();
             }
         });
         setUIColor(vehicle.getDisplayColor());

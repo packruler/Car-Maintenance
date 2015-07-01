@@ -48,10 +48,9 @@ public class SQLDataHandler {
 
     public boolean beginTransaction() {
         Log.v(TAG, "beginTransaction");
-        if (contentValues != null)
-            return false;
+        boolean wasNull = contentValues != null;
         contentValues = new ContentValues();
-        return true;
+        return wasNull;
     }
 
     public boolean endTransaction() {
@@ -207,7 +206,7 @@ public class SQLDataHandler {
     }
 
     public void putContentValues(ContentValues contentValues) {
-//        Log.v(TAG, "Content Values: " + contentValues.toString());
+        Log.v(TAG, "Content Values: " + contentValues.toString());
         database.update(tableName, contentValues, selection, null);
         observable.notifiyChanged();
     }

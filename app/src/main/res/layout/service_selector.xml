@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="$0.00"
-                android:id="@+id/costDisplay"
+                android:id="@+id/cost_display"
                 android:layout_marginBottom="@dimen/margin_tiny"
                 android:layout_alignParentRight="true"/>
 
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/type_display"
-                android:id="@+id/dateDisplay"
+                android:id="@+id/date_display"
                 android:text="Date:"/>
 
             <TextView
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Mileage: 0,000 miles"
-                android:id="@+id/mileageDisplay"
+                android:id="@+id/mileage_display"
                 android:layout_below="@+id/type_display"
                 android:layout_alignParentRight="true"/>
 

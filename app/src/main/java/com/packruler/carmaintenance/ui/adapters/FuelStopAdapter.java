@@ -16,6 +16,7 @@ import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 
 import java.text.DecimalFormat;
+import java.util.Currency;
 
 /**
  * Created by Packruler on 6/28/15.
@@ -94,9 +95,11 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
 
             Vehicle vehicle = new Vehicle(carSQL, cursor.getLong(cursor.getColumnIndex(FuelStop.VEHICLE_ROW)));
 
-            String costUnits = vehicle.getCostUnits();
-            if (costUnits == null)
-                costUnits = "";
+            String currency = vehicle.getCurrency();
+            if (currency == null)
+                currency = "";
+            else
+                currency = Currency.getInstance(currency).getSymbol();
 
             String volumeUnits = vehicle.getVolumeUnits();
             if (volumeUnits == null)
@@ -118,10 +121,10 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
             } else
                 efficiencyDisplay.setText("--.-- " + fuelEfficiencyUnits);
 
-            costDisplay.setText(costUnits + numberFormat.format(cost));
+            costDisplay.setText(currency + numberFormat.format(cost));
             volumeDisplay.setText(numberFormat.format(volume) + ' ' + volumeUnits);
             distanceDisplay.setText(distance + ' ' + distanceUnits);
-            costPerDisplay.setText(costUnits + costPer + volumeUnits);
+            costPerDisplay.setText(currency + costPer + volumeUnits);
         }
     }
 

@@ -85,9 +85,9 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
                 }
             });
             typeDisplay = (TextView) v.findViewById(R.id.type_display);
-            mileageDisplay = (TextView) v.findViewById(R.id.mileageDisplay);
-            costDisplay = (TextView) v.findViewById(R.id.costDisplay);
-            dateDisplay = (TextView) v.findViewById(R.id.dateDisplay);
+            mileageDisplay = (TextView) v.findViewById(R.id.mileage_display);
+            costDisplay = (TextView) v.findViewById(R.id.cost_display);
+            dateDisplay = (TextView) v.findViewById(R.id.date_display);
 
             expandedMenu = (RelativeLayout) v.findViewById(R.id.expanded_menu);
             layout.removeView(expandedMenu);

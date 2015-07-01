@@ -62,9 +62,13 @@
         <item>@string/kilogram</item>
     </string-array>
 
-    <string name="cost_unit">Monitary Unit</string>
+    <string name="currency_unit">Currency</string>
     <string name="dollar">Dollars</string>
     <string name="dollar_short">$</string>
+    <string-array name="currencies">
+        <item>USD</item>
+        <item>EUR</item>
+    </string-array>
 
     <string name="euro">Euro</string>
     <string name="euro_short">€</string>
