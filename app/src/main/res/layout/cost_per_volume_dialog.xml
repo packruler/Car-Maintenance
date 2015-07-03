@@ -4,17 +4,16 @@
               android:layout_height="match_parent"
               android:gravity="center_horizontal">
 
-    <EditText
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="1"
         android:hint="#"
         android:inputType="number"
         android:gravity="center_horizontal"
-        android:id="@+id/number1"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+        android:id="@+id/number1"/>
 
-    <EditText
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="."
@@ -22,36 +21,32 @@
         android:hint="#"
         android:gravity="center_horizontal"
         android:inputType="none"
-        android:id="@+id/decimal"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+        android:id="@+id/decimal"/>
 
-    <EditText
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="1"
         android:hint="#"
         android:inputType="number"
         android:gravity="center_horizontal"
-        android:id="@+id/number2"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+        android:id="@+id/number2"/>
 
-    <EditText
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="1"
         android:hint="#"
         android:inputType="number"
         android:gravity="center_horizontal"
-        android:id="@+id/number3"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+        android:id="@+id/number3"/>
 
-    <EditText
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="1"
         android:text="9"
         android:inputType="none"
         android:gravity="center_horizontal"
-        android:id="@+id/number4"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+        android:id="@+id/number4"/>
 </LinearLayout>

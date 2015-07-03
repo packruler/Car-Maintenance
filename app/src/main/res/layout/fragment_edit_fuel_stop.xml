@@ -16,7 +16,7 @@
         android:id="@+id/general_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_tiny"
+        android:layout_marginBottom="@dimen/margin_small"
         card_view:cardCornerRadius="@dimen/cardview_default_radius"
         card_view:cardElevation="@dimen/cardview_default_elevation"
         card_view:contentPadding="@dimen/margin_tiny">
@@ -42,8 +42,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/general_info_title"
                 android:layout_marginRight="@dimen/margin_small"
+                android:ems="10"
                 android:hint="@string/date"
-                android:minEms="3"
                 app:met_floatingLabel="highlight" />
 
             <View
@@ -55,44 +55,6 @@
                 android:layout_alignRight="@id/date_display"
                 android:layout_alignTop="@id/date_display" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/time_display"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/date_display"
-                android:layout_marginRight="@dimen/margin_small"
-                android:layout_toRightOf="@id/date_display"
-                android:hint="@string/time"
-                android:minEms="3"
-                app:met_floatingLabel="highlight" />
-
-            <View
-                android:id="@+id/time_click"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/time_display"
-                android:layout_alignLeft="@id/time_display"
-                android:layout_alignRight="@id/time_display"
-                android:layout_alignTop="@id/time_display" />
-
-            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                android:id="@+id/time_zone_display"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/time_display"
-                android:layout_toRightOf="@id/time_display"
-                android:hint="@string/time_zone"
-                android:minEms="3"
-                app:met_floatingLabel="highlight" />
-
-            <!--<View-->
-            <!--android:id="@+id/time_zone_click"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignBottom="@id/time_zone_display"-->
-            <!--android:layout_alignLeft="@id/time_zone_display"-->
-            <!--android:layout_alignRight="@id/time_zone_display"-->
-            <!--android:layout_alignTop="@id/time_zone_display" />-->
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@id/current_mileage"
@@ -101,6 +63,7 @@
                 android:layout_below="@id/date_display"
                 android:ems="10"
                 android:hint="@string/current_mileage"
+                android:inputType="number"
                 app:met_floatingLabel="highlight" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
@@ -123,7 +86,7 @@
                 android:layout_alignTop="@id/cost_per_volume" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/volume"
+                android:id="@+id/volume_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cost_per_volume"
@@ -136,13 +99,72 @@
                 android:id="@+id/total_cost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/volume"
+                android:layout_below="@id/volume_display"
                 android:ems="10"
                 android:enabled="false"
                 android:hint="@string/total_cost"
                 app:met_floatingLabel="highlight" />
 
 
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/general_info"
+        android:layout_marginBottom="@dimen/margin_tiny"
+        card_view:cardCornerRadius="@dimen/cardview_default_radius"
+        card_view:cardElevation="@dimen/cardview_default_elevation"
+        card_view:contentPadding="@dimen/margin_tiny">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/calc_efficiency_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:text="@string/calc_efficiency"
+                android:textAppearance="@android:style/TextAppearance.Small"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold" />
+
+            <com.gc.materialdesign.views.Switch
+                android:id="@+id/missed_fill_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/calc_efficiency_title"
+                android:layout_marginRight="@dimen/margin_small" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/missed_fill_up"
+                android:layout_alignTop="@id/missed_fill_up"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:gravity="center_vertical"
+                android:text="@string/missed_fill_up" />
+
+            <com.gc.materialdesign.views.Switch
+                android:id="@+id/complete_fill_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/missed_fill_up"
+                android:layout_marginRight="@dimen/margin_small" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/complete_fill_up"
+                android:layout_alignTop="@id/complete_fill_up"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:gravity="center_vertical"
+                android:text="@string/complete_fill_up" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
     <!--</>-->

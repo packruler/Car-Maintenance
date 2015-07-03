@@ -1,12 +1,10 @@
 package com.packruler.carmaintenance.ui;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -19,9 +17,13 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.gc.materialdesign.views.CheckBox;
+import com.gc.materialdesign.views.Switch;
 import com.packruler.carmaintenance.R;
+import com.packruler.carmaintenance.ui.utilities.NumberTextWatcher;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -31,16 +33,7 @@ import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.Currency;
 import java.util.Date;
-import java.util.TimeZone;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link EditFuelStop.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link EditFuelStop#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class EditFuelStop extends android.support.v4.app.Fragment {
     private final String TAG = getClass().getSimpleName();
 
@@ -48,15 +41,20 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
     private FuelStop fuelStop;
     private MainActivity activity;
     private MaterialEditText mileage;
-    private MaterialEditText costPerVolume;
+    private MaterialEditText costPerVolumeDisplay;
     private MaterialEditText dateDisplay;
     private MaterialEditText volume;
     private MaterialEditText totalCost;
+    private Switch completeFillup;
+    private Switch missedFillup;
 
-    private AlertDialog costPerVolumeDialog;
-    private MaterialDialog datePickerDialog;
+    private MaterialDialog costPerVolumeDialog;
     private float costPer;
+
+    private MaterialDialog datePickerDialog;
     private Calendar date = Calendar.getInstance();
+    private String currencyString;
+
     private int uiColor;
 
     public EditFuelStop() {
@@ -69,6 +67,13 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
         uiColor = activity.getCurrentVehicle().getUiColor();
         if (uiColor == 0)
             uiColor = activity.getResources().getColor(R.color.default_ui_color);
+
+        currencyString = activity.getCurrentVehicle().getCurrency();
+        Log.v(TAG, "Currency: " + currencyString);
+        if (currencyString != null)
+            currencyString = Currency.getInstance(currencyString).getSymbol();
+        else
+            currencyString = "";
     }
 
     @Override
@@ -76,72 +81,72 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_edit_fuel_stop, container, false);
-        initializeCostPerVolume();
+        ((TextView) rootView.findViewById(R.id.general_info_title)).setTextColor(uiColor);
         initializeDate();
-
+        initializeVolume();
+        initializeCalcEff();
+        initializeMileage();
+        initializeCostPerVolume();
         return rootView;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            activity.getActionBar().setTitle("Edit Fuel Stop");
+        } catch (NullPointerException e) {
+            Log.e(TAG, e.getMessage());
+        }
     }
 
     private void initializeDate() {
         Log.v(TAG, "init Date");
         dateDisplay = (MaterialEditText) rootView.findViewById(R.id.date_display);
-
+        dateDisplay.setPrimaryColor(uiColor);
         date = Calendar.getInstance();
         if (fuelStop != null)
             date.setTimeInMillis(fuelStop.getDate());
-        setupDatePickerDialog.run();
-//        activity.execute(setupDatePickerDialog);
+
+        final DatePicker picker = new DatePicker(activity);
+        picker.setMaxDate(Calendar.getInstance().getTimeInMillis());
+
+        datePickerDialog = new MaterialDialog.Builder(activity)
+                .customView(picker, false)
+                .positiveText(R.string.accept)
+                .positiveColor(getResources().getColor(R.color.default_ui_color))
+                .negativeText(R.string.cancel)
+                .negativeColor(getResources().getColor(R.color.material_grey_900))
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        date.set(picker.getYear(), picker.getMonth(), picker.getDayOfMonth());
+                        displaySetDate();
+                    }
+                })
+                .build();
+
+        rootView.findViewById(R.id.date_click).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datePickerDialog.show();
+            }
+        });
+
         displaySetDate();
     }
-
-    private Runnable setupDatePickerDialog = new Runnable() {
-        private String TAG = "setupDatePickerDialog";
-
-        @Override
-        public void run() {
-            Log.v(TAG, "Run on other thread");
-            try {
-                Looper.prepare();
-            } catch (Exception e) {
-                //Thread ready check
-            }
-            final DatePicker picker = new DatePicker(activity);
-            picker.setMaxDate(Calendar.getInstance().getTimeInMillis());
-
-            datePickerDialog = new MaterialDialog.Builder(activity)
-                    .customView(picker, false)
-                    .positiveText(R.string.accept)
-                    .positiveColor(uiColor)
-                    .negativeText(R.string.cancel)
-                    .negativeColor(getResources().getColor(R.color.material_grey_900))
-                    .callback(new MaterialDialog.ButtonCallback() {
-                        @Override
-                        public void onPositive(MaterialDialog dialog) {
-                            date.set(picker.getYear(), picker.getMonth(), picker.getDayOfMonth());
-                            displaySetDate();
-                        }
-                    })
-                    .build();
-
-            rootView.findViewById(R.id.date_click).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    datePickerDialog.show();
-                }
-            });
-        }
-    };
 
     private void saveDate() {
         fuelStop.setDate(date.getTimeInMillis());
     }
 
     private void displaySetDate() {
-        dateDisplay.setText(DateFormat.getMediumDateFormat(activity).format(new Date(date.getTimeInMillis())));
+        dateDisplay.setText(DateFormat.getLongDateFormat(activity).format(new Date(date.getTimeInMillis())));
     }
 
     private void initializeCostPerVolume() {
-        costPerVolume = (MaterialEditText) rootView.findViewById(R.id.cost_per_volume);
+        costPerVolumeDisplay = (MaterialEditText) rootView.findViewById(R.id.cost_per_volume);
+        costPerVolumeDisplay.setPrimaryColor(uiColor);
         rootView.findViewById(R.id.cost_per_volume_click).setOnClickListener(new View.OnClickListener() {
             private String TAG = "cost_per_volume_click";
 
@@ -154,16 +159,16 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
         if (fuelStop != null)
             setCostPerVolumeDisplay(fuelStop.getCostPerVolume());
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(getString(R.string.cost_per_volume));
-
         LinearLayout numLayout = (LinearLayout) LayoutInflater.from(activity).inflate(R.layout.cost_per_volume_dialog, null);
-        final EditText[] price = new EditText[numLayout.getChildCount()];
+
+        final MaterialEditText[] price = new MaterialEditText[numLayout.getChildCount()];
+
         for (int x = 0; x < numLayout.getChildCount(); x++) {
-            price[x] = (EditText) numLayout.getChildAt(x);
-            Log.v(TAG, x + " null: " + (price[x] == null));
+            price[x] = (MaterialEditText) numLayout.getChildAt(x);
             price[x].setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
+            price[x].setPrimaryColor(uiColor);
         }
+
         price[1].setText("" + DecimalFormatSymbols.getInstance().getDecimalSeparator());
         price[1].setEnabled(false);
         price[4].setEnabled(false);
@@ -205,28 +210,36 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
 
             }
         });
-        builder.setView(numLayout);
 
-        builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
-            private String TAG = "Accept.Button";
+        costPerVolumeDialog = new MaterialDialog.Builder(activity)
+                .customView(numLayout, false)
+                .title(R.string.cost_per_volume)
+                .titleColor(uiColor)
+                .positiveText(R.string.accept)
+                .positiveColor(uiColor)
+                .negativeText(R.string.cancel)
+                .negativeColor(getResources().getColor(R.color.material_grey_900))
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        String buffer;
+                        for (EditText curr : price) {
+                            buffer = curr.getText().toString();
+                            if (buffer.length() > 0)
+                                stringBuilder.append(buffer);
+                            else
+                                stringBuilder.append('0');
+                        }
+                        setCostPerVolumeDisplay(Float.valueOf(stringBuilder.toString()));
+                    }
 
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                StringBuilder stringBuilder = new StringBuilder();
-                String buffer;
-                for (EditText curr : price) {
-                    buffer = curr.getText().toString();
-                    if (buffer.length() > 0)
-                        stringBuilder.append(buffer);
-                    else
-                        stringBuilder.append('0');
-                }
-                setCostPerVolumeDisplay(Float.valueOf(stringBuilder.toString()));
-            }
-        });
-        builder.setNegativeButton(R.string.cancel, null);
+                    @Override
+                    public void onAny(MaterialDialog dialog) {
+                        costPerVolumeDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                    }
+                }).build();
 
-        costPerVolumeDialog = builder.create();
         costPerVolumeDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             private String TAG = getClass().getSimpleName();
 
@@ -241,15 +254,150 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
     private void setCostPerVolumeDisplay(float value) {
         costPer = value;
         NumberFormat format = new DecimalFormat("0.000");
-        String currencyString = activity.getCurrentVehicle().getCurrency();
-        Log.v(TAG, "Currency: " + currencyString);
-        if (currencyString != null)
-            currencyString = Currency.getInstance(currencyString).getSymbol();
-        else
-            currencyString = "";
         Log.v(TAG, "Currency: " + currencyString);
 
-        costPerVolume.setText(currencyString + format.format(costPer));
+        costPerVolumeDisplay.setText(currencyString + format.format(costPer));
+
+        try {
+            value = Float.parseFloat(volume.getText().toString());
+        } catch (NumberFormatException e) {
+            Log.e(TAG, e.getMessage());
+            value = 0;
+        }
+        value *= costPer;
+        format = new DecimalFormat("0.00");
+
+        totalCost.setText(currencyString + format.format(value));
     }
 
+    private boolean saveCostPerVolume() {
+        if (costPerVolumeDisplay.getText().toString().length() > 0) {
+            fuelStop.setCostPerVolume(costPer);
+            return true;
+        }
+        return false;
+    }
+
+    private void initializeVolume() {
+        volume = (MaterialEditText) rootView.findViewById(R.id.volume_display);
+        volume.setPrimaryColor(uiColor);
+        totalCost = (MaterialEditText) rootView.findViewById(R.id.total_cost);
+        totalCost.setPrimaryColor(uiColor);
+
+        volume.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                float value = 0;
+                try {
+                    value = Float.parseFloat(s.toString());
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, e.getMessage());
+                    value = 0;
+                }
+                value *= costPer;
+                NumberFormat format = new DecimalFormat("0.00");
+
+                totalCost.setText(currencyString + format.format(value));
+
+            }
+        });
+    }
+
+    private boolean saveVolume() {
+        float value;
+        try {
+            value = Float.parseFloat(volume.getText().toString());
+        } catch (NumberFormatException e) {
+            Log.e(TAG, e.getMessage());
+            value = -1f;
+        }
+        if (value != -1f) {
+            fuelStop.setVolume(Float.parseFloat(volume.getText().toString()));
+            return true;
+        }
+
+        return false;
+    }
+
+    private void initializeMileage() {
+        mileage = (MaterialEditText) rootView.findViewById(R.id.current_mileage);
+        mileage.setPrimaryColor(uiColor);
+        mileage.addTextChangedListener(new NumberTextWatcher(mileage));
+        if (fuelStop != null)
+            mileage.setText(fuelStop.getMileage() + "");
+    }
+
+    private boolean saveMileage() {
+        if (mileage.getText().toString().length() > 0)
+            try {
+                fuelStop.setMileage(Long.parseLong(mileage.getText().toString()));
+                return true;
+            } catch (NumberFormatException e) {
+                Log.e(TAG, e.getMessage());
+            }
+        return false;
+    }
+
+    private void initializeCalcEff() {
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((CheckBox) v).setChecked(!((CheckBox) v).isCheck());
+            }
+        };
+        ((TextView) rootView.findViewById(R.id.calc_efficiency_title)).setTextColor(uiColor);
+
+        missedFillup = (com.gc.materialdesign.views.Switch) rootView.findViewById(R.id.missed_fill_up);
+        missedFillup.setBackgroundColor(uiColor);
+        missedFillup.setOnClickListener(onClickListener);
+
+        completeFillup = (Switch) rootView.findViewById(R.id.complete_fill_up);
+        completeFillup.setBackgroundColor(uiColor);
+        completeFillup.setOnClickListener(onClickListener);
+
+        if (fuelStop != null) {
+            missedFillup.setChecked(fuelStop.missedFillup());
+            completeFillup.setChecked(fuelStop.isCompleteFillUp());
+        } else {
+            missedFillup.setChecked(true);
+            completeFillup.setChecked(false);
+        }
+    }
+
+    private void updateDistanceTraveled() {
+        if (!missedFillup.isCheck() && completeFillup.isCheck())
+            fuelStop.updateDistanceTraveled();
+    }
+
+    private void save() {
+        boolean update = true;
+        if (fuelStop == null)
+            activity.getCurrentVehicle().getNewFuelStop();
+
+        assert fuelStop != null;
+        fuelStop.beginTransaction();
+        if (!saveCostPerVolume())
+            update = false;
+
+        if (!saveMileage())
+            update = false;
+
+        if (!saveVolume())
+            update = false;
+
+        saveDate();
+
+        if (update)
+            updateDistanceTraveled();
+    }
 }
