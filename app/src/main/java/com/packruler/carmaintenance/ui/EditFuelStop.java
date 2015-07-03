@@ -1,5 +1,6 @@
 package com.packruler.carmaintenance.ui;
 
+import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -23,8 +25,9 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.util.Calendar;
 import java.util.Currency;
-import java.util.Locale;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,9 +45,14 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
     private MainActivity activity;
     private MaterialEditText mileage;
     private MaterialEditText costPerVolume;
+    private MaterialEditText dateDisplay;
+    private MaterialEditText volume;
+    private MaterialEditText totalCost;
 
     private AlertDialog costPerVolumeDialog;
+    private DatePickerDialog datePickerDialog;
     private float costPer;
+    private long dateSet = -1l;
 
     public EditFuelStop() {
     }
@@ -59,13 +67,32 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_edit_fuel_stop, container, false);
-        setCostPerVolume();
+        initializeCostPerVolume();
 
 
         return rootView;
     }
 
-    private void setCostPerVolume() {
+    private void initializeDate() {
+        dateDisplay = (MaterialEditText) rootView.findViewById(R.id.date_display);
+
+
+    }
+
+    private Runnable setupDatePickerDialog = new Runnable() {
+        @Override
+        public void run() {
+            Calendar currentDay = Calendar.getInstance();
+            datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    dateSet = view.getCalendarView().getDate();
+                }
+            }, currentDay.get(Calendar.YEAR), currentDay.get(Calendar.MONTH), currentDay.get(Calendar.DAY_OF_MONTH));
+        }
+    };
+
+    private void initializeCostPerVolume() {
         costPerVolume = (MaterialEditText) rootView.findViewById(R.id.cost_per_volume);
         rootView.findViewById(R.id.cost_per_volume_click).setOnClickListener(new View.OnClickListener() {
             private String TAG = "cost_per_volume_click";

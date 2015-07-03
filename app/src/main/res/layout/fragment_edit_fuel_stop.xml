@@ -1,4 +1,4 @@
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -8,10 +8,10 @@
     android:layout_height="match_parent"
     tools:context="com.packruler.carmaintenance.ui.EditService">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_small">
+    <!--<-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="@dimen/margin_small">-->
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:hint="@string/mileage"
+                    android:hint="@string/current_mileage"
                     android:ems="10"
                     android:id="@id/current_mileage"
                     android:layout_below="@id/date_display"
@@ -68,9 +68,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/cost_per_volume"
+                    android:ems="10"
                     app:met_floatingLabel="highlight"
                     android:hint="@string/cost_per_volume"
-                    android:layout_below="@id/current_mileage"/>
+                    android:layout_below="@id/current_mileage"
+                    android:layout_marginRight="@dimen/margin_small"/>
+
                 <View
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,8 +83,28 @@
                     android:layout_alignLeft="@id/cost_per_volume"
                     android:layout_alignRight="@id/cost_per_volume"/>
 
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/volume"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/volume"
+                    app:met_floatingLabel="highlight"
+                    android:layout_below="@id/cost_per_volume"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/total_cost"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:hint="@string/total_cost"
+                    app:met_floatingLabel="highlight"
+                    android:layout_below="@id/volume"/>
+
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
-    </RelativeLayout>
+    <!--</>-->
 </ScrollView>
