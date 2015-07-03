@@ -37,6 +37,7 @@ public class Vehicle extends SQLDataOberservable {
     public static final String COLOR = "color";
     public static final String PURCHASE_MILEAGE = "purchase_mileage";
     public static final String PURCHASE_DATE = "purchase_date";
+    public static final String DATE_TIME_ZONE = "date_time_zone";
     public static final String BOUGHT_FROM = "bought_from";
     public static final String PURCHASE_COST = "purchase_cost";
     public static final String CURRENCY = "currency";
@@ -60,7 +61,7 @@ public class Vehicle extends SQLDataOberservable {
                     POWER + " FLOAT," + POWER_UNITS + " TEXT," +
                     TORQUE + " FLOAT," + TORQUE_UNITS + " TEXT," +
                     CURRENT_MILEAGE + " LONG," + DISTANCE_UNITS + " TEXT," + COLOR + " TEXT," +
-                    PURCHASE_DATE + " LONG," + BOUGHT_FROM + " TEXT," +
+                    PURCHASE_DATE + " LONG," + DATE_TIME_ZONE + " TEXT," + BOUGHT_FROM + " TEXT," +
                     PURCHASE_COST + " FLOAT," + CURRENCY + " TEXT," +
                     PURCHASE_MILEAGE + " LONG," + FUEL_EFFICIENCY_UNITS + " TEXT," +
                     VOLUME_UNITS + " TEXT," + PRIMARY_COLOR + " INTEGER" + ")";
@@ -215,6 +216,14 @@ public class Vehicle extends SQLDataOberservable {
         return sqlDataHandler.getLong(PURCHASE_DATE);
     }
 
+    public void setDateTimeZone(String timeZone) {
+        sqlDataHandler.put(DATE_TIME_ZONE, timeZone);
+    }
+
+    public String getDateTimeZone() {
+        return sqlDataHandler.getString(DATE_TIME_ZONE);
+    }
+
     public synchronized ServiceTask getNewServiceTask() {
         return new ServiceTask(carSQL, row, true);
     }
@@ -352,11 +361,11 @@ public class Vehicle extends SQLDataOberservable {
         sqlDataHandler.put(BOUGHT_FROM, boughtFrom);
     }
 
-    public void setDisplayColor(int color) {
+    public void setUiColor(int color) {
         sqlDataHandler.put(PRIMARY_COLOR, color);
     }
 
-    public int getDisplayColor() {
+    public int getUiColor() {
         return sqlDataHandler.getInt(PRIMARY_COLOR);
     }
 

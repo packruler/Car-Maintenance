@@ -179,8 +179,8 @@ public class MainActivity extends AppCompatActivity
 
         int color = getResources().getColor(R.color.default_ui_color);
         if (currentVehicle != null) {
-            if (currentVehicle.getDisplayColor() != 0)
-                color = currentVehicle.getDisplayColor();
+            if (currentVehicle.getUiColor() != 0)
+                color = currentVehicle.getUiColor();
 
             getSupportActionBar().setTitle(currentVehicle.getName());
         } else

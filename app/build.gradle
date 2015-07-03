@@ -46,8 +46,8 @@ dependencies {
         exclude group: 'com.rengwuxian.materialedittext', module: 'library'
     }
     compile 'de.hdodenhof:circleimageview:1.3.0'
+    compile 'com.afollestad:material-dialogs:0.7.6.0'
 //    compile project(':BitmapCache')
 
     compile 'com.packruler:BitmapCache:1.0'
-    compile 'me.drakeet.materialdialog:library:1.2.2'
 }

@@ -1,8 +1,6 @@
 package com.packruler.carmaintenance.ui;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -118,7 +116,7 @@ public class ServicesFragment extends android.support.v4.app.Fragment {
 
             }
         });
-        setUIColor(vehicle.getDisplayColor());
+        setUIColor(vehicle.getUiColor());
         return view;
     }
 

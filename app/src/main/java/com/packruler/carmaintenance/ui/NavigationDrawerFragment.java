@@ -364,7 +364,7 @@ public class NavigationDrawerFragment extends Fragment {
                 else
                     selectedCarIcon.setImageDrawable(new ColorDrawable(getResources().getColor(R.color.material_grey_500)));
 
-                color = vehicle.getDisplayColor();
+                color = vehicle.getUiColor();
             } else {
                 selectedCarName.setText("None Selected");
                 selectedCarIcon.setImageDrawable(new ColorDrawable(getResources().getColor(R.color.material_grey_500)));

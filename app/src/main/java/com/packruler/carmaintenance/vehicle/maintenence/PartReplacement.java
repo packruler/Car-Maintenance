@@ -31,8 +31,8 @@ public class PartReplacement extends ServiceTask {
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    VEHICLE_ROW + " LONG," + DATE + " LONG," + TYPE + " TEXT," +
-                    COST + " FLOAT," + MILEAGE + " LONG," +
+                    VEHICLE_ROW + " LONG," + DATE + " LONG," + DATE_TIME_ZONE + " TEXT," +
+                    TYPE + " TEXT," + COST + " FLOAT," + MILEAGE + " LONG," +
                     DETAILS + " TEXT," + LOCATION_ID + " TEXT," +
                     LOCATION_NAME + " TEXT," + SERVICE_TASK_ROW + " LONG," +
                     BRAND + " TEXT," + PRODUCT_NUMBER + " TEXT," +

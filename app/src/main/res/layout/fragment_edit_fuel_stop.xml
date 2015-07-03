@@ -1,110 +1,149 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.packruler.carmaintenance.ui.EditService">
 
     <!--<-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="@dimen/margin_small">-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="@dimen/margin_small">-->
 
-        <android.support.v7.widget.CardView
+    <android.support.v7.widget.CardView
+        android:id="@+id/general_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_tiny"
+        card_view:cardCornerRadius="@dimen/cardview_default_radius"
+        card_view:cardElevation="@dimen/cardview_default_elevation"
+        card_view:contentPadding="@dimen/margin_tiny">
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardElevation="@dimen/cardview_default_elevation"
-            card_view:cardCornerRadius="@dimen/cardview_default_radius"
-            card_view:contentPadding="@dimen/margin_tiny"
-            android:id="@+id/general_info"
-            android:layout_marginBottom="@dimen/margin_tiny">
+            android:tag="@string/container_layout">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/general_info_title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tag="@string/container_layout">
+                android:layout_marginBottom="@dimen/margin_small"
+                android:text="@string/general_info"
+                android:textAppearance="@android:style/TextAppearance.Small"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/general_info"
-                    android:textAppearance="@android:style/TextAppearance.Small"
-                    android:id="@+id/general_info_title"
-                    android:textStyle="bold"
-                    android:textColor="?attr/colorPrimary"
-                    android:layout_marginBottom="@dimen/margin_small"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/date_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/general_info_title"
+                android:layout_marginRight="@dimen/margin_small"
+                android:hint="@string/date"
+                android:minEms="3"
+                app:met_floatingLabel="highlight" />
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:id="@+id/date_display"
-                    android:hint="@string/date"
-                    android:layout_below="@id/general_info_title"
-                    app:met_floatingLabel="highlight"/>
+            <View
+                android:id="@+id/date_click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/date_display"
+                android:layout_alignLeft="@id/date_display"
+                android:layout_alignRight="@id/date_display"
+                android:layout_alignTop="@id/date_display" />
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/date_click"
-                    android:layout_alignTop="@id/date_display"
-                    android:layout_alignBottom="@id/date_display"
-                    android:layout_alignLeft="@id/date_display"
-                    android:layout_alignRight="@id/date_display"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/time_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/date_display"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_toRightOf="@id/date_display"
+                android:hint="@string/time"
+                android:minEms="3"
+                app:met_floatingLabel="highlight" />
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:hint="@string/current_mileage"
-                    android:ems="10"
-                    android:id="@id/current_mileage"
-                    android:layout_below="@id/date_display"
-                    app:met_floatingLabel="highlight"/>
+            <View
+                android:id="@+id/time_click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/time_display"
+                android:layout_alignLeft="@id/time_display"
+                android:layout_alignRight="@id/time_display"
+                android:layout_alignTop="@id/time_display" />
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cost_per_volume"
-                    android:ems="10"
-                    app:met_floatingLabel="highlight"
-                    android:hint="@string/cost_per_volume"
-                    android:layout_below="@id/current_mileage"
-                    android:layout_marginRight="@dimen/margin_small"/>
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/time_zone_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/time_display"
+                android:layout_toRightOf="@id/time_display"
+                android:hint="@string/time_zone"
+                android:minEms="3"
+                app:met_floatingLabel="highlight" />
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cost_per_volume_click"
-                    android:layout_alignTop="@id/cost_per_volume"
-                    android:layout_alignBottom="@id/cost_per_volume"
-                    android:layout_alignLeft="@id/cost_per_volume"
-                    android:layout_alignRight="@id/cost_per_volume"/>
+            <!--<View-->
+            <!--android:id="@+id/time_zone_click"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@id/time_zone_display"-->
+            <!--android:layout_alignLeft="@id/time_zone_display"-->
+            <!--android:layout_alignRight="@id/time_zone_display"-->
+            <!--android:layout_alignTop="@id/time_zone_display" />-->
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/volume"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:hint="@string/volume"
-                    app:met_floatingLabel="highlight"
-                    android:layout_below="@id/cost_per_volume"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@id/current_mileage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date_display"
+                android:ems="10"
+                android:hint="@string/current_mileage"
+                app:met_floatingLabel="highlight" />
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/total_cost"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:hint="@string/total_cost"
-                    app:met_floatingLabel="highlight"
-                    android:layout_below="@id/volume"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/cost_per_volume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/current_mileage"
+                android:layout_marginRight="@dimen/margin_small"
+                android:ems="10"
+                android:hint="@string/cost_per_volume"
+                app:met_floatingLabel="highlight" />
+
+            <View
+                android:id="@+id/cost_per_volume_click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/cost_per_volume"
+                android:layout_alignLeft="@id/cost_per_volume"
+                android:layout_alignRight="@id/cost_per_volume"
+                android:layout_alignTop="@id/cost_per_volume" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/volume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cost_per_volume"
+                android:ems="10"
+                android:hint="@string/volume"
+                android:inputType="numberDecimal"
+                app:met_floatingLabel="highlight" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/total_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/volume"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="@string/total_cost"
+                app:met_floatingLabel="highlight" />
 
 
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
     <!--</>-->
 </RelativeLayout>

@@ -4,7 +4,6 @@ package com.packruler.carmaintenance.ui;
 import android.app.DatePickerDialog;
 import android.app.FragmentManager;
 import android.app.PendingIntent;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
@@ -179,7 +178,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                 initializePurchaseMileage();
 
                 viewInitialized = true;
-                if (vehicle == null || vehicle.getDisplayColor() == 0)
+                if (vehicle == null || vehicle.getUiColor() == 0)
                     setHighlightColors(getResources().getColor(R.color.default_ui_color));
 
                 if (vehicle != null)
@@ -334,8 +333,8 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                     if (datePurchased != 0)
                         setDisplayPurchaseDate();
 
-                    if (vehicle.getDisplayColor() != 0)
-                        setLoadedColor(vehicle.getDisplayColor());
+                    if (vehicle.getUiColor() != 0)
+                        setLoadedColor(vehicle.getUiColor());
 
                 }
             });
@@ -884,7 +883,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
 
     private void saveDisplayColor() {
         if (currentColor != getResources().getColor(R.color.default_ui_color))
-            vehicle.setDisplayColor(currentColor);
+            vehicle.setUiColor(currentColor);
     }
 
     private void initializeVehicleImage() {

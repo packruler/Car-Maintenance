@@ -102,7 +102,7 @@ public class FuelStopsFragment extends android.support.v4.app.Fragment {
                         .commit();
             }
         });
-        setUIColor(vehicle.getDisplayColor());
+        setUIColor(vehicle.getUiColor());
         return rootView;
     }
 

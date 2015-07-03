@@ -33,6 +33,7 @@ public class ServiceTask extends SQLDataOberservable {
     public static final String COST = "cost";
     public static final String MILEAGE = "mileage";
     public static final String DATE = "date";
+    public static final String DATE_TIME_ZONE = "date_time_zone";
     public static final String LOCATION_ID = "location_id";
     public static final String LOCATION_NAME = "location_name";
     public static final String PARTS_REPLACED = "parts_replaced";
@@ -40,8 +41,8 @@ public class ServiceTask extends SQLDataOberservable {
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    VEHICLE_ROW + " LONG," + DATE + " LONG," + TYPE + " TEXT," +
-                    COST + " FLOAT," + MILEAGE + " LONG," + DETAILS + " TEXT," +
+                    VEHICLE_ROW + " LONG," + DATE + " LONG," + DATE_TIME_ZONE + " TEXT," +
+                    TYPE + " TEXT," + COST + " FLOAT," + MILEAGE + " LONG," + DETAILS + " TEXT," +
                     LOCATION_ID + " TEXT," + LOCATION_NAME + " TEXT," +
                     PARTS_REPLACED + " TEXT" + ")";
 
@@ -138,6 +139,13 @@ public class ServiceTask extends SQLDataOberservable {
         return sqlDataHandler.getLong(DATE);
     }
 
+    public void setDateTimeZone(String dateTimeZone) {
+        sqlDataHandler.put(DATE_TIME_ZONE, dateTimeZone);
+    }
+
+    public String getDateTimeZone() {
+        return sqlDataHandler.getString(DATE_TIME_ZONE);
+    }
 
     public void setCost(float cost) {
         sqlDataHandler.put(COST, cost);

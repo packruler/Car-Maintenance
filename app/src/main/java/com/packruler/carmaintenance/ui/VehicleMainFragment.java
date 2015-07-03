@@ -134,7 +134,7 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
         if (viewInitialized) {
             final Vehicle vehicle = activity.getCurrentVehicle();
             if (vehicle != null) {
-                setUIColor(vehicle.getDisplayColor());
+                setUIColor(vehicle.getUiColor());
 
                 vehicleName.setText(vehicle.getName());
                 if (vehicle.getImage().exists()) {

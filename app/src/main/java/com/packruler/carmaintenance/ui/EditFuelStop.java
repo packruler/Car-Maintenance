@@ -1,14 +1,16 @@
 package com.packruler.carmaintenance.ui;
 
-import android.app.DatePickerDialog;
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -28,6 +31,7 @@ import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.Currency;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,16 +54,21 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
     private MaterialEditText totalCost;
 
     private AlertDialog costPerVolumeDialog;
-    private DatePickerDialog datePickerDialog;
+    private MaterialDialog datePickerDialog;
     private float costPer;
-    private long dateSet = -1l;
+    private Calendar date = Calendar.getInstance();
+    private int uiColor;
 
     public EditFuelStop() {
     }
 
+    @SuppressLint("ValidFragment")
     public EditFuelStop(MainActivity activity, @Nullable FuelStop fuelStop) {
         this.fuelStop = fuelStop;
         this.activity = activity;
+        uiColor = activity.getCurrentVehicle().getUiColor();
+        if (uiColor == 0)
+            uiColor = activity.getResources().getColor(R.color.default_ui_color);
     }
 
     @Override
@@ -68,29 +77,68 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_edit_fuel_stop, container, false);
         initializeCostPerVolume();
-
+        initializeDate();
 
         return rootView;
     }
 
     private void initializeDate() {
+        Log.v(TAG, "init Date");
         dateDisplay = (MaterialEditText) rootView.findViewById(R.id.date_display);
 
-
+        date = Calendar.getInstance();
+        if (fuelStop != null)
+            date.setTimeInMillis(fuelStop.getDate());
+        setupDatePickerDialog.run();
+//        activity.execute(setupDatePickerDialog);
+        displaySetDate();
     }
 
     private Runnable setupDatePickerDialog = new Runnable() {
+        private String TAG = "setupDatePickerDialog";
+
         @Override
         public void run() {
-            Calendar currentDay = Calendar.getInstance();
-            datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
+            Log.v(TAG, "Run on other thread");
+            try {
+                Looper.prepare();
+            } catch (Exception e) {
+                //Thread ready check
+            }
+            final DatePicker picker = new DatePicker(activity);
+            picker.setMaxDate(Calendar.getInstance().getTimeInMillis());
+
+            datePickerDialog = new MaterialDialog.Builder(activity)
+                    .customView(picker, false)
+                    .positiveText(R.string.accept)
+                    .positiveColor(uiColor)
+                    .negativeText(R.string.cancel)
+                    .negativeColor(getResources().getColor(R.color.material_grey_900))
+                    .callback(new MaterialDialog.ButtonCallback() {
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                            date.set(picker.getYear(), picker.getMonth(), picker.getDayOfMonth());
+                            displaySetDate();
+                        }
+                    })
+                    .build();
+
+            rootView.findViewById(R.id.date_click).setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    dateSet = view.getCalendarView().getDate();
+                public void onClick(View v) {
+                    datePickerDialog.show();
                 }
-            }, currentDay.get(Calendar.YEAR), currentDay.get(Calendar.MONTH), currentDay.get(Calendar.DAY_OF_MONTH));
+            });
         }
     };
+
+    private void saveDate() {
+        fuelStop.setDate(date.getTimeInMillis());
+    }
+
+    private void displaySetDate() {
+        dateDisplay.setText(DateFormat.getMediumDateFormat(activity).format(new Date(date.getTimeInMillis())));
+    }
 
     private void initializeCostPerVolume() {
         costPerVolume = (MaterialEditText) rootView.findViewById(R.id.cost_per_volume);
