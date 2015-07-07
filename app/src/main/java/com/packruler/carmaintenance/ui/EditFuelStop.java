@@ -3,6 +3,7 @@ package com.packruler.carmaintenance.ui;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -11,6 +12,9 @@ import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -23,6 +27,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.gc.materialdesign.views.CheckBox;
 import com.gc.materialdesign.views.Switch;
 import com.packruler.carmaintenance.R;
+import com.packruler.carmaintenance.ui.utilities.MenuHandler;
 import com.packruler.carmaintenance.ui.utilities.NumberTextWatcher;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -98,6 +103,27 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
         } catch (NullPointerException e) {
             Log.e(TAG, e.getMessage());
         }
+    }
+
+    private Drawable[] icons = new Drawable[3];
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuHandler.setupEditMenu(menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        final String save = getString(R.string.save);
+        final String discard = getString(R.string.discard);
+        final String delete = getString(R.string.delete);
+
+//        switch (item.getTitle().toString()){
+//            case save:
+//
+//        }
+        return true;
     }
 
     private void initializeDate() {

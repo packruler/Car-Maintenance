@@ -114,7 +114,7 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
                 color = activity.getResources().getColor(R.color.default_ui_color);
 
             editCarButton.setCardBackgroundColor(color);
-            int textColor = new Swatch(color).getBodyTextColor();
+            int textColor = Swatch.getForegroundColor();
             ((TextView) editCarButton.findViewWithTag(getString(R.string.title_tag))).setTextColor(textColor);
             ((ImageView) editCarButton.findViewWithTag(getString(R.string.image_tag))).setColorFilter(textColor, PorterDuff.Mode.SRC_IN);
 
@@ -133,8 +133,8 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
     public void loadVehicleDetails() {
         if (viewInitialized) {
             final Vehicle vehicle = activity.getCurrentVehicle();
+            setUIColor(activity.getUiColor());
             if (vehicle != null) {
-                setUIColor(vehicle.getUiColor());
 
                 vehicleName.setText(vehicle.getName());
                 if (vehicle.getImage().exists()) {

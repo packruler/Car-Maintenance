@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -101,8 +102,6 @@ public class NavigationDrawerFragment extends Fragment {
 
         // Select either the default item (0) or the last selected item.
 //        selectItem(mCurrentSelectedPosition);
-
-
     }
 
     @Override
@@ -152,10 +151,8 @@ public class NavigationDrawerFragment extends Fragment {
     /**
      * Users of this fragment must call this method to set up the navigation drawer interactions.
      *
-     * @param fragmentId
-     *         The android:id of this fragment in its activity's layout.
-     * @param drawerLayout
-     *         The DrawerLayout containing this fragment's UI.
+     * @param fragmentId   The android:id of this fragment in its activity's layout.
+     * @param drawerLayout The DrawerLayout containing this fragment's UI.
      */
     public void setUp(int fragmentId, DrawerLayout drawerLayout, MainActivity activity) {
         mFragmentContainerView = getActivity().findViewById(fragmentId);
@@ -207,12 +204,13 @@ public class NavigationDrawerFragment extends Fragment {
                 getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
         };
+//        mDrawerToggle.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 
         // If the user hasn't 'learned' about the drawer, open it to introduce them to the drawer,
         // per the navigation drawer design guidelines.
-        if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
-            mDrawerLayout.openDrawer(mFragmentContainerView);
-        }
+//        if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
+//            mDrawerLayout.openDrawer(mFragmentContainerView);
+//        }
 
         // Defer code dependent on restoration of previous instance state.
         mDrawerLayout.post(new Runnable() {
@@ -373,10 +371,9 @@ public class NavigationDrawerFragment extends Fragment {
             if (color == 0)
                 color = getResources().getColor(R.color.default_ui_color);
 
-            int textColor = new Swatch(color).getBodyTextColor();
             selectedCarView.setBackgroundColor(color);
-            selectedCarIcon.setBorderColor(textColor);
-            selectedCarName.setTextColor(textColor);
+            selectedCarIcon.setBorderColor(Swatch.getForegroundColor());
+            selectedCarName.setTextColor(Swatch.getForegroundColor());
         }
     }
 
@@ -384,9 +381,21 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerLayout.setDrawerLockMode(lockMode);
     }
 
-    public boolean closeDrawers() {
+    public boolean close() {
         mDrawerLayout.closeDrawers();
         return true;
+    }
+
+    public void open() {
+        mDrawerLayout.openDrawer(Gravity.LEFT);
+    }
+
+    public void useDrawerIcon() {
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
+    }
+
+    public void useBackIcon() {
+        mDrawerToggle.setDrawerIndicatorEnabled(false);
     }
 
     private class DrawerRow {

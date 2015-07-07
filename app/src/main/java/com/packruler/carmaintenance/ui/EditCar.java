@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,7 +48,7 @@ import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.ui.adapters.PaletteAdapter;
-import com.packruler.carmaintenance.ui.utilities.Swatch;
+import com.packruler.carmaintenance.ui.utilities.MenuHandler;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rengwuxian.materialedittext.validation.METValidator;
@@ -112,7 +111,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         this.activity = activity;
         carSQL = activity.getCarsSQL();
         availableCarsSQL = activity.getAvailableCarsSQL();
-        currentColor = activity.getResources().getColor(R.color.default_ui_color);
+        currentColor = activity.getUiColor();
     }
 
     public EditCar(MainActivity activity, Vehicle vehicle) {
@@ -162,6 +161,9 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                 } catch (RuntimeException e) {
                     //Looper prepared already
                 }
+                currentColor = activity.getUiColor();
+                setCardTitleColors();
+
                 initializeNameText();
                 initializeYearSpinner();
                 initializeMakeSpinner();
@@ -178,8 +180,8 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                 initializePurchaseMileage();
 
                 viewInitialized = true;
-                if (vehicle == null || vehicle.getUiColor() == 0)
-                    setHighlightColors(getResources().getColor(R.color.default_ui_color));
+                Log.v(TAG, "UI color: " + activity.getUiColor());
+                initialColorLoad();
 
                 if (vehicle != null)
                     loadVehicle();
@@ -198,35 +200,36 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        menu.add(getString(R.string.save));
-
-        icons[0] = getResources().getDrawable(R.drawable.ic_save);
-        if (icons[0] != null) {
-            icons[0].setColorFilter(currentColor, PorterDuff.Mode.MULTIPLY);
-            icons[0].setVisible(false, false);
-        }
-        menu.getItem(0).setIcon(icons[0]).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-
-        menu.add(getString(R.string.discard));
-        icons[1] = getResources().getDrawable(R.drawable.ic_cancel);
-        if (icons[1] != null) {
-            icons[1].setColorFilter(currentColor, PorterDuff.Mode.MULTIPLY);
-            icons[1].setVisible(false, false);
-        }
-        menu.getItem(1).setIcon(icons[1]).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-
-        menu.add(getString(R.string.delete));
-        icons[2] = getResources().getDrawable(R.drawable.ic_delete);
-        if (icons[2] != null) {
-            icons[2].setColorFilter(currentColor, PorterDuff.Mode.MULTIPLY);
-            icons[2].setVisible(false, false);
-        }
-        menu.getItem(2).setIcon(icons[2]);
-
-//        activity.getToolbar().setOnMenuItemClickListener(this);
-        Log.v(TAG, "onCreateOptionsMenu");
-        Log.v(TAG, "Menu size: " + menu.size());
+//        menu.clear();
+//        menu.add(getString(R.string.save));
+//
+//        icons[0] = getResources().getDrawable(R.drawable.ic_save);
+//        if (icons[0] != null) {
+//            icons[0].setColorFilter(currentColor, PorterDuff.Mode.MULTIPLY);
+//            icons[0].setVisible(false, false);
+//        }
+//        menu.getItem(0).setIcon(icons[0]).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//
+//        menu.add(getString(R.string.discard));
+//        icons[1] = getResources().getDrawable(R.drawable.ic_cancel);
+//        if (icons[1] != null) {
+//            icons[1].setColorFilter(currentColor, PorterDuff.Mode.MULTIPLY);
+//            icons[1].setVisible(false, false);
+//        }
+//        menu.getItem(1).setIcon(icons[1]).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+//
+//        menu.add(getString(R.string.delete));
+//        icons[2] = getResources().getDrawable(R.drawable.ic_delete);
+//        if (icons[2] != null) {
+//            icons[2].setColorFilter(currentColor, PorterDuff.Mode.MULTIPLY);
+//            icons[2].setVisible(false, false);
+//        }
+//        menu.getItem(2).setIcon(icons[2]);
+//
+////        activity.getToolbar().setOnMenuItemClickListener(this);
+//        Log.v(TAG, "onCreateOptionsMenu");
+//        Log.v(TAG, "Menu size: " + menu.size());
+        MenuHandler.setupEditMenu(menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -260,6 +263,9 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                 }
             });
             builder.show();
+        } else if (item.getItemId() == android.R.id.home) {
+            Log.v(TAG, "HOME");
+            getFragmentManager().popBackStack();
         }
         return true;
     }
@@ -333,9 +339,8 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                     if (datePurchased != 0)
                         setDisplayPurchaseDate();
 
-                    if (vehicle.getUiColor() != 0)
-                        setLoadedColor(vehicle.getUiColor());
-
+                    if (vehicle.getUiColor() != 0 && vehicle.getUiColor() != activity.getUiColor())
+                        setHighlightColors(vehicle.getUiColor());
                 }
             });
         }
@@ -347,6 +352,29 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     }
 
     private int currentColor;
+
+    private void initialColorLoad() {
+
+        year.setPrimaryColor(currentColor);
+        make.setPrimaryColor(currentColor);
+        model.setPrimaryColor(currentColor);
+
+        vehicleName.setPrimaryColor(currentColor);
+        vin.setPrimaryColor(currentColor);
+        subModel.setPrimaryColor(currentColor);
+        currentMileage.setPrimaryColor(currentColor);
+        mileageUnit.setPrimaryColor(currentColor);
+        weight.setPrimaryColor(currentColor);
+        weightUnits.setPrimaryColor(currentColor);
+        power.setPrimaryColor(currentColor);
+        powerUnit.setPrimaryColor(currentColor);
+        torque.setPrimaryColor(currentColor);
+        torqueUnit.setPrimaryColor(currentColor);
+        vehicleColor.setPrimaryColor(currentColor);
+        purchaseCost.setPrimaryColor(currentColor);
+        costUnit.setPrimaryColor(currentColor);
+        purchaseDate.setPrimaryColor(currentColor);
+    }
 
     private void setHighlightColors(int color) {
         if (currentColor != color) {
@@ -379,31 +407,26 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                     purchaseDate.setPrimaryColor(currentColor);
                 }
             });
-            for (Drawable icon : icons) {
-                if (icon != null) {
-                    color = new Swatch(currentColor).getBodyTextColor();
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-//                        icon.setTint(color);
-//                    else
-                    icon.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
-                    icon.setVisible(true, true);
-                }
-            }
+//            for (Drawable icon : icons) {
+//                if (icon != null) {
+//                    color = Swatch.getForegroundColor();
+////                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+////                        icon.setTint(color);
+////                    else
+//                    icon.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+//                    icon.setVisible(true, true);
+//                }
+//            }
         }
     }
 
     private void setCardTitleColors() {
-        mainHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                RelativeLayout layout = (RelativeLayout) rootView.getChildAt(0);
-                for (int x = 0; x < layout.getChildCount(); x++) {
-                    TextView title = (TextView) layout.getChildAt(x).findViewWithTag(getString(R.string.card_title_tag));
-                    if (title != null)
-                        title.setTextColor(currentColor);
-                }
-            }
-        });
+        RelativeLayout layout = (RelativeLayout) rootView.getChildAt(0);
+        for (int x = 0; x < layout.getChildCount(); x++) {
+            TextView title = (TextView) layout.getChildAt(x).findViewWithTag(getString(R.string.card_title_tag));
+            if (title != null)
+                title.setTextColor(currentColor);
+        }
     }
 
     private void saveVehicle() {

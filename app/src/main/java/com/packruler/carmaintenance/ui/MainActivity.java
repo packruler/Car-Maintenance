@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -22,14 +23,13 @@ import com.google.android.gms.location.places.Places;
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
+import com.packruler.carmaintenance.ui.utilities.MenuHandler;
 import com.packruler.carmaintenance.ui.utilities.Swatch;
 import com.packruler.carmaintenance.ui.utilities.ToolbarColorizeHelper;
 import com.packruler.carmaintenance.ui.utilities.VehicleMap;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity
     private Vehicle currentVehicle;
 
     private VehicleMainFragment mainFragment;
+//    EditCar editCar= new EditCar(this);
 
     private SharedPreferences sharedPreferences;
     private CarSQL carsSQL;
@@ -69,10 +70,12 @@ public class MainActivity extends AppCompatActivity
     private ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(numProcessors, numProcessors, 10, TimeUnit.SECONDS, workQueue);
 
     private Toolbar toolbar;
+    private int uiColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MenuHandler.setResources(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -105,6 +108,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(false);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         sharedPreferences = getSharedPreferences(getApplication().getPackageName(), MODE_MULTI_PROCESS);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -137,6 +143,17 @@ public class MainActivity extends AppCompatActivity
                 .addToBackStack(getString(R.string.select_vehicle))
                 .commit();
         getSupportActionBar().setTitle(getString(R.string.select_vehicle));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0 && currentVehicle != null) {
+                    getSupportFragmentManager().popBackStack();
+                } else if (mNavigationDrawerFragment.isDrawerOpen())
+                    mNavigationDrawerFragment.close();
+                else mNavigationDrawerFragment.open();
+
+            }
+        });
     }
 
     @Override
@@ -154,6 +171,16 @@ public class MainActivity extends AppCompatActivity
                 displaySelectVehicle();
                 break;
         }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        Log.v(TAG, "context item selected: " + item.getItemId());
+        if (item.getItemId() == android.R.id.home) {
+            Log.v(TAG, "HOME");
+            getFragmentManager().popBackStack();
+        }
+        return super.onContextItemSelected(item);
     }
 
     void displaySelectVehicle() {
@@ -186,7 +213,6 @@ public class MainActivity extends AppCompatActivity
         } else
             getSupportActionBar().setTitle(getString(R.string.app_name));
 
-        mNavigationDrawerFragment.updateSelectedCar(currentVehicle);
         setUIColor(color);
         mainFragment.loadVehicleDetails();
 
@@ -255,24 +281,17 @@ public class MainActivity extends AppCompatActivity
             if (currentVehicle == null)
                 finish();
             changeVehicle();
-            getSupportActionBar().setDisplayShowHomeEnabled(false);
+            mNavigationDrawerFragment.useDrawerIcon();
             mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         } else {
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            mNavigationDrawerFragment.useBackIcon();
+            ToolbarColorizeHelper.colorizeToolbar(toolbar, Swatch.getForegroundColor(), MainActivity.this);
             mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
     }
 
     public VehicleMap getVehicleMap() {
         return vehicleMap;
-    }
-
-    public List<String> getVehicleNames() {
-        List<String> names = new LinkedList<>();
-        for (Vehicle vehicle : vehicleMap.getVehiclesByName()) {
-            names.add(vehicle.getName());
-        }
-        return names;
     }
 
     public AvailableCarsSQL getAvailableCarsSQL() {
@@ -292,20 +311,28 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void setUIColor(final int color) {
+        uiColor = color;
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
-                Swatch swatch = new Swatch(color);
+                Swatch.setBackgroundColor(color);
                 toolbar.setBackgroundColor(color);
-                ToolbarColorizeHelper.colorizeToolbar(toolbar, swatch.getBodyTextColor(), MainActivity.this);
+                ToolbarColorizeHelper.colorizeToolbar(toolbar, Swatch.getForegroundColor(), MainActivity.this);
                 mainFragment.setUIColor(color);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     Window window = getWindow();
                     window.setStatusBarColor(color);
                     window.setNavigationBarColor(color);
                 }
+                MenuHandler.setUIColor();
+                mNavigationDrawerFragment.updateSelectedCar(currentVehicle);
             }
         });
+    }
+
+
+    public int getUiColor() {
+        return uiColor;
     }
 
     public GoogleApiClient getGoogleApiClient() {
@@ -318,7 +345,7 @@ public class MainActivity extends AppCompatActivity
             Log.v(TAG, "Back button press");
 
             if (mNavigationDrawerFragment.isDrawerOpen())
-                return mNavigationDrawerFragment.closeDrawers();
+                return mNavigationDrawerFragment.close();
 
             if (getSupportFragmentManager().getBackStackEntryCount() > 0)
                 getSupportFragmentManager().popBackStack();
