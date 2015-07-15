@@ -423,10 +423,9 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         boolean newVehicle = vehicle == null;
         sendToast(getString(R.string.saving));
         if (newVehicle) {
-            if (vehicleName.getText().length() > 0) {
+            if (vehicleName.getText().length() > 0)
                 vehicle = new Vehicle(carSQL, vehicleName.getText().toString());
-                activity.getVehicleMap().put(vehicle);
-            }
+
         } else if (!vehicle.getName().equals(vehicleName.getText().toString()))
             vehicle.setName(vehicleName.getText().toString());
 

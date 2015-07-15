@@ -61,6 +61,11 @@ public class PartReplacement extends ServiceTask {
         this(carSQL, row, false);
     }
 
+    @Override
+    public void delete() {
+        delete(TABLE_NAME);
+    }
+
     public String getPartName() {
         return sqlDataHandler.getString(PART_NAME);
     }

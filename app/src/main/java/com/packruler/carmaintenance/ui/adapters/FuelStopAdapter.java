@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
 
     private final CarSQL carSQL;
     private ServiceRecyclerAdapter.OnClickListener onClickListener;
+    private ViewHolder exandedView;
 
     public FuelStopAdapter(CarSQL carSQL, Cursor cursor) {
         super(cursor);
@@ -45,36 +47,46 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
         private LinearLayout layout;
         private RelativeLayout expandedMenu;
         private LinearLayout detailLayout;
-        private boolean expanded = false;
 
         public ViewHolder(View itemView) {
             super(itemView);
             layout = (LinearLayout) itemView.findViewById(R.id.expandable_layout);
+            layout.setLayoutAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                }
 
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    notifyItemChanged(getAdapterPosition());
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!expanded) {
-                        layout.addView(expandedMenu);
-                    } else {
-                        layout.removeView(expandedMenu);
-                    }
+                    Log.v(TAG, "Current expanded: " + exandedView);
+                    if (exandedView == ViewHolder.this) close();
+                    else expand();
 
-                    expanded = !expanded;
-                    onItemClick(ViewHolder.this.getItemId());
+                    onItemClick(ViewHolder.this.getItemId(), ViewHolder.this);
                 }
             });
             layout.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onEditClick(ViewHolder.this.getItemId());
+                    onEditClick(ViewHolder.this.getItemId(), ViewHolder.this);
                 }
             });
 
             layout.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onDeleteClick(ViewHolder.this.getItemId());
+                    onDeleteClick(ViewHolder.this.getItemId(), ViewHolder.this);
                 }
             });
             efficiencyDisplay = (TextView) itemView.findViewById(R.id.fuel_efficiency);
@@ -84,7 +96,8 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
             costPerDisplay = (TextView) itemView.findViewById(R.id.cost_per);
             detailLayout = (LinearLayout) itemView.findViewById(R.id.extra_details);
             expandedMenu = (RelativeLayout) itemView.findViewById(R.id.expanded_menu);
-            layout.removeView(expandedMenu);
+//            layout.removeView(expandedMenu);
+            expandedMenu.setVisibility(View.GONE);
         }
 
         public void setDisplay(Cursor cursor) {
@@ -126,6 +139,19 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
             distanceDisplay.setText(distance + ' ' + distanceUnits);
             costPerDisplay.setText(currency + costPer + volumeUnits);
         }
+
+        void expand() {
+            if (exandedView != null)
+                exandedView.close();
+            expandedMenu.setVisibility(View.VISIBLE);
+            exandedView = this;
+        }
+
+        void close() {
+            expandedMenu.setVisibility(View.GONE);
+
+            exandedView = null;
+        }
     }
 
     @Override
@@ -138,21 +164,21 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.fuel_stop_selector, parent, false));
     }
 
-    private void onItemClick(long position) {
+    private void onItemClick(long position, RecyclerView.ViewHolder holder) {
         Log.v("onItemClick", "Position: " + position);
-        onClickListener.onItemClick(position);
+        onClickListener.onItemClick(position,holder);
     }
 
-    private void onEditClick(long itemId) {
+    private void onEditClick(long itemId, RecyclerView.ViewHolder holder) {
         Log.v(TAG, "Edit item: " + itemId);
         if (onClickListener != null)
-            onClickListener.onEditClick(itemId);
+            onClickListener.onEditClick(itemId,holder);
     }
 
-    private void onDeleteClick(long itemId) {
+    private void onDeleteClick(long itemId, RecyclerView.ViewHolder holder) {
         Log.v(TAG, "Delete item: " + itemId);
         if (onClickListener != null)
-            onClickListener.onDeleteClick(itemId);
+            onClickListener.onDeleteClick(itemId,holder);
     }
 
     public void setOnItemClickListener(ServiceRecyclerAdapter.OnClickListener onClickListener) {

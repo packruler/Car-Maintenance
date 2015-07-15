@@ -26,7 +26,6 @@ import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.ui.utilities.MenuHandler;
 import com.packruler.carmaintenance.ui.utilities.Swatch;
 import com.packruler.carmaintenance.ui.utilities.ToolbarColorizeHelper;
-import com.packruler.carmaintenance.ui.utilities.VehicleMap;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.io.IOException;
@@ -55,11 +54,10 @@ public class MainActivity extends AppCompatActivity
      */
     private CharSequence mTitle;
 
-    private VehicleMap vehicleMap;
     private Vehicle currentVehicle;
 
     private VehicleMainFragment mainFragment;
-//    EditCar editCar= new EditCar(this);
+//    private EditCar editCar = new EditCar(this);
 
     private SharedPreferences sharedPreferences;
     private CarSQL carsSQL;
@@ -126,8 +124,6 @@ public class MainActivity extends AppCompatActivity
 
         carsSQL = new CarSQL(this);
         mNavigationDrawerFragment.setCarSql(carsSQL);
-
-        vehicleMap = carsSQL.loadVehicles();
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
 
@@ -290,10 +286,6 @@ public class MainActivity extends AppCompatActivity
             mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
         System.gc();
-    }
-
-    public VehicleMap getVehicleMap() {
-        return vehicleMap;
     }
 
     public AvailableCarsSQL getAvailableCarsSQL() {

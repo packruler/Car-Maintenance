@@ -2,10 +2,12 @@ package com.packruler.carmaintenance.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -115,14 +117,35 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        final String save = getString(R.string.save);
-        final String discard = getString(R.string.discard);
-        final String delete = getString(R.string.delete);
-
-//        switch (item.getTitle().toString()){
-//            case save:
-//
-//        }
+        if (item.getTitle().equals(getString(R.string.save))) {
+            activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+            activity.execute(new Runnable() {
+                @Override
+                public void run() {
+                    save();
+                }
+            });
+        } else if (item.getTitle().equals(getString(R.string.discard)))
+            Log.v(TAG, "Pop EditCar " + (getFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE) ? "Success" : "FAIL"));
+        else if (item.getTitle().equals(getString(R.string.delete))) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setTitle(getString(R.string.confirm));
+            builder.setNegativeButton(getString(R.string.cancel), null);
+            builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (fuelStop != null) {
+                        Log.v(TAG, "Deleting fuel stop");
+                        fuelStop.delete();
+                    }
+                    Log.v(TAG, "Pop FuelStop " + (getFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE) ? "Success" : "FAIL"));
+                }
+            });
+            builder.show();
+        } else if (item.getItemId() == android.R.id.home) {
+            Log.v(TAG, "HOME");
+            getFragmentManager().popBackStack();
+        }
         return true;
     }
 
@@ -425,5 +448,9 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
 
         if (update)
             updateDistanceTraveled();
+    }
+
+    private void delete() {
+
     }
 }

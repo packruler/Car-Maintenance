@@ -42,6 +42,11 @@ public class FuelStop extends ServiceTask {
         this(carSQL, row, false);
     }
 
+    @Override
+    public void delete() {
+        delete(TABLE_NAME);
+    }
+
     public float getVolume() {
         return sqlDataHandler.getFloat(VOLUME);
     }

@@ -12,11 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.gc.materialdesign.views.ButtonFloat;
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.ui.adapters.ServiceRecyclerAdapter;
 import com.packruler.carmaintenance.vehicle.Vehicle;
+import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
 import java.util.Calendar;
@@ -88,17 +90,29 @@ public class ServicesFragment extends android.support.v4.app.Fragment {
 
         mAdapter.setOnItemClickListener(new ServiceRecyclerAdapter.OnClickListener() {
             @Override
-            public void onItemClick(long itemId) {
+            public void onItemClick(long itemId, RecyclerView.ViewHolder holder) {
 
             }
 
             @Override
-            public void onDeleteClick(long itemId) {
-
+            public void onDeleteClick(final long itemId, final RecyclerView.ViewHolder holder) {
+                new MaterialDialog.Builder(activity)
+                        .title(R.string.confirm).titleColor(activity.getUiColor())
+                        .positiveText(R.string.accept).positiveColor(activity.getUiColor())
+                        .negativeText(R.string.cancel).negativeColor(activity.getColor(R.color.material_grey_900))
+                        .callback(new MaterialDialog.ButtonCallback() {
+                            @Override
+                            public void onPositive(MaterialDialog dialog) {
+                                Log.v(TAG, "Deleting service task");
+                                new ServiceTask(carSQL, itemId).delete();
+                                recyclerView.removeViewAt(holder.getLayoutPosition());
+                                setSortOrder(ServiceTask.DATE, true);
+                            }
+                        }).show();
             }
 
             @Override
-            public void onEditClick(long itemId) {
+            public void onEditClick(long itemId, RecyclerView.ViewHolder holder) {
                 long start = Calendar.getInstance().getTimeInMillis();
                 ServiceTask task = new ServiceTask(carSQL, itemId);
                 Log.v(TAG, "Type: " + task.getType() + " Date: " + DateFormat.getMediumDateFormat(activity).format(task.getDate()));

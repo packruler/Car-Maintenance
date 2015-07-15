@@ -291,7 +291,6 @@ public abstract class CursorRecyclerViewAdapter<VH
      * @see ContentObserver#onChange(boolean)
      */
     protected void onContentChanged() {
-
     }
 
     private class ChangeObserver extends ContentObserver {

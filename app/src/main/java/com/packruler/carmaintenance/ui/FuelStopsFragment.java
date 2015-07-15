@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.gc.materialdesign.views.ButtonFloat;
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.CarSQL;
@@ -49,6 +50,9 @@ public class FuelStopsFragment extends android.support.v4.app.Fragment {
         mAdapter.setHasStableIds(true);
     }
 
+    private void updateCursor() {
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,17 +71,39 @@ public class FuelStopsFragment extends android.support.v4.app.Fragment {
 
         mAdapter.setOnItemClickListener(new ServiceRecyclerAdapter.OnClickListener() {
             @Override
-            public void onItemClick(long itemId) {
-
+            public void onItemClick(long itemId, RecyclerView.ViewHolder holder) {
             }
 
             @Override
-            public void onDeleteClick(long itemId) {
-
+            public void onDeleteClick(final long itemId, final RecyclerView.ViewHolder holder) {
+                new MaterialDialog.Builder(activity)
+                        .title(R.string.confirm).titleColor(activity.getUiColor())
+                        .positiveText(R.string.accept).positiveColor(activity.getUiColor())
+                        .negativeText(R.string.cancel).negativeColor(activity.getColor(R.color.material_grey_900))
+                        .callback(new MaterialDialog.ButtonCallback() {
+                            @Override
+                            public void onPositive(MaterialDialog dialog) {
+                                Log.v(TAG, "Deleting fuel stop");
+                                new FuelStop(carSQL, itemId).delete();
+                                recyclerView.removeViewAt(holder.getLayoutPosition());
+                                mAdapter.changeCursor(vehicle.getFuelStopCursor());
+                            }
+                        }).show();
+//                builder.setTitle(getString(R.string.confirm));
+//                builder.setNegativeButton(getString(R.string.cancel), null);
+//                builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Log.v(TAG, "Deleting fuel stop");
+//                        new FuelStop(carSQL, itemId).delete();
+//                        mAdapter.notifyDataSetChanged();
+//                    }
+//                });
+//                builder.show();
             }
 
             @Override
-            public void onEditClick(long itemId) {
+            public void onEditClick(long itemId, RecyclerView.ViewHolder holder) {
                 long start = Calendar.getInstance().getTimeInMillis();
                 FuelStop task = new FuelStop(carSQL, itemId);
                 Log.v(TAG, "Type: " + task.getType() + " Date: " + DateFormat.getMediumDateFormat(activity).format(task.getDate()));

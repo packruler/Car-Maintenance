@@ -192,11 +192,16 @@ public class ServiceTask extends SQLDataOberservable {
     }
 
     public void delete() {
+        delete(TABLE_NAME);
+//        if (success && type != null)
+//            ServiceTypeCursorHandler.removeType(carSQL, type);
+    }
+
+    void delete(String TABLE_NAME) {
 //        String type = getType();
         boolean success = carSQL.getWritableDatabase().delete(TABLE_NAME, ID + "= " + row, null) == 1;
         Log.v(TAG, "Delete row " + row + ": " + (success ? "SUCCESS" : "FAILED"));
-//        if (success && type != null)
-//            ServiceTypeCursorHandler.removeType(carSQL, type);
+//        Log.v(TAG, "Delete row " + row + ": " + carSQL.getWritableDatabase().delete(TABLE_NAME, ID + "= " + row, null));
     }
 
     @Override

@@ -68,20 +68,20 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
                     }
 
                     expanded = !expanded;
-                    onItemClick(ViewHolder.this.getItemId());
+                    onItemClick(ViewHolder.this.getItemId(), ViewHolder.this);
                 }
             });
             layout.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onEditClick(ViewHolder.this.getItemId());
+                    onEditClick(ViewHolder.this.getItemId(), ViewHolder.this);
                 }
             });
 
             layout.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onDeleteClick(ViewHolder.this.getItemId());
+                    onDeleteClick(ViewHolder.this.getItemId(), ViewHolder.this);
                 }
             });
             typeDisplay = (TextView) v.findViewById(R.id.type_display);
@@ -126,29 +126,29 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
         return DateFormat.getDateFormat(context).format(new Date(cursor.getLong(cursor.getColumnIndex(ServiceTask.DATE))));
     }
 
-    private void onItemClick(long position) {
+    private void onItemClick(long position, RecyclerView.ViewHolder holder) {
         Log.v("onItemClick", "Position: " + position);
-        onClickListener.onItemClick(position);
+        onClickListener.onItemClick(position, holder);
     }
 
-    private void onEditClick(long itemId) {
+    private void onEditClick(long itemId, RecyclerView.ViewHolder holder) {
         Log.v(TAG, "Edit item: " + itemId);
         if (onClickListener != null)
-            onClickListener.onEditClick(itemId);
+            onClickListener.onEditClick(itemId,holder);
     }
 
-    private void onDeleteClick(long itemId) {
+    private void onDeleteClick(long itemId, RecyclerView.ViewHolder holder) {
         Log.v(TAG, "Delete item: " + itemId);
         if (onClickListener != null)
-            onClickListener.onDeleteClick(itemId);
+            onClickListener.onDeleteClick(itemId,holder);
     }
 
     public interface OnClickListener {
-        void onItemClick(long itemId);
+        void onItemClick(long itemId, RecyclerView.ViewHolder holder);
 
-        void onDeleteClick(long itemId);
+        void onDeleteClick(long itemId, RecyclerView.ViewHolder holder);
 
-        void onEditClick(long itemId);
+        void onEditClick(long itemId, RecyclerView.ViewHolder holder);
     }
 
     public void setOnItemClickListener(OnClickListener onClickListener) {
