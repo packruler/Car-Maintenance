@@ -36,7 +36,7 @@ public class MenuHandler {
         DELETE = res.getString(R.string.delete);
     }
 
-    public static void setupEditMenu(Menu menu) {
+    public static Menu setupEditMenu(Menu menu) {
         menu.clear();
 
         menu.add(SAVE);
@@ -51,6 +51,7 @@ public class MenuHandler {
 //        activity.getToolbar().setOnMenuItemClickListener(this);
         Log.v(TAG, "onCreateOptionsMenu");
         Log.v(TAG, "Menu size: " + menu.size());
+        return menu;
     }
 
     public static void setUIColor() {

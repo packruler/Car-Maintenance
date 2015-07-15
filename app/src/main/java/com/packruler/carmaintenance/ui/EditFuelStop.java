@@ -84,6 +84,12 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -101,7 +107,7 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            activity.getActionBar().setTitle("Edit Fuel Stop");
+            ((MainActivity) activity).getSupportActionBar().setTitle("Edit Fuel Stop");
         } catch (NullPointerException e) {
             Log.e(TAG, e.getMessage());
         }

@@ -134,7 +134,6 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                              Bundle savedInstanceState) {
         Log.v(TAG, "onCreateView");
         rootView = (ScrollView) inflater.inflate(R.layout.fragment_edit_car, container, false);
-        rootView.isInEditMode();
         initializeView();
 
         return rootView;
