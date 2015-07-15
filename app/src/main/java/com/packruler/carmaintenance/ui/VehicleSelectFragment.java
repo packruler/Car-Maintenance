@@ -29,6 +29,7 @@ public class VehicleSelectFragment extends android.support.v4.app.Fragment {
     private View rootView;
     private CarSQL carSQL;
     private Cursor cursor;
+    private MainActivity activity;
 
     public VehicleSelectFragment() {
         // Required empty public constructor
@@ -70,6 +71,7 @@ public class VehicleSelectFragment extends android.support.v4.app.Fragment {
         } else
             setupAdapter();
 
+
         return rootView;
     }
 
@@ -81,10 +83,16 @@ public class VehicleSelectFragment extends android.support.v4.app.Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        if (activity instanceof MainActivity)
-            ((MainActivity) activity).setUIColor(getResources().getColor(R.color.default_ui_color));
-        super.onAttach(activity);
+    public void onAttach(Activity act) {
+        if (act instanceof MainActivity) {
+            activity = (MainActivity) act;
+            activity.setUIColor(getResources().getColor(R.color.default_ui_color));
+            if (activity.getCurrentVehicle() == null && activity.getSupportActionBar() != null) {
+                activity.getSupportActionBar().setDisplayShowHomeEnabled(false);
+                Log.v(TAG,"HIDEME");
+            }
+        }
+        super.onAttach(act);
     }
 
     @Override

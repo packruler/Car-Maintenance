@@ -198,37 +198,38 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void changeVehicle(long vehicleRow) {
-        currentVehicle = vehicleMap.get(vehicleRow);
+        if (vehicleRow == -1l)
+            currentVehicle = null;
+        else
+            currentVehicle = new Vehicle(carsSQL, vehicleRow);
         changeVehicle();
     }
 
     private void changeVehicle() {
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                int color = getResources().getColor(R.color.default_ui_color);
+                if (currentVehicle != null) {
+                    if (currentVehicle.getUiColor() != 0)
+                        color = currentVehicle.getUiColor();
 
-        int color = getResources().getColor(R.color.default_ui_color);
-        if (currentVehicle != null) {
-            if (currentVehicle.getUiColor() != 0)
-                color = currentVehicle.getUiColor();
+                    getSupportActionBar().setTitle(currentVehicle.getName());
+                    mainFragment.loadVehicleDetails();
+                } else {
+                    getSupportActionBar().setTitle(getString(R.string.app_name));
+                    displaySelectVehicle();
+                }
 
-            getSupportActionBar().setTitle(currentVehicle.getName());
-        } else
-            getSupportActionBar().setTitle(getString(R.string.app_name));
+                setUIColor(color);
 
-        setUIColor(color);
-        mainFragment.loadVehicleDetails();
+                while (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    getSupportFragmentManager().popBackStackImmediate();
+                }
 
-        while (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStackImmediate();
-        }
-//        .beginTransaction()
-//                .replace(R.id.container, mainFragment)
-//                .commit();
-
-        mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-//        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-//        while (fragmentManager.getBackStackEntryCount() > 0) {
-//            Log.v(TAG, "Back Stack count: " + fragmentManager.getBackStackEntryCount());
-//            Log.v(TAG, "Pop stack " + (fragmentManager.popBackStackImmediate() ? "Success" : "FAIL"));
-//        }
+                mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            }
+        });
     }
 
     public Vehicle getCurrentVehicle() {
@@ -278,8 +279,8 @@ public class MainActivity extends AppCompatActivity
         int count = getSupportFragmentManager().getBackStackEntryCount();
         Log.v("onBackStackChanged", "Count: " + count);
         if (count == 0) {
-            if (currentVehicle == null)
-                finish();
+//            if (currentVehicle == null)
+//                finish();
             changeVehicle();
             mNavigationDrawerFragment.useDrawerIcon();
             mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
@@ -288,6 +289,7 @@ public class MainActivity extends AppCompatActivity
             ToolbarColorizeHelper.colorizeToolbar(toolbar, Swatch.getForegroundColor(), MainActivity.this);
             mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
+        System.gc();
     }
 
     public VehicleMap getVehicleMap() {

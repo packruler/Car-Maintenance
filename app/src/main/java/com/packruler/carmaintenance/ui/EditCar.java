@@ -1,6 +1,7 @@
 package com.packruler.carmaintenance.ui;
 
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.FragmentManager;
 import android.app.PendingIntent;
@@ -68,6 +69,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 @SuppressWarnings("ResourceType")
+@SuppressLint("ValidFragment")
 public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListener*/ {
 
     final static String TAG = "EditCar";
@@ -255,9 +257,10 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                 public void onClick(DialogInterface dialog, int which) {
                     if (vehicle != null) {
                         Log.v(TAG, "Deleting vehicle");
-                        activity.getVehicleMap().remove(vehicle.getRow()).delete();
-                        activity.getToolbar().setTitle(getString(R.string.select_vehicle));
-                        activity.displaySelectVehicle();
+                        vehicle.delete();
+//                        activity.getToolbar().setTitle(getString(R.string.select_vehicle));
+                        activity.changeVehicle(-1l);
+//                        activity.displaySelectVehicle();
                     } else
                         Log.v(TAG, "Pop EditCar " + (getFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE) ? "Success" : "FAIL"));
                 }
@@ -272,7 +275,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
 
     private void loadVehicle() {
         Log.v(TAG, "LoadVehicle");
-        if (viewInitialized) {
+        if (viewInitialized && !vehicle.isDeleted()) {
             mainHandler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -339,8 +342,12 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                     if (datePurchased != 0)
                         setDisplayPurchaseDate();
 
-                    if (vehicle.getUiColor() != 0 && vehicle.getUiColor() != activity.getUiColor())
-                        setHighlightColors(vehicle.getUiColor());
+                    if (vehicle.getUiColor() != 0) {
+                        if (vehicle.getUiColor() != activity.getUiColor())
+                            setHighlightColors(vehicle.getUiColor());
+                        else
+                            displayColorIcon.setBackgroundColor(activity.getUiColor());
+                    }
                 }
             });
         }
@@ -354,7 +361,6 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     private int currentColor;
 
     private void initialColorLoad() {
-
         year.setPrimaryColor(currentColor);
         make.setPrimaryColor(currentColor);
         model.setPrimaryColor(currentColor);
@@ -374,6 +380,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         purchaseCost.setPrimaryColor(currentColor);
         costUnit.setPrimaryColor(currentColor);
         purchaseDate.setPrimaryColor(currentColor);
+        purchaseMileage.setPrimaryColor(currentColor);
     }
 
     private void setHighlightColors(int color) {
@@ -386,27 +393,10 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
             activity.execute(new Runnable() {
                 @Override
                 public void run() {
-                    year.setPrimaryColor(currentColor);
-                    make.setPrimaryColor(currentColor);
-                    model.setPrimaryColor(currentColor);
-
-                    vehicleName.setPrimaryColor(currentColor);
-                    vin.setPrimaryColor(currentColor);
-                    subModel.setPrimaryColor(currentColor);
-                    currentMileage.setPrimaryColor(currentColor);
-                    mileageUnit.setPrimaryColor(currentColor);
-                    weight.setPrimaryColor(currentColor);
-                    weightUnits.setPrimaryColor(currentColor);
-                    power.setPrimaryColor(currentColor);
-                    powerUnit.setPrimaryColor(currentColor);
-                    torque.setPrimaryColor(currentColor);
-                    torqueUnit.setPrimaryColor(currentColor);
-                    vehicleColor.setPrimaryColor(currentColor);
-                    purchaseCost.setPrimaryColor(currentColor);
-                    costUnit.setPrimaryColor(currentColor);
-                    purchaseDate.setPrimaryColor(currentColor);
+                    initialColorLoad();
                 }
             });
+
 //            for (Drawable icon : icons) {
 //                if (icon != null) {
 //                    color = Swatch.getForegroundColor();
@@ -585,7 +575,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     }
 
     private void saveYear() {
-        if (year.getText().toString().length() > 0 || !year.getText().toString().equals(String.valueOf(vehicle.getYear())))
+        if (year.getText().toString().length() > 0)
             vehicle.setYear(Integer.valueOf(year.getText().toString()));
     }
 
@@ -661,7 +651,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     }
 
     private void saveMake() {
-        if (make.getText().toString().length() > 0 || !make.getText().toString().equals(vehicle.getMake()))
+        if (make.getText().toString().length() > 0)
             vehicle.setMake(make.getText().toString());
     }
 
@@ -734,7 +724,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     }
 
     private void saveModel() {
-        if (model.getText().toString().length() > 0 || !model.getText().toString().equals(vehicle.getModel()))
+        if (model.getText().toString().length() > 0)
             vehicle.setModel(model.getText().toString());
     }
 
@@ -743,7 +733,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     }
 
     private void saveSubModel() {
-        if (subModel.getText().toString().length() > 0 || !subModel.getText().toString().equals(vehicle.getSubmodel()))
+        if (subModel.getText().toString().length() > 0)
             vehicle.setSubmodel(subModel.getText().toString());
     }
 

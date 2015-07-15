@@ -151,9 +151,9 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
                         public void run() {
                             Log.v(TAG, "Load null to UI");
                             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                                vehicleImage.setImageDrawable(getResources().getDrawable(R.drawable.missing_photo_icon, null));
+                                vehicleImage.setImageDrawable(activity.getResources().getDrawable(R.drawable.missing_photo_icon, null));
                             else
-                                vehicleImage.setImageDrawable(getResources().getDrawable(R.drawable.missing_photo_icon));
+                                vehicleImage.setImageDrawable(activity.getResources().getDrawable(R.drawable.missing_photo_icon));
 
                             vehicleImage.setScaleType(ImageView.ScaleType.CENTER);
                         }

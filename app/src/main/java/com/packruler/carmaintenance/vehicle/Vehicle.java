@@ -67,6 +67,7 @@ public class Vehicle extends SQLDataOberservable {
                     VOLUME_UNITS + " TEXT," + PRIMARY_COLOR + " INTEGER" + ")";
 
     protected CarSQL carSQL;
+    private boolean deleted = false;
 
     private SQLDataHandler sqlDataHandler;
 
@@ -124,11 +125,20 @@ public class Vehicle extends SQLDataOberservable {
             database.delete(ServiceTask.TABLE_NAME, ServiceTask.VEHICLE_ROW + "= " + row, null);
             database.delete(FuelStop.TABLE_NAME, FuelStop.VEHICLE_ROW + "= " + row, null);
             database.delete(PartReplacement.TABLE_NAME, PartReplacement.VEHICLE_ROW + "= " + row, null);
+            database.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + TABLE_NAME + "'");
+            database.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + ServiceTask.TABLE_NAME + "'");
+            database.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + FuelStop.TABLE_NAME + "'");
+            database.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + PartReplacement.TABLE_NAME + "'");
             database.setTransactionSuccessful();
+            deleted = true;
             Log.v(TAG, "Delete took: " + (Calendar.getInstance().getTimeInMillis() - start));
         } finally {
             database.endTransaction();
         }
+    }
+
+    public boolean isDeleted() {
+        return deleted;
     }
 
     public long getRow() {
