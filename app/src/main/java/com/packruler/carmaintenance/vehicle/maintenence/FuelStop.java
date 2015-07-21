@@ -97,15 +97,22 @@ public class FuelStop extends ServiceTask {
 
     public void updateDistanceTraveled() {
         long distance = -1;
+        Cursor cursor = null;
         if (isCompleteFillUp() && !missedFillup() && getDate() > 0) {
-            Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{MILEAGE},
+            cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{MILEAGE},
                     DATE + "< " + getDate(), null, null, null, DATE + " DESC", String.valueOf(1));
-            if (cursor.moveToFirst())
+            Log.v(TAG, "Cursor count: " + cursor.getCount());
+            if (cursor.moveToFirst()) {
                 distance = getMileage() - cursor.getInt(cursor.getColumnIndex(MILEAGE));
+                Log.d(TAG, "Curr: " + getMileage() + " | " + cursor.getInt(cursor.getColumnIndex(MILEAGE)));
+            }
         }
+        Log.v(TAG, "Distance: " + distance);
         if (distance < -1)
             distance = -1;
         sqlDataHandler.put(DISTANCE_TRAVELED, distance);
+        if (cursor != null)
+            cursor.close();
     }
 
     public static Cursor getFuelStopCursorForCar(CarSQL carSQL, long vehicleRow) {

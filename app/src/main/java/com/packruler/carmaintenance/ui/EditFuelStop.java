@@ -440,17 +440,18 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
     }
 
     private void updateDistanceTraveled() {
-        if (!missedFillup.isCheck() && completeFillup.isCheck())
+//        if (!missedFillup.isCheck() && completeFillup.isCheck())
             fuelStop.updateDistanceTraveled();
     }
 
     private void save() {
         boolean update = true;
         if (fuelStop == null)
-            activity.getCurrentVehicle().getNewFuelStop();
+            fuelStop = activity.getCurrentVehicle().getNewFuelStop();
 
         assert fuelStop != null;
         fuelStop.beginTransaction();
+
         if (!saveCostPerVolume())
             update = false;
 
@@ -460,12 +461,15 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
         if (!saveVolume())
             update = false;
 
+        Log.v(TAG, "Update " + update);
         saveDate();
 
-        if (update)
-            updateDistanceTraveled();
+        fuelStop.setMissedFillup(missedFillup.isCheck());
+        fuelStop.setCompleteFillUp(completeFillup.isCheck());
 
         fuelStop.endTransaction();
+
+        updateDistanceTraveled();
 
         getFragmentManager().popBackStack();
     }

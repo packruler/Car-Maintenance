@@ -57,6 +57,7 @@ public class SQLDataHandler {
         if (contentValues == null)
             return false;
         putContentValues(contentValues);
+        contentValues = null;
         return true;
     }
 

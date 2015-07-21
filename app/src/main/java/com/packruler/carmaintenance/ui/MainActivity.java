@@ -156,6 +156,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         carsSQL.close();
+        availableCarsSQL.close();
         googleApiClient.disconnect();
         super.onDestroy();
     }

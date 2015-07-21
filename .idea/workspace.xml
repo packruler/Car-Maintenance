@@ -28,15 +28,14 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="package" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c618867f-dfb4-47b3-a368-3bc9a89fa8fa" name="Default" comment="">
+    <list default="true" id="c618867f-dfb4-47b3-a368-3bc9a89fa8fa" name="Default" comment="Initial">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/EditFuelStop.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/EditFuelStop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/ExpandableViewHolder.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/ExpandableViewHolder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/FuelStopAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/FuelStopAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/FuelStopsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/FuelStopsFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Car-Maintenance.iws" />
@@ -65,47 +64,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FuelStopsFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FuelStopsFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/FuelStopsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.7942177">
-              <caret line="47" column="25" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="47" column="27" selection-start-line="47" selection-start-column="27" selection-end-line="47" selection-end-column="27" />
               <folding>
                 <element signature="e#964#1003#0" expanded="true" />
-                <element signature="method#onRemoved#0;class#1418:2141" expanded="true" />
-                <element signature="method#onAdded#0;class#1418:2141" expanded="true" />
+                <element signature="method#onRemoved#0;class#1418:2033" expanded="true" />
+                <element signature="method#onAdded#0;class#1418:2033" expanded="true" />
                 <element signature="method#FuelStopsFragment#0;class#FuelStopsFragment#0" expanded="true" />
                 <element signature="method#FuelStopsFragment#1;class#FuelStopsFragment#0" expanded="true" />
                 <element signature="method#onDestroy#0;class#FuelStopsFragment#0" expanded="true" />
-                <element signature="method#updateCursor#0;class#FuelStopsFragment#0" expanded="true" />
+                <element signature="e#2636#2637#0" expanded="true" />
+                <element signature="e#2702#2703#0" expanded="true" />
                 <element signature="method#onCreateView#0;class#FuelStopsFragment#0" expanded="true" />
-                <element signature="class#3658:5698" expanded="true" />
-                <element signature="method#onDeleteClick#0;class#3658:5698" expanded="true" />
-                <element signature="e#4024#4040#0" expanded="true" />
-                <element signature="e#4114#4129#0" expanded="true" />
-                <element signature="e#4206#4221#0" expanded="true" />
-                <element signature="e#4317#4832#0" expanded="true" />
-                <element signature="e#4831#4832#0" expanded="true" />
-                <element signature="method#onEditClick#0;class#3658:5698" expanded="true" />
+                <element signature="class#3610:5650" expanded="true" />
+                <element signature="method#onDeleteClick#0;class#3610:5650" expanded="true" />
+                <element signature="e#3976#3992#0" expanded="true" />
+                <element signature="e#4066#4081#0" expanded="true" />
+                <element signature="e#4158#4173#0" expanded="true" />
+                <element signature="e#4269#4784#0" expanded="true" />
+                <element signature="e#4783#4784#0" expanded="true" />
+                <element signature="method#onEditClick#0;class#3610:5650" expanded="true" />
                 <element signature="method#onAttach#0;class#FuelStopsFragment#0" expanded="true" />
-                <element signature="e#6427#6457#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CarSQL.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="19" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
-              <folding>
-                <element signature="class#1563:2318" expanded="true" />
-                <element signature="method#CarSQL#0;class#CarSQL#0" expanded="true" />
-                <element signature="method#registerObserver#0;class#CarSQL#0" expanded="true" />
-                <element signature="method#unregisterAll#0;class#CarSQL#0" expanded="true" />
-                <element signature="method#unregisterObserver#0;class#CarSQL#0" expanded="true" />
-                <element signature="method#loadVehicles#0;class#CarSQL#0" expanded="true" />
+                <element signature="e#6379#6409#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -115,63 +98,13 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="191" column="19" selection-start-line="191" selection-start-column="19" selection-end-line="191" selection-end-column="19" />
+              <caret line="59" column="29" selection-start-line="59" selection-start-column="29" selection-end-line="59" selection-end-column="29" />
               <folding>
                 <element signature="method#SQLDataHandler#0;class#SQLDataHandler#0" expanded="true" />
                 <element signature="method#getString#0;class#SQLDataHandler#0" expanded="true" />
+                <element signature="method#put#2;class#SQLDataHandler#0" expanded="true" />
+                <element signature="method#put#5;class#SQLDataHandler#0" expanded="true" />
                 <element signature="method#putContentValues#0;class#SQLDataHandler#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServiceTask.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="272" column="14" selection-start-line="272" selection-start-column="14" selection-end-line="272" selection-end-column="14" />
-              <folding>
-                <element signature="e#2101#2102#0" expanded="true" />
-                <element signature="e#2137#2138#0" expanded="true" />
-                <element signature="method#ServiceTask#1;class#ServiceTask#0" expanded="true" />
-                <element signature="method#ServiceTask#2;class#ServiceTask#0" expanded="true" />
-                <element signature="e#2770#2771#0" expanded="true" />
-                <element signature="e#2810#2811#0" expanded="true" />
-                <element signature="method#init#0;class#ServiceTask#0" expanded="true" />
-                <element signature="e#3044#3045#0" expanded="true" />
-                <element signature="e#3070#3071#0" expanded="true" />
-                <element signature="e#3111#3112#0" expanded="true" />
-                <element signature="e#3167#3168#0" expanded="true" />
-                <element signature="method#setLocationName#0;class#ServiceTask#0" expanded="true" />
-                <element signature="e#3963#3964#0" expanded="true" />
-                <element signature="e#4025#4026#0" expanded="true" />
-                <element signature="e#4077#4078#0" expanded="true" />
-                <element signature="e#4136#4137#0" expanded="true" />
-                <element signature="method#setDateTimeZone#0;class#ServiceTask#0" expanded="true" />
-                <element signature="e#4658#4659#0" expanded="true" />
-                <element signature="e#4704#4705#0" expanded="true" />
-                <element signature="e#4744#4745#0" expanded="true" />
-                <element signature="e#4810#4811#0" expanded="true" />
-                <element signature="e#4936#4937#0" expanded="true" />
-                <element signature="e#4988#4989#0" expanded="true" />
-                <element signature="method#setMileage#1;class#ServiceTask#0" expanded="true" />
-                <element signature="method#delete#1;class#ServiceTask#0" expanded="true" />
-                <element signature="e#8851#9043#0" expanded="true" />
-                <element signature="e#9042#9043#0" expanded="true" />
-                <element signature="method#cleanNumberString#0;class#ServiceTask#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServicesFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/ServicesFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="100" column="53" selection-start-line="100" selection-start-column="53" selection-end-line="100" selection-end-column="53" />
-              <folding>
-                <element signature="e#3745#3760#0" expanded="true" />
-                <element signature="method#setSortOrder#0;class#ServicesFragment#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -181,7 +114,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/EditFuelStop.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="325" column="25" selection-start-line="325" selection-start-column="25" selection-end-line="325" selection-end-column="25" />
+              <caret line="467" column="21" selection-start-line="467" selection-start-column="21" selection-end-line="467" selection-end-column="21" />
               <folding>
                 <element signature="method#EditFuelStop#1;class#EditFuelStop#0" expanded="true" />
                 <element signature="method#onCreate#0;class#EditFuelStop#0" expanded="true" />
@@ -190,6 +123,8 @@
                 <element signature="method#onCreateOptionsMenu#0;class#EditFuelStop#0" expanded="true" />
                 <element signature="method#onOptionsItemSelected#0;class#EditFuelStop#0" expanded="true" />
                 <element signature="e#4313#4337#0" expanded="true" />
+                <element signature="e#4474#4612#0" expanded="true" />
+                <element signature="e#4611#4612#0" expanded="true" />
                 <element signature="e#4657#4684#0" expanded="true" />
                 <element signature="e#4882#4908#0" expanded="true" />
                 <element signature="e#4989#5005#0" expanded="true" />
@@ -209,25 +144,32 @@
                 <element signature="e#10217#10232#0" expanded="true" />
                 <element signature="class#11377:11743" expanded="true" />
                 <element signature="method#onShow#0;class#11377:11743" expanded="true" />
+                <element signature="method#setCostPerVolumeDisplay#0;class#EditFuelStop#0" expanded="true" />
                 <element signature="method#saveCostPerVolume#0;class#EditFuelStop#0" expanded="true" />
                 <element signature="method#initializeVolume#0;class#EditFuelStop#0" expanded="true" />
                 <element signature="method#saveVolume#0;class#EditFuelStop#0" expanded="true" />
                 <element signature="method#initializeMileage#0;class#EditFuelStop#0" expanded="true" />
                 <element signature="method#saveMileage#0;class#EditFuelStop#0" expanded="true" />
                 <element signature="method#updateDistanceTraveled#0;class#EditFuelStop#0" expanded="true" />
-                <element signature="method#save#0;class#EditFuelStop#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NumberTextWatcher.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/utilities/NumberTextWatcher.java">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
+              <caret line="277" column="9" selection-start-line="277" selection-start-column="9" selection-end-line="277" selection-end-column="9" />
               <folding>
-                <element signature="method#NumberTextWatcher#0;class#NumberTextWatcher#0" expanded="true" />
+                <element signature="method#onCreate#0;class#MainActivity#0" expanded="true" />
+                <element signature="method#onDestroy#0;class#MainActivity#0" expanded="true" />
+                <element signature="method#onContextItemSelected#0;class#MainActivity#0" expanded="true" />
+                <element signature="method#changeVehicle#1;class#MainActivity#0" expanded="true" />
+                <element signature="method#changeVehicle#2;class#MainActivity#0" expanded="true" />
+                <element signature="method#setUIColor#0;class#MainActivity#0" expanded="true" />
+                <element signature="method#onKeyDown#0;class#MainActivity#0" expanded="true" />
+                <element signature="method#setTitle#0;class#MainActivity#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -237,38 +179,71 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="37" column="49" selection-start-line="37" selection-start-column="49" selection-end-line="37" selection-end-column="49" />
+              <caret line="112" column="25" selection-start-line="112" selection-start-column="25" selection-end-line="112" selection-end-column="25" />
               <folding>
-                <element signature="e#1624#1625#0" expanded="true" />
-                <element signature="e#1664#1665#0" expanded="true" />
-                <element signature="e#1706#1707#0" expanded="true" />
-                <element signature="e#1740#1741#0" expanded="true" />
+                <element signature="method#FuelStop#0;class#FuelStop#0" expanded="true" />
                 <element signature="e#2074#2075#0" expanded="true" />
                 <element signature="e#2140#2141#0" expanded="true" />
                 <element signature="method#setCompleteFillUp#0;class#FuelStop#0" expanded="true" />
                 <element signature="e#2306#2307#0" expanded="true" />
                 <element signature="e#2370#2371#0" expanded="true" />
                 <element signature="method#setMissedFillup#0;class#FuelStop#0" expanded="true" />
-                <element signature="e#2521#2522#0" expanded="true" />
-                <element signature="e#2573#2574#0" expanded="true" />
+                <element signature="e#2703#2704#0" expanded="true" />
+                <element signature="e#2766#2767#0" expanded="true" />
                 <element signature="method#setCostPerVolume#0;class#FuelStop#0" expanded="true" />
                 <element signature="method#setCostPerVolume#1;class#FuelStop#0" expanded="true" />
+                <element signature="method#getFuelStopCursorForCar#0;class#FuelStop#0" expanded="true" />
+                <element signature="method#getFuelStopCursorForCar#1;class#FuelStop#0" expanded="true" />
+                <element signature="method#getFuelStopsForCar#0;class#FuelStop#0" expanded="true" />
+                <element signature="method#getFuelStopCountForCar#0;class#FuelStop#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ExpandableViewHolder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/ExpandableViewHolder.java">
+      <file leaf-file-name="Vehicle.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="45" column="28" selection-start-line="45" selection-start-column="28" selection-end-line="45" selection-end-column="28" />
+              <caret line="241" column="33" selection-start-line="241" selection-start-column="33" selection-end-line="241" selection-end-column="33" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#expand#0;class#ExpandableViewHolder#0" expanded="true" />
-                <element signature="method#close#0;class#ExpandableViewHolder#0" expanded="true" />
-                <element signature="method#onBind#0;class#ExpandableViewHolder#0" expanded="true" />
-                <element signature="method#equals#0;class#ExpandableViewHolder#0" expanded="true" />
+                <element signature="method#delete#0;class#Vehicle#0" expanded="true" />
+                <element signature="e#8780#8781#0" expanded="true" />
+                <element signature="e#8834#8835#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServiceTask.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.33333334">
+              <caret line="99" column="19" selection-start-line="99" selection-start-column="19" selection-end-line="99" selection-end-column="19" />
+              <folding>
+                <element signature="method#ServiceTask#1;class#ServiceTask#0" expanded="true" />
+                <element signature="method#ServiceTask#2;class#ServiceTask#0" expanded="true" />
+                <element signature="method#init#0;class#ServiceTask#0" expanded="true" />
+                <element signature="e#3411#3412#0" expanded="true" />
+                <element signature="e#3470#3471#0" expanded="true" />
+                <element signature="method#setLocationName#0;class#ServiceTask#0" expanded="true" />
+                <element signature="method#setDateTimeZone#0;class#ServiceTask#0" expanded="true" />
+                <element signature="method#setMileage#0;class#ServiceTask#0" expanded="true" />
+                <element signature="method#setMileage#1;class#ServiceTask#0" expanded="true" />
+                <element signature="method#delete#1;class#ServiceTask#0" expanded="true" />
+                <element signature="method#cleanNumberString#0;class#ServiceTask#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FuelStopAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/FuelStopAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="132" column="68" selection-start-line="132" selection-start-column="68" selection-end-line="132" selection-end-column="68" />
+              <folding>
+                <element signature="method#setOnItemClickListener#0;class#FuelStopAdapter#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -2183,19 +2158,19 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/EditService.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_services.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fuel_stop_selector.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/FuelStopAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/ServiceRecyclerAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/ServicesFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/service_selector.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/ExpandableViewHolder.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/sql/CarSQL.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/FuelStopsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/FuelStopsFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/EditFuelStop.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/FuelStopAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java" />
       </list>
     </option>
   </component>
@@ -2284,20 +2259,6 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
@@ -2347,6 +2308,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="utilities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="carmaintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vehicle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maintenence" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2701,7 +2688,13 @@
       <option name="project" value="LOCAL" />
       <updated>1437497525563</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="better handling of SQL data changes and EditFuelStop UI">
+      <created>1437507004338</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1437507004338</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2721,7 +2714,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32703003" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3147942" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3147942" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2755,7 +2748,8 @@
     <MESSAGE value="initial action buttons support" />
     <MESSAGE value="much improved expandable items in RecyclerView" />
     <MESSAGE value="Make expandable item compartmentalized" />
-    <option name="LAST_COMMIT_MESSAGE" value="Make expandable item compartmentalized" />
+    <MESSAGE value="better handling of SQL data changes and EditFuelStop UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="better handling of SQL data changes and EditFuelStop UI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2764,16 +2758,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://D:/Android/sdk/platforms/android-MNC/data/res/layout/select_dialog_singlechoice.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Android/sdk/platforms/android-MNC/data/res/layout/select_dialog_item.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -3142,31 +3126,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49829933">
-          <caret line="277" column="9" selection-start-line="277" selection-start-column="9" selection-end-line="277" selection-end-column="9" />
-          <folding>
-            <element signature="method#onCreate#0;class#MainActivity#0" expanded="true" />
-            <element signature="e#5885#5919#0" expanded="true" />
-            <element signature="method#onContextItemSelected#0;class#MainActivity#0" expanded="true" />
-            <element signature="e#7508#7542#0" expanded="true" />
-            <element signature="method#changeVehicle#1;class#MainActivity#0" expanded="true" />
-            <element signature="method#changeVehicle#2;class#MainActivity#0" expanded="true" />
-            <element signature="e#8432#8460#0" expanded="true" />
-            <element signature="e#8903#8904#0" expanded="true" />
-            <element signature="e#8940#8941#0" expanded="true" />
-            <element signature="e#10780#10781#0" expanded="true" />
-            <element signature="e#10819#10820#0" expanded="true" />
-            <element signature="method#setUIColor#0;class#MainActivity#0" expanded="true" />
-            <element signature="e#11906#11907#0" expanded="true" />
-            <element signature="e#11936#11937#0" expanded="true" />
-            <element signature="method#onKeyDown#0;class#MainActivity#0" expanded="true" />
-            <element signature="method#setTitle#0;class#MainActivity#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/NavigationDrawerFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3265306">
@@ -3182,19 +3141,9 @@
         <state vertical-scroll-proportion="0.47959185">
           <caret line="90" column="25" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
           <folding>
-            <element signature="method#onCreateView#0;class#VehicleSelectFragment#0" expanded="true" />
-            <element signature="class#1516:1996" expanded="true" />
-            <element signature="method#onClick#0;class#1516:1996" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/FuelStopAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding>
-            <element signature="method#setOnItemClickListener#0;class#FuelStopAdapter#0" expanded="false" />
+            <element signature="method#onCreateView#0;class#VehicleSelectFragment#0" expanded="false" />
+            <element signature="class#1516:1996" expanded="false" />
+            <element signature="method#onClick#0;class#1516:1996" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3206,17 +3155,6 @@
           <folding>
             <element signature="method#changeCursor#0;class#CursorRecyclerViewAdapter#0" expanded="true" />
             <element signature="method#onContentChanged#0;class#CursorRecyclerViewAdapter#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.54561716">
-          <caret line="132" column="43" selection-start-line="132" selection-start-column="43" selection-end-line="132" selection-end-column="43" />
-          <folding>
-            <element signature="e#6362#6363#0" expanded="true" />
-            <element signature="e#6392#6393#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3236,58 +3174,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="191" column="19" selection-start-line="191" selection-start-column="19" selection-end-line="191" selection-end-column="19" />
-          <folding>
-            <element signature="method#SQLDataHandler#0;class#SQLDataHandler#0" expanded="true" />
-            <element signature="method#getString#0;class#SQLDataHandler#0" expanded="true" />
-            <element signature="method#putContentValues#0;class#SQLDataHandler#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="272" column="14" selection-start-line="272" selection-start-column="14" selection-end-line="272" selection-end-column="14" />
-          <folding>
-            <element signature="e#2101#2102#0" expanded="true" />
-            <element signature="e#2137#2138#0" expanded="true" />
-            <element signature="method#ServiceTask#1;class#ServiceTask#0" expanded="true" />
-            <element signature="method#ServiceTask#2;class#ServiceTask#0" expanded="true" />
-            <element signature="e#2770#2771#0" expanded="true" />
-            <element signature="e#2810#2811#0" expanded="true" />
-            <element signature="method#init#0;class#ServiceTask#0" expanded="true" />
-            <element signature="e#3044#3045#0" expanded="true" />
-            <element signature="e#3070#3071#0" expanded="true" />
-            <element signature="e#3111#3112#0" expanded="true" />
-            <element signature="e#3167#3168#0" expanded="true" />
-            <element signature="method#setLocationName#0;class#ServiceTask#0" expanded="true" />
-            <element signature="e#3963#3964#0" expanded="true" />
-            <element signature="e#4025#4026#0" expanded="true" />
-            <element signature="e#4077#4078#0" expanded="true" />
-            <element signature="e#4136#4137#0" expanded="true" />
-            <element signature="method#setDateTimeZone#0;class#ServiceTask#0" expanded="true" />
-            <element signature="e#4658#4659#0" expanded="true" />
-            <element signature="e#4704#4705#0" expanded="true" />
-            <element signature="e#4744#4745#0" expanded="true" />
-            <element signature="e#4810#4811#0" expanded="true" />
-            <element signature="e#4936#4937#0" expanded="true" />
-            <element signature="e#4988#4989#0" expanded="true" />
-            <element signature="method#setMileage#1;class#ServiceTask#0" expanded="true" />
-            <element signature="method#delete#1;class#ServiceTask#0" expanded="true" />
-            <element signature="e#8851#9043#0" expanded="true" />
-            <element signature="e#9042#9043#0" expanded="true" />
-            <element signature="method#cleanNumberString#0;class#ServiceTask#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/utilities/NumberTextWatcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.335034">
           <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
           <folding>
             <element signature="method#NumberTextWatcher#0;class#NumberTextWatcher#0" expanded="true" />
@@ -3295,25 +3184,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataOberservable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="49" selection-start-line="37" selection-start-column="49" selection-end-line="37" selection-end-column="49" />
+          <caret line="37" column="16" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
           <folding>
-            <element signature="e#1624#1625#0" expanded="true" />
-            <element signature="e#1664#1665#0" expanded="true" />
-            <element signature="e#1706#1707#0" expanded="true" />
-            <element signature="e#1740#1741#0" expanded="true" />
-            <element signature="e#2074#2075#0" expanded="true" />
-            <element signature="e#2140#2141#0" expanded="true" />
-            <element signature="method#setCompleteFillUp#0;class#FuelStop#0" expanded="true" />
-            <element signature="e#2306#2307#0" expanded="true" />
-            <element signature="e#2370#2371#0" expanded="true" />
-            <element signature="method#setMissedFillup#0;class#FuelStop#0" expanded="true" />
-            <element signature="e#2521#2522#0" expanded="true" />
-            <element signature="e#2573#2574#0" expanded="true" />
-            <element signature="method#setCostPerVolume#0;class#FuelStop#0" expanded="true" />
-            <element signature="method#setCostPerVolume#1;class#FuelStop#0" expanded="true" />
+            <element signature="method#notifyAdded#0;class#SQLDataOberservable#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="277" column="9" selection-start-line="277" selection-start-column="9" selection-end-line="277" selection-end-column="9" />
+          <folding>
+            <element signature="method#onCreate#0;class#MainActivity#0" expanded="true" />
+            <element signature="method#onDestroy#0;class#MainActivity#0" expanded="true" />
+            <element signature="method#onContextItemSelected#0;class#MainActivity#0" expanded="true" />
+            <element signature="method#changeVehicle#1;class#MainActivity#0" expanded="true" />
+            <element signature="method#changeVehicle#2;class#MainActivity#0" expanded="true" />
+            <element signature="method#setUIColor#0;class#MainActivity#0" expanded="true" />
+            <element signature="method#onKeyDown#0;class#MainActivity#0" expanded="true" />
+            <element signature="method#setTitle#0;class#MainActivity#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3321,7 +3214,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/EditFuelStop.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="325" column="25" selection-start-line="325" selection-start-column="25" selection-end-line="325" selection-end-column="25" />
+          <caret line="467" column="21" selection-start-line="467" selection-start-column="21" selection-end-line="467" selection-end-column="21" />
           <folding>
             <element signature="method#EditFuelStop#1;class#EditFuelStop#0" expanded="true" />
             <element signature="method#onCreate#0;class#EditFuelStop#0" expanded="true" />
@@ -3330,6 +3223,8 @@
             <element signature="method#onCreateOptionsMenu#0;class#EditFuelStop#0" expanded="true" />
             <element signature="method#onOptionsItemSelected#0;class#EditFuelStop#0" expanded="true" />
             <element signature="e#4313#4337#0" expanded="true" />
+            <element signature="e#4474#4612#0" expanded="true" />
+            <element signature="e#4611#4612#0" expanded="true" />
             <element signature="e#4657#4684#0" expanded="true" />
             <element signature="e#4882#4908#0" expanded="true" />
             <element signature="e#4989#5005#0" expanded="true" />
@@ -3349,40 +3244,121 @@
             <element signature="e#10217#10232#0" expanded="true" />
             <element signature="class#11377:11743" expanded="true" />
             <element signature="method#onShow#0;class#11377:11743" expanded="true" />
+            <element signature="method#setCostPerVolumeDisplay#0;class#EditFuelStop#0" expanded="true" />
             <element signature="method#saveCostPerVolume#0;class#EditFuelStop#0" expanded="true" />
             <element signature="method#initializeVolume#0;class#EditFuelStop#0" expanded="true" />
             <element signature="method#saveVolume#0;class#EditFuelStop#0" expanded="true" />
             <element signature="method#initializeMileage#0;class#EditFuelStop#0" expanded="true" />
             <element signature="method#saveMileage#0;class#EditFuelStop#0" expanded="true" />
             <element signature="method#updateDistanceTraveled#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="method#save#0;class#EditFuelStop#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/sql/SQLDataHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="59" column="29" selection-start-line="59" selection-start-column="29" selection-end-line="59" selection-end-column="29" />
+          <folding>
+            <element signature="method#SQLDataHandler#0;class#SQLDataHandler#0" expanded="true" />
+            <element signature="method#getString#0;class#SQLDataHandler#0" expanded="true" />
+            <element signature="method#put#2;class#SQLDataHandler#0" expanded="true" />
+            <element signature="method#put#5;class#SQLDataHandler#0" expanded="true" />
+            <element signature="method#putContentValues#0;class#SQLDataHandler#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/FuelStopsFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.7942177">
-          <caret line="47" column="25" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="27" selection-start-line="47" selection-start-column="27" selection-end-line="47" selection-end-column="27" />
           <folding>
             <element signature="e#964#1003#0" expanded="true" />
-            <element signature="method#onRemoved#0;class#1418:2141" expanded="true" />
-            <element signature="method#onAdded#0;class#1418:2141" expanded="true" />
+            <element signature="method#onRemoved#0;class#1418:2033" expanded="true" />
+            <element signature="method#onAdded#0;class#1418:2033" expanded="true" />
             <element signature="method#FuelStopsFragment#0;class#FuelStopsFragment#0" expanded="true" />
             <element signature="method#FuelStopsFragment#1;class#FuelStopsFragment#0" expanded="true" />
             <element signature="method#onDestroy#0;class#FuelStopsFragment#0" expanded="true" />
-            <element signature="method#updateCursor#0;class#FuelStopsFragment#0" expanded="true" />
+            <element signature="e#2636#2637#0" expanded="true" />
+            <element signature="e#2702#2703#0" expanded="true" />
             <element signature="method#onCreateView#0;class#FuelStopsFragment#0" expanded="true" />
-            <element signature="class#3658:5698" expanded="true" />
-            <element signature="method#onDeleteClick#0;class#3658:5698" expanded="true" />
-            <element signature="e#4024#4040#0" expanded="true" />
-            <element signature="e#4114#4129#0" expanded="true" />
-            <element signature="e#4206#4221#0" expanded="true" />
-            <element signature="e#4317#4832#0" expanded="true" />
-            <element signature="e#4831#4832#0" expanded="true" />
-            <element signature="method#onEditClick#0;class#3658:5698" expanded="true" />
+            <element signature="class#3610:5650" expanded="true" />
+            <element signature="method#onDeleteClick#0;class#3610:5650" expanded="true" />
+            <element signature="e#3976#3992#0" expanded="true" />
+            <element signature="e#4066#4081#0" expanded="true" />
+            <element signature="e#4158#4173#0" expanded="true" />
+            <element signature="e#4269#4784#0" expanded="true" />
+            <element signature="e#4783#4784#0" expanded="true" />
+            <element signature="method#onEditClick#0;class#3610:5650" expanded="true" />
             <element signature="method#onAttach#0;class#FuelStopsFragment#0" expanded="true" />
-            <element signature="e#6427#6457#0" expanded="true" />
+            <element signature="e#6379#6409#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="112" column="25" selection-start-line="112" selection-start-column="25" selection-end-line="112" selection-end-column="25" />
+          <folding>
+            <element signature="method#FuelStop#0;class#FuelStop#0" expanded="true" />
+            <element signature="e#2074#2075#0" expanded="true" />
+            <element signature="e#2140#2141#0" expanded="true" />
+            <element signature="method#setCompleteFillUp#0;class#FuelStop#0" expanded="true" />
+            <element signature="e#2306#2307#0" expanded="true" />
+            <element signature="e#2370#2371#0" expanded="true" />
+            <element signature="method#setMissedFillup#0;class#FuelStop#0" expanded="true" />
+            <element signature="e#2703#2704#0" expanded="true" />
+            <element signature="e#2766#2767#0" expanded="true" />
+            <element signature="method#setCostPerVolume#0;class#FuelStop#0" expanded="true" />
+            <element signature="method#setCostPerVolume#1;class#FuelStop#0" expanded="true" />
+            <element signature="method#getFuelStopCursorForCar#0;class#FuelStop#0" expanded="true" />
+            <element signature="method#getFuelStopCursorForCar#1;class#FuelStop#0" expanded="true" />
+            <element signature="method#getFuelStopsForCar#0;class#FuelStop#0" expanded="true" />
+            <element signature="method#getFuelStopCountForCar#0;class#FuelStop#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/FuelStopAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="132" column="68" selection-start-line="132" selection-start-column="68" selection-end-line="132" selection-end-column="68" />
+          <folding>
+            <element signature="method#setOnItemClickListener#0;class#FuelStopAdapter#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="241" column="33" selection-start-line="241" selection-start-column="33" selection-end-line="241" selection-end-column="33" />
+          <folding>
+            <element signature="method#delete#0;class#Vehicle#0" expanded="true" />
+            <element signature="e#8780#8781#0" expanded="true" />
+            <element signature="e#8834#8835#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/ServiceTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="99" column="19" selection-start-line="99" selection-start-column="19" selection-end-line="99" selection-end-column="19" />
+          <folding>
+            <element signature="method#ServiceTask#1;class#ServiceTask#0" expanded="true" />
+            <element signature="method#ServiceTask#2;class#ServiceTask#0" expanded="true" />
+            <element signature="method#init#0;class#ServiceTask#0" expanded="true" />
+            <element signature="e#3411#3412#0" expanded="true" />
+            <element signature="e#3470#3471#0" expanded="true" />
+            <element signature="method#setLocationName#0;class#ServiceTask#0" expanded="true" />
+            <element signature="method#setDateTimeZone#0;class#ServiceTask#0" expanded="true" />
+            <element signature="method#setMileage#0;class#ServiceTask#0" expanded="true" />
+            <element signature="method#setMileage#1;class#ServiceTask#0" expanded="true" />
+            <element signature="method#delete#1;class#ServiceTask#0" expanded="true" />
+            <element signature="method#cleanNumberString#0;class#ServiceTask#0" expanded="true" />
           </folding>
         </state>
       </provider>

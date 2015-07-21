@@ -45,21 +45,21 @@ public class FuelStopsFragment extends android.support.v4.app.Fragment {
         public void onChanged(String tableName, long row) {
             super.onChanged(tableName, row);
             Log.v(TAG, "onChanged");
-            mAdapter.changeCursor(vehicle.getFuelStopCursor());
+            updateCursor();
         }
 
         @Override
         public void onRemoved(String tableName, long row) {
             super.onRemoved(tableName, row);
             Log.v(TAG, "onRemoved");
-            mAdapter.changeCursor(vehicle.getFuelStopCursor());
+            updateCursor();
         }
 
         @Override
         public void onAdded(String tableName, long row) {
             super.onAdded(tableName, row);
             Log.v(TAG, "onAdded");
-            mAdapter.changeCursor(vehicle.getFuelStopCursor());
+            updateCursor();
         }
     };
 
@@ -85,6 +85,7 @@ public class FuelStopsFragment extends android.support.v4.app.Fragment {
     }
 
     private void updateCursor() {
+        mAdapter.changeCursor(vehicle.getFuelStopCursor());
     }
 
     @Override

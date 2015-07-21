@@ -100,7 +100,7 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
             int distance = cursor.getInt(cursor.getColumnIndex(FuelStop.DISTANCE_TRAVELED));
             float volume = cursor.getFloat(cursor.getColumnIndex(FuelStop.VOLUME));
             float costPer = cursor.getFloat(cursor.getColumnIndex(FuelStop.COST_PER_VOLUME));
-            float cost = cursor.getFloat(cursor.getColumnIndex(FuelStop.COST));
+            float cost = volume * costPer;
 
             Vehicle vehicle = new Vehicle(carSQL, cursor.getLong(cursor.getColumnIndex(FuelStop.VEHICLE_ROW)));
 
@@ -131,8 +131,10 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
                 efficiencyDisplay.setText("--.-- " + fuelEfficiencyUnits);
 
             costDisplay.setText(currency + numberFormat.format(cost));
-            volumeDisplay.setText(numberFormat.format(volume) + ' ' + volumeUnits);
-            distanceDisplay.setText(distance + ' ' + distanceUnits);
+            volumeDisplay.setText(numberFormat.format(volume) + " " + volumeUnits);
+            if (distance > 0)
+                distanceDisplay.setText(distance + " " + distanceUnits);
+            else distanceDisplay.setText("");
             costPerDisplay.setText(currency + costPer + volumeUnits);
         }
 

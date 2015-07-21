@@ -78,6 +78,7 @@ public class ServiceTask extends SQLDataOberservable {
         table = TABLE_NAME;
         row = rowId;
         sqlDataHandler = new SQLDataHandler(carSQL.getWritableDatabase(), table, row, this);
+        notifyAdded();
     }
 
     public long getRow() {
@@ -162,6 +163,9 @@ public class ServiceTask extends SQLDataOberservable {
 
     public void setMileage(long mileage) {
         sqlDataHandler.put(MILEAGE, mileage);
+        Vehicle vehicle = getVehicle();
+        if (mileage > vehicle.getCurrentMileage())
+            vehicle.setCurrentMileage(mileage);
     }
 
     public void setMileage(String mileage) {
@@ -196,7 +200,7 @@ public class ServiceTask extends SQLDataOberservable {
         return new LinkedList<>();
     }
 
-    public void setContentValues(ContentValues contentValues) {
+    public void putContentValues(ContentValues contentValues) {
         sqlDataHandler.putContentValues(contentValues);
     }
 
@@ -210,7 +214,7 @@ public class ServiceTask extends SQLDataOberservable {
 //        String type = getType();
         boolean success = carSQL.getWritableDatabase().delete(TABLE_NAME, ID + "= " + row, null) == 1;
         Log.v(TAG, "Delete row " + row + ": " + (success ? "SUCCESS" : "FAILED"));
-        notifyRemoved(TABLE_NAME, row);
+        notifyRemoved();
 //        Log.v(TAG, "Delete row " + row + ": " + carSQL.getWritableDatabase().delete(TABLE_NAME, ID + "= " + row, null));
     }
 
