@@ -98,7 +98,7 @@ public class ServicesFragment extends android.support.v4.app.Fragment {
             public void onDeleteClick(final long itemId, final RecyclerView.ViewHolder holder) {
                 new MaterialDialog.Builder(activity)
                         .title(R.string.confirm).titleColor(activity.getUiColor())
-                        .positiveText(R.string.accept).positiveColor(activity.getUiColor())
+                        .positiveText(R.string.delete).positiveColor(activity.getUiColor())
                         .negativeText(R.string.cancel).negativeColor(activity.getColor(R.color.material_grey_900))
                         .callback(new MaterialDialog.ButtonCallback() {
                             @Override

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.packruler.carmaintenance.R;
@@ -27,6 +26,7 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
     private String TAG = getClass().getName();
 
     private OnClickListener onClickListener;
+    private ViewHolder expandedView;
 
     public ServiceRecyclerAdapter(Context context, Cursor cursor) {
         super(cursor);
@@ -40,62 +40,79 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
         holder.setDisplay(cursor);
     }
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends ExpandableViewHolder {
         // each data item is just a string in this case
         private TextView typeDisplay;
         private TextView mileageDisplay;
         private TextView costDisplay;
         private TextView dateDisplay;
-        private LinearLayout layout;
-        private RelativeLayout expandedMenu;
         private LinearLayout detailLayout;
-        private boolean expanded = false;
 
-        public ViewHolder(View v) {
-            super(v);
-            layout = (LinearLayout) v.findViewById(R.id.expandable_layout);
+        public ViewHolder(View itemView) {
+            super(itemView);
 
-            v.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!expanded) {
-                        layout.addView(expandedMenu);
-                    } else {
-                        layout.removeView(expandedMenu);
-                    }
+                    Log.v(TAG, "Current expanded: " + expandedView);
+                    if (expandedView == ViewHolder.this) close(false);
+                    else expand();
 
-                    expanded = !expanded;
                     onItemClick(ViewHolder.this.getItemId(), ViewHolder.this);
                 }
             });
             layout.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onEditClick(ViewHolder.this.getItemId(), ViewHolder.this);
+                    if (ViewHolder.this.equals(expandedView))
+                        onEditClick(ViewHolder.this.getItemId(), ViewHolder.this);
+                    else {
+                        Log.v(TAG, "Current expanded: " + expandedView);
+                        if (expandedView == ViewHolder.this) close(false);
+                        else expand();
+
+                        onItemClick(ViewHolder.this.getItemId(), ViewHolder.this);
+                    }
                 }
             });
 
             layout.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onDeleteClick(ViewHolder.this.getItemId(), ViewHolder.this);
+                    if (ViewHolder.this.equals(expandedView))
+                        onDeleteClick(ViewHolder.this.getItemId(), ViewHolder.this);
+                    else {
+                        Log.v(TAG, "Current expanded: " + expandedView);
+                        if (expandedView == ViewHolder.this) close(false);
+                        else expand();
+
+                        onItemClick(ViewHolder.this.getItemId(), ViewHolder.this);
+                    }
                 }
             });
-            typeDisplay = (TextView) v.findViewById(R.id.type_display);
-            mileageDisplay = (TextView) v.findViewById(R.id.mileage_display);
-            costDisplay = (TextView) v.findViewById(R.id.cost_display);
-            dateDisplay = (TextView) v.findViewById(R.id.date_display);
-
-            expandedMenu = (RelativeLayout) v.findViewById(R.id.expanded_menu);
-            layout.removeView(expandedMenu);
-
+            typeDisplay = (TextView) itemView.findViewById(R.id.type_display);
+            mileageDisplay = (TextView) itemView.findViewById(R.id.mileage_display);
+            costDisplay = (TextView) itemView.findViewById(R.id.cost_display);
+            dateDisplay = (TextView) itemView.findViewById(R.id.date_display);
             detailLayout = (LinearLayout) layout.findViewById(R.id.extra_details);
         }
 
-        public void setDisplay(Cursor cursor) {
+        @Override
+        public void expand() {
+            if (expandedView != null)
+                expandedView.close(false);
+            super.expand();
+            expandedView = this;
+        }
+
+        @Override
+        public void close(boolean initialLoad) {
+            super.close(initialLoad);
+            expandedView = null;
+        }
+
+        @Override
+        void setDisplay(Cursor cursor) {
             typeDisplay.setText(getType(cursor));
             costDisplay.setText(getCost(cursor));
             mileageDisplay.setText(getMileage(cursor));
@@ -134,13 +151,13 @@ public class ServiceRecyclerAdapter extends CursorRecyclerViewAdapter<ServiceRec
     private void onEditClick(long itemId, RecyclerView.ViewHolder holder) {
         Log.v(TAG, "Edit item: " + itemId);
         if (onClickListener != null)
-            onClickListener.onEditClick(itemId,holder);
+            onClickListener.onEditClick(itemId, holder);
     }
 
     private void onDeleteClick(long itemId, RecyclerView.ViewHolder holder) {
         Log.v(TAG, "Delete item: " + itemId);
         if (onClickListener != null)
-            onClickListener.onDeleteClick(itemId,holder);
+            onClickListener.onDeleteClick(itemId, holder);
     }
 
     public interface OnClickListener {

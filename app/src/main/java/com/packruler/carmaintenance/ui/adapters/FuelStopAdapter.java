@@ -1,22 +1,12 @@
 package com.packruler.carmaintenance.ui.adapters;
 
-import android.animation.Animator;
-import android.animation.ValueAnimator;
 import android.database.Cursor;
-import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.packruler.carmaintenance.R;
@@ -47,52 +37,17 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
         }
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends ExpandableViewHolder {
         private String TAG = "Position: " + getItemId();
         private TextView efficiencyDisplay;
         private TextView costDisplay;
         private TextView distanceDisplay;
         private TextView volumeDisplay;
         private TextView costPerDisplay;
-        private FrameLayout layout;
-        private RelativeLayout expandedMenu;
         private LinearLayout detailLayout;
-        private CardView card;
-        private ValueAnimator valueAnimator;
-        private int minHeight;
-        private boolean setup = false;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            layout = (FrameLayout) itemView.findViewById(R.id.expandable_layout);
-            layout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    Log.v(TAG, "LAYOUT");
-                    close(true);
-                    if (setup) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
-                            layout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                        else layout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                    }
-                }
-            });
-            card = (CardView) layout.findViewById(R.id.card);
-//            layout.setLayoutAnimationListener(new Animation.AnimationListener() {
-//                @Override
-//                public void onAnimationStart(Animation animation) {
-//                }
-//
-//                @Override
-//                public void onAnimationEnd(Animation animation) {
-//                    notifyItemChanged(getAdapterPosition());
-//                }
-//
-//                @Override
-//                public void onAnimationRepeat(Animation animation) {
-//
-//                }
-//            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -138,10 +93,10 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
             volumeDisplay = (TextView) itemView.findViewById(R.id.volume_display);
             costPerDisplay = (TextView) itemView.findViewById(R.id.cost_per);
             detailLayout = (LinearLayout) itemView.findViewById(R.id.extra_details);
-            expandedMenu = (RelativeLayout) itemView.findViewById(R.id.expanded_menu);
         }
 
-        public void setDisplay(Cursor cursor) {
+        @Override
+        void setDisplay(Cursor cursor) {
             int distance = cursor.getInt(cursor.getColumnIndex(FuelStop.DISTANCE_TRAVELED));
             float volume = cursor.getFloat(cursor.getColumnIndex(FuelStop.VOLUME));
             float costPer = cursor.getFloat(cursor.getColumnIndex(FuelStop.COST_PER_VOLUME));
@@ -181,144 +136,20 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
             costPerDisplay.setText(currency + costPer + volumeUnits);
         }
 
-        void expand() {
-            if (minHeight <= (layout.getPaddingTop() * 2))
-                minHeight = card.getHeight() + (layout.getPaddingTop() * 2);
-
+        @Override
+        public void expand() {
             if (expandedView != null)
                 expandedView.close(false);
-
-            valueAnimator = ValueAnimator.ofInt(0, card.getHeight() + layout.getPaddingTop());
-            valueAnimator.setDuration(500);
-
-            valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    int currentValue = (int) valueAnimator.getAnimatedValue();
-                    expandedMenu.setY(currentValue);
-//                    Log.v(TAG, "Current Value:" + currentValue);
-                    expandedMenu.requestLayout();
-
-                    float height = currentValue + expandedMenu.getHeight();
-//                    Log.v(TAG, "Height: " + height + " | " + minHeight);
-                    if (height < minHeight)
-                        height = minHeight;
-
-                    if (height != 0)
-                        layout.getLayoutParams().height = (int) height;
-                }
-            });
-            valueAnimator.start();
+            super.expand();
             expandedView = this;
         }
 
-        void close(boolean initialLoad) {
-            if (initialLoad) {
-                layout.requestLayout();
-                card.requestLayout();
-                expandedMenu.requestLayout();
-            }
-//            Log.v(TAG, "Card height: " + card.getHeight());
-            minHeight = card.getHeight() + (layout.getPaddingTop() * 2);
-            int hideValue = card.getHeight() - expandedMenu.getHeight();
-
-            if (initialLoad) {
-                expandedMenu.setY(hideValue);
-                if (minHeight > (layout.getPaddingTop() * 2)) {
-                    ((RecyclerView.LayoutParams) layout.getLayoutParams()).height = card.getHeight() + (layout.getPaddingTop() * 2);
-//                    Log.d(TAG, "SUCCESS");
-                    setup = true;
-                } else {
-//                    Log.d(TAG, "FAILED");
-                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-//                            Log.d(TAG, "RERUN");
-                            close(true);
-                        }
-                    }, 100);
-                }
-
-                layout.requestLayout();
-//                Log.v(TAG, "Current Value:" + hideValue);
-            } else {
-                if (valueAnimator != null && valueAnimator.isRunning())
-                    valueAnimator.cancel();
-
-                valueAnimator = ValueAnimator.ofInt((int) expandedMenu.getY(), hideValue);
-
-                valueAnimator.setDuration(500);
-                valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animation) {
-                        int currentValue = (int) valueAnimator.getAnimatedValue();
-                        expandedMenu.setY(currentValue);
-
-                        int height = currentValue + expandedMenu.getHeight();
-                        if (height < minHeight)
-                            height = minHeight;
-//                        Log.v(TAG, "Height: " + height + " | " + minHeight);
-                        if (height != 0) {
-                            ((RecyclerView.LayoutParams) layout.getLayoutParams()).height = height;
-                        }
-                        layout.requestLayout();
-                    }
-                });
-                valueAnimator.addListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        valueAnimator = null;
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                });
-                valueAnimator.start();
-
-                expandedView = null;
-            }
-        }
-
-        public void onBind(Cursor cursor) {
-            TAG = "Position: " + getItemId();
-            setDisplay(cursor);
-            close(true);
-        }
-
         @Override
-        public boolean equals(Object o) {
-            if (o instanceof Long)
-                return (Long) o == getItemId();
-            else
-                return o instanceof ViewHolder && ((ViewHolder) o).getItemId() == getItemId();
+        public void close(boolean initialLoad) {
+            super.close(initialLoad);
+            expandedView = null;
         }
     }
-//
-//    @Override
-//    public void onViewAttachedToWindow(ViewHolder holder) {
-//        super.onViewAttachedToWindow(holder);
-//        holder.close(true);
-//    }
-//
-//    @Override
-//    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-//        super.onAttachedToRecyclerView(recyclerView);
-//        notifyDataSetChanged();
-//    }
 
     @Override
     public void onBindViewHolderCursor(FuelStopAdapter.ViewHolder holder, Cursor cursor) {
