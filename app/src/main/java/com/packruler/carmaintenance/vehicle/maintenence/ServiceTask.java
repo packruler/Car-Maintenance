@@ -13,6 +13,7 @@ import com.packruler.carmaintenance.vehicle.Vehicle;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -151,12 +152,20 @@ public class ServiceTask extends SQLDataOberservable {
         sqlDataHandler.put(COST, cost);
     }
 
+    public void setCost(String cost) {
+        setCost(Float.parseFloat(cleanNumberString(cost)));
+    }
+
     public float getCost() {
         return sqlDataHandler.getFloat(COST);
     }
 
     public void setMileage(long mileage) {
         sqlDataHandler.put(MILEAGE, mileage);
+    }
+
+    public void setMileage(String mileage) {
+        setMileage(Long.parseLong(cleanNumberString(mileage)));
     }
 
     public long getMileage() {
@@ -201,6 +210,7 @@ public class ServiceTask extends SQLDataOberservable {
 //        String type = getType();
         boolean success = carSQL.getWritableDatabase().delete(TABLE_NAME, ID + "= " + row, null) == 1;
         Log.v(TAG, "Delete row " + row + ": " + (success ? "SUCCESS" : "FAILED"));
+        notifyRemoved(TABLE_NAME, row);
 //        Log.v(TAG, "Delete row " + row + ": " + carSQL.getWritableDatabase().delete(TABLE_NAME, ID + "= " + row, null));
     }
 
@@ -259,4 +269,13 @@ public class ServiceTask extends SQLDataOberservable {
             return Float.compare(lhs.getCost(), rhs.getCost());
         }
     };
+
+    protected String cleanNumberString(String string) {
+        StringBuilder builder = new StringBuilder();
+        for (char c : string.toCharArray()) {
+            if ((c >= '0' && c <= '9') || c == DecimalFormatSymbols.getInstance().getDecimalSeparator())
+                builder.append(c);
+        }
+        return builder.toString();
+    }
 }

@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
@@ -39,12 +38,11 @@ public abstract class ExpandableViewHolder extends RecyclerView.ViewHolder {
 
     public ExpandableViewHolder(View itemView) {
         super(itemView);
-
         layout = (FrameLayout) itemView.findViewById(R.id.expandable_layout);
         layout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                Log.v(TAG, "LAYOUT");
+//                Log.v(TAG, "LAYOUT");
                 close(true);
                 if (setup) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)

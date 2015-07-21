@@ -189,7 +189,7 @@ public class SQLDataHandler {
         return output;
     }
 
-    public void putBoolean(String column, boolean value) {
+    public void put(String column, boolean value) {
         boolean inTransaction = contentValues != null;
 
         ContentValues contentValues;

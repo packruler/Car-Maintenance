@@ -130,6 +130,7 @@ public class Vehicle extends SQLDataOberservable {
             database.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + FuelStop.TABLE_NAME + "'");
             database.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + PartReplacement.TABLE_NAME + "'");
             database.setTransactionSuccessful();
+            notifyRemoved(TABLE_NAME, row);
             deleted = true;
             Log.v(TAG, "Delete took: " + (Calendar.getInstance().getTimeInMillis() - start));
         } finally {

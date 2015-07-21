@@ -1,6 +1,7 @@
 package com.packruler.carmaintenance.ui;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.gc.materialdesign.views.ButtonFloat;
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.CarSQL;
+import com.packruler.carmaintenance.sql.SQLDataObserver;
 import com.packruler.carmaintenance.ui.adapters.FuelStopAdapter;
 import com.packruler.carmaintenance.ui.adapters.ServiceRecyclerAdapter;
 import com.packruler.carmaintenance.vehicle.Vehicle;
@@ -25,6 +27,7 @@ import java.util.Calendar;
 /**
  * A simple {@link Fragment} subclass.
  */
+@SuppressWarnings("ConstantConditions")
 public class FuelStopsFragment extends android.support.v4.app.Fragment {
     private static final String TAG = "FuelStopsFragment";
 
@@ -37,6 +40,29 @@ public class FuelStopsFragment extends android.support.v4.app.Fragment {
 
     private ButtonFloat buttonFloat;
 
+    private SQLDataObserver dataObserver = new SQLDataObserver() {
+        @Override
+        public void onChanged(String tableName, long row) {
+            super.onChanged(tableName, row);
+            Log.v(TAG, "onChanged");
+            mAdapter.changeCursor(vehicle.getFuelStopCursor());
+        }
+
+        @Override
+        public void onRemoved(String tableName, long row) {
+            super.onRemoved(tableName, row);
+            Log.v(TAG, "onRemoved");
+            mAdapter.changeCursor(vehicle.getFuelStopCursor());
+        }
+
+        @Override
+        public void onAdded(String tableName, long row) {
+            super.onAdded(tableName, row);
+            Log.v(TAG, "onAdded");
+            mAdapter.changeCursor(vehicle.getFuelStopCursor());
+        }
+    };
+
 
     public FuelStopsFragment() {
         // Required empty public constructor
@@ -48,6 +74,14 @@ public class FuelStopsFragment extends android.support.v4.app.Fragment {
         carSQL = activity.getCarsSQL();
         mAdapter = new FuelStopAdapter(carSQL, vehicle.getFuelStopCursor());
         mAdapter.setHasStableIds(true);
+
+        carSQL.registerObserver(dataObserver);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        carSQL.unregisterObserver(dataObserver);
     }
 
     private void updateCursor() {
@@ -89,26 +123,15 @@ public class FuelStopsFragment extends android.support.v4.app.Fragment {
                                 mAdapter.changeCursor(vehicle.getFuelStopCursor());
                             }
                         }).show();
-//                builder.setTitle(getString(R.string.confirm));
-//                builder.setNegativeButton(getString(R.string.cancel), null);
-//                builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Log.v(TAG, "Deleting fuel stop");
-//                        new FuelStop(carSQL, itemId).delete();
-//                        mAdapter.notifyDataSetChanged();
-//                    }
-//                });
-//                builder.show();
             }
 
             @Override
             public void onEditClick(long itemId, RecyclerView.ViewHolder holder) {
                 long start = Calendar.getInstance().getTimeInMillis();
                 FuelStop task = new FuelStop(carSQL, itemId);
+                task.registerObserver(dataObserver);
                 Log.v(TAG, "Type: " + task.getType() + " Date: " + DateFormat.getMediumDateFormat(activity).format(task.getDate()));
                 Log.v(TAG, "Loading task took " + (Calendar.getInstance().getTimeInMillis() - start));
-
                 activity.getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.container, new EditFuelStop(activity, task))
@@ -133,8 +156,9 @@ public class FuelStopsFragment extends android.support.v4.app.Fragment {
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity.setTitle(getString(R.string.fuel_stops));
     }
 
     private void setUIColor(int color) {

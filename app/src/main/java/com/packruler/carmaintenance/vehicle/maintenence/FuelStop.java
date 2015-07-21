@@ -55,13 +55,16 @@ public class FuelStop extends ServiceTask {
         sqlDataHandler.put(VOLUME, volume);
     }
 
+    public void setVolume(String volume) {
+        setVolume(Float.parseFloat(cleanNumberString(volume)));
+    }
 
     public boolean isCompleteFillUp() {
         return sqlDataHandler.getBoolean(COMPLETE_FILL_UP);
     }
 
     public void setCompleteFillUp(boolean completeFillUp) {
-        sqlDataHandler.putBoolean(COMPLETE_FILL_UP, completeFillUp);
+        sqlDataHandler.put(COMPLETE_FILL_UP, completeFillUp);
     }
 
     public boolean missedFillup() {
@@ -69,7 +72,7 @@ public class FuelStop extends ServiceTask {
     }
 
     public void setMissedFillup(boolean missedFillup) {
-        sqlDataHandler.putBoolean(MISSED_FILL_UP, missedFillup);
+        sqlDataHandler.put(MISSED_FILL_UP, missedFillup);
     }
 
     public int getOctane() {
@@ -86,6 +89,10 @@ public class FuelStop extends ServiceTask {
 
     public void setCostPerVolume(float costPerVolume) {
         sqlDataHandler.put(COST_PER_VOLUME, costPerVolume);
+    }
+
+    public void setCostPerVolume(String costPerVolume) {
+        setCostPerVolume(Float.parseFloat(cleanNumberString(costPerVolume)));
     }
 
     public void updateDistanceTraveled() {

@@ -29,6 +29,7 @@ import com.packruler.carmaintenance.ui.utilities.ToolbarColorizeHelper;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
 import java.io.IOException;
+import java.util.Stack;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.container, new VehicleSelectFragment(carsSQL))
                 .addToBackStack(getString(R.string.select_vehicle))
                 .commit();
-        getSupportActionBar().setTitle(getString(R.string.select_vehicle));
+        setTitle(getString(R.string.select_vehicle));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -185,7 +186,7 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.container, new VehicleSelectFragment(carsSQL))
                 .addToBackStack(null)
                 .commit();
-        getSupportActionBar().setTitle(getString(R.string.select_vehicle));
+        setTitle(getString(R.string.select_vehicle));
     }
 
     private void changeVehicle(Vehicle vehicle) {
@@ -210,10 +211,10 @@ public class MainActivity extends AppCompatActivity
                     if (currentVehicle.getUiColor() != 0)
                         color = currentVehicle.getUiColor();
 
-                    getSupportActionBar().setTitle(currentVehicle.getName());
+                    setTitle(currentVehicle.getName());
                     mainFragment.loadVehicleDetails();
                 } else {
-                    getSupportActionBar().setTitle(getString(R.string.app_name));
+                    setTitle(getString(R.string.app_name));
                     displaySelectVehicle();
                 }
 
@@ -230,16 +231,6 @@ public class MainActivity extends AppCompatActivity
 
     public Vehicle getCurrentVehicle() {
         return currentVehicle;
-    }
-
-    public void restoreActionBar() {
-        Log.v(TAG, "restoreActionBar");
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setTitle(mTitle);
-        }
     }
 
     @Override
@@ -285,6 +276,7 @@ public class MainActivity extends AppCompatActivity
             ToolbarColorizeHelper.colorizeToolbar(toolbar, Swatch.getForegroundColor(), MainActivity.this);
             mNavigationDrawerFragment.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
+
         System.gc();
     }
 
@@ -348,5 +340,10 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void setTitle(CharSequence title) {
+        getSupportActionBar().setTitle(title);
+
     }
 }

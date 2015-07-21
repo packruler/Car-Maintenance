@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -103,14 +102,20 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
         return rootView;
     }
 
+    private CharSequence previousTitle;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
-            ((MainActivity) activity).getSupportActionBar().setTitle("Edit Fuel Stop");
-        } catch (NullPointerException e) {
-            Log.e(TAG, e.getMessage());
-        }
+        previousTitle = this.activity.getSupportActionBar().getTitle();
+        this.activity.setTitle("Edit Fuel Stop");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (previousTitle != null)
+            activity.setTitle(previousTitle);
     }
 
     private Drawable[] icons = new Drawable[3];
@@ -134,20 +139,19 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
         } else if (item.getTitle().equals(getString(R.string.discard)))
             Log.v(TAG, "Pop EditCar " + (getFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE) ? "Success" : "FAIL"));
         else if (item.getTitle().equals(getString(R.string.delete))) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            builder.setTitle(getString(R.string.confirm));
-            builder.setNegativeButton(getString(R.string.cancel), null);
-            builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (fuelStop != null) {
-                        Log.v(TAG, "Deleting fuel stop");
-                        fuelStop.delete();
-                    }
-                    Log.v(TAG, "Pop FuelStop " + (getFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE) ? "Success" : "FAIL"));
-                }
-            });
-            builder.show();
+            new MaterialDialog.Builder(activity)
+                    .title(R.string.confirm).titleColor(activity.getUiColor())
+                    .positiveText(R.string.delete).positiveColor(activity.getUiColor())
+                    .negativeText(R.string.cancel).negativeColor(activity.getColor(R.color.material_grey_900))
+                    .callback(new MaterialDialog.ButtonCallback() {
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                            Log.v(TAG, "Deleting fuel stop");
+                            if (fuelStop != null)
+                                fuelStop.delete();
+                            getFragmentManager().popBackStack();
+                        }
+                    }).show();
         } else if (item.getItemId() == android.R.id.home) {
             Log.v(TAG, "HOME");
             getFragmentManager().popBackStack();
@@ -320,9 +324,8 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
             value = 0;
         }
         value *= costPer;
-        format = new DecimalFormat("0.00");
 
-        totalCost.setText(currencyString + format.format(value));
+        totalCost.setText(currencyString + new DecimalFormat("0.000").format(value));
     }
 
     private boolean saveCostPerVolume() {
@@ -366,6 +369,8 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
 
             }
         });
+        if (fuelStop != null)
+            volume.setText(new DecimalFormat("0.000").format(fuelStop.getVolume()));
     }
 
     private boolean saveVolume() {
@@ -395,7 +400,12 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
     private boolean saveMileage() {
         if (mileage.getText().toString().length() > 0)
             try {
-                fuelStop.setMileage(Long.parseLong(mileage.getText().toString()));
+                StringBuilder builder = new StringBuilder();
+                for (char c : mileage.getText().toString().toCharArray()) {
+                    if (c != DecimalFormatSymbols.getInstance().getGroupingSeparator())
+                        builder.append(c);
+                }
+                fuelStop.setMileage(Long.parseLong(builder.toString()));
                 return true;
             } catch (NumberFormatException e) {
                 Log.e(TAG, e.getMessage());
@@ -454,9 +464,9 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
 
         if (update)
             updateDistanceTraveled();
-    }
 
-    private void delete() {
+        fuelStop.endTransaction();
 
+        getFragmentManager().popBackStack();
     }
 }
