@@ -1,6 +1,12 @@
 package com.packruler.carmaintenance.ui;
 
+import android.app.ActivityManager;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,6 +47,7 @@ public class MainActivity extends AppCompatActivity
 
     private final String TAG = getClass().getSimpleName();
     private static final String CAR_NAME_SET = "CAR_NAME_SET";
+    private Bitmap icon;
     private GoogleApiClient googleApiClient;
 
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
@@ -299,10 +306,18 @@ public class MainActivity extends AppCompatActivity
 
     public void setUIColor(final int color) {
         uiColor = color;
+        Swatch.setBackgroundColor(color);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            BitmapDrawable drawable = (BitmapDrawable) getDrawable(R.drawable.ic_car_icon);
+            drawable.mutate();
+            drawable.setTint(Swatch.getForegroundColor());
+            icon = drawable.getBitmap();
+            setTaskDescription(new ActivityManager.TaskDescription(getString(R.string.app_name), icon, uiColor));
+        }
+
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
-                Swatch.setBackgroundColor(color);
                 toolbar.setBackgroundColor(color);
                 ToolbarColorizeHelper.colorizeToolbar(toolbar, Swatch.getForegroundColor(), MainActivity.this);
                 mainFragment.setUIColor(color);

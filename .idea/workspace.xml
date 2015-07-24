@@ -70,12 +70,7 @@
       <change type="DELETED" beforePath="C:\Users\packr\Documents\GitHub\Car-Maintenance\.idea\libraries\support_annotations_22_2_0.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\packr\Documents\GitHub\Car-Maintenance\.idea\libraries\support_v13_22_2_0.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\packr\Documents\GitHub\Car-Maintenance\.idea\libraries\support_v4_22_2_0.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/VehicleCursorAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/VehicleCursorAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_edit_car.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_edit_car.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Car-Maintenance.iws" />
@@ -3234,7 +3229,13 @@
       <option name="project" value="LOCAL" />
       <updated>1437752132400</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Initial data calculation work">
+      <created>1437753635575</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1437753635575</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3291,7 +3292,8 @@
     <MESSAGE value="better handling of SQL data changes and EditFuelStop UI" />
     <MESSAGE value="Can now calculate MPGs on fuel stops" />
     <MESSAGE value="Remove unnecessary commented area" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove unnecessary commented area" />
+    <MESSAGE value="Initial data calculation work" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial data calculation work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3391,6 +3393,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="5339" column="26" selection-start-line="5339" selection-start-column="26" selection-end-line="5339" selection-end-column="26" />
+          <folding>
+            <element signature="method#notifyItemChanged#0;class#Adapter#0;class#RecyclerView#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3528,6 +3533,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="154" column="16" selection-start-line="154" selection-start-column="16" selection-end-line="154" selection-end-column="16" />
+          <folding>
+            <element signature="method#changeCursor#0;class#CursorRecyclerViewAdapter#0" expanded="false" />
+            <element signature="method#onContentChanged#0;class#CursorRecyclerViewAdapter#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3557,6 +3566,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="37" column="16" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
+          <folding>
+            <element signature="method#notifyAdded#0;class#SQLDataOberservable#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3629,6 +3641,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="99" column="19" selection-start-line="99" selection-start-column="19" selection-end-line="99" selection-end-column="19" />
+          <folding>
+            <element signature="method#ServiceTask#1;class#ServiceTask#0" expanded="true" />
+            <element signature="method#ServiceTask#2;class#ServiceTask#0" expanded="true" />
+            <element signature="method#init#0;class#ServiceTask#0" expanded="true" />
+            <element signature="e#3411#3412#0" expanded="true" />
+            <element signature="e#3470#3471#0" expanded="true" />
+            <element signature="method#setLocationName#0;class#ServiceTask#0" expanded="true" />
+            <element signature="method#setDateTimeZone#0;class#ServiceTask#0" expanded="true" />
+            <element signature="method#setMileage#0;class#ServiceTask#0" expanded="true" />
+            <element signature="method#setMileage#1;class#ServiceTask#0" expanded="true" />
+            <element signature="method#delete#1;class#ServiceTask#0" expanded="true" />
+            <element signature="method#cleanNumberString#0;class#ServiceTask#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
