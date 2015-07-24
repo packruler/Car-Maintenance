@@ -44,7 +44,6 @@
       <change type="DELETED" beforePath="C:\Users\packr\Documents\GitHub\Car-Maintenance\.idea\libraries\library_material_1_1_0.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\packr\Documents\GitHub\Car-Maintenance\.idea\libraries\mediarouter_v7_22_0_0.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\packr\Documents\GitHub\Car-Maintenance\.idea\libraries\palette_v7_22_2_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\packr\Documents\GitHub\Car-Maintenance\.idea\libraries\play_services_7_5_0.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\packr\Documents\GitHub\Car-Maintenance\.idea\libraries\play_services_ads_7_5_0.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\packr\Documents\GitHub\Car-Maintenance\.idea\libraries\play_services_analytics_7_5_0.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\packr\Documents\GitHub\Car-Maintenance\.idea\libraries\play_services_appindexing_7_5_0.xml" afterPath="" />
@@ -70,7 +69,6 @@
       <change type="DELETED" beforePath="C:\Users\packr\Documents\GitHub\Car-Maintenance\.idea\libraries\support_annotations_22_2_0.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\packr\Documents\GitHub\Car-Maintenance\.idea\libraries\support_v13_22_2_0.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\packr\Documents\GitHub\Car-Maintenance\.idea\libraries\support_v4_22_2_0.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Car-Maintenance.iws" />
@@ -239,7 +237,7 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.2585034">
+            <state vertical-scroll-proportion="1.2563667">
               <caret line="334" column="0" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
               <folding>
                 <element signature="e#1548#1587#0" expanded="true" />
@@ -3235,7 +3233,13 @@
       <option name="project" value="LOCAL" />
       <updated>1437753635575</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Set &quot;Recents&quot; title by current UI color">
+      <created>1437753683434</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1437753683434</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3245,7 +3249,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.314164" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31368187" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -3254,13 +3258,13 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32703003" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3147942" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3147942" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2521322" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2521322" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32703003" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -3293,7 +3297,8 @@
     <MESSAGE value="Can now calculate MPGs on fuel stops" />
     <MESSAGE value="Remove unnecessary commented area" />
     <MESSAGE value="Initial data calculation work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial data calculation work" />
+    <MESSAGE value="Set &quot;Recents&quot; title by current UI color" />
+    <option name="LAST_COMMIT_MESSAGE" value="Set &quot;Recents&quot; title by current UI color" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3642,17 +3647,17 @@
         <state vertical-scroll-proportion="0.33333334">
           <caret line="99" column="19" selection-start-line="99" selection-start-column="19" selection-end-line="99" selection-end-column="19" />
           <folding>
-            <element signature="method#ServiceTask#1;class#ServiceTask#0" expanded="true" />
-            <element signature="method#ServiceTask#2;class#ServiceTask#0" expanded="true" />
-            <element signature="method#init#0;class#ServiceTask#0" expanded="true" />
-            <element signature="e#3411#3412#0" expanded="true" />
-            <element signature="e#3470#3471#0" expanded="true" />
-            <element signature="method#setLocationName#0;class#ServiceTask#0" expanded="true" />
-            <element signature="method#setDateTimeZone#0;class#ServiceTask#0" expanded="true" />
-            <element signature="method#setMileage#0;class#ServiceTask#0" expanded="true" />
-            <element signature="method#setMileage#1;class#ServiceTask#0" expanded="true" />
-            <element signature="method#delete#1;class#ServiceTask#0" expanded="true" />
-            <element signature="method#cleanNumberString#0;class#ServiceTask#0" expanded="true" />
+            <element signature="method#ServiceTask#1;class#ServiceTask#0" expanded="false" />
+            <element signature="method#ServiceTask#2;class#ServiceTask#0" expanded="false" />
+            <element signature="method#init#0;class#ServiceTask#0" expanded="false" />
+            <element signature="e#3411#3412#0" expanded="false" />
+            <element signature="e#3470#3471#0" expanded="false" />
+            <element signature="method#setLocationName#0;class#ServiceTask#0" expanded="false" />
+            <element signature="method#setDateTimeZone#0;class#ServiceTask#0" expanded="false" />
+            <element signature="method#setMileage#0;class#ServiceTask#0" expanded="false" />
+            <element signature="method#setMileage#1;class#ServiceTask#0" expanded="false" />
+            <element signature="method#delete#1;class#ServiceTask#0" expanded="false" />
+            <element signature="method#cleanNumberString#0;class#ServiceTask#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -4024,7 +4029,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2585034">
+        <state vertical-scroll-proportion="1.2563667">
           <caret line="334" column="0" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
           <folding>
             <element signature="e#1548#1587#0" expanded="true" />
