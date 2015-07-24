@@ -121,94 +121,10 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/units_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/general_info"
-            android:layout_marginBottom="@dimen/margin_tiny"
-            card_view:cardCornerRadius="@dimen/cardview_default_radius"
-            card_view:cardElevation="@dimen/cardview_default_elevation"
-            card_view:contentPadding="@dimen/margin_tiny">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="@string/container_layout">
-
-                <TextView
-                    android:id="@+id/units_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_small"
-                    android:tag="@string/card_title_tag"
-                    android:text="@string/units_selection"
-                    android:textAppearance="@android:style/TextAppearance.Small"
-                    android:textColor="?attr/colorPrimary"
-                    android:textStyle="bold" />
-
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                    android:id="@+id/distance_units"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/units_title"
-                    android:dropDownWidth="100dp"
-                    android:ems="10"
-                    android:hint="@string/distance_unit"
-                    app:met_floatingLabel="highlight" />
-
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                    android:id="@+id/weight_units"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/distance_units"
-                    android:dropDownWidth="100dp"
-                    android:ems="10"
-                    android:hint="@string/weight_unit"
-                    app:met_floatingLabel="highlight" />
-
-
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                    android:id="@+id/power_units"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/weight_units"
-                    android:layout_marginRight="@dimen/margin_small"
-                    android:dropDownWidth="110dp"
-                    android:ems="10"
-                    android:hint="@string/power_unit"
-                    app:met_floatingLabel="highlight" />
-
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                    android:id="@+id/torque_units"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/power_units"
-                    android:dropDownWidth="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/torque_unit"
-                    app:met_floatingLabel="highlight" />
-
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                    android:id="@+id/cost_unit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/torque_units"
-                    android:layout_marginRight="@dimen/margin_small"
-                    android:dropDownWidth="80dp"
-                    android:ems="10"
-                    android:hint="@string/currency_unit"
-                    android:singleLine="true"
-                    app:met_floatingLabel="highlight"
-                    app:met_primaryColor="?attr/colorPrimary" />
-
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
             android:id="@+id/performance_details_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/units_card"
+            android:layout_below="@id/general_info"
             android:layout_marginBottom="@dimen/margin_tiny"
             card_view:cardCornerRadius="@dimen/cardview_default_radius"
             card_view:cardElevation="@dimen/cardview_default_elevation"
@@ -468,19 +384,89 @@
                     android:inputType="textShortMessage|number"
                     android:singleLine="true"
                     app:met_floatingLabel="highlight" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
-                <!--<com.rengwuxian.materialedittext.MaterialEditText
+        <android.support.v7.widget.CardView
+            android:id="@+id/units_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/purchase_details_card"
+            android:layout_marginBottom="@dimen/margin_tiny"
+            card_view:cardCornerRadius="@dimen/cardview_default_radius"
+            card_view:cardElevation="@dimen/cardview_default_elevation"
+            card_view:contentPadding="@dimen/margin_tiny">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="@string/container_layout">
+
+                <TextView
+                    android:id="@+id/units_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/purchase_location"
-                    android:singleLine="true"
-                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:tag="@string/card_title_tag"
+                    android:text="@string/units_selection"
+                    android:textAppearance="@android:style/TextAppearance.Small"
+                    android:textColor="?attr/colorPrimary"
+                    android:textStyle="bold" />
+
+                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                    android:id="@+id/distance_units"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/units_title"
+                    android:dropDownWidth="100dp"
                     android:ems="10"
-                    android:hint="@string/purchase_location"
-                    android:inputType="textShortMessage"
-                    android:layout_below="@id/purchase_mileage"
+                    android:hint="@string/distance_unit"
+                    app:met_floatingLabel="highlight" />
+
+                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                    android:id="@+id/weight_units"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/distance_units"
+                    android:dropDownWidth="100dp"
+                    android:ems="10"
+                    android:hint="@string/weight_unit"
+                    app:met_floatingLabel="highlight" />
+
+                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                    android:id="@+id/power_units"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/weight_units"
                     android:layout_marginRight="@dimen/margin_small"
-                    app:met_floatingLabel="highlight"/>-->
+                    android:dropDownWidth="110dp"
+                    android:ems="10"
+                    android:hint="@string/power_unit"
+                    app:met_floatingLabel="highlight" />
+
+                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                    android:id="@+id/torque_units"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/power_units"
+                    android:dropDownWidth="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/torque_unit"
+                    app:met_floatingLabel="highlight" />
+
+                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                    android:id="@+id/cost_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/torque_units"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:dropDownWidth="80dp"
+                    android:ems="10"
+                    android:hint="@string/currency_unit"
+                    android:singleLine="true"
+                    app:met_floatingLabel="highlight"
+                    app:met_primaryColor="?attr/colorPrimary" />
+
             </RelativeLayout>
         </android.support.v7.widget.CardView>
     </RelativeLayout>

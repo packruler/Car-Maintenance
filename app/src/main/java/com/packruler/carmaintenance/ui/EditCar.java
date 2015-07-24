@@ -887,6 +887,10 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
         return true;
     }
 
+    private void initializeEfficiencyUnits() {
+
+    }
+
     private void saveVehicleColor() {
         if (vehicleColor.getText().toString().length() > 0 || !vehicleColor.getText().toString().equals(vehicle.getColor()))
             vehicle.setColor(vehicleColor.getText().toString());

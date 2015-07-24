@@ -22,6 +22,11 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/materialpicker/src/main/res/layout/picker_layout.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light.NoActionBar</theme>
+        </config>
+      </layout>
     </layouts>
   </component>
   <component name="AndroidLogFilters">
@@ -67,7 +72,6 @@
       <change type="DELETED" beforePath="C:\Users\packr\Documents\GitHub\Car-Maintenance\.idea\libraries\support_v4_22_2_0.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/utilities/ToolbarColorizeHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/utilities/ToolbarColorizeHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/VehicleCursorAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/VehicleCursorAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
@@ -100,104 +104,98 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="EditCar.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/EditCar.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="1135" column="7" selection-start-line="1107" selection-start-column="5" selection-end-line="1135" selection-end-column="7" />
-              <folding>
-                <element signature="method#onCreateView#0;class#EditCar#0" expanded="true" />
-                <element signature="e#6634#6657#0" expanded="false" />
-                <element signature="method#initializeModelSpinner#0;class#EditCar#0" expanded="true" />
-                <element signature="method#updateModelSpinner#1;class#EditCar#0" expanded="true" />
-                <element signature="method#initializeEfficiencyUnits#0;class#EditCar#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Vehicle.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="429" column="0" selection-start-line="429" selection-start-column="0" selection-end-line="429" selection-end-column="0" />
               <folding>
-                <element signature="e#3657#3658#0" expanded="true" />
-                <element signature="e#3693#3694#0" expanded="true" />
-                <element signature="method#Vehicle#1;class#Vehicle#0" expanded="true" />
-                <element signature="method#Vehicle#2;class#Vehicle#0" expanded="true" />
-                <element signature="e#6362#6363#0" expanded="true" />
-                <element signature="e#6392#6393#0" expanded="true" />
-                <element signature="e#6420#6421#0" expanded="true" />
-                <element signature="e#6446#6447#0" expanded="true" />
-                <element signature="method#setName#0;class#Vehicle#0" expanded="true" />
-                <element signature="e#6785#6786#0" expanded="true" />
-                <element signature="e#6846#6847#0" expanded="true" />
-                <element signature="e#6886#6887#0" expanded="true" />
-                <element signature="e#6932#6933#0" expanded="true" />
-                <element signature="method#setPurchaseDate#0;class#Vehicle#0" expanded="true" />
-                <element signature="e#8337#8338#0" expanded="true" />
-                <element signature="e#8397#8398#0" expanded="true" />
-                <element signature="e#8449#8450#0" expanded="true" />
-                <element signature="e#8509#8510#0" expanded="true" />
-                <element signature="method#getNewServiceTask#0;class#Vehicle#0" expanded="true" />
-                <element signature="e#8780#8781#0" expanded="true" />
-                <element signature="e#8834#8835#0" expanded="true" />
-                <element signature="method#getNewPartReplacement#0;class#Vehicle#0" expanded="true" />
-                <element signature="method#getServiceTasks#0;class#Vehicle#0" expanded="true" />
-                <element signature="e#9673#9674#0" expanded="true" />
-                <element signature="e#9747#9748#0" expanded="true" />
-                <element signature="e#9784#9785#0" expanded="true" />
-                <element signature="e#9851#9852#0" expanded="true" />
-                <element signature="method#getFuelStopCursor#0;class#Vehicle#0" expanded="true" />
-                <element signature="e#10018#10019#0" expanded="true" />
-                <element signature="e#10099#10100#0" expanded="true" />
-                <element signature="e#10137#10138#0" expanded="true" />
-                <element signature="e#10198#10199#0" expanded="true" />
-                <element signature="method#setPurchaseCost#0;class#Vehicle#0" expanded="true" />
-                <element signature="e#10351#10352#0" expanded="true" />
-                <element signature="e#10408#10409#0" expanded="true" />
-                <element signature="e#10456#10457#0" expanded="true" />
-                <element signature="e#10510#10511#0" expanded="true" />
-                <element signature="method#setWeightUnits#0;class#Vehicle#0" expanded="true" />
-                <element signature="e#11271#11272#0" expanded="true" />
-                <element signature="e#11323#11324#0" expanded="true" />
-                <element signature="e#11363#11364#0" expanded="true" />
-                <element signature="e#11411#11412#0" expanded="true" />
-                <element signature="method#getImage#0;class#Vehicle#0" expanded="true" />
-                <element signature="method#getFuelEfficiency#0;class#Vehicle#0" expanded="true" />
-                <element signature="method#getAverageCostOfFuel#0;class#Vehicle#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="docComment;class#Vehicle#0" expanded="false" />
+                <element signature="method#equals#0;class#Vehicle#0" expanded="false" />
+                <element signature="method#init#0;class#Vehicle#0" expanded="false" />
+                <element signature="method#delete#0;class#Vehicle#0" expanded="false" />
+                <element signature="e#6487#6488#0" expanded="false" />
+                <element signature="e#6543#6544#0" expanded="false" />
+                <element signature="e#6582#6583#0" expanded="false" />
+                <element signature="e#6636#6637#0" expanded="false" />
+                <element signature="e#6963#6964#0" expanded="false" />
+                <element signature="e#7016#7017#0" expanded="false" />
+                <element signature="e#7058#7059#0" expanded="false" />
+                <element signature="e#7106#7107#0" expanded="false" />
+                <element signature="e#7138#7139#0" expanded="false" />
+                <element signature="e#7192#7193#0" expanded="false" />
+                <element signature="e#7240#7241#0" expanded="false" />
+                <element signature="e#7294#7295#0" expanded="false" />
+                <element signature="e#7329#7330#0" expanded="false" />
+                <element signature="e#7386#7387#0" expanded="false" />
+                <element signature="e#7423#7424#0" expanded="false" />
+                <element signature="e#7469#7470#0" expanded="false" />
+                <element signature="e#7497#7498#0" expanded="false" />
+                <element signature="e#7547#7548#0" expanded="false" />
+                <element signature="e#7598#7599#0" expanded="false" />
+                <element signature="e#7658#7659#0" expanded="false" />
+                <element signature="e#7697#7698#0" expanded="false" />
+                <element signature="e#7759#7760#0" expanded="false" />
+                <element signature="e#7808#7809#0" expanded="false" />
+                <element signature="e#7865#7866#0" expanded="false" />
+                <element signature="e#7904#7905#0" expanded="false" />
+                <element signature="e#7967#7968#0" expanded="false" />
+                <element signature="e#8019#8020#0" expanded="false" />
+                <element signature="e#8080#8081#0" expanded="false" />
+                <element signature="e#8120#8121#0" expanded="false" />
+                <element signature="e#8183#8184#0" expanded="false" />
+                <element signature="e#8548#8549#0" expanded="false" />
+                <element signature="e#8611#8612#0" expanded="false" />
+                <element signature="method#getServiceTaskCursor#0;class#Vehicle#0" expanded="false" />
+                <element signature="method#getServiceTaskCursor#1;class#Vehicle#0" expanded="false" />
+                <element signature="method#getServiceTaskCursor#2;class#Vehicle#0" expanded="false" />
+                <element signature="e#10540#10541#0" expanded="false" />
+                <element signature="e#10592#10593#0" expanded="false" />
+                <element signature="e#10630#10631#0" expanded="false" />
+                <element signature="e#10674#10675#0" expanded="false" />
+                <element signature="e#10706#10707#0" expanded="false" />
+                <element signature="e#10760#10761#0" expanded="false" />
+                <element signature="e#10802#10803#0" expanded="false" />
+                <element signature="e#10850#10851#0" expanded="false" />
+                <element signature="e#10881#10882#0" expanded="false" />
+                <element signature="e#10934#10935#0" expanded="false" />
+                <element signature="e#10976#10977#0" expanded="false" />
+                <element signature="e#11026#11027#0" expanded="false" />
+                <element signature="e#11065#11066#0" expanded="false" />
+                <element signature="e#11126#11127#0" expanded="false" />
+                <element signature="e#11448#11449#0" expanded="false" />
+                <element signature="e#11508#11509#0" expanded="false" />
+                <element signature="e#11555#11556#0" expanded="false" />
+                <element signature="e#11609#11610#0" expanded="false" />
+                <element signature="e#11640#11641#0" expanded="false" />
+                <element signature="e#11693#11694#0" expanded="false" />
+                <element signature="e#11735#11736#0" expanded="false" />
+                <element signature="e#11785#11786#0" expanded="false" />
+                <element signature="e#11823#11824#0" expanded="false" />
+                <element signature="e#11884#11885#0" expanded="false" />
+                <element signature="e#11932#11933#0" expanded="false" />
+                <element signature="e#11987#11988#0" expanded="false" />
+                <element signature="e#12024#12025#0" expanded="false" />
+                <element signature="e#12084#12085#0" expanded="false" />
+                <element signature="e#12136#12137#0" expanded="false" />
+                <element signature="e#12195#12196#0" expanded="false" />
+                <element signature="e#12236#12237#0" expanded="false" />
+                <element signature="e#12292#12293#0" expanded="false" />
+                <element signature="e#12323#12324#0" expanded="false" />
+                <element signature="e#12382#12383#0" expanded="false" />
+                <element signature="e#12425#12426#0" expanded="false" />
+                <element signature="e#12478#12479#0" expanded="false" />
+                <element signature="e#12511#12512#0" expanded="false" />
+                <element signature="e#12567#12568#0" expanded="false" />
+                <element signature="method#setFuelEfficiencyUnits#0;class#Vehicle#0" expanded="false" />
+                <element signature="method#getFuelEfficiencyUnits#0;class#Vehicle#0" expanded="false" />
+                <element signature="e#15300#15301#0" expanded="false" />
+                <element signature="e#15355#15356#0" expanded="false" />
+                <element signature="e#15393#15394#0" expanded="false" />
+                <element signature="e#15454#15455#0" expanded="false" />
+                <element signature="method#putContentValues#0;class#Vehicle#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FuelStop.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/maintenence/FuelStop.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="112" column="25" selection-start-line="112" selection-start-column="25" selection-end-line="112" selection-end-column="25" />
-              <folding>
-                <element signature="method#FuelStop#0;class#FuelStop#0" expanded="true" />
-                <element signature="method#setCompleteFillUp#0;class#FuelStop#0" expanded="true" />
-                <element signature="method#setMissedFillup#0;class#FuelStop#0" expanded="true" />
-                <element signature="method#setCostPerVolume#0;class#FuelStop#0" expanded="true" />
-                <element signature="method#setCostPerVolume#1;class#FuelStop#0" expanded="true" />
-                <element signature="method#getFuelStopCursorForCar#0;class#FuelStop#0" expanded="true" />
-                <element signature="method#getFuelStopCursorForCar#1;class#FuelStop#0" expanded="true" />
-                <element signature="method#getFuelStopsForCar#0;class#FuelStop#0" expanded="true" />
-                <element signature="method#getFuelStopCountForCar#0;class#FuelStop#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VehicleSelectFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/VehicleSelectFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="90" column="25" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -207,7 +205,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="61" column="108" selection-start-line="61" selection-start-column="108" selection-end-line="61" selection-end-column="108" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="docComment;class#VehicleCursorAdapter#0" expanded="false" />
+                <element signature="method#VehicleCursorAdapter#0;class#VehicleCursorAdapter#0" expanded="false" />
+                <element signature="method#ViewHolder#0;class#ViewHolder#0;class#VehicleCursorAdapter#0" expanded="false" />
+                <element signature="class#1542:1797" expanded="false" />
+                <element signature="method#onClick#0;class#1542:1797" expanded="false" />
+                <element signature="e#2575#2576#0" expanded="false" />
+                <element signature="e#2611#2612#0" expanded="false" />
+                <element signature="method#onCreateViewHolder#0;class#VehicleCursorAdapter#0" expanded="false" />
+                <element signature="class#OnClickListener#0;class#VehicleCursorAdapter#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -215,7 +224,7 @@
       <file leaf-file-name="styles.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values-v21/styles.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
+            <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -225,33 +234,42 @@
       <file leaf-file-name="styles.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.9230769">
+            <state vertical-scroll-proportion="0.0">
               <caret line="6" column="57" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="57" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="311" column="30" selection-start-line="311" selection-start-column="30" selection-end-line="311" selection-end-column="30" />
+            <state vertical-scroll-proportion="1.2585034">
+              <caret line="334" column="0" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
               <folding>
                 <element signature="e#1548#1587#0" expanded="true" />
                 <element signature="method#onCreate#0;class#MainActivity#0" expanded="true" />
+                <element signature="e#3611#4607#0" expanded="true" />
+                <element signature="e#4195#4573#0" expanded="true" />
+                <element signature="e#4572#4573#0" expanded="true" />
+                <element signature="e#4606#4607#0" expanded="true" />
                 <element signature="e#6065#6099#0" expanded="true" />
                 <element signature="e#6145#6179#0" expanded="true" />
+                <element signature="e#6227#6693#0" expanded="true" />
+                <element signature="e#6692#6693#0" expanded="true" />
                 <element signature="method#onDestroy#0;class#MainActivity#0" expanded="true" />
                 <element signature="method#onContextItemSelected#0;class#MainActivity#0" expanded="true" />
                 <element signature="e#7802#7836#0" expanded="true" />
                 <element signature="method#changeVehicle#1;class#MainActivity#0" expanded="true" />
                 <element signature="method#changeVehicle#2;class#MainActivity#0" expanded="true" />
+                <element signature="e#8245#9148#0" expanded="true" />
                 <element signature="e#8726#8754#0" expanded="true" />
+                <element signature="e#9147#9148#0" expanded="true" />
                 <element signature="method#onBackStackChanged#0;class#MainActivity#0" expanded="true" />
-                <element signature="e#11840#11868#0" expanded="true" />
-                <element signature="e#11923#12601#0" expanded="true" />
-                <element signature="e#12600#12601#0" expanded="true" />
+                <element signature="method#setUIColor#0;class#MainActivity#0" expanded="true" />
+                <element signature="e#11809#11837#0" expanded="true" />
+                <element signature="e#11892#12570#0" expanded="true" />
+                <element signature="e#12569#12570#0" expanded="true" />
                 <element signature="method#onKeyDown#0;class#MainActivity#0" expanded="true" />
                 <element signature="method#setTitle#0;class#MainActivity#0" expanded="true" />
               </folding>
@@ -259,13 +277,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ToolbarColorizeHelper.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ToolbarColorizeHelper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/utilities/ToolbarColorizeHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.13265306">
-              <caret line="63" column="12" selection-start-line="63" selection-start-column="12" selection-end-line="63" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
               <folding>
-                <element signature="method#setOverflowButtonColor#0;class#ToolbarColorizeHelper#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="docComment;class#ToolbarColorizeHelper#0" expanded="false" />
+                <element signature="docComment;method#colorizeToolbar#0;class#ToolbarColorizeHelper#0" expanded="false" />
+                <element signature="docComment;method#setOverflowButtonColor#0;class#ToolbarColorizeHelper#0" expanded="false" />
+                <element signature="class#3328:3973" expanded="false" />
+                <element signature="method#onGlobalLayout#0;class#3328:3973" expanded="false" />
+                <element signature="method#removeOnGlobalLayoutListener#0;class#ToolbarColorizeHelper#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -277,8 +301,9 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
               <folding>
-                <element signature="e#1251#1252#0" expanded="true" />
-                <element signature="e#1289#1290#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="docComment;class#Swatch#0" expanded="false" />
+                <element signature="method#setBackgroundColor#0;class#Swatch#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -1785,11 +1810,548 @@
             </list>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/materialpicker">
+          <value>
+            <list>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the Android dependencies of the project." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="androidDependencies" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles all variants of all applications and secondary packages." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="assemble" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles all the Test applications." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="assembleAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles all Debug builds." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="assembleDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles the android (on device) tests for the Debug build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="assembleDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles the unit tests for the Debug build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="assembleDebugUnitTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="assembleDefault" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles all Release builds." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="assembleRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles the unit tests for the Release build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="assembleReleaseUnitTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="build" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project and all projects that depend on it." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="buildDependents" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project and all projects it depends on." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="buildNeeded" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles a bundle containing the library in Debug." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="bundleDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles a bundle containing the library in Release." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="bundleRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs all checks." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="check" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="checkDebugManifest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="checkReleaseManifest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Deletes the build directory." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="clean" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileDebugAidl" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileDebugAndroidTestAidl" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileDebugAndroidTestJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileDebugAndroidTestNdk" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileDebugAndroidTestRenderscript" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileDebugAndroidTestSources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileDebugJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileDebugNdk" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileDebugRenderscript" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileDebugSources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileDebugUnitTestJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileDebugUnitTestSources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileLint" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileReleaseAidl" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileReleaseJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileReleaseNdk" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileReleaseRenderscript" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileReleaseSources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileReleaseUnitTestJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="compileReleaseUnitTestSources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the components produced by project ':materialpicker'. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="components" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Installs and runs instrumentation tests for all flavors on connected devices." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="connectedAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Installs and runs the tests for Debug build on connected devices." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="connectedAndroidTestDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs all device checks on currently connected devices." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="connectedCheck" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="copyDebugLint" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="copyReleaseLint" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays all dependencies declared in project ':materialpicker'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="dependencies" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the insight into a specific dependency in project ':materialpicker'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="dependencyInsight" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Installs and runs instrumentation tests using all Device Providers." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="deviceAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs all device checks using Device Providers and Test Servers." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="deviceCheck" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="dexDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateDebugAndroidTestAssets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateDebugAndroidTestBuildConfig" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateDebugAndroidTestResValues" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateDebugAndroidTestResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateDebugAndroidTestSources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateDebugAssets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateDebugBuildConfig" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateDebugResValues" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateDebugResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateDebugSources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateReleaseAssets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateReleaseBuildConfig" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateReleaseResValues" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateReleaseResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="generateReleaseSources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays a help message." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="help" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Installs the android (on device) tests for the Debug build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="installDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs lint on all variants." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="lint" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs lint on the Debug build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="lintDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs lint on the Release build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="lintRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="mergeDebugAndroidTestAssets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="mergeDebugAndroidTestResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="mergeDebugAssets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="mergeDebugProguardFiles" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="mergeReleaseAssets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="mergeReleaseProguardFiles" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Creates a version of android.jar that's suitable for unit tests." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="mockableAndroidJar" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the configuration model of project ':materialpicker'. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="model" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="packageDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="packageDebugJar" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="packageDebugJniLibs" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="packageDebugLocalJar" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="packageDebugRenderscript" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="packageDebugResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="packageReleaseJar" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="packageReleaseJniLibs" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="packageReleaseLocalJar" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="packageReleaseRenderscript" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="packageReleaseResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="preBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="preCompileDebugUnitTestJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="preCompileReleaseUnitTestJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="preDebugAndroidTestBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="preDebugBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="preDebugUnitTestBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="preDexDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="preReleaseBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="preReleaseUnitTestBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="prepareDebugAndroidTestDependencies" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="prepareDebugDependencies" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="prepareDebugUnitTestDependencies" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="prepareReleaseDependencies" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="prepareReleaseUnitTestDependencies" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="processDebugAndroidTestJavaRes" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="processDebugAndroidTestManifest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="processDebugAndroidTestResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="processDebugJavaRes" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="processDebugManifest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="processDebugResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="processDebugUnitTestJavaRes" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="processReleaseJavaRes" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="processReleaseManifest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="processReleaseResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="processReleaseUnitTestJavaRes" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the sub-projects of project ':materialpicker'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="projects" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the properties of project ':materialpicker'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="properties" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the signing info for each variant." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="signingReport" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the tasks runnable from project ':materialpicker'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="tasks" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Run unit tests for all variants." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="test" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Run unit tests for the debug build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="testDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Run unit tests for the release build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="testRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Uninstall all applications." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="uninstallAll" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Uninstalls the android (on device) tests for the Debug build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="uninstallDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/materialpicker" />
+                <option name="name" value="validateDebugSigning" />
+              </ExternalTaskPojo>
+            </list>
+          </value>
+        </entry>
       </map>
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="C:\Users\packr\Documents\GitHub\Car-Maintenance" value="4308844942537" />
+        <entry key="C:\Users\packr\Documents\GitHub\Car-Maintenance" value="4310666324026" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2042,6 +2604,107 @@
                       </ExternalModuleBuildClasspathPojo>
                     </value>
                   </entry>
+                  <entry key="$PROJECT_DIR$/materialpicker">
+                    <value>
+                      <ExternalModuleBuildClasspathPojo>
+                        <option name="entries">
+                          <list>
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.2.3/gradle-1.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.2.3/gradle-1.2.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jfrog.bintray.gradle/gradle-bintray-plugin/1.2/85566c4fd2f071635bca55847249587f34e2b13f/gradle-bintray-plugin-1.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jfrog.bintray.gradle/gradle-bintray-plugin/1.2/ae174b2aa348ae742cdc63496b66bcbc8f15d5e0/gradle-bintray-plugin-1.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.dcendents/android-maven-gradle-plugin/1.3/c284e22e7c691774d2240e419ac2a744e80d7e84/android-maven-gradle-plugin-1.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.dcendents/android-maven-gradle-plugin/1.3/56f44bee48445bcb6b1f1e0f04576de3fee13426/android-maven-gradle-plugin-1.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle-core/1.2.3/gradle-core-1.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle-core/1.2.3/gradle-core-1.2.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy.modules.http-builder/http-builder/0.7.2/f1860181de06236f28f3f247aed57fa4631016d8/http-builder-0.7.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy.modules.http-builder/http-builder/0.7.2/323092cd786480311c1cf693770f9e6fc20a8bef/http-builder-0.7.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-gradle/5.1/proguard-gradle-5.1-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-gradle/5.1/proguard-gradle-5.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint/24.2.3/lint-24.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint/24.2.3/lint-24.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.2.3/builder-1.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.2.3/builder-1.2.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.1/6b27312b9c28b59aaeb6c21f3490045690c703d3/httpclient-4.2.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.1/b69bd03af60bf487b3ae1209a644ecac587bf6fc/httpclient-4.2.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.json-lib/json-lib/2.3/f35340c0a0380141f62c72b76c8fb4bfa638d8c1/json-lib-2.3-jdk15.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sourceforge.nekohtml/nekohtml/1.9.16/2d40ea21fae95418331ddc66efb6744a38bf59a/nekohtml-1.9.16-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sourceforge.nekohtml/nekohtml/1.9.16/61e35204e5a8fdb864152f84e2e3b33ab56f50ab/nekohtml-1.9.16.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/xml-resolver/xml-resolver/1.2/6b72432ea1c5296783007365bb7c9a6b39dfb730/xml-resolver-1.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/xml-resolver/xml-resolver/1.2/3d0f97750b3a03e0971831566067754ba4bfd68c/xml-resolver-1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-base/5.1/proguard-base-5.1-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-base/5.1/proguard-base-5.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/eclipse/jdt/core/compiler/ecj/4.4/ecj-4.4-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/eclipse/jdt/core/compiler/ecj/4.4/ecj-4.4.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-checks/24.2.3/lint-checks-24.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-checks/24.2.3/lint-checks-24.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcprov-jdk15on/1.48/bcprov-jdk15on-1.48-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcprov-jdk15on/1.48/bcprov-jdk15on-1.48.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdk-common/24.2.3/sdk-common-24.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdk-common/24.2.3/sdk-common-24.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-test-api/1.2.3/builder-test-api-1.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-test-api/1.2.3/builder-test-api-1.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-tree/5.0.3/asm-tree-5.0.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-tree/5.0.3/asm-tree-5.0.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/squareup/javawriter/2.5.0/javawriter-2.5.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/squareup/javawriter/2.5.0/javawriter-2.5.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/common/24.2.3/common-24.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/common/24.2.3/common-24.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.2.3/builder-model-1.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.2.3/builder-model-1.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdklib/24.2.3/sdklib-24.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdklib/24.2.3/sdklib-24.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/manifest-merger/24.2.3/manifest-merger-24.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/manifest-merger/24.2.3/manifest-merger-24.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/ddms/ddmlib/24.2.3/ddmlib-24.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/ddms/ddmlib/24.2.3/ddmlib-24.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm/5.0.3/asm-5.0.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm/5.0.3/asm-5.0.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/code/gson/gson/2.2.4/gson-2.2.4-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcpkix-jdk15on/1.48/bcpkix-jdk15on-1.48-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcpkix-jdk15on/1.48/bcpkix-jdk15on-1.48.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.2.1/3f6caf5334fa83607b82e2f32dd128a9d8a0ea5e/httpcore-4.2.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.2.1/2d503272bf0a8b5f92d64db78b4ba9abbaccc6fd/httpcore-4.2.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.6/61e9f9d11fe3e12ec62f633006e99d75fd7f19c8/commons-codec-1.6-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.6/b7f0fc8f61ecadeb3695f0b9464755eee44374d4/commons-codec-1.6.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-beanutils/commons-beanutils/1.8.0/2818502bbb50bbcbd3f57e92a2bfe4d496f37688/commons-beanutils-1.8.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-beanutils/commons-beanutils/1.8.0/c651d5103c649c12b20d53731643e5fffceb536/commons-beanutils-1.8.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-collections/commons-collections/3.2.1/fa095ef874374e5b2a11f8b06c26a5d68c7cb3a4/commons-collections-3.2.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-collections/commons-collections/3.2.1/761ea405b9b37ced573d2df0d1e3a4e0f9edc668/commons-collections-3.2.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-lang/commons-lang/2.4/2b8c4b3035e45520ef42033e823c7d33e4b4402c/commons-lang-2.4-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-lang/commons-lang/2.4/16313e02a793435009f1e458fa4af5d879f6fb11/commons-lang-2.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.ezmorph/ezmorph/1.0.6/298992280d62b944afd0ae9bfe3329f5487dd434/ezmorph-1.0.6-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.ezmorph/ezmorph/1.0.6/1e55d2a0253ea37745d33062852fd2c90027432/ezmorph-1.0.6.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/xerces/xercesImpl/2.9.1/1136d197e2755bbde296ceee217ec5fe2917477b/xercesImpl-2.9.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-api/24.2.3/lint-api-24.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-api/24.2.3/lint-api-24.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/guava/guava/17.0/guava-17.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/guava/guava/17.0/guava-17.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/annotations/24.2.3/annotations-24.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/annotations/24.2.3/annotations-24.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/layoutlib/layoutlib-api/24.2.3/layoutlib-api-24.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/layoutlib/layoutlib-api/24.2.3/layoutlib-api-24.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/dvlib/24.2.3/dvlib-24.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/dvlib/24.2.3/dvlib-24.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3.jar" />
+                          </list>
+                        </option>
+                        <option name="path" value="$PROJECT_DIR$/materialpicker" />
+                      </ExternalModuleBuildClasspathPojo>
+                    </value>
+                  </entry>
                 </map>
               </option>
               <option name="name" value="Car-Maintenance" />
@@ -2207,8 +2870,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/VehicleCursorAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/utilities/ToolbarColorizeHelper.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java" />
+        <option value="$PROJECT_DIR$/materialpicker/src/main/res/layout/picker_layout.xml" />
+        <option value="$PROJECT_DIR$/materialpicker/build.gradle" />
+        <option value="$PROJECT_DIR$/materialpicker/src/main/java/com/example/materialpicker/MaterialPicker.java" />
       </list>
     </option>
   </component>
@@ -2253,19 +2919,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2288,190 +2941,21 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
           </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="styles.xml" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="carmaintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vehicle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="carmaintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vehicle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maintenence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="carmaintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="carmaintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="adapters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car-Maintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="carmaintenance" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2482,6 +2966,14 @@
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="ZX1G22H2PH" />
     <property name="FullScreen" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="android.project.structure.last.selected" value="materialpicker" />
+    <property name="android.project.structure.proportion" value="0.15" />
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.packageName">
+      <recent name="com.example.materialpicker" />
+    </key>
   </component>
   <component name="RunManager" selected="Android Application.app">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -2635,17 +3127,17 @@
       <option name="DISABLE_BOOT_ANIMATION" value="false" />
       <option name="NETWORK_SPEED" value="full" />
       <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="CLEAR_LOGCAT" value="true" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="Please select a project..." />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="Please select a project..." />
       <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="Cloud configuration not specified" />
       <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="Cloud configuration not specified" />
       <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
@@ -2736,12 +3228,18 @@
       <option name="project" value="LOCAL" />
       <updated>1437510567499</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Remove unnecessary commented area">
+      <created>1437752132400</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1437752132400</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2755,13 +3253,13 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32703003" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3147942" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3147942" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2521322" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2521322" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32703003" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -2792,7 +3290,8 @@
     <MESSAGE value="Make expandable item compartmentalized" />
     <MESSAGE value="better handling of SQL data changes and EditFuelStop UI" />
     <MESSAGE value="Can now calculate MPGs on fuel stops" />
-    <option name="LAST_COMMIT_MESSAGE" value="Can now calculate MPGs on fuel stops" />
+    <MESSAGE value="Remove unnecessary commented area" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove unnecessary commented area" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2801,32 +3300,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/fuel_stops_strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2692308">
-          <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_edit_fuel_stop.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="16" selection-start-line="63" selection-start-column="16" selection-end-line="63" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://D:/Android/sdk/extras/android/m2repository/com/android/support/support-v4/22.2.0/support-v4-22.2.0-sources.jar!/android/support/v4/app/FragmentActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33222592">
-          <caret line="806" column="27" selection-start-line="806" selection-start-column="27" selection-end-line="806" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/22.2.0/appcompat-v7-22.2.0-sources.jar!/android/support/v7/app/ActionBar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2918,9 +3391,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="5339" column="26" selection-start-line="5339" selection-start-column="26" selection-end-line="5339" selection-end-column="26" />
-          <folding>
-            <element signature="method#notifyItemChanged#0;class#Adapter#0;class#RecyclerView#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3038,8 +3508,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="100" column="53" selection-start-line="100" selection-start-column="53" selection-end-line="100" selection-end-column="53" />
           <folding>
-            <element signature="e#3745#3760#0" expanded="true" />
-            <element signature="method#setSortOrder#0;class#ServicesFragment#0" expanded="true" />
+            <element signature="e#3745#3760#0" expanded="false" />
+            <element signature="method#setSortOrder#0;class#ServicesFragment#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3049,7 +3519,7 @@
         <state vertical-scroll-proportion="0.3265306">
           <caret line="318" column="51" selection-start-line="318" selection-start-column="51" selection-end-line="318" selection-end-column="51" />
           <folding>
-            <element signature="method#updateSelectedCar#0;class#NavigationDrawerFragment#0" expanded="true" />
+            <element signature="method#updateSelectedCar#0;class#NavigationDrawerFragment#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3058,10 +3528,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="154" column="16" selection-start-line="154" selection-start-column="16" selection-end-line="154" selection-end-column="16" />
-          <folding>
-            <element signature="method#changeCursor#0;class#CursorRecyclerViewAdapter#0" expanded="false" />
-            <element signature="method#onContentChanged#0;class#CursorRecyclerViewAdapter#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3091,9 +3557,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="37" column="16" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
-          <folding>
-            <element signature="method#notifyAdded#0;class#SQLDataOberservable#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3102,41 +3565,41 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="467" column="21" selection-start-line="467" selection-start-column="21" selection-end-line="467" selection-end-column="21" />
           <folding>
-            <element signature="method#EditFuelStop#1;class#EditFuelStop#0" expanded="true" />
-            <element signature="method#onCreate#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="method#onCreateView#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="method#onAttach#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="method#onCreateOptionsMenu#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="method#onOptionsItemSelected#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="e#4313#4337#0" expanded="true" />
-            <element signature="e#4474#4612#0" expanded="true" />
-            <element signature="e#4611#4612#0" expanded="true" />
-            <element signature="e#4657#4684#0" expanded="true" />
-            <element signature="e#4882#4908#0" expanded="true" />
-            <element signature="e#4989#5005#0" expanded="true" />
-            <element signature="e#5075#5090#0" expanded="true" />
-            <element signature="e#5163#5178#0" expanded="true" />
-            <element signature="e#5270#5689#0" expanded="true" />
-            <element signature="e#5688#5689#0" expanded="true" />
-            <element signature="method#initializeDate#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="e#6467#6482#0" expanded="true" />
-            <element signature="e#6596#6611#0" expanded="true" />
-            <element signature="e#7351#7352#0" expanded="true" />
-            <element signature="e#7407#7408#0" expanded="true" />
-            <element signature="method#displaySetDate#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="method#initializeCostPerVolume#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="e#10037#10061#0" expanded="true" />
-            <element signature="e#10130#10145#0" expanded="true" />
-            <element signature="e#10217#10232#0" expanded="true" />
-            <element signature="class#11377:11743" expanded="true" />
-            <element signature="method#onShow#0;class#11377:11743" expanded="true" />
-            <element signature="method#setCostPerVolumeDisplay#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="method#saveCostPerVolume#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="method#initializeVolume#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="method#saveVolume#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="method#initializeMileage#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="method#saveMileage#0;class#EditFuelStop#0" expanded="true" />
-            <element signature="method#updateDistanceTraveled#0;class#EditFuelStop#0" expanded="true" />
+            <element signature="method#EditFuelStop#1;class#EditFuelStop#0" expanded="false" />
+            <element signature="method#onCreate#0;class#EditFuelStop#0" expanded="false" />
+            <element signature="method#onCreateView#0;class#EditFuelStop#0" expanded="false" />
+            <element signature="method#onAttach#0;class#EditFuelStop#0" expanded="false" />
+            <element signature="method#onCreateOptionsMenu#0;class#EditFuelStop#0" expanded="false" />
+            <element signature="method#onOptionsItemSelected#0;class#EditFuelStop#0" expanded="false" />
+            <element signature="e#4313#4337#0" expanded="false" />
+            <element signature="e#4474#4612#0" expanded="false" />
+            <element signature="e#4611#4612#0" expanded="false" />
+            <element signature="e#4657#4684#0" expanded="false" />
+            <element signature="e#4882#4908#0" expanded="false" />
+            <element signature="e#4989#5005#0" expanded="false" />
+            <element signature="e#5075#5090#0" expanded="false" />
+            <element signature="e#5163#5178#0" expanded="false" />
+            <element signature="e#5270#5689#0" expanded="false" />
+            <element signature="e#5688#5689#0" expanded="false" />
+            <element signature="method#initializeDate#0;class#EditFuelStop#0" expanded="false" />
+            <element signature="e#6467#6482#0" expanded="false" />
+            <element signature="e#6596#6611#0" expanded="false" />
+            <element signature="e#7351#7352#0" expanded="false" />
+            <element signature="e#7407#7408#0" expanded="false" />
+            <element signature="method#displaySetDate#0;class#EditFuelStop#0" expanded="false" />
+            <element signature="method#initializeCostPerVolume#0;class#EditFuelStop#0" expanded="false" />
+            <element signature="e#10037#10061#0" expanded="false" />
+            <element signature="e#10130#10145#0" expanded="false" />
+            <element signature="e#10217#10232#0" expanded="false" />
+            <element signature="class#11377:11743" expanded="false" />
+            <element signature="method#onShow#0;class#11377:11743" expanded="false" />
+            <element signature="method#setCostPerVolumeDisplay#0;class#EditFuelStop#0" expanded="false" />
+            <element signature="method#saveCostPerVolume#0;class#EditFuelStop#0" expanded="false" />
+            <element signature="method#initializeVolume#0;class#EditFuelStop#0" expanded="false" />
+            <element signature="method#saveVolume#0;class#EditFuelStop#0" expanded="false" />
+            <element signature="method#initializeMileage#0;class#EditFuelStop#0" expanded="false" />
+            <element signature="method#saveMileage#0;class#EditFuelStop#0" expanded="false" />
+            <element signature="method#updateDistanceTraveled#0;class#EditFuelStop#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3145,13 +3608,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="29" selection-start-line="59" selection-start-column="29" selection-end-line="59" selection-end-column="29" />
-          <folding>
-            <element signature="method#SQLDataHandler#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#getString#0;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#put#2;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#put#5;class#SQLDataHandler#0" expanded="false" />
-            <element signature="method#putContentValues#0;class#SQLDataHandler#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3159,27 +3615,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="47" column="27" selection-start-line="47" selection-start-column="27" selection-end-line="47" selection-end-column="27" />
-          <folding>
-            <element signature="e#964#1003#0" expanded="true" />
-            <element signature="method#onRemoved#0;class#1418:2033" expanded="true" />
-            <element signature="method#onAdded#0;class#1418:2033" expanded="true" />
-            <element signature="method#FuelStopsFragment#0;class#FuelStopsFragment#0" expanded="true" />
-            <element signature="method#FuelStopsFragment#1;class#FuelStopsFragment#0" expanded="true" />
-            <element signature="method#onDestroy#0;class#FuelStopsFragment#0" expanded="true" />
-            <element signature="e#2636#2637#0" expanded="true" />
-            <element signature="e#2702#2703#0" expanded="true" />
-            <element signature="method#onCreateView#0;class#FuelStopsFragment#0" expanded="true" />
-            <element signature="class#3610:5650" expanded="true" />
-            <element signature="method#onDeleteClick#0;class#3610:5650" expanded="true" />
-            <element signature="e#3976#3992#0" expanded="true" />
-            <element signature="e#4066#4081#0" expanded="true" />
-            <element signature="e#4158#4173#0" expanded="true" />
-            <element signature="e#4269#4784#0" expanded="true" />
-            <element signature="e#4783#4784#0" expanded="true" />
-            <element signature="method#onEditClick#0;class#3610:5650" expanded="true" />
-            <element signature="method#onAttach#0;class#FuelStopsFragment#0" expanded="true" />
-            <element signature="e#6379#6409#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3187,9 +3622,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.82653064">
           <caret line="132" column="68" selection-start-line="132" selection-start-column="68" selection-end-line="132" selection-end-column="68" />
-          <folding>
-            <element signature="method#setOnItemClickListener#0;class#FuelStopAdapter#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3197,19 +3629,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="99" column="19" selection-start-line="99" selection-start-column="19" selection-end-line="99" selection-end-column="19" />
-          <folding>
-            <element signature="method#ServiceTask#1;class#ServiceTask#0" expanded="true" />
-            <element signature="method#ServiceTask#2;class#ServiceTask#0" expanded="true" />
-            <element signature="method#init#0;class#ServiceTask#0" expanded="true" />
-            <element signature="e#3411#3412#0" expanded="true" />
-            <element signature="e#3470#3471#0" expanded="true" />
-            <element signature="method#setLocationName#0;class#ServiceTask#0" expanded="true" />
-            <element signature="method#setDateTimeZone#0;class#ServiceTask#0" expanded="true" />
-            <element signature="method#setMileage#0;class#ServiceTask#0" expanded="true" />
-            <element signature="method#setMileage#1;class#ServiceTask#0" expanded="true" />
-            <element signature="method#delete#1;class#ServiceTask#0" expanded="true" />
-            <element signature="method#cleanNumberString#0;class#ServiceTask#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3237,15 +3656,15 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="112" column="25" selection-start-line="112" selection-start-column="25" selection-end-line="112" selection-end-column="25" />
           <folding>
-            <element signature="method#FuelStop#0;class#FuelStop#0" expanded="true" />
-            <element signature="method#setCompleteFillUp#0;class#FuelStop#0" expanded="true" />
-            <element signature="method#setMissedFillup#0;class#FuelStop#0" expanded="true" />
-            <element signature="method#setCostPerVolume#0;class#FuelStop#0" expanded="true" />
-            <element signature="method#setCostPerVolume#1;class#FuelStop#0" expanded="true" />
-            <element signature="method#getFuelStopCursorForCar#0;class#FuelStop#0" expanded="true" />
-            <element signature="method#getFuelStopCursorForCar#1;class#FuelStop#0" expanded="true" />
-            <element signature="method#getFuelStopsForCar#0;class#FuelStop#0" expanded="true" />
-            <element signature="method#getFuelStopCountForCar#0;class#FuelStop#0" expanded="true" />
+            <element signature="method#FuelStop#0;class#FuelStop#0" expanded="false" />
+            <element signature="method#setCompleteFillUp#0;class#FuelStop#0" expanded="false" />
+            <element signature="method#setMissedFillup#0;class#FuelStop#0" expanded="false" />
+            <element signature="method#setCostPerVolume#0;class#FuelStop#0" expanded="false" />
+            <element signature="method#setCostPerVolume#1;class#FuelStop#0" expanded="false" />
+            <element signature="method#getFuelStopCursorForCar#0;class#FuelStop#0" expanded="false" />
+            <element signature="method#getFuelStopCursorForCar#1;class#FuelStop#0" expanded="false" />
+            <element signature="method#getFuelStopsForCar#0;class#FuelStop#0" expanded="false" />
+            <element signature="method#getFuelStopCountForCar#0;class#FuelStop#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3255,11 +3674,160 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="1135" column="7" selection-start-line="1107" selection-start-column="5" selection-end-line="1135" selection-end-column="7" />
           <folding>
-            <element signature="method#onCreateView#0;class#EditCar#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="docComment;class#EditCar#0" expanded="false" />
+            <element signature="method#EditCar#0;class#EditCar#0" expanded="false" />
+            <element signature="method#EditCar#1;class#EditCar#0" expanded="false" />
+            <element signature="method#EditCar#2;class#EditCar#0" expanded="false" />
+            <element signature="method#onCreate#0;class#EditCar#0" expanded="false" />
+            <element signature="method#onDestroy#0;class#EditCar#0" expanded="false" />
+            <element signature="method#initializeView#0;class#EditCar#0" expanded="false" />
+            <element signature="class#5072:6489" expanded="false" />
+            <element signature="method#run#0;class#5072:6489" expanded="false" />
+            <element signature="class#6236:6463" expanded="false" />
+            <element signature="method#run#0;class#6236:6463" expanded="false" />
+            <element signature="method#onCreateOptionsMenu#0;class#EditCar#0" expanded="false" />
             <element signature="e#6634#6657#0" expanded="false" />
-            <element signature="method#initializeModelSpinner#0;class#EditCar#0" expanded="true" />
-            <element signature="method#updateModelSpinner#1;class#EditCar#0" expanded="true" />
-            <element signature="method#initializeEfficiencyUnits#0;class#EditCar#0" expanded="true" />
+            <element signature="method#onOptionsItemSelected#0;class#EditCar#0" expanded="false" />
+            <element signature="class#8367:8508" expanded="false" />
+            <element signature="e#8440#8441#0" expanded="false" />
+            <element signature="e#8493#8494#0" expanded="false" />
+            <element signature="class#9088:9795" expanded="false" />
+            <element signature="method#onClick#0;class#9088:9795" expanded="false" />
+            <element signature="method#loadVehicle#0;class#EditCar#0" expanded="false" />
+            <element signature="class#10161:13153" expanded="false" />
+            <element signature="method#run#0;class#10161:13153" expanded="false" />
+            <element signature="method#loadVehicle#1;class#EditCar#0" expanded="false" />
+            <element signature="method#initialColorLoad#0;class#EditCar#0" expanded="false" />
+            <element signature="method#setHighlightColors#0;class#EditCar#0" expanded="false" />
+            <element signature="class#14506:14652" expanded="false" />
+            <element signature="e#14579#14580#0" expanded="false" />
+            <element signature="e#14637#14638#0" expanded="false" />
+            <element signature="method#setCardTitleColors#0;class#EditCar#0" expanded="false" />
+            <element signature="method#saveVehicle#0;class#EditCar#0" expanded="false" />
+            <element signature="class#18220:18500" expanded="false" />
+            <element signature="method#run#0;class#18220:18500" expanded="false" />
+            <element signature="method#initializeNameText#0;class#EditCar#0" expanded="false" />
+            <element signature="method#initializeYearSpinner#0;class#EditCar#0" expanded="false" />
+            <element signature="class#19318:22250" expanded="false" />
+            <element signature="method#onItemClick#0;class#19318:22250" expanded="false" />
+            <element signature="class#20325:22041" expanded="false" />
+            <element signature="method#onShow#0;class#20325:22041" expanded="false" />
+            <element signature="class#20619:21991" expanded="false" />
+            <element signature="method#onClick#0;class#20619:21991" expanded="false" />
+            <element signature="method#saveYear#0;class#EditCar#0" expanded="false" />
+            <element signature="method#initializeMakeSpinner#0;class#EditCar#0" expanded="false" />
+            <element signature="class#22790:24816" expanded="false" />
+            <element signature="method#onItemClick#0;class#22790:24816" expanded="false" />
+            <element signature="class#23811:24611" expanded="false" />
+            <element signature="method#onShow#0;class#23811:24611" expanded="false" />
+            <element signature="class#24100:24561" expanded="false" />
+            <element signature="method#onClick#0;class#24100:24561" expanded="false" />
+            <element signature="e#24863#24864#0" expanded="false" />
+            <element signature="e#24902#24903#0" expanded="false" />
+            <element signature="method#updateMakeSpinner#1;class#EditCar#0" expanded="false" />
+            <element signature="method#saveMake#0;class#EditCar#0" expanded="false" />
+            <element signature="class#25972:27953" expanded="false" />
+            <element signature="method#onItemClick#0;class#25972:27953" expanded="false" />
+            <element signature="class#27064:27807" expanded="false" />
+            <element signature="method#onShow#0;class#27064:27807" expanded="false" />
+            <element signature="class#27353:27757" expanded="false" />
+            <element signature="method#onClick#0;class#27353:27757" expanded="false" />
+            <element signature="e#28001#28002#0" expanded="false" />
+            <element signature="e#28041#28042#0" expanded="false" />
+            <element signature="method#saveModel#0;class#EditCar#0" expanded="false" />
+            <element signature="method#initializeSubModel#0;class#EditCar#0" expanded="false" />
+            <element signature="method#saveSubModel#0;class#EditCar#0" expanded="false" />
+            <element signature="method#initializeVIN#0;class#EditCar#0" expanded="false" />
+            <element signature="class#29079:29378" expanded="false" />
+            <element signature="method#isValid#0;class#29079:29378" expanded="false" />
+            <element signature="class#29599:30111" expanded="false" />
+            <element signature="method#filter#0;class#29599:30111" expanded="false" />
+            <element signature="method#saveVIN#0;class#EditCar#0" expanded="false" />
+            <element signature="method#initializeCurrentMileage#0;class#EditCar#0" expanded="false" />
+            <element signature="method#saveCurrentMileage#0;class#EditCar#0" expanded="false" />
+            <element signature="method#initializeWeight#0;class#EditCar#0" expanded="false" />
+            <element signature="method#saveWeight#0;class#EditCar#0" expanded="false" />
+            <element signature="method#saveWeightUnits#0;class#EditCar#0" expanded="false" />
+            <element signature="method#initializePower#0;class#EditCar#0" expanded="false" />
+            <element signature="method#savePower#0;class#EditCar#0" expanded="false" />
+            <element signature="method#savePowerUnits#0;class#EditCar#0" expanded="false" />
+            <element signature="method#initializeTorque#0;class#EditCar#0" expanded="false" />
+            <element signature="method#saveTorque#0;class#EditCar#0" expanded="false" />
+            <element signature="method#saveTorqueUnits#0;class#EditCar#0" expanded="false" />
+            <element signature="method#saveVehicleColor#0;class#EditCar#0" expanded="false" />
+            <element signature="method#saveDisplayColor#0;class#EditCar#0" expanded="false" />
+            <element signature="method#initializeVehicleImage#0;class#EditCar#0" expanded="false" />
+            <element signature="class#36156:36367" expanded="false" />
+            <element signature="e#36304#36305#0" expanded="false" />
+            <element signature="e#36356#36357#0" expanded="false" />
+            <element signature="class#36513:39477" expanded="false" />
+            <element signature="method#onClick#0;class#36513:39477" expanded="false" />
+            <element signature="class#36847:39352" expanded="false" />
+            <element signature="method#onClick#0;class#36847:39352" expanded="false" />
+            <element signature="class#37674:38135" expanded="false" />
+            <element signature="method#onItemClick#0;class#37674:38135" expanded="false" />
+            <element signature="class#38939:39230" expanded="false" />
+            <element signature="e#39098#39099#0" expanded="false" />
+            <element signature="e#39195#39196#0" expanded="false" />
+            <element signature="method#openImageSelection#0;class#EditCar#0" expanded="false" />
+            <element signature="class#40114:40292" expanded="false" />
+            <element signature="method#run#0;class#40114:40292" expanded="false" />
+            <element signature="method#doCrop#0;class#EditCar#0" expanded="false" />
+            <element signature="method#getTempFile#0;class#EditCar#0" expanded="false" />
+            <element signature="method#getTempFile#1;class#EditCar#0" expanded="false" />
+            <element signature="method#getTempUri#0;class#EditCar#0" expanded="false" />
+            <element signature="method#loadImage#0;class#EditCar#0" expanded="false" />
+            <element signature="class#42786:43395" expanded="false" />
+            <element signature="method#run#0;class#42786:43395" expanded="false" />
+            <element signature="class#42997:43353" expanded="false" />
+            <element signature="method#run#0;class#42997:43353" expanded="false" />
+            <element signature="method#loadImage#1;class#EditCar#0" expanded="false" />
+            <element signature="class#45856:46698" expanded="false" />
+            <element signature="method#run#0;class#45856:46698" expanded="false" />
+            <element signature="class#45960:46382" expanded="false" />
+            <element signature="method#run#0;class#45960:46382" expanded="false" />
+            <element signature="class#46509:46672" expanded="false" />
+            <element signature="e#46590#46591#0" expanded="false" />
+            <element signature="e#46653#46654#0" expanded="false" />
+            <element signature="method#loadImage#2;class#EditCar#0" expanded="false" />
+            <element signature="class#48473:49140" expanded="false" />
+            <element signature="method#run#0;class#48473:49140" expanded="false" />
+            <element signature="class#48716:49082" expanded="false" />
+            <element signature="method#run#0;class#48716:49082" expanded="false" />
+            <element signature="e#50727#50728#0" expanded="false" />
+            <element signature="e#50775#50776#0" expanded="false" />
+            <element signature="method#setLoadedColor#0;class#EditCar#0" expanded="false" />
+            <element signature="method#setLoadedColor#1;class#EditCar#0" expanded="false" />
+            <element signature="class#51473:51705" expanded="false" />
+            <element signature="method#run#0;class#51473:51705" expanded="false" />
+            <element signature="method#storeImage#0;class#EditCar#0" expanded="false" />
+            <element signature="class#52045:54433" expanded="false" />
+            <element signature="method#run#0;class#52045:54433" expanded="false" />
+            <element signature="class#53293:53789" expanded="false" />
+            <element signature="method#run#0;class#53293:53789" expanded="false" />
+            <element signature="method#initializePurchaseCost#0;class#EditCar#0" expanded="false" />
+            <element signature="method#savePurchaseCost#0;class#EditCar#0" expanded="false" />
+            <element signature="method#saveCurrency#0;class#EditCar#0" expanded="false" />
+            <element signature="method#initializePurchaseDate#0;class#EditCar#0" expanded="false" />
+            <element signature="class#56357:56505" expanded="false" />
+            <element signature="e#56444#56445#0" expanded="false" />
+            <element signature="e#56494#56495#0" expanded="false" />
+            <element signature="method#loadPurchaseDate#0;class#EditCar#0" expanded="false" />
+            <element signature="class#57071:57554" expanded="false" />
+            <element signature="method#onDateSet#0;class#57071:57554" expanded="false" />
+            <element signature="method#setDisplayPurchaseDate#0;class#EditCar#0" expanded="false" />
+            <element signature="method#savePurchaseDate#0;class#EditCar#0" expanded="false" />
+            <element signature="method#initializePurchaseMileage#0;class#EditCar#0" expanded="false" />
+            <element signature="method#savePurchaseMileage#0;class#EditCar#0" expanded="false" />
+            <element signature="method#saveMileageUnit#0;class#EditCar#0" expanded="false" />
+            <element signature="method#onActivityResult#0;class#EditCar#0" expanded="false" />
+            <element signature="e#59762#59763#0" expanded="false" />
+            <element signature="e#59815#59816#0" expanded="false" />
+            <element signature="method#sendToast#1;class#EditCar#0" expanded="false" />
+            <element signature="class#59922:60180" expanded="false" />
+            <element signature="method#run#0;class#59922:60180" expanded="false" />
+            <element signature="method#recycle#0;class#EditCar#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3269,51 +3837,91 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="429" column="0" selection-start-line="429" selection-start-column="0" selection-end-line="429" selection-end-column="0" />
           <folding>
-            <element signature="e#3657#3658#0" expanded="true" />
-            <element signature="e#3693#3694#0" expanded="true" />
-            <element signature="method#Vehicle#1;class#Vehicle#0" expanded="true" />
-            <element signature="method#Vehicle#2;class#Vehicle#0" expanded="true" />
-            <element signature="e#6362#6363#0" expanded="true" />
-            <element signature="e#6392#6393#0" expanded="true" />
-            <element signature="e#6420#6421#0" expanded="true" />
-            <element signature="e#6446#6447#0" expanded="true" />
-            <element signature="method#setName#0;class#Vehicle#0" expanded="true" />
-            <element signature="e#6785#6786#0" expanded="true" />
-            <element signature="e#6846#6847#0" expanded="true" />
-            <element signature="e#6886#6887#0" expanded="true" />
-            <element signature="e#6932#6933#0" expanded="true" />
-            <element signature="method#setPurchaseDate#0;class#Vehicle#0" expanded="true" />
-            <element signature="e#8337#8338#0" expanded="true" />
-            <element signature="e#8397#8398#0" expanded="true" />
-            <element signature="e#8449#8450#0" expanded="true" />
-            <element signature="e#8509#8510#0" expanded="true" />
-            <element signature="method#getNewServiceTask#0;class#Vehicle#0" expanded="true" />
-            <element signature="e#8780#8781#0" expanded="true" />
-            <element signature="e#8834#8835#0" expanded="true" />
-            <element signature="method#getNewPartReplacement#0;class#Vehicle#0" expanded="true" />
-            <element signature="method#getServiceTasks#0;class#Vehicle#0" expanded="true" />
-            <element signature="e#9673#9674#0" expanded="true" />
-            <element signature="e#9747#9748#0" expanded="true" />
-            <element signature="e#9784#9785#0" expanded="true" />
-            <element signature="e#9851#9852#0" expanded="true" />
-            <element signature="method#getFuelStopCursor#0;class#Vehicle#0" expanded="true" />
-            <element signature="e#10018#10019#0" expanded="true" />
-            <element signature="e#10099#10100#0" expanded="true" />
-            <element signature="e#10137#10138#0" expanded="true" />
-            <element signature="e#10198#10199#0" expanded="true" />
-            <element signature="method#setPurchaseCost#0;class#Vehicle#0" expanded="true" />
-            <element signature="e#10351#10352#0" expanded="true" />
-            <element signature="e#10408#10409#0" expanded="true" />
-            <element signature="e#10456#10457#0" expanded="true" />
-            <element signature="e#10510#10511#0" expanded="true" />
-            <element signature="method#setWeightUnits#0;class#Vehicle#0" expanded="true" />
-            <element signature="e#11271#11272#0" expanded="true" />
-            <element signature="e#11323#11324#0" expanded="true" />
-            <element signature="e#11363#11364#0" expanded="true" />
-            <element signature="e#11411#11412#0" expanded="true" />
-            <element signature="method#getImage#0;class#Vehicle#0" expanded="true" />
-            <element signature="method#getFuelEfficiency#0;class#Vehicle#0" expanded="true" />
-            <element signature="method#getAverageCostOfFuel#0;class#Vehicle#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="docComment;class#Vehicle#0" expanded="false" />
+            <element signature="method#equals#0;class#Vehicle#0" expanded="false" />
+            <element signature="method#init#0;class#Vehicle#0" expanded="false" />
+            <element signature="method#delete#0;class#Vehicle#0" expanded="false" />
+            <element signature="e#6487#6488#0" expanded="false" />
+            <element signature="e#6543#6544#0" expanded="false" />
+            <element signature="e#6582#6583#0" expanded="false" />
+            <element signature="e#6636#6637#0" expanded="false" />
+            <element signature="e#6963#6964#0" expanded="false" />
+            <element signature="e#7016#7017#0" expanded="false" />
+            <element signature="e#7058#7059#0" expanded="false" />
+            <element signature="e#7106#7107#0" expanded="false" />
+            <element signature="e#7138#7139#0" expanded="false" />
+            <element signature="e#7192#7193#0" expanded="false" />
+            <element signature="e#7240#7241#0" expanded="false" />
+            <element signature="e#7294#7295#0" expanded="false" />
+            <element signature="e#7329#7330#0" expanded="false" />
+            <element signature="e#7386#7387#0" expanded="false" />
+            <element signature="e#7423#7424#0" expanded="false" />
+            <element signature="e#7469#7470#0" expanded="false" />
+            <element signature="e#7497#7498#0" expanded="false" />
+            <element signature="e#7547#7548#0" expanded="false" />
+            <element signature="e#7598#7599#0" expanded="false" />
+            <element signature="e#7658#7659#0" expanded="false" />
+            <element signature="e#7697#7698#0" expanded="false" />
+            <element signature="e#7759#7760#0" expanded="false" />
+            <element signature="e#7808#7809#0" expanded="false" />
+            <element signature="e#7865#7866#0" expanded="false" />
+            <element signature="e#7904#7905#0" expanded="false" />
+            <element signature="e#7967#7968#0" expanded="false" />
+            <element signature="e#8019#8020#0" expanded="false" />
+            <element signature="e#8080#8081#0" expanded="false" />
+            <element signature="e#8120#8121#0" expanded="false" />
+            <element signature="e#8183#8184#0" expanded="false" />
+            <element signature="e#8548#8549#0" expanded="false" />
+            <element signature="e#8611#8612#0" expanded="false" />
+            <element signature="method#getServiceTaskCursor#0;class#Vehicle#0" expanded="false" />
+            <element signature="method#getServiceTaskCursor#1;class#Vehicle#0" expanded="false" />
+            <element signature="method#getServiceTaskCursor#2;class#Vehicle#0" expanded="false" />
+            <element signature="e#10540#10541#0" expanded="false" />
+            <element signature="e#10592#10593#0" expanded="false" />
+            <element signature="e#10630#10631#0" expanded="false" />
+            <element signature="e#10674#10675#0" expanded="false" />
+            <element signature="e#10706#10707#0" expanded="false" />
+            <element signature="e#10760#10761#0" expanded="false" />
+            <element signature="e#10802#10803#0" expanded="false" />
+            <element signature="e#10850#10851#0" expanded="false" />
+            <element signature="e#10881#10882#0" expanded="false" />
+            <element signature="e#10934#10935#0" expanded="false" />
+            <element signature="e#10976#10977#0" expanded="false" />
+            <element signature="e#11026#11027#0" expanded="false" />
+            <element signature="e#11065#11066#0" expanded="false" />
+            <element signature="e#11126#11127#0" expanded="false" />
+            <element signature="e#11448#11449#0" expanded="false" />
+            <element signature="e#11508#11509#0" expanded="false" />
+            <element signature="e#11555#11556#0" expanded="false" />
+            <element signature="e#11609#11610#0" expanded="false" />
+            <element signature="e#11640#11641#0" expanded="false" />
+            <element signature="e#11693#11694#0" expanded="false" />
+            <element signature="e#11735#11736#0" expanded="false" />
+            <element signature="e#11785#11786#0" expanded="false" />
+            <element signature="e#11823#11824#0" expanded="false" />
+            <element signature="e#11884#11885#0" expanded="false" />
+            <element signature="e#11932#11933#0" expanded="false" />
+            <element signature="e#11987#11988#0" expanded="false" />
+            <element signature="e#12024#12025#0" expanded="false" />
+            <element signature="e#12084#12085#0" expanded="false" />
+            <element signature="e#12136#12137#0" expanded="false" />
+            <element signature="e#12195#12196#0" expanded="false" />
+            <element signature="e#12236#12237#0" expanded="false" />
+            <element signature="e#12292#12293#0" expanded="false" />
+            <element signature="e#12323#12324#0" expanded="false" />
+            <element signature="e#12382#12383#0" expanded="false" />
+            <element signature="e#12425#12426#0" expanded="false" />
+            <element signature="e#12478#12479#0" expanded="false" />
+            <element signature="e#12511#12512#0" expanded="false" />
+            <element signature="e#12567#12568#0" expanded="false" />
+            <element signature="method#setFuelEfficiencyUnits#0;class#Vehicle#0" expanded="false" />
+            <element signature="method#getFuelEfficiencyUnits#0;class#Vehicle#0" expanded="false" />
+            <element signature="e#15300#15301#0" expanded="false" />
+            <element signature="e#15355#15356#0" expanded="false" />
+            <element signature="e#15393#15394#0" expanded="false" />
+            <element signature="e#15454#15455#0" expanded="false" />
+            <element signature="method#putContentValues#0;class#Vehicle#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3336,7 +3944,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9230769">
+        <state vertical-scroll-proportion="0.0">
           <caret line="6" column="57" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="57" />
           <folding />
         </state>
@@ -3347,33 +3955,25 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
           <folding>
-            <element signature="e#1251#1252#0" expanded="true" />
-            <element signature="e#1289#1290#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="docComment;class#Swatch#0" expanded="false" />
+            <element signature="method#setBackgroundColor#0;class#Swatch#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/utilities/ToolbarColorizeHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="311" column="30" selection-start-line="311" selection-start-column="30" selection-end-line="311" selection-end-column="30" />
+          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
           <folding>
-            <element signature="e#1548#1587#0" expanded="true" />
-            <element signature="method#onCreate#0;class#MainActivity#0" expanded="true" />
-            <element signature="e#6065#6099#0" expanded="true" />
-            <element signature="e#6145#6179#0" expanded="true" />
-            <element signature="method#onDestroy#0;class#MainActivity#0" expanded="true" />
-            <element signature="method#onContextItemSelected#0;class#MainActivity#0" expanded="true" />
-            <element signature="e#7802#7836#0" expanded="true" />
-            <element signature="method#changeVehicle#1;class#MainActivity#0" expanded="true" />
-            <element signature="method#changeVehicle#2;class#MainActivity#0" expanded="true" />
-            <element signature="e#8726#8754#0" expanded="true" />
-            <element signature="method#onBackStackChanged#0;class#MainActivity#0" expanded="true" />
-            <element signature="e#11840#11868#0" expanded="true" />
-            <element signature="e#11923#12601#0" expanded="true" />
-            <element signature="e#12600#12601#0" expanded="true" />
-            <element signature="method#onKeyDown#0;class#MainActivity#0" expanded="true" />
-            <element signature="method#setTitle#0;class#MainActivity#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="docComment;class#ToolbarColorizeHelper#0" expanded="false" />
+            <element signature="docComment;method#colorizeToolbar#0;class#ToolbarColorizeHelper#0" expanded="false" />
+            <element signature="docComment;method#setOverflowButtonColor#0;class#ToolbarColorizeHelper#0" expanded="false" />
+            <element signature="class#3328:3973" expanded="false" />
+            <element signature="method#onGlobalLayout#0;class#3328:3973" expanded="false" />
+            <element signature="method#removeOnGlobalLayoutListener#0;class#ToolbarColorizeHelper#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3382,16 +3982,51 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="61" column="108" selection-start-line="61" selection-start-column="108" selection-end-line="61" selection-end-column="108" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="docComment;class#VehicleCursorAdapter#0" expanded="false" />
+            <element signature="method#VehicleCursorAdapter#0;class#VehicleCursorAdapter#0" expanded="false" />
+            <element signature="method#ViewHolder#0;class#ViewHolder#0;class#VehicleCursorAdapter#0" expanded="false" />
+            <element signature="class#1542:1797" expanded="false" />
+            <element signature="method#onClick#0;class#1542:1797" expanded="false" />
+            <element signature="e#2575#2576#0" expanded="false" />
+            <element signature="e#2611#2612#0" expanded="false" />
+            <element signature="method#onCreateViewHolder#0;class#VehicleCursorAdapter#0" expanded="false" />
+            <element signature="class#OnClickListener#0;class#VehicleCursorAdapter#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/utilities/ToolbarColorizeHelper.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13265306">
-          <caret line="63" column="12" selection-start-line="63" selection-start-column="12" selection-end-line="63" selection-end-column="12" />
+        <state vertical-scroll-proportion="1.2585034">
+          <caret line="334" column="0" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
           <folding>
-            <element signature="method#setOverflowButtonColor#0;class#ToolbarColorizeHelper#0" expanded="true" />
+            <element signature="e#1548#1587#0" expanded="true" />
+            <element signature="method#onCreate#0;class#MainActivity#0" expanded="true" />
+            <element signature="e#3611#4607#0" expanded="true" />
+            <element signature="e#4195#4573#0" expanded="true" />
+            <element signature="e#4572#4573#0" expanded="true" />
+            <element signature="e#4606#4607#0" expanded="true" />
+            <element signature="e#6065#6099#0" expanded="true" />
+            <element signature="e#6145#6179#0" expanded="true" />
+            <element signature="e#6227#6693#0" expanded="true" />
+            <element signature="e#6692#6693#0" expanded="true" />
+            <element signature="method#onDestroy#0;class#MainActivity#0" expanded="true" />
+            <element signature="method#onContextItemSelected#0;class#MainActivity#0" expanded="true" />
+            <element signature="e#7802#7836#0" expanded="true" />
+            <element signature="method#changeVehicle#1;class#MainActivity#0" expanded="true" />
+            <element signature="method#changeVehicle#2;class#MainActivity#0" expanded="true" />
+            <element signature="e#8245#9148#0" expanded="true" />
+            <element signature="e#8726#8754#0" expanded="true" />
+            <element signature="e#9147#9148#0" expanded="true" />
+            <element signature="method#onBackStackChanged#0;class#MainActivity#0" expanded="true" />
+            <element signature="method#setUIColor#0;class#MainActivity#0" expanded="true" />
+            <element signature="e#11809#11837#0" expanded="true" />
+            <element signature="e#11892#12570#0" expanded="true" />
+            <element signature="e#12569#12570#0" expanded="true" />
+            <element signature="method#onKeyDown#0;class#MainActivity#0" expanded="true" />
+            <element signature="method#setTitle#0;class#MainActivity#0" expanded="true" />
           </folding>
         </state>
       </provider>

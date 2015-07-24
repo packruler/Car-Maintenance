@@ -396,12 +396,53 @@ public class Vehicle extends SQLDataOberservable {
         Cursor volume = carSQL.getReadableDatabase()
                 .rawQuery("select sum(" + FuelStop.VOLUME + ") " +
                         "from " + FuelStop.TABLE_NAME +
-                        " where " + FuelStop.COMPLETE_FILL_UP + "= 1", null);
-//        if (volume.moveToFirst()){
-//            Cursor distance= carSQL.getReadableDatabase()
-//                    .query(FuelStop.TABLE_NAME,new String[]{FuelStop.})
-//        }
+                        " where " + FuelStop.VEHICLE_ROW + "= " + row + " AND " +
+//                        FuelStop.COMPLETE_FILL_UP + "= 1 AND " +
+//                        FuelStop.MISSED_FILL_UP + "= 0 AND " +
+                        FuelStop.DISTANCE_TRAVELED + "> 0", null);
+        Cursor distance = carSQL.getReadableDatabase()
+                .rawQuery("select sum(" + FuelStop.DISTANCE_TRAVELED + ") " +
+                        "from " + FuelStop.TABLE_NAME +
+                        " where " + FuelStop.VEHICLE_ROW + "= " + row + " AND " +
+//                        FuelStop.COMPLETE_FILL_UP + "= 1 AND " +
+//                        FuelStop.MISSED_FILL_UP + "= 0 AND " +
+                        FuelStop.DISTANCE_TRAVELED + "> 0", null);
+
+        if (volume.moveToFirst() && distance.moveToFirst()) {
+            float efficiency = distance.getLong(0) / volume.getFloat(0);
+            Log.v(TAG, row + ": Volume: " + volume.getFloat(0) + " | Distance: " + distance.getLong(0) + " | MPG: " + efficiency);
+        } else
+            Log.e(TAG, "SQLite query error");
+
+        volume.close();
+        distance.close();
         return 0f;
+    }
+
+    public float getTotalFuelUsed() {
+        Cursor volume = carSQL.getReadableDatabase()
+                .rawQuery("select sum(" + FuelStop.VOLUME + ") " +
+                        "from " + FuelStop.TABLE_NAME +
+                        " where " + FuelStop.VEHICLE_ROW + "= " + row, null);
+        if (!volume.moveToFirst())
+            Log.e(TAG, "SQLite query error");
+        float total = volume.getFloat(0);
+
+        volume.close();
+        return total;
+    }
+
+    public float getAverageCostOfFuel() {
+        Cursor cursor = carSQL.getReadableDatabase()
+                .rawQuery("select avg(" + FuelStop.COST_PER_VOLUME + ") " +
+                        "from " + FuelStop.TABLE_NAME +
+                        " where " + FuelStop.VEHICLE_ROW + "= " + row, null);
+        if (!cursor.moveToFirst())
+            Log.e(TAG, "SQLite query error");
+        float average = cursor.getFloat(0);
+
+        cursor.close();
+        return average;
     }
 
     public void setFuelEfficiencyUnits(String units) {
