@@ -17,6 +17,7 @@ import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -137,7 +138,11 @@ public class ServiceTask extends SQLDataOberservable {
         sqlDataHandler.put(DATE, date);
     }
 
-    public long getDate() {
+    public Date getDate() {
+        return new Date(getDateLong());
+    }
+
+    public long getDateLong() {
         return sqlDataHandler.getLong(DATE);
     }
 
@@ -263,7 +268,7 @@ public class ServiceTask extends SQLDataOberservable {
     public static Comparator<ServiceTask> compareByDate = new Comparator<ServiceTask>() {
         @Override
         public int compare(ServiceTask lhs, ServiceTask rhs) {
-            return Float.compare(lhs.getDate(), rhs.getDate());
+            return Float.compare(lhs.getDateLong(), rhs.getDateLong());
         }
     };
 

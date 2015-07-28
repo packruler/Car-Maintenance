@@ -44,6 +44,16 @@ public class FuelStop extends ServiceTask {
 
     @Override
     public void delete() {
+        Cursor cursor = carSQL.getReadableDatabase().query(TABLE_NAME,
+                new String[]{ID}, VEHICLE_ROW + "= " + getVehicleRow() + " AND " +
+                        DATE + "> " + getDateLong(), null, null, null, DATE + " ASC", "1");
+        if (cursor.moveToFirst()) {
+            Log.v(TAG, "Next fuel stop: " + cursor.getLong(0));
+            FuelStop nextStop = new FuelStop(carSQL, cursor.getLong(0));
+            nextStop.setMissedFillup(true);
+            nextStop.updateDistanceTraveled();
+        }
+        cursor.close();
         delete(TABLE_NAME);
     }
 
@@ -98,9 +108,9 @@ public class FuelStop extends ServiceTask {
     public void updateDistanceTraveled() {
         long distance = -1;
         Cursor cursor = null;
-        if (isCompleteFillUp() && !missedFillup() && getDate() > 0) {
+        if (isCompleteFillUp() && !missedFillup() && getDateLong() > 0) {
             cursor = carSQL.getReadableDatabase().query(TABLE_NAME, new String[]{MILEAGE},
-                    DATE + "< " + getDate(), null, null, null, DATE + " DESC", String.valueOf(1));
+                    DATE + "< " + getDateLong(), null, null, null, DATE + " DESC", String.valueOf(1));
             Log.v(TAG, "Cursor count: " + cursor.getCount());
             if (cursor.moveToFirst()) {
                 distance = getMileage() - cursor.getInt(cursor.getColumnIndex(MILEAGE));
@@ -113,6 +123,10 @@ public class FuelStop extends ServiceTask {
         sqlDataHandler.put(DISTANCE_TRAVELED, distance);
         if (cursor != null)
             cursor.close();
+    }
+
+    public int getDistanceTraveled() {
+        return sqlDataHandler.getInt(DISTANCE_TRAVELED);
     }
 
     public static Cursor getFuelStopCursorForCar(CarSQL carSQL, long vehicleRow) {
@@ -153,4 +167,5 @@ public class FuelStop extends ServiceTask {
         cursor.close();
         return count;
     }
+
 }

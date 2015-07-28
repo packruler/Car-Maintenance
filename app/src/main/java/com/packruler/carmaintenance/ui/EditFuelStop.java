@@ -169,7 +169,7 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
         dateDisplay.setPrimaryColor(uiColor);
         date = Calendar.getInstance();
         if (fuelStop != null)
-            date.setTimeInMillis(fuelStop.getDate());
+            date.setTimeInMillis(fuelStop.getDateLong());
 
         final DatePicker picker = new DatePicker(activity);
         picker.setMaxDate(Calendar.getInstance().getTimeInMillis());

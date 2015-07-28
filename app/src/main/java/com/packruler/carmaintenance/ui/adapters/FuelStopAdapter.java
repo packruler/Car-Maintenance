@@ -1,8 +1,10 @@
 package com.packruler.carmaintenance.ui.adapters;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,9 @@ import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Currency;
 
 /**
@@ -42,8 +46,7 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
         private TextView efficiencyDisplay;
         private TextView costDisplay;
         private TextView distanceDisplay;
-        private TextView volumeDisplay;
-        private TextView costPerDisplay;
+        private TextView dateDisplay;
         private LinearLayout detailLayout;
 
         public ViewHolder(View itemView) {
@@ -90,16 +93,16 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
             efficiencyDisplay = (TextView) itemView.findViewById(R.id.fuel_efficiency);
             costDisplay = (TextView) itemView.findViewById(R.id.cost_display);
             distanceDisplay = (TextView) itemView.findViewById(R.id.distance_display);
-            volumeDisplay = (TextView) itemView.findViewById(R.id.volume_display);
-            costPerDisplay = (TextView) itemView.findViewById(R.id.cost_per);
+            dateDisplay = (TextView) itemView.findViewById(R.id.date_display);
             detailLayout = (LinearLayout) itemView.findViewById(R.id.extra_details);
         }
 
         @Override
         void setDisplay(Cursor cursor) {
-            int distance = cursor.getInt(cursor.getColumnIndex(FuelStop.DISTANCE_TRAVELED));
-            float volume = cursor.getFloat(cursor.getColumnIndex(FuelStop.VOLUME));
-            float costPer = cursor.getFloat(cursor.getColumnIndex(FuelStop.COST_PER_VOLUME));
+            FuelStop fuelStop = new FuelStop(carSQL, cursor.getLong(cursor.getColumnIndex(FuelStop.ID)));
+            int distance = fuelStop.getDistanceTraveled();
+            float volume = fuelStop.getVolume();
+            float costPer = fuelStop.getCostPerVolume();
             float cost = volume * costPer;
 
             Vehicle vehicle = new Vehicle(carSQL, cursor.getLong(cursor.getColumnIndex(FuelStop.VEHICLE_ROW)));
@@ -131,11 +134,38 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
                 efficiencyDisplay.setText("--.-- " + fuelEfficiencyUnits);
 
             costDisplay.setText(currency + numberFormat.format(cost));
-            volumeDisplay.setText(numberFormat.format(volume) + " " + volumeUnits);
-            if (distance > 0)
-                distanceDisplay.setText(distance + " " + distanceUnits);
-            else distanceDisplay.setText("");
-            costPerDisplay.setText(currency + costPer + volumeUnits);
+
+            dateDisplay.setText(DateFormat.getDateInstance().format(fuelStop.getDate()));
+            distanceDisplay.setText(NumberFormat.getInstance().format(fuelStop.getMileage()) + " " + distanceUnits);
+
+            Context context = detailLayout.getContext();
+            detailLayout.removeAllViews();
+
+            TextView timeDisplay = new TextView(context);
+            timeDisplay.setTextAppearance(R.style.TextAppearance_AppCompat_Medium_Inverse);
+            timeDisplay.setGravity(Gravity.END);
+            timeDisplay.setText(DateFormat.getTimeInstance(DateFormat.SHORT).format(fuelStop.getDate()));
+            detailLayout.addView(timeDisplay);
+
+            TextView volumeDisplay = new TextView(context);
+            volumeDisplay.setTextAppearance(R.style.TextAppearance_AppCompat_Medium_Inverse);
+            volumeDisplay.setText(context.getString(R.string.volume) + ": " + new DecimalFormat("0.000").format(volume) + volumeUnits);
+            detailLayout.addView(volumeDisplay);
+
+            if (costPer > 0) {
+                TextView costPerDisplay = new TextView(context);
+                costPerDisplay.setTextAppearance(R.style.TextAppearance_AppCompat_Medium_Inverse);
+                costPerDisplay.setText(currency + costPer + volumeUnits);
+                detailLayout.addView(costPerDisplay);
+            }
+
+            if (fuelStop.getDistanceTraveled() > 0) {
+                TextView distanceTraveled = new TextView(context);
+                distanceTraveled.setTextAppearance(R.style.TextAppearance_AppCompat_Medium_Inverse);
+                distanceTraveled.setText("Distance Traveled: " + new DecimalFormat("#,##0").format(distance) + ' ' + distanceUnits);
+                detailLayout.addView(distanceTraveled);
+            }
+
         }
 
         @Override

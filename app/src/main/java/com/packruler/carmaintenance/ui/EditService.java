@@ -25,7 +25,6 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -131,16 +130,16 @@ public class EditService extends android.support.v4.app.Fragment {
                 loadDateDialog();
             }
         });
-        if (serviceTask != null && serviceTask.getDate() != 0) {
-            dateLong = serviceTask.getDate();
+        if (serviceTask != null && serviceTask.getDateLong() != 0) {
+            dateLong = serviceTask.getDateLong();
             setDateDisplay();
         }
     }
 
     private void loadDateDialog() {
         final Calendar calendar = Calendar.getInstance();
-        if (serviceTask != null && serviceTask.getDate() != 0) {
-            calendar.setTime(new Date(serviceTask.getDate()));
+        if (serviceTask != null && serviceTask.getDateLong() != 0) {
+            calendar.setTime(serviceTask.getDate());
             setDateDisplay();
         } else {
             date.setText("");
