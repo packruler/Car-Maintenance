@@ -42,7 +42,6 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
     }
 
     class ViewHolder extends ExpandableViewHolder {
-        private String TAG = "Position: " + getItemId();
         private TextView efficiencyDisplay;
         private TextView costDisplay;
         private TextView distanceDisplay;
@@ -54,7 +53,6 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.v(TAG, "Current expanded: " + expandedView);
                     if (expandedView == ViewHolder.this) close(false);
                     else expand();
 
@@ -67,7 +65,6 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
                     if (ViewHolder.this.equals(expandedView))
                         onEditClick(ViewHolder.this.getItemId(), ViewHolder.this);
                     else {
-                        Log.v(TAG, "Current expanded: " + expandedView);
                         if (expandedView == ViewHolder.this) close(false);
                         else expand();
 
@@ -82,7 +79,6 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
                     if (ViewHolder.this.equals(expandedView))
                         onDeleteClick(ViewHolder.this.getItemId(), ViewHolder.this);
                     else {
-                        Log.v(TAG, "Current expanded: " + expandedView);
                         if (expandedView == ViewHolder.this) close(false);
                         else expand();
 
@@ -194,18 +190,18 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
     }
 
     private void onItemClick(long position, RecyclerView.ViewHolder holder) {
-        Log.v("onItemClick", "Position: " + position);
+//        Log.v("onItemClick", "Position: " + position);
         onClickListener.onItemClick(position, holder);
     }
 
     private void onEditClick(long itemId, RecyclerView.ViewHolder holder) {
-        Log.v(TAG, "Edit item: " + itemId);
+//        Log.v(TAG, "Edit item: " + itemId);
         if (onClickListener != null)
             onClickListener.onEditClick(itemId, holder);
     }
 
     private void onDeleteClick(long itemId, RecyclerView.ViewHolder holder) {
-        Log.v(TAG, "Delete item: " + itemId);
+//        Log.v(TAG, "Delete item: " + itemId);
         if (onClickListener != null)
             onClickListener.onDeleteClick(itemId, holder);
     }
