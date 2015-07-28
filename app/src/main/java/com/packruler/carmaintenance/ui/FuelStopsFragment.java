@@ -135,7 +135,7 @@ public class FuelStopsFragment extends android.support.v4.app.Fragment {
                 Log.v(TAG, "Loading task took " + (Calendar.getInstance().getTimeInMillis() - start));
                 activity.getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.container, new EditFuelStop(activity, task))
+                        .replace(R.id.container, new EditFuelStop(activity, task, null))
                         .addToBackStack(EditFuelStop.class.getSimpleName())
                         .commit();
             }
@@ -147,7 +147,7 @@ public class FuelStopsFragment extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 activity.getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.container, new EditFuelStop(activity, null))
+                        .replace(R.id.container, new EditFuelStop(activity, null, dataObserver))
                         .addToBackStack(EditFuelStop.class.getSimpleName())
                         .commit();
             }

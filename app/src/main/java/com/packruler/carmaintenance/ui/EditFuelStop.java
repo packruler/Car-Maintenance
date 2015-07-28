@@ -28,6 +28,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.gc.materialdesign.views.CheckBox;
 import com.gc.materialdesign.views.Switch;
 import com.packruler.carmaintenance.R;
+import com.packruler.carmaintenance.sql.SQLDataObserver;
 import com.packruler.carmaintenance.ui.utilities.MenuHandler;
 import com.packruler.carmaintenance.ui.utilities.NumberTextWatcher;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
@@ -42,6 +43,7 @@ import java.util.Date;
 
 public class EditFuelStop extends android.support.v4.app.Fragment {
     private final String TAG = getClass().getSimpleName();
+    private SQLDataObserver dataObserver;
 
     private View rootView;
     private FuelStop fuelStop;
@@ -67,7 +69,7 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
     }
 
     @SuppressLint("ValidFragment")
-    public EditFuelStop(MainActivity activity, @Nullable FuelStop fuelStop) {
+    public EditFuelStop(MainActivity activity, @Nullable FuelStop fuelStop, @Nullable SQLDataObserver dataObserver) {
         this.fuelStop = fuelStop;
         this.activity = activity;
         uiColor = activity.getCurrentVehicle().getUiColor();
@@ -80,6 +82,8 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
             currencyString = Currency.getInstance(currencyString).getSymbol();
         else
             currencyString = "";
+
+        this.dataObserver = dataObserver;
     }
 
     @Override
@@ -393,8 +397,21 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
         mileage = (MaterialEditText) rootView.findViewById(R.id.current_mileage);
         mileage.setPrimaryColor(uiColor);
         mileage.addTextChangedListener(new NumberTextWatcher(mileage));
+//        rootView.findViewById(R.id.mileage_click).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                MultiNumberPickerHandler multiNumberPickerHandler = new MultiNumberPickerHandler(activity);
+//                multiNumberPickerHandler.setPrimaryColor(activity.getUiColor());
+//                new MaterialDialog.Builder(activity)
+//                        .title(R.string.current_mileage).titleColor(activity.getUiColor())
+//                        .positiveText(R.string.accept).positiveColor(activity.getUiColor())
+//                        .negativeText(R.string.cancel).negativeColor(getResources().getColor(R.color.material_grey_900))
+//                        .customView(multiNumberPickerHandler, false).show();
+//            }
+//        });
         if (fuelStop != null)
             mileage.setText(fuelStop.getMileage() + "");
+        else mileage.setText(activity.getCurrentVehicle().getCurrentMileage() + "");
     }
 
     private boolean saveMileage() {
@@ -441,14 +458,15 @@ public class EditFuelStop extends android.support.v4.app.Fragment {
 
     private void updateDistanceTraveled() {
 //        if (!missedFillup.isCheck() && completeFillup.isCheck())
-            fuelStop.updateDistanceTraveled();
+        fuelStop.updateDistanceTraveled();
     }
 
     private void save() {
         boolean update = true;
-        if (fuelStop == null)
+        if (fuelStop == null) {
             fuelStop = activity.getCurrentVehicle().getNewFuelStop();
-
+            fuelStop.registerObserver(dataObserver);
+        }
         assert fuelStop != null;
         fuelStop.beginTransaction();
 

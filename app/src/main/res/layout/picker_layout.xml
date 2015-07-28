@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2015.  Ethan Leisinger
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/margin_tiny"
+    android:paddingRight="@dimen/margin_tiny">
+
+    <ImageButton
+        android:id="@+id/up_arrow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:src="@drawable/ic_keyboard_arrow_up_white_24dp"
+        android:tint="#333" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
+        android:cursorVisible="false"
+        android:ems="1"
+        android:gravity="center"
+        android:hint="0"
+        android:inputType="number"
+        android:maxLength="1"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+    <ImageButton
+        android:id="@+id/down_arrow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:src="@drawable/ic_keyboard_arrow_down_white_24dp"
+        android:tint="#333" />
+</LinearLayout>

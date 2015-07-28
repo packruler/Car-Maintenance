@@ -66,6 +66,15 @@
                 android:inputType="number"
                 app:met_floatingLabel="highlight" />
 
+            <View
+                android:id="@+id/mileage_click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/current_mileage"
+                android:layout_alignLeft="@id/current_mileage"
+                android:layout_alignRight="@id/current_mileage"
+                android:layout_alignTop="@id/current_mileage" />
+
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/cost_per_volume"
                 android:layout_width="wrap_content"
