@@ -1,63 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:id="@+id/vehicle_image_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/vehicle_image_container">
+        android:layout_height="wrap_content">
 
         <com.packruler.carmaintenance.ui.utilities.AspectRatioImageView
+            android:id="@id/vehicle_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/material_grey_500"
-            android:id="@id/vehicle_image"
             android:scaleType="center"
-            android:src="@drawable/missing_photo_icon"/>
+            android:src="@drawable/missing_photo_icon" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/vehicle_image"
-            android:background="@drawable/grey_gradient"
-            android:layout_alignTop="@+id/vehicle_name"/>
+            android:layout_alignTop="@+id/vehicle_name"
+            android:background="@drawable/grey_gradient" />
 
         <TextView
+            android:id="@id/vehicle_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@id/vehicle_name"
-            android:paddingTop="@dimen/margin_large"
-            android:textAppearance="@android:style/TextAppearance.Large.Inverse"
             android:layout_alignBottom="@id/vehicle_image"
             android:paddingBottom="@dimen/margin_tiny"
             android:paddingLeft="@dimen/margin_small"
-            android:text="Vehicle-Name"/>
+            android:paddingTop="@dimen/margin_large"
+            android:text="Vehicle-Name"
+            android:textAppearance="@android:style/TextAppearance.Large.Inverse" />
     </RelativeLayout>
 
-    <android.support.v7.widget.CardView
+    <include
+        android:id="@+id/vehicle_expandable_statistics"
+        layout="@layout/vehicle_expandable_statistics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:contentPadding="@dimen/abc_action_bar_default_padding_material"
-        card_view:cardCornerRadius="@dimen/cardview_default_radius"
-        card_view:cardElevation="@dimen/cardview_default_elevation"
-        android:layout_margin="@dimen/abc_action_bar_default_padding_material"
-        android:layout_below="@id/vehicle_image_container">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Statistics"
-            android:id="@+id/title"
-            android:textAppearance="@android:style/TextAppearance.Medium"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/extra_details"
-            android:orientation="vertical"/>
-    </android.support.v7.widget.CardView>
+        android:layout_below="@id/vehicle_image_container" />
 </RelativeLayout>

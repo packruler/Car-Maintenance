@@ -14,6 +14,7 @@ import com.packruler.carmaintenance.vehicle.maintenence.ServiceTask;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.List;
 
 /**
@@ -292,7 +293,10 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public String getCurrency() {
-        return sqlDataHandler.getString(CURRENCY);
+        String code = sqlDataHandler.getString(CURRENCY);
+
+        if (code == null) return "";
+        else return Currency.getInstance(code).getSymbol();
     }
 
     public void setCurrency(String currency) {
@@ -407,16 +411,16 @@ public class Vehicle extends SQLDataOberservable {
 //                        FuelStop.COMPLETE_FILL_UP + "= 1 AND " +
 //                        FuelStop.MISSED_FILL_UP + "= 0 AND " +
                         FuelStop.DISTANCE_TRAVELED + "> 0", null);
-
+        float efficiency = 0f;
         if (volume.moveToFirst() && distance.moveToFirst()) {
-            float efficiency = distance.getLong(0) / volume.getFloat(0);
+            efficiency = distance.getLong(0) / volume.getFloat(0);
             Log.v(TAG, row + ": Volume: " + volume.getFloat(0) + " | Distance: " + distance.getLong(0) + " | MPG: " + efficiency);
         } else
             Log.e(TAG, "SQLite query error");
 
         volume.close();
         distance.close();
-        return 0f;
+        return efficiency;
     }
 
     public float getTotalFuelUsed() {

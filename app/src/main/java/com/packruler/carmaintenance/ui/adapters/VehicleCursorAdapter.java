@@ -3,7 +3,6 @@ package com.packruler.carmaintenance.ui.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 /**
@@ -56,10 +54,10 @@ public class VehicleCursorAdapter extends CursorRecyclerViewAdapter<VehicleCurso
             name.setText(cursor.getString(cursor.getColumnIndex(Vehicle.VEHICLE_NAME)));
             mileage.setText(context.getString(R.string.current_mileage) + ": " +
                     NumberFormat.getInstance().format(cursor.getLong(cursor.getColumnIndex(Vehicle.CURRENT_MILEAGE))));
-            Vehicle vehicle = new Vehicle(carSQL, cursor.getLong(0));
-            vehicle.getFuelEfficiency();
-            Log.v(TAG, "Avg cost: " + new DecimalFormat("0.000").format(vehicle.getAverageCostOfFuel()));
-            Log.v(TAG, "Total fuel used: " + new DecimalFormat("0.000").format(vehicle.getTotalFuelUsed()));
+//            Vehicle vehicle = new Vehicle(carSQL, cursor.getLong(0));
+//            vehicle.getFuelEfficiency();
+//            Log.v(TAG, "Avg cost: " + new DecimalFormat("0.000").format(vehicle.getAverageCostOfFuel()));
+//            Log.v(TAG, "Total fuel used: " + new DecimalFormat("0.000").format(vehicle.getTotalFuelUsed()));
         }
     }
 

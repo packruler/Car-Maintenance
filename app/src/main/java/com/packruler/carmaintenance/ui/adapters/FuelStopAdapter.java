@@ -19,7 +19,6 @@ import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.Currency;
 
 /**
  * Created by Packruler on 6/28/15.
@@ -106,8 +105,8 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
             String currency = vehicle.getCurrency();
             if (currency == null)
                 currency = "";
-            else
-                currency = Currency.getInstance(currency).getSymbol();
+//            else
+//                currency = Currency.getInstance(currency).getSymbol();
 
             String volumeUnits = vehicle.getVolumeUnits();
             if (volumeUnits == null)

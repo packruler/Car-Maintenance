@@ -13,14 +13,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.CarSQL;
+import com.packruler.carmaintenance.ui.adapters.VehicleStatisticsHandler;
 import com.packruler.carmaintenance.ui.utilities.Swatch;
 import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
+
+import java.text.DecimalFormat;
 
 /**
  * Created by Packruler on 6/10/15.
@@ -33,6 +38,8 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
     private CardView fuelStopsButton;
     private ImageView vehicleImage;
     private TextView vehicleName;
+    private LinearLayout extraDetails;
+    private VehicleStatisticsHandler statisticsHandler;
     private boolean viewInitialized = false;
 
     public VehicleMainFragment() {
@@ -90,8 +97,8 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
         });
         vehicleName = (TextView) rootView.findViewById(R.id.vehicle_name);
         viewInitialized = true;
-
-        loadVehicleDetails();
+        extraDetails = (LinearLayout) rootView.findViewById(R.id.extra_details);
+        statisticsHandler = new VehicleStatisticsHandler((FrameLayout) rootView.findViewById(R.id.vehicle_expandable_statistics));
         return rootView;
     }
 
@@ -149,7 +156,7 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            Log.v(TAG, "Load null to UI");
+                            Log.e(TAG, "Load null to UI");
                             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
                                 vehicleImage.setImageDrawable(activity.getResources().getDrawable(R.drawable.missing_photo_icon, null));
                             else
@@ -158,6 +165,20 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
                             vehicleImage.setScaleType(ImageView.ScaleType.CENTER);
                         }
                     });
+
+                extraDetails.removeAllViews();
+
+                float avgEff = vehicle.getFuelEfficiency();
+                TextView avgEffDisplay = new TextView(activity);
+                avgEffDisplay.setTextAppearance(R.style.TextAppearance_AppCompat_Medium_Inverse);
+                avgEffDisplay.setText("Average Efficiency: " + DecimalFormat.getInstance().format(avgEff) + " " + vehicle.getFuelEfficiencyUnits());
+                extraDetails.addView(avgEffDisplay);
+
+                float costOfFuel = vehicle.getAverageCostOfFuel();
+                TextView avgCostOfFuel = new TextView(activity);
+                avgCostOfFuel.setTextAppearance(R.style.TextAppearance_AppCompat_Medium_Inverse);
+                avgCostOfFuel.setText("Average cost of fuel: " + vehicle.getCurrency() + new DecimalFormat("0.000").format(costOfFuel));
+                extraDetails.addView(avgCostOfFuel);
             } else {
                 vehicleImage.setVisibility(View.GONE);
             }
