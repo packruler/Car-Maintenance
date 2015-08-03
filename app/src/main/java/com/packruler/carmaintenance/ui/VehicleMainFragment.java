@@ -14,8 +14,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.packruler.carmaintenance.R;
@@ -38,7 +38,7 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
     private CardView fuelStopsButton;
     private ImageView vehicleImage;
     private TextView vehicleName;
-    private LinearLayout extraDetails;
+    private GridLayout extraDetails;
     private VehicleStatisticsHandler statisticsHandler;
     private boolean viewInitialized = false;
 
@@ -97,7 +97,7 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
         });
         vehicleName = (TextView) rootView.findViewById(R.id.vehicle_name);
         viewInitialized = true;
-        extraDetails = (LinearLayout) rootView.findViewById(R.id.extra_details);
+        extraDetails = (GridLayout) rootView.findViewById(R.id.extra_details);
         statisticsHandler = new VehicleStatisticsHandler((FrameLayout) rootView.findViewById(R.id.vehicle_expandable_statistics));
         return rootView;
     }
@@ -171,7 +171,11 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
                 float avgEff = vehicle.getFuelEfficiency();
                 TextView avgEffDisplay = new TextView(activity);
                 avgEffDisplay.setTextAppearance(R.style.TextAppearance_AppCompat_Medium_Inverse);
-                avgEffDisplay.setText("Average Efficiency: " + DecimalFormat.getInstance().format(avgEff) + " " + vehicle.getFuelEfficiencyUnits());
+                StringBuilder builder = new StringBuilder("Average Efficiency: " + DecimalFormat.getInstance().format(avgEff));
+                String units = vehicle.getFuelEfficiencyUnits();
+                if (units != null)
+                    builder.append(" ").append(units);
+                avgEffDisplay.setText(builder.toString());
                 extraDetails.addView(avgEffDisplay);
 
                 float costOfFuel = vehicle.getAverageCostOfFuel();
@@ -179,6 +183,8 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
                 avgCostOfFuel.setTextAppearance(R.style.TextAppearance_AppCompat_Medium_Inverse);
                 avgCostOfFuel.setText("Average cost of fuel: " + vehicle.getCurrency() + new DecimalFormat("0.000").format(costOfFuel));
                 extraDetails.addView(avgCostOfFuel);
+                extraDetails.requestLayout();
+                statisticsHandler.close(true);
             } else {
                 vehicleImage.setVisibility(View.GONE);
             }

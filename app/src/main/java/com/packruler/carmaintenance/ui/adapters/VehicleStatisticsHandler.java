@@ -9,13 +9,14 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
+import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.packruler.carmaintenance.R;
@@ -27,7 +28,7 @@ public class VehicleStatisticsHandler {
     String TAG = getClass().getSimpleName();
     private FrameLayout layout;
     private ImageView expandedArrow;
-    LinearLayout extraDetails;
+    GridLayout extraDetails;
     CardView card;
     ValueAnimator valueAnimator;
     final static Interpolator outInterpolator = new DecelerateInterpolator();
@@ -42,7 +43,7 @@ public class VehicleStatisticsHandler {
         layout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-//                Log.v(TAG, "LAYOUT");
+                Log.v(TAG, "LAYOUT");
                 close(true);
                 if (setup) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
@@ -61,7 +62,7 @@ public class VehicleStatisticsHandler {
                 else expand();
             }
         });
-        extraDetails = (LinearLayout) layout.findViewById(R.id.extra_details);
+        extraDetails = (GridLayout) layout.findViewById(R.id.extra_details);
         expandedArrow = (ImageView) layout.findViewById(R.id.expandable_arrow);
 //        expandedArrow.rota
     }
@@ -93,6 +94,11 @@ public class VehicleStatisticsHandler {
                 layout.getLayoutParams().height = outHeight;
             }
         });
+        expandedArrow.animate()
+                .rotation(180f)
+                .setInterpolator(inInterpolator)
+                .setDuration(aDuration * extraDetails.getHeight())
+                .start();
         valueAnimator.start();
         expanded = true;
     }
@@ -123,6 +129,7 @@ public class VehicleStatisticsHandler {
                     }
                 }, 100);
             }
+            expandedArrow.setRotation(0f);
 
             layout.requestLayout();
 //                Log.v(TAG, "Current Value:" + hideValue);
@@ -150,6 +157,11 @@ public class VehicleStatisticsHandler {
                     layout.requestLayout();
                 }
             });
+            expandedArrow.animate()
+                    .rotation(0f)
+                    .setInterpolator(inInterpolator)
+                    .setDuration(aDuration * extraDetails.getHeight())
+                    .start();
             valueAnimator.start();
             expanded = false;
         }
