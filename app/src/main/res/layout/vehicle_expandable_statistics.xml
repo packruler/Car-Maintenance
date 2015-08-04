@@ -20,7 +20,9 @@
         android:background="@color/material_grey_600"
         android:columnCount="4"
         android:columnOrderPreserved="true"
-        android:padding="@dimen/margin_small" />
+        android:horizontalSpacing="@dimen/margin_small"
+        android:padding="@dimen/margin_small"
+        android:useDefaultMargins="true" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/card"
