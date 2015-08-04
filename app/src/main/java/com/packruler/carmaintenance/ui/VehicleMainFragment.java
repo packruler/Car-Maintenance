@@ -171,7 +171,7 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
 
                 float avgEff = vehicle.getFuelEfficiency();
                 LinkedBlockingQueue<String> queue = new LinkedBlockingQueue<>();
-                queue.add("Average Efficiency: ");
+                queue.add(getString(R.string.avg_efficiency));
                 queue.add("");
                 queue.add(new DecimalFormat("0.##").format(avgEff));
 
@@ -182,7 +182,7 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
                     queue.add("");
 
                 float costOfFuel = vehicle.getAverageCostOfFuel();
-                queue.add("Average cost of fuel: ");
+                queue.add(getString(R.string.avg_cost_of_fuel));
                 queue.add(vehicle.getCurrencySymbol());
                 queue.add(new DecimalFormat("0.000").format(costOfFuel));
                 queue.add("");

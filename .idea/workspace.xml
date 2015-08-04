@@ -39,13 +39,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c618867f-dfb4-47b3-a368-3bc9a89fa8fa" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/FuelStopAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/FuelStopAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/values/statistic_strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/VehicleStatisticsHandler.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/VehicleStatisticsHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fuel_stop_selector.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fuel_stop_selector.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/service_selector.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/service_selector.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/vehicle_expandable_statistics.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/vehicle_expandable_statistics.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Car-Maintenance.iws" />
@@ -167,10 +162,21 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="187" column="30" selection-start-line="187" selection-start-column="30" selection-end-line="187" selection-end-column="30" />
+              <caret line="184" column="61" selection-start-line="184" selection-start-column="61" selection-end-line="184" selection-end-column="61" />
               <folding>
                 <element signature="method#onCreateView#0;class#VehicleMainFragment#0" expanded="true" />
+                <element signature="e#7566#7600#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="statistic_strings.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/statistic_strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.24199288">
+              <caret line="8" column="49" selection-start-line="8" selection-start-column="49" selection-end-line="8" selection-end-column="49" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -212,52 +218,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fuel_stop_selector.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fuel_stop_selector.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.709091">
-              <caret line="12" column="51" selection-start-line="12" selection-start-column="51" selection-end-line="14" selection-end-column="67" />
-              <folding>
-                <element signature="e#576#608#0" expanded="true" />
-                <element signature="e#644#676#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="service_selector.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/service_selector.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4465291">
-              <caret line="14" column="67" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="67" />
-              <folding>
-                <element signature="e#317#338#0" expanded="true" />
-                <element signature="e#520#541#0" expanded="true" />
-                <element signature="e#576#608#0" expanded="true" />
-                <element signature="e#644#676#0" expanded="true" />
-                <element signature="e#755#776#0" expanded="true" />
-                <element signature="e#982#1002#0" expanded="true" />
-                <element signature="e#1095#1115#0" expanded="true" />
-                <element signature="e#1527#1543#0" expanded="true" />
-                <element signature="e#1936#1950#0" expanded="true" />
-                <element signature="e#2171#2192#0" expanded="true" />
-                <element signature="e#2228#2249#0" expanded="true" />
-                <element signature="e#2285#2317#0" expanded="true" />
-                <element signature="e#2350#2385#0" expanded="true" />
-                <element signature="e#2419#2467#0" expanded="true" />
-                <element signature="e#2911#2931#0" expanded="true" />
-                <element signature="e#3326#3346#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -265,6 +225,7 @@
       <list>
         <option value="Class" />
         <option value="layoutResourceFile" />
+        <option value="valueResourceFile" />
       </list>
     </option>
   </component>
@@ -2296,10 +2257,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/vehicle/Vehicle.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/FuelStopAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/adapters/VehicleStatisticsHandler.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/vehicle_expandable_statistics.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fuel_stop_selector.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/service_selector.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/statistic_strings.xml" />
       </list>
     </option>
   </component>
@@ -2378,6 +2340,24 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car-Maintenance" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2737,7 +2717,13 @@
       <option name="project" value="LOCAL" />
       <updated>1438631830177</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Better statistics handling">
+      <created>1438706767433</created>
+      <option name="number" value="00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1438706767433</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2746,7 +2732,7 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31368187" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32814237" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2800,7 +2786,8 @@
     <MESSAGE value="Add details for fuel stop" />
     <MESSAGE value="Remove unnecessary Logging" />
     <MESSAGE value="Initial vehicle quick stats" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial vehicle quick stats" />
+    <MESSAGE value="Better statistics handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Better statistics handling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2809,13 +2796,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/utilities/MenuHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Android/sdk/sources/android-MNC/android/animation/ValueAnimator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -3259,12 +3239,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/service_selector.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="187" column="30" selection-start-line="187" selection-start-column="30" selection-end-line="187" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.4465291">
+          <caret line="14" column="67" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="67" />
           <folding>
-            <element signature="method#onCreateView#0;class#VehicleMainFragment#0" expanded="true" />
+            <element signature="e#317#338#0" expanded="true" />
+            <element signature="e#520#541#0" expanded="true" />
+            <element signature="e#576#608#0" expanded="true" />
+            <element signature="e#644#676#0" expanded="true" />
+            <element signature="e#755#776#0" expanded="true" />
+            <element signature="e#982#1002#0" expanded="true" />
+            <element signature="e#1095#1115#0" expanded="true" />
+            <element signature="e#1527#1543#0" expanded="true" />
+            <element signature="e#1936#1950#0" expanded="true" />
+            <element signature="e#2171#2192#0" expanded="true" />
+            <element signature="e#2228#2249#0" expanded="true" />
+            <element signature="e#2285#2317#0" expanded="true" />
+            <element signature="e#2350#2385#0" expanded="true" />
+            <element signature="e#2419#2467#0" expanded="true" />
+            <element signature="e#2911#2931#0" expanded="true" />
+            <element signature="e#3326#3346#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fuel_stop_selector.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38273922">
+          <caret line="12" column="51" selection-start-line="12" selection-start-column="51" selection-end-line="14" selection-end-column="67" />
+          <folding>
+            <element signature="e#576#608#0" expanded="true" />
+            <element signature="e#644#676#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3291,45 +3303,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fuel_stop_selector.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/packruler/carmaintenance/ui/VehicleMainFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.709091">
-          <caret line="12" column="51" selection-start-line="12" selection-start-column="51" selection-end-line="14" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="184" column="61" selection-start-line="184" selection-start-column="61" selection-end-line="184" selection-end-column="61" />
           <folding>
-            <element signature="e#576#608#0" expanded="true" />
-            <element signature="e#644#676#0" expanded="true" />
+            <element signature="method#onCreateView#0;class#VehicleMainFragment#0" expanded="true" />
+            <element signature="e#7566#7600#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/service_selector.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/statistic_strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4465291">
-          <caret line="14" column="67" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="67" />
-          <folding>
-            <element signature="e#317#338#0" expanded="true" />
-            <element signature="e#520#541#0" expanded="true" />
-            <element signature="e#576#608#0" expanded="true" />
-            <element signature="e#644#676#0" expanded="true" />
-            <element signature="e#755#776#0" expanded="true" />
-            <element signature="e#982#1002#0" expanded="true" />
-            <element signature="e#1095#1115#0" expanded="true" />
-            <element signature="e#1527#1543#0" expanded="true" />
-            <element signature="e#1936#1950#0" expanded="true" />
-            <element signature="e#2171#2192#0" expanded="true" />
-            <element signature="e#2228#2249#0" expanded="true" />
-            <element signature="e#2285#2317#0" expanded="true" />
-            <element signature="e#2350#2385#0" expanded="true" />
-            <element signature="e#2419#2467#0" expanded="true" />
-            <element signature="e#2911#2931#0" expanded="true" />
-            <element signature="e#3326#3346#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.24199288">
+          <caret line="8" column="49" selection-start-line="8" selection-start-column="49" selection-end-line="8" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
