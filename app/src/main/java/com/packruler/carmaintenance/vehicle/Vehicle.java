@@ -293,7 +293,11 @@ public class Vehicle extends SQLDataOberservable {
     }
 
     public String getCurrency() {
-        String code = sqlDataHandler.getString(CURRENCY);
+        return sqlDataHandler.getString(CURRENCY);
+    }
+
+    public String getCurrencySymbol() {
+        String code = getCurrency();
 
         if (code == null) return "";
         else return Currency.getInstance(code).getSymbol();

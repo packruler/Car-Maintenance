@@ -26,6 +26,7 @@ import com.packruler.carmaintenance.vehicle.Vehicle;
 import com.packruler.carmaintenance.vehicle.maintenence.FuelStop;
 
 import java.text.DecimalFormat;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by Packruler on 6/10/15.
@@ -169,20 +170,24 @@ public class VehicleMainFragment extends android.support.v4.app.Fragment {
                 extraDetails.removeAllViews();
 
                 float avgEff = vehicle.getFuelEfficiency();
-                TextView avgEffDisplay = new TextView(activity);
-                avgEffDisplay.setTextAppearance(R.style.TextAppearance_AppCompat_Medium_Inverse);
-                StringBuilder builder = new StringBuilder("Average Efficiency: " + DecimalFormat.getInstance().format(avgEff));
+                LinkedBlockingQueue<String> queue = new LinkedBlockingQueue<>();
+                queue.add("Average Efficiency: ");
+                queue.add("");
+                queue.add(new DecimalFormat("0.##").format(avgEff));
+
                 String units = vehicle.getFuelEfficiencyUnits();
                 if (units != null)
-                    builder.append(" ").append(units);
-                avgEffDisplay.setText(builder.toString());
-                extraDetails.addView(avgEffDisplay);
+                    queue.add(units);
+                else
+                    queue.add("");
 
                 float costOfFuel = vehicle.getAverageCostOfFuel();
-                TextView avgCostOfFuel = new TextView(activity);
-                avgCostOfFuel.setTextAppearance(R.style.TextAppearance_AppCompat_Medium_Inverse);
-                avgCostOfFuel.setText("Average cost of fuel: " + vehicle.getCurrency() + new DecimalFormat("0.000").format(costOfFuel));
-                extraDetails.addView(avgCostOfFuel);
+                queue.add("Average cost of fuel: ");
+                queue.add(vehicle.getCurrencySymbol());
+                queue.add(new DecimalFormat("0.000").format(costOfFuel));
+                queue.add("");
+                statisticsHandler.addValues(queue, activity);
+
                 extraDetails.requestLayout();
                 statisticsHandler.close(true);
             } else {

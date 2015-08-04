@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/cardview_default_radius"
+        android:layout_marginRight="@dimen/cardview_default_radius"
         android:background="@color/material_grey_600"
         android:padding="@dimen/margin_small">
 

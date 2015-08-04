@@ -5,6 +5,7 @@
 package com.packruler.carmaintenance.ui.adapters;
 
 import android.animation.ValueAnimator;
+import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,8 +19,11 @@ import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.packruler.carmaintenance.R;
+
+import java.util.Queue;
 
 /**
  * Created by packr on 8/3/2015.
@@ -164,6 +168,16 @@ public class VehicleStatisticsHandler {
                     .start();
             valueAnimator.start();
             expanded = false;
+        }
+    }
+
+    public void addValues(Queue<String> columns, Context context) {
+        TextView current;
+        while (!columns.isEmpty()) {
+            current = new TextView(context);
+            current.setTextAppearance(R.style.TextAppearance_AppCompat_Medium_Inverse);
+            current.setText(columns.poll());
+            extraDetails.addView(current);
         }
     }
 }

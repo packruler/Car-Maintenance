@@ -102,7 +102,7 @@ public class FuelStopAdapter extends CursorRecyclerViewAdapter<FuelStopAdapter.V
 
             Vehicle vehicle = new Vehicle(carSQL, cursor.getLong(cursor.getColumnIndex(FuelStop.VEHICLE_ROW)));
 
-            String currency = vehicle.getCurrency();
+            String currency = vehicle.getCurrencySymbol();
             if (currency == null)
                 currency = "";
 //            else
