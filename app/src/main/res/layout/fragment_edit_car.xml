@@ -54,12 +54,16 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     app:met_floatingLabel="highlight" />
 
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                <!--<AutoCompleteTextView-->
+                <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
                     android:id="@+id/year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/task_type"
                     android:layout_marginRight="@dimen/margin_small"
+                    android:completionThreshold="1"
+                    android:dropDownHeight="wrap_content"
+                    android:dropDownWidth="wrap_content"
                     android:ems="4"
                     android:hint="@string/year"
                     android:textAppearance="?android:attr/textAppearanceMedium"

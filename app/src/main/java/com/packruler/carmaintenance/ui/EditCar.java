@@ -22,9 +22,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.Spanned;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -49,8 +51,10 @@ import com.packruler.carmaintenance.R;
 import com.packruler.carmaintenance.sql.AvailableCarsSQL;
 import com.packruler.carmaintenance.sql.CarSQL;
 import com.packruler.carmaintenance.ui.adapters.PaletteAdapter;
+import com.packruler.carmaintenance.ui.adapters.SQLiteAutoCompleteAdapter;
 import com.packruler.carmaintenance.ui.utilities.MenuHandler;
 import com.packruler.carmaintenance.vehicle.Vehicle;
+import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rengwuxian.materialedittext.validation.METValidator;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
@@ -82,7 +86,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     private Vehicle vehicle;
 
     private MaterialEditText vehicleName;
-    private MaterialBetterSpinner year;
+    private MaterialAutoCompleteTextView year;
     private MaterialBetterSpinner make;
     private MaterialBetterSpinner model;
     private MaterialEditText subModel;
@@ -283,8 +287,25 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
                     }
                     activity.getToolbar().setTitle(getString(R.string.edit_car));
 
-                    if (vehicle.getYear() != 0)
+                    if (vehicle.getYear() != 0) {
                         year.setText(vehicle.getYear() + "");
+                        year.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                year.showDropDown();
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable s) {
+
+                            }
+                        });
+                    }
 
                     if (vehicle.getMake() != null)
                         make.setText(vehicle.getMake());
@@ -360,7 +381,7 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     private int currentColor;
 
     private void initialColorLoad() {
-        year.setPrimaryColor(currentColor);
+//        year.setPrimaryColor(currentColor);
         make.setPrimaryColor(currentColor);
         model.setPrimaryColor(currentColor);
 
@@ -503,72 +524,77 @@ public class EditCar extends Fragment /*implements Toolbar.OnMenuItemClickListen
     }
 
     private void initializeYearSpinner() {
-        year = (MaterialBetterSpinner) rootView.findViewById(R.id.year);
+        year = (MaterialAutoCompleteTextView) rootView.findViewById(R.id.year);
         year.setPrimaryColor(currentColor);
         final List<String> yearList = new LinkedList<>();
         for (int x = Calendar.getInstance().get(Calendar.YEAR) + 1; x >= 1984; x--) {
-            yearList.add(x + "");
+            yearList.add(String.valueOf(x));
         }
         yearList.add(getString(R.string.other_selection));
+        SQLiteAutoCompleteAdapter adapter = new SQLiteAutoCompleteAdapter(activity,
+                AvailableCarsSQL.TABLE_NAME, AvailableCarsSQL.YEAR);
+//        ArrayAdapter arrayAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_dropdown_item_1line, yearList);
+        year.setThreshold(1);
+        year.setAdapter(adapter);
 
-        year.setAdapter(new ArrayAdapter<>(activity, R.layout.one_line_selector, yearList));
-        year.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (yearList.get(position).equals(getString(R.string.other_selection))) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                    builder.setTitle(R.string.year);
-
-                    final MaterialEditText editText = new MaterialEditText(activity);
-                    editText.setInputType(InputType.TYPE_CLASS_NUMBER);
-                    editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
-                    editText.setPrimaryColor(currentColor);
-
-                    builder.setView(editText);
-                    builder.setPositiveButton(R.string.accept, null);
-                    builder.setNegativeButton(R.string.discard, null);
-                    final AlertDialog otherDialog = builder.create();
-
-                    otherDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                        private String TAG = "YearOther";
-
-                        @Override
-                        public void onShow(DialogInterface d) {
-                            otherDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-                                private final String TAG = "PositiveClick";
-
-                                @Override
-                                public void onClick(View v) {
-
-                                    String entry = editText.getText().toString();
-                                    try {
-                                        int value = Integer.valueOf(entry);
-
-                                        if (entry.length() != 4)
-                                            sendToast("Please enter full year\nExample: 2015");
-                                        else if (value < 1900 || value > Calendar.getInstance().get(Calendar.YEAR) + 1)
-                                            sendToast("Please enter valid year\n(1900-Current Year + 1)");
-                                        else {
-                                            year.setText(editText.getText().toString());
-                                            updateMakeSpinner();
-                                            otherDialog.cancel();
-                                        }
-
-                                    } catch (NumberFormatException e) {
-                                        sendToast("Please enter valid year\nExample: 2015");
-                                    }
-                                }
-                            });
-                        }
-                    });
-
-                    otherDialog.show();
-                } else {
-                    year.setText(yearList.get(position));
-                    updateMakeSpinner();
-                }
-            }
-        });
+        Log.d(TAG, "YEAR SETUP");
+//        year.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                if (yearList.get(position).equals(getString(R.string.other_selection))) {
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+//                    builder.setTitle(R.string.year);
+//
+//                    final MaterialEditText editText = new MaterialEditText(activity);
+//                    editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+//                    editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
+//                    editText.setPrimaryColor(currentColor);
+//
+//                    builder.setView(editText);
+//                    builder.setPositiveButton(R.string.accept, null);
+//                    builder.setNegativeButton(R.string.discard, null);
+//                    final AlertDialog otherDialog = builder.create();
+//
+//                    otherDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+//                        private String TAG = "YearOther";
+//
+//                        @Override
+//                        public void onShow(DialogInterface d) {
+//                            otherDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+//                                private final String TAG = "PositiveClick";
+//
+//                                @Override
+//                                public void onClick(View v) {
+//
+//                                    String entry = editText.getText().toString();
+//                                    try {
+//                                        int value = Integer.valueOf(entry);
+//
+//                                        if (entry.length() != 4)
+//                                            sendToast("Please enter full year\nExample: 2015");
+//                                        else if (value < 1900 || value > Calendar.getInstance().get(Calendar.YEAR) + 1)
+//                                            sendToast("Please enter valid year\n(1900-Current Year + 1)");
+//                                        else {
+//                                            year.setText(editText.getText().toString());
+//                                            updateMakeSpinner();
+//                                            otherDialog.cancel();
+//                                        }
+//
+//                                    } catch (NumberFormatException e) {
+//                                        sendToast("Please enter valid year\nExample: 2015");
+//                                    }
+//                                }
+//                            });
+//                        }
+//                    });
+//
+//                    otherDialog.show();
+//                } else {
+//                    year.setText(yearList.get(position));
+//                    updateMakeSpinner();
+//                }
+//            }
+//        });
 
     }
 
