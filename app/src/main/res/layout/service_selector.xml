@@ -54,7 +54,7 @@
         android:layout_marginRight="@dimen/margin_small"
         card_view:cardCornerRadius="@dimen/cardview_default_radius"
         card_view:cardElevation="@dimen/cardview_default_elevation"
-        card_view:contentPadding="@dimen/abc_action_bar_default_padding_material">
+        card_view:contentPadding="@dimen/default_padding_top">
 
         <RelativeLayout
             android:layout_width="match_parent"
